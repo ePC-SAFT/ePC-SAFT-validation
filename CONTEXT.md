@@ -1,15 +1,17 @@
 # Validation Repository Context
 
-This is a governance-only skeleton, not an active validation campaign.
+This repository owns the black-box installed-artifact campaign for provider
+Slice 1: neutral, nonassociating, nonionic PC-SAFT at explicit molar density.
 
 `governance_doctrine_revision: 2`
 
 Canonical local doctrine: `../ePC-SAFT-organization/GOVERNANCE.md`.
 
-The lab remains the transitional runtime and evidence archive. This repository
-will validate only installed immutable artifacts and may not depend on the lab,
-migration repository, or sibling source paths.
+The campaign validates only an immutable installed wheel through the six-symbol
+public `epcsaft` API. It may not depend on the lab, migration repository,
+sibling source paths, package-private imports, or a copied EOS implementation.
+Frozen scalar goldens are evidence values, not a second executable model.
 
 `runtime_source_of_truth: false`
 
-`validation_source_of_truth: false`
+`validation_source_of_truth: provider-slice-1`
