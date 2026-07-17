@@ -1,0 +1,78 @@
+{
+  "artifact": {
+    "distribution": "epcsaft",
+    "filename": "epcsaft-0.1.0.dev0-cp313-cp313-linux_x86_64.whl",
+    "sha256": "0055843d389a5b5f7eebefcb6f4bb2b22c797eee159249ecf4c738b035a30330",
+    "version": "0.1.0.dev0"
+  },
+  "checks": {
+    "close_packing_rejection": "passed",
+    "component_permutation": "passed",
+    "density_direction_pressure_Pa": 3170693.1055920506,
+    "density_direction_reconstructed_pressure_Pa": 3170693.1055916576,
+    "gross_2001_goldens": [
+      {
+        "compressibility_factor": 0.8963961463906833,
+        "molar_density_mol_m3": 1000.0,
+        "mole_fractions": [
+          1.0,
+          0.0
+        ],
+        "pressure_Pa": 1490610.450044391,
+        "residual_helmholtz": -0.10616678968898827,
+        "temperature_K": 200.0
+      },
+      {
+        "compressibility_factor": 0.7598730786270727,
+        "molar_density_mol_m3": 1000.0,
+        "mole_fractions": [
+          0.0,
+          1.0
+        ],
+        "pressure_Pa": 1579484.0766964532,
+        "residual_helmholtz": -0.24860577989522525,
+        "temperature_K": 250.0
+      },
+      {
+        "compressibility_factor": 0.19067336346364538,
+        "molar_density_mol_m3": 8000.0,
+        "mole_fractions": [
+          0.4,
+          0.6
+        ],
+        "pressure_Pa": 3170693.1055920506,
+        "residual_helmholtz": -1.067071023489015,
+        "temperature_K": 250.0
+      }
+    ],
+    "low_density_limit": "passed",
+    "strict_quantity_boundary": "passed",
+    "wheel_negative_space": "passed"
+  },
+  "claim": "provider Slice 1 explicit-density neutral EOS public behavior",
+  "installation": {
+    "module_path_class": "installed-site-packages",
+    "root_exports": [
+      "ParameterBundle",
+      "ParameterSet",
+      "ParameterError",
+      "unit_registry",
+      "EPCSAFT",
+      "EosResult"
+    ]
+  },
+  "limits": [
+    "Frozen values and finite differences do not duplicate the production EOS kernel.",
+    "This campaign does not validate density closure, phase identity, association, ions, equilibrium, regression, or release readiness.",
+    "A passed campaign does not transfer runtime authority."
+  ],
+  "schema_version": 1,
+  "status": "passed",
+  "tolerances": {
+    "density_direction_rtol": 2e-07,
+    "dimensionless_atol": 5e-13,
+    "dimensionless_rtol": 5e-12,
+    "pressure_atol_Pa": 1e-06,
+    "pressure_rtol": 5e-12
+  }
+}
