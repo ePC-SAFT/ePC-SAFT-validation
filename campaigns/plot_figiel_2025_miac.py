@@ -82,6 +82,12 @@ def main() -> None:
     )
     for suffix, options in ((".png", {"dpi": 220}), (".svg", {}), (".pdf", {})):
         figure.savefig(arguments.output_base.with_suffix(suffix), bbox_inches="tight", **options)
+    svg_path = arguments.output_base.with_suffix(".svg")
+    normalized_svg = "\n".join(
+        line.rstrip()
+        for line in svg_path.read_text(encoding="utf-8").splitlines()
+    )
+    svg_path.write_text(f"{normalized_svg}\n", encoding="utf-8")
     plt.close(figure)
 
 

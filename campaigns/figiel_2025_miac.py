@@ -198,7 +198,11 @@ def run(artifact: Path, data_path: Path = DATA_PATH) -> tuple[dict[str, Any], li
 
 def write_predictions(path: Path, rows: list[dict[str, Any]]) -> None:
     with path.open("w", newline="", encoding="utf-8") as stream:
-        writer = csv.DictWriter(stream, fieldnames=tuple(rows[0]))
+        writer = csv.DictWriter(
+            stream,
+            fieldnames=tuple(rows[0]),
+            lineterminator="\n",
+        )
         writer.writeheader()
         writer.writerows(rows)
 
