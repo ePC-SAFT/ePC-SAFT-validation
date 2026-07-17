@@ -33,7 +33,7 @@
       "parameter_csv_sha256": "082b72cb0ae926dbc0619ce941870fd0148c1ecb7ba9a4aa62f7f437f6742893",
       "receipt_json_sha256": "73a241c8197b9f7903b08158f13fca41d4d3c9e333d1372a747102930c1282d4",
       "png_sha256": "d79c534347393b6a6416bb2416967ea4a597044046614cbd9e5867ca14e0aac4",
-      "svg_sha256": "4666929bd08302bc00244beddb929dde34afec94e18f816844f3f00e4677eddf",
+      "svg_sha256": "389b21fc62dd4b2438ed70af9bd0e774bdb0b58c00a01257497707605ca71c17",
       "pdf_sha256": "67bb14901529417533162c82c7328eb8a9872e3c2512427b682bed50d7e3dd21"
     },
     "concern": "The public regression result exposes start/fitted parameters and initial/final objective values but not start-model reporting predictions. Validation left those CSV fields empty instead of owning a saturation solve."
@@ -80,7 +80,7 @@
       "csv_sha256": "f5f09e796d9bcad74b860eca5d0ca2627d362679f129230afc7c553b7fc23089",
       "receipt_json_sha256": "5e2c3f7f566dec5c77ce9060bbb830c47747b684b938554fd7b6d7a6d9bc9013",
       "png_sha256": "5093fdba2b30d06686f907ead6e6fe01014715e5d258a85ab3449f852d63f97d",
-      "svg_sha256": "011eebd0c6a1b4db1a12d875d3daddd53752f1d983b5137d26e1a300688e469f",
+      "svg_sha256": "cf26c1af77cbb0e87a46d36ad96934a2685c31c0366af433f4329f347e2de9f9",
       "pdf_sha256": "029bf16e5a7bac7700dd2a04e2e8ecec5a78d49e499a494cac655b2ab89bda82"
     },
     "concern": "Four locally accepted package states miss the frozen composition contract and one row has no accepted local state. These are retained separately as model/data misses and a package local-physical rejection."

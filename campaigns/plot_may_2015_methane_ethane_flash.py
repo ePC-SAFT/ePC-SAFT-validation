@@ -31,6 +31,11 @@ def _optional_float(value: str) -> float:
     return float(value) if value else math.nan
 
 
+def _normalize_svg(path: Path) -> None:
+    lines = path.read_text(encoding="utf-8").splitlines()
+    path.write_text("\n".join(line.rstrip() for line in lines) + "\n", encoding="utf-8")
+
+
 def render(csv_path: Path, output_stem: Path) -> None:
     rows = _read_rows(csv_path)
     mpl.rcParams.update(
@@ -130,7 +135,9 @@ def render(csv_path: Path, output_stem: Path) -> None:
         fontsize=8.5,
     )
     output_stem.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(output_stem.with_suffix(".svg"), metadata={"Date": None})
+    svg_path = output_stem.with_suffix(".svg")
+    fig.savefig(svg_path, metadata={"Date": None})
+    _normalize_svg(svg_path)
     fig.savefig(output_stem.with_suffix(".png"), dpi=220, metadata={"Software": "Matplotlib"})
     fig.savefig(
         output_stem.with_suffix(".pdf"),
