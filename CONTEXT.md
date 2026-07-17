@@ -1,10 +1,14 @@
 # Validation Repository Context
 
-This repository owns two black-box installed-artifact campaigns:
+This repository owns four black-box installed-artifact campaigns:
 
 - provider Slice 1 neutral, nonassociating PC-SAFT at explicit molar density;
 - Figiel 2025 aqueous LiCl, NaCl, KCl, LiBr, NaBr, and KBr mean ionic
   activity coefficients at 298.15 K and 1 bar through 6 mol/kg.
+- Esteso 1989 NaCl mean ionic activity coefficients in 20, 40, 60, and 80
+  mass-percent ethanol/water at 298.15 K;
+- Held 2012 LiCl, LiBr, and NaBr solution densities in ethanol at 298.15 K
+  and ambient pressure.
 
 `governance_doctrine_revision: 2`
 
@@ -15,8 +19,9 @@ Each campaign validates only an immutable installed wheel through the public
 sibling source paths, package-private imports, or a copied EOS implementation.
 Frozen Slice 1 scalar goldens are declared shared provider evidence. The
 Hamer--Wu tables are real physical reproduction data for fitted Figiel
-parameters, not a held-out prediction set. Neither is a second executable
-model.
+parameters, not a held-out prediction set. The Esteso and Held tables are
+direct experiments that exercise mixed-solvent activity and specified-pressure
+density respectively. None is a second executable model.
 
 `results/provider-slice-1.json` remains bound to the narrow accepted Slice 1
 wheel and its exact negative-space contract. It is not regenerated against a
@@ -25,4 +30,4 @@ provider-candidate campaign.
 
 `runtime_source_of_truth: false`
 
-`validation_source_of_truth: provider-slice-1, figiel-2025-miac`
+`validation_source_of_truth: provider-slice-1, figiel-2025-miac, esteso-1989-water-ethanol-nacl, held-2012-ethanol-salt-density`

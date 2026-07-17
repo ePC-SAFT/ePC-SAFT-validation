@@ -4,8 +4,9 @@ Repository role: validation
 
 Intended GitHub home: `ePC-SAFT/ePC-SAFT-validation`
 
-Active campaigns: provider Slice 1 explicit-density neutral EOS and the
-Figiel 2025 aqueous alkali-halide MIAC comparison.
+Active campaigns: provider Slice 1 explicit-density neutral EOS, Figiel 2025
+aqueous alkali-halide MIAC reproduction, Esteso 1989 mixed-solvent NaCl MIAC,
+and Held 2012 ethanol-salt density.
 
 This repository will own black-box installed-artifact, cross-package, and
 literature acceptance evidence. It will not own production algorithms, private
@@ -25,3 +26,11 @@ retains predictions and a hash-bound JSON receipt. The source range stops at
 6 mol/kg, matching the model range in Figiel 2025 Figure 5; no figure points
 were digitized and no parameters are fitted here. Render the retained CSV with
 `campaigns/plot_figiel_2025_miac.py`; plotting never recomputes the EOS.
+
+`campaigns/provider_real_data.py` adds two small predictive campaigns using
+only direct tabular experiments: 92 Esteso Table I NaCl activity-coefficient
+rows over four water/ethanol compositions and seven Held Table 1 ethanol-salt
+density rows for LiCl, LiBr, and NaBr. It runs against one hash-bound installed
+wheel and writes separate receipts and prediction tables. Render those tables
+with `campaigns/plot_provider_real_data.py`; the plotting script does not import
+or execute the provider.

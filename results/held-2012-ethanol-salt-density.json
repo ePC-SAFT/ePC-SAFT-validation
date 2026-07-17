@@ -1,0 +1,76 @@
+{
+  "artifact": {
+    "distribution": "epcsaft",
+    "filename": "epcsaft-0.1.0.dev0-cp313-cp313-linux_x86_64.whl",
+    "module_path_class": "installed-site-packages",
+    "sha256": "0734a1d70bd94fe68b44a6ad0b2fd95f2ef69c5e7b00ed4bc4ba72927a34e118",
+    "version": "0.1.0.dev0"
+  },
+  "claim": "LiCl, LiBr, and NaBr solution densities in ethanol at 298.15 K",
+  "conditions": {
+    "experimental_pressure": "ambient",
+    "model_pressure_bar": 1.0,
+    "solvent": "ethanol",
+    "temperature_K": 298.15
+  },
+  "failures": [],
+  "limits": [
+    "The retained values are direct Table 1 experiments, not digitized figure points.",
+    "One bar approximates the reported ambient pressure.",
+    "The density tolerances measure model accuracy and are intentionally much wider than the reported 0.0015 kg/m3 maximum instrument uncertainty.",
+    "Passing does not establish other salts, concentrations, solvents, temperatures, pressures, equilibria, or regressions."
+  ],
+  "metrics": {
+    "max_relative_error": 0.021924069596367474,
+    "per_salt": {
+      "LiBr": {
+        "bias": -7.380777881984841,
+        "mae": 7.380777881984841,
+        "max_abs": 7.387665923805116,
+        "points": 2,
+        "rmse": 7.3807810960843945
+      },
+      "LiCl": {
+        "bias": -15.607741266725043,
+        "mae": 15.607741266725043,
+        "max_abs": 18.05951384861578,
+        "points": 2,
+        "rmse": 15.799138465193062
+      },
+      "NaBr": {
+        "bias": -7.809037191911898,
+        "mae": 7.809037191911898,
+        "max_abs": 8.212231336795867,
+        "points": 3,
+        "rmse": 7.817937807944753
+      }
+    },
+    "pooled": {
+      "bias": -9.914878553307924,
+      "mae": 9.914878553307924,
+      "max_abs": 18.05951384861578,
+      "points": 7,
+      "rmse": 10.63375935652913
+    }
+  },
+  "parameter_set_fingerprints": {
+    "LiBr": "sha256:c029b913ba204887c41d846c87182a65e8260da106b91fb98b7192a1e9dbea57",
+    "LiCl": "sha256:e778db287f3789318038d800396aef0d5faf78f2b47de0bb2b5df86b4a0dbb23",
+    "NaBr": "sha256:c8a369d86bd1229c11344f9fbe20185c99b78277c0254a82a6d957cc2996ab25"
+  },
+  "schema_version": 1,
+  "source_data": {
+    "doi": "10.1016/j.ces.2011.09.040",
+    "filename": "held-2012-ethanol-salt-density.csv",
+    "rows": 7,
+    "sha256": "3d8b00ef52897ab698d34648249cbf49f6118e266dfe53e34ffbbf01ede38e04",
+    "table": "1"
+  },
+  "status": "passed",
+  "tolerances": {
+    "max_relative_error": 0.025,
+    "per_salt_max_abs_max_kg_m3": 20.0,
+    "pooled_rmse_max_kg_m3": 12.0,
+    "pressure_residual_max_pa": 0.001
+  }
+}

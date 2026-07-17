@@ -1,0 +1,24 @@
+schema_version: 1
+dataset_id: held-2012-ethanol-salt-density
+title: Measuring and modeling alcohol/salt systems
+authors: [C. Held, A. Prinz, V. Wallmeyer, G. Sadowski]
+journal: Chemical Engineering Science
+year: 2012
+volume: 68
+pages: 328-339
+doi: 10.1016/j.ces.2011.09.040
+table: 1
+conditions:
+  temperature_K: 298.15
+  pressure: ambient
+  solvent: ethanol
+  quantity: solution mass density
+  quantity_unit: kg/m3
+  concentration: formula-unit molality
+  concentration_unit: mol/kg ethanol
+  instrument: Anton Paar DMA 602 vibrating-tube densimeter
+  stated_maximum_instrument_uncertainty_kg_m3: 0.0015
+transformation:
+  method: Exact transcription of every LiCl, LiBr, and NaBr row supported by the provider's current component catalog; no figure digitization or interpolation.
+  retained_rows: 7
+use_basis: Direct experimental tabular data for scientific validation.

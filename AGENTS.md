@@ -2,8 +2,9 @@
 
 Repository Profile: scientific-computing
 
-Active scope: provider Slice 1 installed-artifact acceptance and the bounded
-Figiel 2025 aqueous mean-ionic-activity campaign.
+Active scope: provider Slice 1 installed-artifact acceptance and bounded
+real-data provider campaigns for aqueous and mixed-solvent electrolyte
+properties.
 
 Before work, read doctrine revision 2 at
 `../ePC-SAFT-organization/GOVERNANCE.md`. Its future published home is
