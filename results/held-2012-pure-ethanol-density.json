@@ -1,0 +1,47 @@
+{
+  "artifact": {
+    "distribution": "epcsaft",
+    "filename": "epcsaft-0.1.0.dev0-cp313-cp313-linux_x86_64.whl",
+    "module_path_class": "installed-site-packages",
+    "sha256": "758327312c1a7f84a4e836e37b6798b1a1452506994da84429095247c3ce1474",
+    "version": "0.1.0.dev0"
+  },
+  "claim": "pure ethanol liquid density from the neutral-associating EOS path",
+  "conditions": {
+    "experimental_pressure": "ambient",
+    "model_pressure_bar": 1.0,
+    "temperature_K": 298.15
+  },
+  "failures": [],
+  "limits": [
+    "The retained value is the authors' direct mean measurement, not a digitized point or evaluated database value.",
+    "The two-percent gate is a model-accuracy tolerance; the source reports a much smaller instrument uncertainty.",
+    "Passing establishes one neutral-associating density state, not saturation or phase-equilibrium capability."
+  ],
+  "metrics": {
+    "association_helmholtz": -4.728487095705868,
+    "density_kg_m3_literature": 785.54,
+    "density_kg_m3_model": 779.7848815612265,
+    "error_kg_m3": -5.755118438773479,
+    "parameter_fingerprint": "sha256:9bde35a37d090db81b652abbc51b81378cade3dca99c365b573e8e1134091699",
+    "pressure_residual_pa": 2.6808847906067967e-06,
+    "relative_error": -0.007326321306074139,
+    "root_branch": "liquid",
+    "root_stable": true,
+    "temperature_K": 298.15
+  },
+  "parameter_set_fingerprint": "sha256:9bde35a37d090db81b652abbc51b81378cade3dca99c365b573e8e1134091699",
+  "schema_version": 1,
+  "source_data": {
+    "doi": "10.1016/j.ces.2011.09.040",
+    "filename": "held-2012-pure-ethanol-density.csv",
+    "rows": 1,
+    "section": "2.2 Solution densities",
+    "sha256": "25e3be94ee3cfb5eb13df89827f4368673f87f96d6b0225c12e35f9396b8779c"
+  },
+  "status": "passed",
+  "tolerances": {
+    "pressure_residual_max_pa": 0.001,
+    "relative_error_max": 0.02
+  }
+}

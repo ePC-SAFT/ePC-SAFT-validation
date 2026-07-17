@@ -1,0 +1,2 @@
+temperature_K,density_kg_m3_literature,density_kg_m3_model,error_kg_m3,relative_error,association_helmholtz,root_branch,root_stable,pressure_residual_pa,parameter_fingerprint
+298.15,785.54,779.7848815612265,-5.755118438773479,-0.007326321306074139,-4.728487095705868,liquid,True,2.6808847906067967e-06,sha256:9bde35a37d090db81b652abbc51b81378cade3dca99c365b573e8e1134091699

@@ -117,6 +117,30 @@ def density_plot(rows: list[dict[str, str]], output_base: Path) -> None:
     save(figure, output_base)
 
 
+def pure_ethanol_plot(rows: list[dict[str, str]], output_base: Path) -> None:
+    if len(rows) != 1:
+        raise ValueError("expected one pure-ethanol density row")
+    row = rows[0]
+    figure, axis = plt.subplots(figsize=(5.2, 3.8))
+    values = [
+        float(row["density_kg_m3_literature"]),
+        float(row["density_kg_m3_model"]),
+    ]
+    axis.bar(
+        ["Held et al. (2012)", "clean provider"],
+        values,
+        color=["white", "#6A4C93"],
+        edgecolor="#171717",
+        linewidth=1.0,
+    )
+    axis.set_ylabel(r"Liquid density, $\rho$ / kg m$^{-3}$")
+    axis.set_title("Pure ethanol at 298.15 K and ambient pressure")
+    axis.set_ylim(760.0, 800.0)
+    axis.grid(True, axis="y", color="#D7D7D7", linewidth=0.6)
+    axis.tick_params(direction="out")
+    save(figure, output_base)
+
+
 def read_rows(path: Path) -> list[dict[str, str]]:
     with path.open(newline="", encoding="utf-8") as stream:
         return list(csv.DictReader(stream))
@@ -142,6 +166,10 @@ def main() -> None:
     density_plot(
         read_rows(results / "held-2012-ethanol-salt-density.csv"),
         results / "held-2012-ethanol-salt-density",
+    )
+    pure_ethanol_plot(
+        read_rows(results / "held-2012-pure-ethanol-density.csv"),
+        results / "held-2012-pure-ethanol-density",
     )
 
 

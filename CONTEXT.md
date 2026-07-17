@@ -1,6 +1,6 @@
 # Validation Repository Context
 
-This repository owns four black-box installed-artifact campaigns:
+This repository owns five black-box installed-artifact campaigns:
 
 - provider Slice 1 neutral, nonassociating PC-SAFT at explicit molar density;
 - Figiel 2025 aqueous LiCl, NaCl, KCl, LiBr, NaBr, and KBr mean ionic
@@ -9,6 +9,8 @@ This repository owns four black-box installed-artifact campaigns:
   mass-percent ethanol/water at 298.15 K;
 - Held 2012 LiCl, LiBr, and NaBr solution densities in ethanol at 298.15 K
   and ambient pressure.
+- Held 2012 directly measured pure-ethanol density at 298.15 K and ambient
+  pressure through the neutral-associating provider path.
 
 `governance_doctrine_revision: 2`
 
@@ -21,13 +23,15 @@ Frozen Slice 1 scalar goldens are declared shared provider evidence. The
 Hamer--Wu tables are real physical reproduction data for fitted Figiel
 parameters, not a held-out prediction set. The Esteso and Held tables are
 direct experiments that exercise mixed-solvent activity and specified-pressure
-density respectively. None is a second executable model.
+density respectively. The pure-ethanol anchor isolates association and density
+closure without ionic terms. None is a second executable model.
 
 `results/provider-slice-1.json` remains bound to the narrow accepted Slice 1
 wheel and its exact negative-space contract. It is not regenerated against a
-broader provider candidate. The Figiel MIAC receipt is the current full-
-provider-candidate campaign.
+broader provider candidate. The current full-provider candidate is covered by
+the Figiel MIAC reproduction and the three direct-data records produced by
+`campaigns/provider_real_data.py`.
 
 `runtime_source_of_truth: false`
 
-`validation_source_of_truth: provider-slice-1, figiel-2025-miac, esteso-1989-water-ethanol-nacl, held-2012-ethanol-salt-density`
+`validation_source_of_truth: provider-slice-1, figiel-2025-miac, esteso-1989-water-ethanol-nacl, held-2012-ethanol-salt-density, held-2012-pure-ethanol-density`

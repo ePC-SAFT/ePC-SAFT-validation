@@ -1,9 +1,9 @@
 {
   "artifact": {
     "distribution": "epcsaft",
-    "filename": "epcsaft-0.1.0.dev0-cp311-cp311-linux_x86_64.whl",
+    "filename": "epcsaft-0.1.0.dev0-cp313-cp313-linux_x86_64.whl",
     "module_path_class": "installed-site-packages",
-    "sha256": "93743c4c2fc422af94910ec53c4c1c544797c37443bb6cfd232a37d61e60f761",
+    "sha256": "758327312c1a7f84a4e836e37b6798b1a1452506994da84429095247c3ce1474",
     "version": "0.1.0.dev0"
   },
   "claim": "Figiel 2025 Figure 5 aqueous alkali-halide MIAC behavior through 6 mol/kg",
@@ -78,12 +78,12 @@
     }
   },
   "parameter_set_fingerprints": {
-    "KBr": "sha256:cfaa9380afb43de86c969f388b3e766bbf7e54fd17e7056e025f58a5b5c21303",
-    "KCl": "sha256:b191975b819a7adfb20ec3968e6d7bf25f348ff22ca15238fab9fbfa0f531c6a",
-    "LiBr": "sha256:198531d5d2e18e662e453fcb6737400a889177711c3a8341ebae2eca90137572",
-    "LiCl": "sha256:48b3e8089d984a13d3e5d1e90814dc35164f73a7b849ac68c72a7b34c717b80b",
-    "NaBr": "sha256:d40d0f1ecd71dfb6e42b20ebdb5ee4f78272f5796f726ed3dcb79a611d928607",
-    "NaCl": "sha256:815cfba7c4ed3f35664a2aec48962baa79fc1eb79c814a0f78cc0a7789c74987"
+    "KBr": "sha256:1d498278767a568e2120286f27f98a0b79268c92a68805d85ca30a21f14f3284",
+    "KCl": "sha256:d29cef0c0f63034436d547d0aafa57934effe06783c8dffd89c94fa85e6940f4",
+    "LiBr": "sha256:1258d8f76ddb4300d4983e70a2efa107b5cdc468748fe8760a04f82c4de38668",
+    "LiCl": "sha256:1bb528ebe8f5612757e148608fc55821f9fb03737dbcec6d0bc4fffd0f4cbc4c",
+    "NaBr": "sha256:b46a48ee5025e15a2d063b6f3ca4de54e29c33d429b94940913a9d225c78456b",
+    "NaCl": "sha256:7c637771bc9f717b8f47b44bb2a61044c3fe83084dca7c3c16102fba0989912d"
   },
   "reference_diagnostics": {
     "KBr": {

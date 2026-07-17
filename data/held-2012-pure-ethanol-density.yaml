@@ -1,0 +1,22 @@
+schema_version: 1
+dataset_id: held-2012-pure-ethanol-density
+title: Measuring and modeling alcohol/salt systems
+authors: [C. Held, A. Prinz, V. Wallmeyer, G. Sadowski]
+journal: Chemical Engineering Science
+year: 2012
+volume: 68
+pages: 328-339
+doi: 10.1016/j.ces.2011.09.040
+section: 2.2 Solution densities
+conditions:
+  temperature_K: 298.15
+  pressure: ambient
+  component: ethanol
+  quantity: liquid mass density
+  quantity_unit: kg/m3
+  instrument: Anton Paar DMA 602 vibrating-tube densimeter
+  stated_maximum_instrument_uncertainty_kg_m3: 0.0015
+transformation:
+  method: Exact transcription of the authors' reported average pure-ethanol measurement; no figure digitization or interpolation.
+  retained_rows: 1
+use_basis: Direct experimental anchor for the neutral-associating provider path.

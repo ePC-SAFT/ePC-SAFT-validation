@@ -17,6 +17,7 @@ import epcsaft
 ROOT = Path(__file__).parents[1]
 ACTIVITY_DATA = ROOT / "data" / "esteso-1989-water-ethanol-nacl.csv"
 DENSITY_DATA = ROOT / "data" / "held-2012-ethanol-salt-density.csv"
+PURE_ETHANOL_DATA = ROOT / "data" / "held-2012-pure-ethanol-density.csv"
 TEMPERATURE_K = 298.15
 PRESSURE_BAR = 1.0
 WATER_MOLAR_MASS_KG_MOL = 0.0180153
@@ -28,6 +29,7 @@ DENSITY_POOLED_RMSE_MAX_KG_M3 = 12.0
 DENSITY_MAX_ABS_MAX_KG_M3 = 20.0
 DENSITY_MAX_RELATIVE_MAX = 0.025
 DENSITY_PRESSURE_RESIDUAL_MAX_PA = 1.0e-3
+PURE_ETHANOL_RELATIVE_ERROR_MAX = 0.02
 SALT_COMPONENTS = {
     "LiCl": ("lithium-cation", "chloride-anion"),
     "LiBr": ("lithium-cation", "bromide-anion"),
@@ -385,6 +387,100 @@ def run_density(
     return receipt, predictions
 
 
+def run_pure_ethanol_density(
+    artifact: dict[str, str], data_path: Path = PURE_ETHANOL_DATA
+) -> tuple[dict[str, Any], list[dict[str, Any]]]:
+    with data_path.open(newline="", encoding="utf-8") as stream:
+        source_rows = list(csv.DictReader(stream))
+    if len(source_rows) != 1:
+        raise AssertionError("unexpected Held pure-ethanol campaign data shape")
+
+    units = epcsaft.unit_registry
+    parameters = epcsaft.ParameterBundle.from_catalog(
+        "figiel-2025-reference-electrolytes", version=1
+    ).select(("ethanol",))
+    result = epcsaft.EPCSAFT(parameters).evaluate(
+        temperature=float(source_rows[0]["temperature_K"]) * units.kelvin,
+        pressure=PRESSURE_BAR * units.bar,
+        mole_fractions=(1.0,),
+        phase="liquid",
+    )
+    diagnostics = result.density_diagnostics
+    if diagnostics is None:
+        raise AssertionError("specified-pressure state returned no density diagnostics")
+    observed = float(source_rows[0]["density_kg_m3"])
+    predicted = (
+        result.molar_density.to("mole / meter ** 3").magnitude
+        * ETHANOL_MOLAR_MASS_KG_MOL
+    )
+    error = predicted - observed
+    relative_error = error / observed
+    pressure_residual = abs(diagnostics.pressure_residual.to("pascal").magnitude)
+    failures: list[str] = []
+    if result.association >= 0.0:
+        failures.append("neutral ethanol state did not activate association")
+    if result.debye_huckel != 0.0 or result.born_ssm_ds != 0.0:
+        failures.append("neutral ethanol state activated an ionic contribution")
+    if not diagnostics.stable or diagnostics.branch != "liquid":
+        failures.append("pure ethanol did not return a certified liquid root")
+    if pressure_residual > DENSITY_PRESSURE_RESIDUAL_MAX_PA:
+        failures.append(
+            f"pressure residual {pressure_residual:.8g} Pa exceeds "
+            f"{DENSITY_PRESSURE_RESIDUAL_MAX_PA} Pa"
+        )
+    if abs(relative_error) > PURE_ETHANOL_RELATIVE_ERROR_MAX:
+        failures.append(
+            f"relative density error {relative_error:.8g} exceeds "
+            f"{PURE_ETHANOL_RELATIVE_ERROR_MAX}"
+        )
+
+    predictions = [
+        {
+            "temperature_K": float(source_rows[0]["temperature_K"]),
+            "density_kg_m3_literature": observed,
+            "density_kg_m3_model": predicted,
+            "error_kg_m3": error,
+            "relative_error": relative_error,
+            "association_helmholtz": result.association,
+            "root_branch": diagnostics.branch,
+            "root_stable": diagnostics.stable,
+            "pressure_residual_pa": pressure_residual,
+            "parameter_fingerprint": parameters.fingerprint,
+        }
+    ]
+    receipt = {
+        "schema_version": 1,
+        "status": "passed" if not failures else "failed",
+        "claim": "pure ethanol liquid density from the neutral-associating EOS path",
+        "artifact": artifact,
+        "source_data": {
+            "filename": data_path.name,
+            "sha256": sha256(data_path),
+            "rows": 1,
+            "doi": "10.1016/j.ces.2011.09.040",
+            "section": "2.2 Solution densities",
+        },
+        "conditions": {
+            "temperature_K": float(source_rows[0]["temperature_K"]),
+            "experimental_pressure": "ambient",
+            "model_pressure_bar": PRESSURE_BAR,
+        },
+        "parameter_set_fingerprint": parameters.fingerprint,
+        "metrics": predictions[0],
+        "tolerances": {
+            "relative_error_max": PURE_ETHANOL_RELATIVE_ERROR_MAX,
+            "pressure_residual_max_pa": DENSITY_PRESSURE_RESIDUAL_MAX_PA,
+        },
+        "failures": failures,
+        "limits": [
+            "The retained value is the authors' direct mean measurement, not a digitized point or evaluated database value.",
+            "The two-percent gate is a model-accuracy tolerance; the source reports a much smaller instrument uncertainty.",
+            "Passing establishes one neutral-associating density state, not saturation or phase-equilibrium capability.",
+        ],
+    }
+    return receipt, predictions
+
+
 def write_predictions(path: Path, rows: list[dict[str, Any]]) -> None:
     with path.open("w", newline="", encoding="utf-8") as stream:
         writer = csv.DictWriter(stream, fieldnames=tuple(rows[0]), lineterminator="\n")
@@ -409,6 +505,7 @@ def main() -> None:
 
     activity_receipt, activity_predictions = run_activity(artifact)
     density_receipt, density_predictions = run_density(artifact)
+    pure_ethanol_receipt, pure_ethanol_predictions = run_pure_ethanol_density(artifact)
     write_predictions(
         output_dir / "esteso-1989-water-ethanol-nacl.csv", activity_predictions
     )
@@ -417,7 +514,16 @@ def main() -> None:
         output_dir / "held-2012-ethanol-salt-density.csv", density_predictions
     )
     write_receipt(output_dir / "held-2012-ethanol-salt-density.json", density_receipt)
-    if activity_receipt["status"] != "passed" or density_receipt["status"] != "passed":
+    write_predictions(
+        output_dir / "held-2012-pure-ethanol-density.csv", pure_ethanol_predictions
+    )
+    write_receipt(
+        output_dir / "held-2012-pure-ethanol-density.json", pure_ethanol_receipt
+    )
+    if any(
+        receipt["status"] != "passed"
+        for receipt in (activity_receipt, density_receipt, pure_ethanol_receipt)
+    ):
         raise SystemExit("real-data campaign failed; inspect the retained receipts")
 
 
