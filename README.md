@@ -15,4 +15,6 @@ The current campaign is one standard-library script:
 `campaigns/provider_slice_1.py`. Run it in an isolated environment with the
 exact provider wheel supplied through `uv --with`; pass the same wheel to
 `--artifact` so the result is bound to its SHA-256. The script imports only the
-public `epcsaft` surface and retains no executable PC-SAFT equation copy.
+public `epcsaft` surface and retains no executable PC-SAFT equation copy. Its
+frozen scalar goldens are shared provider anchors; black-box finite-difference
+and metamorphic checks supply the separately executed evidence.

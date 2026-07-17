@@ -1,8 +1,8 @@
 {
   "artifact": {
     "distribution": "epcsaft",
-    "filename": "epcsaft-0.1.0.dev0-cp313-cp313-linux_x86_64.whl",
-    "sha256": "0055843d389a5b5f7eebefcb6f4bb2b22c797eee159249ecf4c738b035a30330",
+    "filename": "epcsaft-0.1.0.dev0-cp312-cp312-linux_x86_64.whl",
+    "sha256": "388dc777dd9b5a4f4df4410f2ecd7742dcc555b5a9bc535713554b74bfbb23ef",
     "version": "0.1.0.dev0"
   },
   "checks": {
@@ -62,7 +62,8 @@
     ]
   },
   "limits": [
-    "Frozen values and finite differences do not duplicate the production EOS kernel.",
+    "The frozen goldens are shared provider anchors and do not count as an independent oracle.",
+    "The black-box finite difference and metamorphic checks retain no production EOS kernel.",
     "This campaign does not validate density closure, phase identity, association, ions, equilibrium, regression, or release readiness.",
     "A passed campaign does not transfer runtime authority."
   ],

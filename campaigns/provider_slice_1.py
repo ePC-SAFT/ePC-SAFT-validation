@@ -1,8 +1,8 @@
 """Black-box acceptance checks for the installed provider Slice 1 wheel.
 
-The frozen values below were independently transcribed from the Gross and
-Sadowski 2001 equations before the clean implementation. They are scalar
-evidence, not an executable alternative EOS.
+The frozen values below are the provider design's shared Gross and Sadowski
+2001 anchors. They are scalar evidence, not an independent oracle or an
+executable alternative EOS.
 """
 
 from __future__ import annotations
@@ -205,7 +205,8 @@ def run(artifact: Path) -> dict[str, Any]:
             "density_direction_rtol": DERIVATIVE_RTOL,
         },
         "limits": [
-            "Frozen values and finite differences do not duplicate the production EOS kernel.",
+            "The frozen goldens are shared provider anchors and do not count as an independent oracle.",
+            "The black-box finite difference and metamorphic checks retain no production EOS kernel.",
             "This campaign does not validate density closure, phase identity, association, ions, equilibrium, regression, or release readiness.",
             "A passed campaign does not transfer runtime authority.",
         ],
