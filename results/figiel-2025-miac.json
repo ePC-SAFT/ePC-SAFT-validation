@@ -1,0 +1,136 @@
+{
+  "artifact": {
+    "distribution": "epcsaft",
+    "filename": "epcsaft-0.1.0.dev0-cp311-cp311-linux_x86_64.whl",
+    "module_path_class": "installed-site-packages",
+    "sha256": "93743c4c2fc422af94910ec53c4c1c544797c37443bb6cfd232a37d61e60f761",
+    "version": "0.1.0.dev0"
+  },
+  "claim": "Figiel 2025 Figure 5 aqueous alkali-halide MIAC behavior through 6 mol/kg",
+  "conditions": {
+    "molality_range_mol_kg": [
+      0.001,
+      6.0
+    ],
+    "pressure_bar": 1.0,
+    "solvent": "water",
+    "temperature_K": 298.15
+  },
+  "failures": [],
+  "limits": [
+    "The Figiel ion--water and ion--ion interaction parameters were fitted to aqueous MIAC data; this campaign is physical reproduction evidence, not an independent prediction set.",
+    "NaBr also informed the fitted water solvation factor in Figiel 2025.",
+    "Only Hamer--Wu points overlapping the Figiel Figure 5 model range through 6 mol/kg are retained.",
+    "A passed campaign does not establish behavior for other salts, solvents, temperatures, pressures, equilibria, or regressions.",
+    "A passed campaign does not transfer runtime authority."
+  ],
+  "metrics": {
+    "per_salt": {
+      "KBr": {
+        "bias": 0.008627819327949692,
+        "mae": 0.021541891252985244,
+        "max_abs": 0.0667315788892141,
+        "points": 28,
+        "rmse": 0.02708914569249232
+      },
+      "KCl": {
+        "bias": 0.019265410962074493,
+        "mae": 0.02341807888629006,
+        "max_abs": 0.04525050744439163,
+        "points": 28,
+        "rmse": 0.02858848461120489
+      },
+      "LiBr": {
+        "bias": -0.057409625387211116,
+        "mae": 0.1286627940558636,
+        "max_abs": 1.1349012234643752,
+        "points": 29,
+        "rmse": 0.2757328545314771
+      },
+      "LiCl": {
+        "bias": -0.012699308692316568,
+        "mae": 0.07106933843151693,
+        "max_abs": 0.5559359249275855,
+        "points": 29,
+        "rmse": 0.13523730085648758
+      },
+      "NaBr": {
+        "bias": 0.059238789976475595,
+        "mae": 0.05933288583678968,
+        "max_abs": 0.13171262477442136,
+        "points": 21,
+        "rmse": 0.0758023564213847
+      },
+      "NaCl": {
+        "bias": 0.028300587824060322,
+        "mae": 0.032583982347431845,
+        "max_abs": 0.06948172418389753,
+        "points": 29,
+        "rmse": 0.04092022456220986
+      }
+    },
+    "pooled": {
+      "bias": 0.004954774367183604,
+      "mae": 0.05635388473586494,
+      "max_abs": 1.1349012234643752,
+      "points": 164,
+      "rmse": 0.13407022131157917
+    }
+  },
+  "parameter_set_fingerprints": {
+    "KBr": "sha256:cfaa9380afb43de86c969f388b3e766bbf7e54fd17e7056e025f58a5b5c21303",
+    "KCl": "sha256:b191975b819a7adfb20ec3968e6d7bf25f348ff22ca15238fab9fbfa0f531c6a",
+    "LiBr": "sha256:198531d5d2e18e662e453fcb6737400a889177711c3a8341ebae2eca90137572",
+    "LiCl": "sha256:48b3e8089d984a13d3e5d1e90814dc35164f73a7b849ac68c72a7b34c717b80b",
+    "NaBr": "sha256:d40d0f1ecd71dfb6e42b20ebdb5ee4f78272f5796f726ed3dcb79a611d928607",
+    "NaCl": "sha256:815cfba7c4ed3f35664a2aec48962baa79fc1eb79c814a0f78cc0a7789c74987"
+  },
+  "reference_diagnostics": {
+    "KBr": {
+      "log_fugacity_convergence_error": 1.0628312907101645e-05,
+      "reference_molality_mol_kg": 1e-12
+    },
+    "KCl": {
+      "log_fugacity_convergence_error": 1.0628329746964482e-05,
+      "reference_molality_mol_kg": 1e-12
+    },
+    "LiBr": {
+      "log_fugacity_convergence_error": 1.062834631682108e-05,
+      "reference_molality_mol_kg": 1e-12
+    },
+    "LiCl": {
+      "log_fugacity_convergence_error": 1.0628336156059959e-05,
+      "reference_molality_mol_kg": 1e-12
+    },
+    "NaBr": {
+      "log_fugacity_convergence_error": 1.0628351105879119e-05,
+      "reference_molality_mol_kg": 1e-12
+    },
+    "NaCl": {
+      "log_fugacity_convergence_error": 1.0628369480514266e-05,
+      "reference_molality_mol_kg": 1e-12
+    }
+  },
+  "schema_version": 1,
+  "source_data": {
+    "doi": "10.1063/1.3253108",
+    "filename": "hamer-wu-1972-aqueous-alkali-halides.csv",
+    "rows": 164,
+    "sha256": "2f63e13f06a5b0f4e8bca2980b6a8d9d7fb0f839153c43e3a71952daf9796595",
+    "tables": {
+      "KBr": 29,
+      "KCl": 28,
+      "LiBr": 10,
+      "LiCl": 9,
+      "NaBr": 17,
+      "NaCl": 16
+    }
+  },
+  "status": "passed",
+  "tolerances": {
+    "first_prediction_max": 0.98,
+    "per_salt_max_abs_max": 1.25,
+    "per_salt_rmse_max": 0.35,
+    "pooled_rmse_max": 0.17
+  }
+}
