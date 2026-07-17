@@ -180,6 +180,29 @@ def _verify_module_origin(module: Any, installed_root: str) -> str:
     return str(origin)
 
 
+def _environment(origins: dict[str, str]) -> dict[str, Any]:
+    distributions = sorted(
+        {
+            (str(item.metadata["Name"]), item.version)
+            for item in importlib.metadata.distributions()
+            if item.metadata["Name"]
+        }
+    )
+    return {
+        "python": sys.version,
+        "python_executable": sys.executable,
+        "python_executable_sha256": sha256_file(Path(sys.executable).resolve()),
+        "python_isolated": bool(sys.flags.isolated),
+        "platform": platform.platform(),
+        "machine": platform.machine(),
+        "implementation": platform.python_implementation(),
+        "installed_distributions": [
+            {"name": name, "version": version} for name, version in distributions
+        ],
+        "imports": origins,
+    }
+
+
 def _partition_contract(dataset: Any, expected: dict[str, Any]) -> None:
     observed = {
         "dataset_id": dataset.dataset_id,
@@ -376,15 +399,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "campaign_id": CAMPAIGN_ID,
         "executed_at_utc": datetime.now(timezone.utc).isoformat(),
         "command": [sys.executable, *sys.argv],
-        "environment": {
-            "python": sys.version,
-            "python_executable": sys.executable,
-            "python_isolated": bool(sys.flags.isolated),
-            "platform": platform.platform(),
-            "machine": platform.machine(),
-            "implementation": platform.python_implementation(),
-            "imports": origins,
-        },
+        "environment": _environment(origins),
         "artifacts": {
             "provider": provider,
             "regression": regression,

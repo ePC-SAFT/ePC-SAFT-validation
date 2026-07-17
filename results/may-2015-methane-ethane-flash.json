@@ -1,0 +1,1859 @@
+{
+  "admission": {
+    "manager_reported_package_approval": "FINAL_PERMANENT_LAB_APPROVAL",
+    "overall_validation_status": "NON_ADMISSION",
+    "predictive_agreement_status": "NON_ADMISSION",
+    "validation_package_local_campaign_status": "NON_ADMISSION"
+  },
+  "artifacts": {
+    "equilibrium": {
+      "distribution": "epcsaft-equilibrium",
+      "installed_root": "/tmp/epcsaft-validation-slice2-eq-019f71fa/lib/python3.13/site-packages",
+      "path": "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT-project/artifacts/equilibrium-neutral-two-phase-tp-flash-v1/e16f1e0/epcsaft_equilibrium-0.1.0.dev0-cp313-cp313-linux_x86_64.whl",
+      "record_members_verified": 8,
+      "sha256": "9f3adbc6f5539ae14cbff15b14a9eccf289ce238b316f78a81a25c1b91b3cc49",
+      "version": "0.1.0.dev0"
+    },
+    "equilibrium_commit": "e16f1e0fff62892615ef11e4012cd1e63a329e39",
+    "equilibrium_tree": "6fc131c03e392acd5ab6678ff6e17e59a4afce02",
+    "provider": {
+      "distribution": "epcsaft",
+      "installed_root": "/tmp/epcsaft-validation-slice2-eq-019f71fa/lib/python3.13/site-packages",
+      "path": "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT-project/artifacts/provider-neutral-mixture-sdk-v1/25e5972/epcsaft-0.1.0.dev0-cp313-cp313-linux_x86_64.whl",
+      "record_members_verified": 29,
+      "sha256": "17c6735ee117469b13b76b6a669d0b4430071c8eaebdf1e405baefc9adcb838b",
+      "version": "0.1.0.dev0"
+    }
+  },
+  "campaign_id": "consumer-slice-2-may-2015-methane-ethane-flash-v1",
+  "command": [
+    "/tmp/epcsaft-validation-slice2-eq-019f71fa/bin/python",
+    "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT-project/ePC-SAFT-validation/campaigns/may_2015_methane_ethane_flash.py",
+    "--provider-wheel",
+    "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT-project/artifacts/provider-neutral-mixture-sdk-v1/25e5972/epcsaft-0.1.0.dev0-cp313-cp313-linux_x86_64.whl",
+    "--equilibrium-wheel",
+    "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT-project/artifacts/equilibrium-neutral-two-phase-tp-flash-v1/e16f1e0/epcsaft_equilibrium-0.1.0.dev0-cp313-cp313-linux_x86_64.whl",
+    "--source",
+    "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT-project/ePC-SAFT-validation/data/may-2015-methane-ethane-vle.csv",
+    "--output-dir",
+    "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT-project/ePC-SAFT-validation/results"
+  ],
+  "diagnostics_by_row": {
+    "may2015-ch4-c2h6-001": {
+      "attempt_log": [
+        {
+          "callback_error": "",
+          "constraint_violation": 1.1102230246251565e-16,
+          "initial_guess": [
+            0.14407499999999998,
+            0.35592500000000005,
+            -10.596634733096073,
+            0.344075,
+            0.15592499999999998,
+            -8.268678207616574
+          ],
+          "iterations": 9,
+          "role": "search",
+          "solver_converged": true,
+          "solver_status": "solve_succeeded"
+        },
+        {
+          "callback_error": "",
+          "constraint_violation": 0.0,
+          "initial_guess": [
+            0.15961723577337397,
+            0.3557321084389802,
+            -10.27609179143826,
+            0.328532764226626,
+            0.1561178915610199,
+            -8.668063339915546
+          ],
+          "iterations": 7,
+          "role": "confirmation",
+          "solver_converged": true,
+          "solver_status": "solve_succeeded"
+        }
+      ],
+      "attempts": 2,
+      "chemical_potential_max_abs": 6.757794324130373e-11,
+      "confirmation_max_difference": 3.597815403046881e-15,
+      "confirmation_solves": 1,
+      "equality_multipliers": [
+        -7.0548597027854605,
+        -5.8962057060071
+      ],
+      "exact_derivatives": true,
+      "failure_reason": "",
+      "globality_certificate": false,
+      "iterations": 9,
+      "kkt_stationarity_max_abs": 7.993605777301127e-15,
+      "lower_bound_multipliers": [
+        6.066544292649378e-11,
+        2.6312684351640484e-11,
+        1.123085024198583e-12,
+        2.6872583183345285e-11,
+        5.464774849711759e-11,
+        9.273958372625409e-13
+      ],
+      "material_balance_max_abs": 1.1102230246251565e-16,
+      "numerical_converged": true,
+      "phase_density_distance": 0.815374400659896,
+      "physical_accepted": true,
+      "pressure_stationarity_max_relative": 1.452287772722744e-12,
+      "solver_constraint_violation": 1.1102230246251565e-16,
+      "solver_converged": true,
+      "solver_lower_bounds": [
+        1e-10,
+        1e-10,
+        -18.420680743952367,
+        1e-10,
+        1e-10,
+        -18.420680743952367
+      ],
+      "solver_status": "solve_succeeded",
+      "solver_upper_bounds": [
+        0.48815,
+        0.51185,
+        -2.3025850929940455,
+        0.48815,
+        0.51185,
+        -2.3025850929940455
+      ],
+      "upper_bound_multipliers": [
+        2.6872583175402697e-11,
+        5.464774846427852e-11,
+        1.133034080235544e-12,
+        6.066544288601818e-11,
+        2.631268434402794e-11,
+        1.4394654919371753e-12
+      ]
+    },
+    "may2015-ch4-c2h6-002": {
+      "attempt_log": [
+        {
+          "callback_error": "",
+          "constraint_violation": 1.1102230246251565e-16,
+          "initial_guess": [
+            0.2216,
+            0.2784,
+            -10.596634733096073,
+            0.3944,
+            0.10560000000000003,
+            -7.829673223292983
+          ],
+          "iterations": 8,
+          "role": "search",
+          "solver_converged": true,
+          "solver_status": "solve_succeeded"
+        },
+        {
+          "callback_error": "",
+          "constraint_violation": 1.1102230246251565e-16,
+          "initial_guess": [
+            0.19134663075675468,
+            0.3296651623611977,
+            -10.442425572697266,
+            0.42465336924324526,
+            0.054334837638802376,
+            -8.087187814996037
+          ],
+          "iterations": 8,
+          "role": "confirmation",
+          "solver_converged": true,
+          "solver_status": "solve_succeeded"
+        }
+      ],
+      "attempts": 2,
+      "chemical_potential_max_abs": 2.367199769537365e-10,
+      "confirmation_max_difference": 1.8449273995273507e-15,
+      "confirmation_solves": 1,
+      "equality_multipliers": [
+        -6.868093872722586,
+        -4.612400043594085
+      ],
+      "exact_derivatives": true,
+      "failure_reason": "",
+      "globality_certificate": false,
+      "iterations": 8,
+      "kkt_stationarity_max_abs": 3.552713678800501e-15,
+      "lower_bound_multipliers": [
+        5.077964185154139e-11,
+        2.8233824915532445e-11,
+        1.1466465036112672e-12,
+        2.0804264302152432e-11,
+        1.4659580928291344e-10,
+        8.755156324820746e-13
+      ],
+      "material_balance_max_abs": 1.1102230246251565e-16,
+      "numerical_converged": true,
+      "phase_density_distance": 0.9145039357016633,
+      "physical_accepted": true,
+      "pressure_stationarity_max_relative": 1.7473260168750856e-12,
+      "solver_constraint_violation": 1.1102230246251565e-16,
+      "solver_converged": true,
+      "solver_lower_bounds": [
+        1e-10,
+        1e-10,
+        -18.420680743952367,
+        1e-10,
+        1e-10,
+        -18.420680743952367
+      ],
+      "solver_status": "solve_succeeded",
+      "solver_upper_bounds": [
+        0.616,
+        0.384,
+        -2.3025850929940455,
+        0.616,
+        0.384,
+        -2.3025850929940455
+      ],
+      "upper_bound_multipliers": [
+        2.0804264297390353e-11,
+        1.4659580904655817e-10,
+        1.1100230880787897e-12,
+        5.077964182317075e-11,
+        2.823382490676433e-11,
+        1.5852722853212203e-12
+      ]
+    },
+    "may2015-ch4-c2h6-003": {
+      "attempt_log": [
+        {
+          "callback_error": "",
+          "constraint_violation": 0.0,
+          "initial_guess": [
+            0.20104624999999998,
+            0.29895375,
+            -10.596634733096073,
+            0.38660375,
+            0.11339624999999998,
+            -7.950607494710671
+          ],
+          "iterations": 8,
+          "role": "search",
+          "solver_converged": true,
+          "solver_status": "solve_succeeded"
+        },
+        {
+          "callback_error": "",
+          "constraint_violation": 0.0,
+          "initial_guess": [
+            0.1799628715424399,
+            0.3366060411481593,
+            -10.413830164882906,
+            0.4076871284575601,
+            0.07574395885184068,
+            -8.226341956834476
+          ],
+          "iterations": 7,
+          "role": "confirmation",
+          "solver_converged": true,
+          "solver_status": "solve_succeeded"
+        }
+      ],
+      "attempts": 2,
+      "chemical_potential_max_abs": 1.6110224265730722e-10,
+      "confirmation_max_difference": 3.969563053814942e-15,
+      "confirmation_solves": 1,
+      "equality_multipliers": [
+        -6.938144906014538,
+        -4.997706108739005
+      ],
+      "exact_derivatives": true,
+      "failure_reason": "",
+      "globality_certificate": false,
+      "iterations": 8,
+      "kkt_stationarity_max_abs": 1.7763568394002505e-15,
+      "lower_bound_multipliers": [
+        5.40451322338135e-11,
+        2.768578614011511e-11,
+        1.1425258176512713e-12,
+        2.167389861194336e-11,
+        1.0823827024604692e-10,
+        8.874081295993361e-13
+      ],
+      "material_balance_max_abs": 0.0,
+      "numerical_converged": true,
+      "phase_density_distance": 0.8970759193276137,
+      "physical_accepted": true,
+      "pressure_stationarity_max_relative": 1.6546978759159395e-12,
+      "solver_constraint_violation": 0.0,
+      "solver_converged": true,
+      "solver_lower_bounds": [
+        1e-10,
+        1e-10,
+        -18.420680743952367,
+        1e-10,
+        1e-10,
+        -18.420680743952367
+      ],
+      "solver_status": "solve_succeeded",
+      "solver_upper_bounds": [
+        0.58765,
+        0.41235,
+        -2.3025850929940455,
+        0.58765,
+        0.41235,
+        -2.3025850929940455
+      ],
+      "upper_bound_multipliers": [
+        2.167389860677679e-11,
+        1.0823827011718541e-10,
+        1.1139122576869682e-12,
+        5.404513220168415e-11,
+        2.7685786131684485e-11,
+        1.547716146626614e-12
+      ]
+    },
+    "may2015-ch4-c2h6-004": {
+      "attempt_log": [
+        {
+          "callback_error": "",
+          "constraint_violation": 1.1102230246251565e-16,
+          "initial_guess": [
+            0.17810000000000004,
+            0.32189999999999996,
+            -10.596634733096073,
+            0.3779,
+            0.12209999999999999,
+            -8.061358659020952
+          ],
+          "iterations": 8,
+          "role": "search",
+          "solver_converged": true,
+          "solver_status": "solve_succeeded"
+        },
+        {
+          "callback_error": "",
+          "constraint_violation": 0.0,
+          "initial_guess": [
+            0.17105994353623716,
+            0.34383644629594307,
+            -10.37641183029979,
+            0.38494005646376295,
+            0.1001635537040569,
+            -8.366390932877204
+          ],
+          "iterations": 7,
+          "role": "confirmation",
+          "solver_converged": true,
+          "solver_status": "solve_succeeded"
+        }
+      ],
+      "attempts": 2,
+      "chemical_potential_max_abs": 1.1246026332401016e-10,
+      "confirmation_max_difference": 5.384026462597397e-15,
+      "confirmation_solves": 1,
+      "equality_multipliers": [
+        -6.98999448827939,
+        -5.335712238069297
+      ],
+      "exact_derivatives": true,
+      "failure_reason": "",
+      "globality_certificate": false,
+      "iterations": 8,
+      "kkt_stationarity_max_abs": 2.6645352591003757e-15,
+      "lower_bound_multipliers": [
+        5.683970893560067e-11,
+        2.7140497219829547e-11,
+        1.1371782055960723e-12,
+        2.295332900849164e-11,
+        8.337023666623355e-11,
+        8.997078351903934e-13
+      ],
+      "material_balance_max_abs": 1.1102230246251565e-16,
+      "numerical_converged": true,
+      "phase_density_distance": 0.8762640906347576,
+      "physical_accepted": true,
+      "pressure_stationarity_max_relative": 1.580085991193969e-12,
+      "solver_constraint_violation": 1.1102230246251565e-16,
+      "solver_converged": true,
+      "solver_lower_bounds": [
+        1e-10,
+        1e-10,
+        -18.420680743952367,
+        1e-10,
+        1e-10,
+        -18.420680743952367
+      ],
+      "solver_status": "solve_succeeded",
+      "solver_upper_bounds": [
+        0.556,
+        0.44399999999999995,
+        -2.3025850929940455,
+        0.556,
+        0.44399999999999995,
+        -2.3025850929940455
+      ],
+      "upper_bound_multipliers": [
+        2.2953329002696413e-11,
+        8.337023658977559e-11,
+        1.1190427967688985e-12,
+        5.683970890006499e-11,
+        2.714049721172814e-11,
+        1.5116733013174496e-12
+      ]
+    },
+    "may2015-ch4-c2h6-005": {
+      "attempt_log": [
+        {
+          "callback_error": "",
+          "constraint_violation": 0.0,
+          "initial_guess": [
+            0.16082499999999997,
+            0.339175,
+            -10.596634733096073,
+            0.36082499999999995,
+            0.13917500000000005,
+            -8.165985225688845
+          ],
+          "iterations": 7,
+          "role": "search",
+          "solver_converged": true,
+          "solver_status": "solve_succeeded"
+        },
+        {
+          "callback_error": "",
+          "constraint_violation": 0.0,
+          "initial_guess": [
+            0.16470575020227898,
+            0.3516514299248276,
+            -10.327691023465421,
+            0.35694424979772094,
+            0.1266985700751724,
+            -8.514591013480477
+          ],
+          "iterations": 7,
+          "role": "confirmation",
+          "solver_converged": true,
+          "solver_status": "solve_succeeded"
+        }
+      ],
+      "attempts": 2,
+      "chemical_potential_max_abs": 8.028422371353372e-11,
+      "confirmation_max_difference": 2.9077647907563323e-15,
+      "confirmation_solves": 1,
+      "equality_multipliers": [
+        -7.027385835728077,
+        -5.633446344470497
+      ],
+      "exact_derivatives": true,
+      "failure_reason": "",
+      "globality_certificate": false,
+      "iterations": 7,
+      "kkt_stationarity_max_abs": 4.440892098500626e-15,
+      "lower_bound_multipliers": [
+        5.892774066549181e-11,
+        2.6574984979277905e-11,
+        1.1302897713200515e-12,
+        2.474539205473513e-11,
+        6.671504608430485e-11,
+        9.131002780751736e-13
+      ],
+      "material_balance_max_abs": 0.0,
+      "numerical_converged": true,
+      "phase_density_distance": 0.8502111244493114,
+      "physical_accepted": true,
+      "pressure_stationarity_max_relative": 1.5164995039978117e-12,
+      "solver_constraint_violation": 0.0,
+      "solver_converged": true,
+      "solver_lower_bounds": [
+        1e-10,
+        1e-10,
+        -18.420680743952367,
+        1e-10,
+        1e-10,
+        -18.420680743952367
+      ],
+      "solver_status": "solve_succeeded",
+      "solver_upper_bounds": [
+        0.52165,
+        0.47835000000000005,
+        -2.3025850929940455,
+        0.52165,
+        0.47835000000000005,
+        -2.3025850929940455
+      ],
+      "upper_bound_multipliers": [
+        2.47453920479994e-11,
+        6.671504603534569e-11,
+        1.1257944165765984e-12,
+        5.892774062729592e-11,
+        2.6574984971508197e-11,
+        1.4753167202227359e-12
+      ]
+    },
+    "may2015-ch4-c2h6-006": {
+      "attempt_log": [
+        {
+          "callback_error": "",
+          "constraint_violation": 1.1102230246251565e-16,
+          "initial_guess": [
+            0.14354999999999998,
+            0.35645000000000004,
+            -10.596634733096073,
+            0.34355,
+            0.15644999999999998,
+            -8.266821928865813
+          ],
+          "iterations": 9,
+          "role": "search",
+          "solver_converged": true,
+          "solver_status": "solve_succeeded"
+        },
+        {
+          "callback_error": "",
+          "constraint_violation": 1.1102230246251565e-16,
+          "initial_guess": [
+            0.15943121723737372,
+            0.3567854140120138,
+            -10.274404993876793,
+            0.3276687827626263,
+            0.15611458598798614,
+            -8.667315595223824
+          ],
+          "iterations": 7,
+          "role": "confirmation",
+          "solver_converged": true,
+          "solver_status": "solve_succeeded"
+        }
+      ],
+      "attempts": 2,
+      "chemical_potential_max_abs": 6.758060777656283e-11,
+      "confirmation_max_difference": 3.5260331118226995e-15,
+      "confirmation_solves": 1,
+      "equality_multipliers": [
+        -7.0524126184356914,
+        -5.897398189938313
+      ],
+      "exact_derivatives": true,
+      "failure_reason": "",
+      "globality_certificate": false,
+      "iterations": 9,
+      "kkt_stationarity_max_abs": 4.440892098500626e-15,
+      "lower_bound_multipliers": [
+        6.073231542922333e-11,
+        2.623429782904044e-11,
+        1.1228510285811738e-12,
+        2.6943067150662786e-11,
+        5.464194106592364e-11,
+        9.273251051197058e-13
+      ],
+      "material_balance_max_abs": 1.1102230246251565e-16,
+      "numerical_converged": true,
+      "phase_density_distance": 0.8158409761940405,
+      "physical_accepted": true,
+      "pressure_stationarity_max_relative": 1.4549847985209092e-12,
+      "solver_constraint_violation": 1.1102230246251565e-16,
+      "solver_converged": true,
+      "solver_lower_bounds": [
+        1e-10,
+        1e-10,
+        -18.420680743952367,
+        1e-10,
+        1e-10,
+        -18.420680743952367
+      ],
+      "solver_status": "solve_succeeded",
+      "solver_upper_bounds": [
+        0.4871,
+        0.5129,
+        -2.3025850929940455,
+        0.4871,
+        0.5129,
+        -2.3025850929940455
+      ],
+      "upper_bound_multipliers": [
+        2.694306714267801e-11,
+        5.4641941033071334e-11,
+        1.1332723397065877e-12,
+        6.073231538865177e-11,
+        2.6234297821466774e-11,
+        1.4396359327213362e-12
+      ]
+    },
+    "may2015-ch4-c2h6-007": {
+      "attempt_log": [
+        {
+          "callback_error": "",
+          "constraint_violation": 1.1102230246251565e-16,
+          "initial_guess": [
+            0.17547500000000002,
+            0.32452499999999995,
+            -10.596634733096073,
+            0.375475,
+            0.124525,
+            -8.470187205707553
+          ],
+          "iterations": 8,
+          "role": "search",
+          "solver_converged": true,
+          "solver_status": "solve_succeeded"
+        },
+        {
+          "callback_error": "",
+          "constraint_violation": 0.0,
+          "initial_guess": [
+            0.21037302445787573,
+            0.31438162237867384,
+            -10.229505485919086,
+            0.3405769755421244,
+            0.13466837762132614,
+            -8.979018987470047
+          ],
+          "iterations": 7,
+          "role": "confirmation",
+          "solver_converged": true,
+          "solver_status": "solve_succeeded"
+        }
+      ],
+      "attempts": 2,
+      "chemical_potential_max_abs": 6.703704258370635e-11,
+      "confirmation_max_difference": 1.841265714262691e-15,
+      "confirmation_solves": 1,
+      "equality_multipliers": [
+        -7.284679568766428,
+        -5.819263691196302
+      ],
+      "exact_derivatives": true,
+      "failure_reason": "",
+      "globality_certificate": false,
+      "iterations": 8,
+      "kkt_stationarity_max_abs": 8.881784197001252e-16,
+      "lower_bound_multipliers": [
+        4.560149720608125e-11,
+        2.976696009395789e-11,
+        1.1166571393937054e-12,
+        2.5856241005615416e-11,
+        6.328645271527475e-11,
+        9.5777891418648e-13
+      ],
+      "material_balance_max_abs": 1.1102230246251565e-16,
+      "numerical_converged": true,
+      "phase_density_distance": 0.7457673939277302,
+      "physical_accepted": true,
+      "pressure_stationarity_max_relative": 1.3103290291164164e-12,
+      "solver_constraint_violation": 1.1102230246251565e-16,
+      "solver_converged": true,
+      "solver_lower_bounds": [
+        1e-10,
+        1e-10,
+        -18.420680743952367,
+        1e-10,
+        1e-10,
+        -18.420680743952367
+      ],
+      "solver_status": "solve_succeeded",
+      "solver_upper_bounds": [
+        0.55095,
+        0.44904999999999995,
+        -2.3025850929940455,
+        0.55095,
+        0.44904999999999995,
+        -2.3025850929940455
+      ],
+      "upper_bound_multipliers": [
+        2.585624099826178e-11,
+        6.328645267120918e-11,
+        1.1396524601067966e-12,
+        4.56014971832064e-11,
+        2.976696008421039e-11,
+        1.371914816844859e-12
+      ]
+    },
+    "may2015-ch4-c2h6-008": {
+      "attempt_log": [
+        {
+          "callback_error": "",
+          "constraint_violation": 0.0,
+          "initial_guess": [
+            0.20148124999999995,
+            0.29851875000000005,
+            -10.596634733096073,
+            0.38676875,
+            0.11323125,
+            -8.580606318845382
+          ],
+          "iterations": 9,
+          "role": "search",
+          "solver_converged": true,
+          "solver_status": "solve_succeeded"
+        },
+        {
+          "callback_error": "",
+          "constraint_violation": 0.0,
+          "initial_guess": [
+            0.24261310489002166,
+            0.28419156236711146,
+            -10.195289274618506,
+            0.34563689510997825,
+            0.1275584376328886,
+            -9.167872349642321
+          ],
+          "iterations": 7,
+          "role": "confirmation",
+          "solver_converged": true,
+          "solver_status": "solve_succeeded"
+        }
+      ],
+      "attempts": 2,
+      "chemical_potential_max_abs": 6.800959795327799e-11,
+      "confirmation_max_difference": 2.2510817741334635e-15,
+      "confirmation_solves": 1,
+      "equality_multipliers": [
+        -7.39971543905566,
+        -5.767783538894408
+      ],
+      "exact_derivatives": true,
+      "failure_reason": "",
+      "globality_certificate": false,
+      "iterations": 9,
+      "kkt_stationarity_max_abs": 2.6645352591003757e-15,
+      "lower_bound_multipliers": [
+        3.9380196120034874e-11,
+        3.2943020405522714e-11,
+        1.1119835703488106e-12,
+        2.5436216909767363e-11,
+        6.694763406805859e-11,
+        9.772223696418305e-13
+      ],
+      "material_balance_max_abs": 0.0,
+      "numerical_converged": true,
+      "phase_density_distance": 0.6848281630024994,
+      "physical_accepted": true,
+      "pressure_stationarity_max_relative": 1.2206453985368023e-12,
+      "solver_constraint_violation": 0.0,
+      "solver_converged": true,
+      "solver_lower_bounds": [
+        1e-10,
+        1e-10,
+        -18.420680743952367,
+        1e-10,
+        1e-10,
+        -18.420680743952367
+      ],
+      "solver_status": "solve_succeeded",
+      "solver_upper_bounds": [
+        0.5882499999999999,
+        0.41175000000000006,
+        -2.3025850929940455,
+        0.5882499999999999,
+        0.41175000000000006,
+        -2.3025850929940455
+      ],
+      "upper_bound_multipliers": [
+        2.54362169026503e-11,
+        6.694763401875532e-11,
+        1.144562008059058e-12,
+        3.9380196102976756e-11,
+        3.294302039358319e-11,
+        1.3338989466645238e-12
+      ]
+    },
+    "may2015-ch4-c2h6-009": {
+      "attempt_log": [
+        {
+          "callback_error": "",
+          "constraint_violation": 0.0,
+          "initial_guess": [
+            0.22794374999999995,
+            0.27205625000000005,
+            -10.596634733096073,
+            0.39680624999999997,
+            0.10319375000000003,
+            -8.700097366052805
+          ],
+          "iterations": 10,
+          "role": "search",
+          "solver_converged": true,
+          "solver_status": "solve_succeeded"
+        },
+        {
+          "callback_error": "",
+          "constraint_violation": 0.0,
+          "initial_guess": [
+            0.29992714275256577,
+            0.2587558388571653,
+            -10.07051314933148,
+            0.32482285724743415,
+            0.11649416114283478,
+            -9.477502152422641
+          ],
+          "iterations": 9,
+          "role": "confirmation",
+          "solver_converged": true,
+          "solver_status": "solve_succeeded"
+        }
+      ],
+      "attempts": 2,
+      "chemical_potential_max_abs": 7.426859127690477e-11,
+      "confirmation_max_difference": 9.058485238819865e-14,
+      "confirmation_solves": 1,
+      "equality_multipliers": [
+        -7.515510916996979,
+        -5.703486545103658
+      ],
+      "exact_derivatives": true,
+      "failure_reason": "",
+      "globality_certificate": false,
+      "iterations": 10,
+      "kkt_stationarity_max_abs": 3.4638958368304884e-14,
+      "lower_bound_multipliers": [
+        3.1626109188863035e-11,
+        3.61811862385495e-11,
+        1.095260031820506e-12,
+        2.6952174168711676e-11,
+        7.332108461709901e-11,
+        1.0108726022519713e-12
+      ],
+      "material_balance_max_abs": 0.0,
+      "numerical_converged": true,
+      "phase_density_distance": 0.5717519744865474,
+      "physical_accepted": true,
+      "pressure_stationarity_max_relative": 1.0894023274120531e-12,
+      "solver_constraint_violation": 0.0,
+      "solver_converged": true,
+      "solver_lower_bounds": [
+        1e-10,
+        1e-10,
+        -18.420680743952367,
+        1e-10,
+        1e-10,
+        -18.420680743952367
+      ],
+      "solver_status": "solve_succeeded",
+      "solver_upper_bounds": [
+        0.6247499999999999,
+        0.3752500000000001,
+        -2.3025850929940455,
+        0.6247499999999999,
+        0.3752500000000001,
+        -2.3025850929940455
+      ],
+      "upper_bound_multipliers": [
+        2.695217416072111e-11,
+        7.332108455797214e-11,
+        1.1628377484189321e-12,
+        3.162610917785988e-11,
+        3.618118622415325e-11,
+        1.2759233949341004e-12
+      ]
+    },
+    "may2015-ch4-c2h6-010": {
+      "attempt_log": [
+        {
+          "callback_error": "",
+          "constraint_violation": 0.0,
+          "initial_guess": [
+            0.24414750000000002,
+            0.2558525,
+            -10.596634733096073,
+            0.4029525,
+            0.09704750000000001,
+            -8.762114207136579
+          ],
+          "iterations": 11,
+          "role": "search",
+          "solver_converged": true,
+          "solver_status": "solve_succeeded"
+        },
+        {
+          "callback_error": "",
+          "constraint_violation": 0.0,
+          "initial_guess": [
+            0.33903792946072064,
+            0.23891674325932702,
+            -9.967818719085638,
+            0.30806207053927936,
+            0.11398325674067296,
+            -9.687960166926137
+          ],
+          "iterations": 10,
+          "role": "confirmation",
+          "solver_converged": true,
+          "solver_status": "solve_succeeded"
+        }
+      ],
+      "attempts": 2,
+      "chemical_potential_max_abs": 7.179234984278082e-11,
+      "confirmation_max_difference": 2.5329074898807685e-13,
+      "confirmation_solves": 1,
+      "equality_multipliers": [
+        -7.571932737701288,
+        -5.6657176454058895
+      ],
+      "exact_derivatives": true,
+      "failure_reason": "",
+      "globality_certificate": false,
+      "iterations": 11,
+      "kkt_stationarity_max_abs": 1.2789769243681803e-13,
+      "lower_bound_multipliers": [
+        2.787400127347915e-11,
+        3.9204849477237905e-11,
+        1.0818632363239053e-12,
+        2.8324377967038035e-11,
+        7.512046220482348e-11,
+        1.0351047577256119e-12
+      ],
+      "material_balance_max_abs": 0.0,
+      "numerical_converged": true,
+      "phase_density_distance": 0.45812712462410005,
+      "physical_accepted": true,
+      "pressure_stationarity_max_relative": 9.333381127271831e-13,
+      "solver_constraint_violation": 0.0,
+      "solver_converged": true,
+      "solver_lower_bounds": [
+        1e-10,
+        1e-10,
+        -18.420680743952367,
+        1e-10,
+        1e-10,
+        -18.420680743952367
+      ],
+      "solver_status": "solve_succeeded",
+      "solver_upper_bounds": [
+        0.6471,
+        0.3529,
+        -2.3025850929940455,
+        0.6471,
+        0.3529,
+        -2.3025850929940455
+      ],
+      "upper_bound_multipliers": [
+        2.8324377958213672e-11,
+        7.512046214274854e-11,
+        1.178329201590482e-12,
+        2.787400126493272e-11,
+        3.920484946033033e-11,
+        1.239303678847385e-12
+      ]
+    },
+    "may2015-ch4-c2h6-011": {
+      "attempt_log": [
+        {
+          "callback_error": "",
+          "constraint_violation": 0.0,
+          "initial_guess": [
+            0.25150625,
+            0.24849375,
+            -10.596634733096073,
+            0.40574375,
+            0.09425624999999999,
+            -8.79585600987541
+          ],
+          "iterations": 14,
+          "role": "search",
+          "solver_converged": true,
+          "solver_status": "solve_succeeded"
+        },
+        {
+          "callback_error": "",
+          "constraint_violation": 0.0,
+          "initial_guess": [
+            0.3937361461776234,
+            0.23996247787863856,
+            -9.803962252222117,
+            0.2635138538223766,
+            0.10278752212136147,
+            -9.949020083144621
+          ],
+          "iterations": 13,
+          "role": "confirmation",
+          "solver_converged": true,
+          "solver_status": "solve_succeeded"
+        }
+      ],
+      "attempts": 2,
+      "chemical_potential_max_abs": 8.857714561827379e-11,
+      "confirmation_max_difference": 1.3306534545614569e-13,
+      "confirmation_solves": 1,
+      "equality_multipliers": [
+        -7.601481068520974,
+        -5.643801906597459
+      ],
+      "exact_derivatives": true,
+      "failure_reason": "",
+      "globality_certificate": false,
+      "iterations": 14,
+      "kkt_stationarity_max_abs": 4.344968829173013e-12,
+      "lower_bound_multipliers": [
+        2.38646300970681e-11,
+        3.897218073375647e-11,
+        1.061068371788285e-12,
+        3.290062297023728e-11,
+        8.303436790669507e-11,
+        1.0669403224556244e-12
+      ],
+      "material_balance_max_abs": 0.0,
+      "numerical_converged": true,
+      "phase_density_distance": 0.34152472430537395,
+      "physical_accepted": true,
+      "pressure_stationarity_max_relative": 5.971544028718167e-12,
+      "solver_constraint_violation": 0.0,
+      "solver_converged": true,
+      "solver_lower_bounds": [
+        1e-10,
+        1e-10,
+        -18.420680743952367,
+        1e-10,
+        1e-10,
+        -18.420680743952367
+      ],
+      "solver_status": "solve_succeeded",
+      "solver_upper_bounds": [
+        0.65725,
+        0.34275,
+        -2.3025850929940455,
+        0.65725,
+        0.34275,
+        -2.3025850929940455
+      ],
+      "upper_bound_multipliers": [
+        3.290062295833084e-11,
+        8.303436783085584e-11,
+        1.2040298245397083e-12,
+        2.3864630090803034e-11,
+        3.897218071704742e-11,
+        1.1965572493609395e-12
+      ]
+    },
+    "may2015-ch4-c2h6-012": {
+      "attempt_log": [
+        {
+          "callback_error": "",
+          "constraint_violation": 0.0,
+          "initial_guess": [
+            0.25861125,
+            0.24138874999999999,
+            -10.596634733096073,
+            0.40843875,
+            0.09156124999999998,
+            -8.824478852315902
+          ],
+          "iterations": 18,
+          "role": "search",
+          "solver_converged": true,
+          "solver_status": "solve_succeeded"
+        },
+        {
+          "callback_error": "",
+          "constraint_violation": 0.0,
+          "initial_guess": [
+            0.40843875,
+            0.09156124999999998,
+            -10.596634733096073,
+            0.25861125,
+            0.24138874999999999,
+            -8.824478852315902
+          ],
+          "iterations": 21,
+          "role": "search",
+          "solver_converged": true,
+          "solver_status": "solve_succeeded"
+        }
+      ],
+      "attempts": 2,
+      "chemical_potential_max_abs": 8.122391648157645e-12,
+      "confirmation_max_difference": 0.0,
+      "confirmation_solves": 0,
+      "equality_multipliers": [
+        -7.625749220260063,
+        -5.624389957732974
+      ],
+      "exact_derivatives": true,
+      "failure_reason": "Ipopt solution failed local physical acceptance",
+      "globality_certificate": false,
+      "iterations": 21,
+      "kkt_stationarity_max_abs": 7.258815770683213e-11,
+      "lower_bound_multipliers": [
+        2.7793024820109555e-11,
+        5.5682045967806176e-11,
+        1.0727227980115635e-12,
+        2.674136983084441e-11,
+        5.357510364130861e-11,
+        1.0678622862935227e-12
+      ],
+      "material_balance_max_abs": 0.0,
+      "numerical_converged": false,
+      "phase_density_distance": 6.631928228786238e-10,
+      "physical_accepted": false,
+      "pressure_stationarity_max_relative": 8.946837899298795e-11,
+      "solver_constraint_violation": 0.0,
+      "solver_converged": true,
+      "solver_lower_bounds": [
+        1e-10,
+        1e-10,
+        -18.420680743952367,
+        1e-10,
+        1e-10,
+        -18.420680743952367
+      ],
+      "solver_status": "solve_succeeded",
+      "solver_upper_bounds": [
+        0.66705,
+        0.33294999999999997,
+        -2.3025850929940455,
+        0.66705,
+        0.33294999999999997,
+        -2.3025850929940455
+      ],
+      "upper_bound_multipliers": [
+        2.6741369822978297e-11,
+        5.35751036097354e-11,
+        1.1893671898133035e-12,
+        2.7793024811612582e-11,
+        5.568204593370078e-11,
+        1.1953998432247575e-12
+      ]
+    },
+    "may2015-ch4-c2h6-013": {
+      "attempt_log": [
+        {
+          "callback_error": "",
+          "constraint_violation": 0.0,
+          "initial_guess": [
+            0.24454625000000002,
+            0.25545375,
+            -10.596634733096073,
+            0.40310375000000004,
+            0.09689624999999996,
+            -8.764933894366203
+          ],
+          "iterations": 12,
+          "role": "search",
+          "solver_converged": true,
+          "solver_status": "solve_succeeded"
+        },
+        {
+          "callback_error": "",
+          "constraint_violation": 5.551115123125783e-17,
+          "initial_guess": [
+            0.34377334115989633,
+            0.2396578610660643,
+            -9.953763833938963,
+            0.30387665884010373,
+            0.11269213893393563,
+            -9.70947341302546
+          ],
+          "iterations": 10,
+          "role": "confirmation",
+          "solver_converged": true,
+          "solver_status": "solve_succeeded"
+        }
+      ],
+      "attempts": 2,
+      "chemical_potential_max_abs": 7.367084720044659e-11,
+      "confirmation_max_difference": 4.691955748733127e-14,
+      "confirmation_solves": 1,
+      "equality_multipliers": [
+        -7.57448194403003,
+        -5.663600769176827
+      ],
+      "exact_derivatives": true,
+      "failure_reason": "",
+      "globality_certificate": false,
+      "iterations": 12,
+      "kkt_stationarity_max_abs": 1.7053025658242404e-13,
+      "lower_bound_multipliers": [
+        2.7475357633552902e-11,
+        3.907750960542917e-11,
+        1.0800538567297878e-12,
+        2.8698314902076865e-11,
+        7.593975111088037e-11,
+        1.037649208788565e-12
+      ],
+      "material_balance_max_abs": 0.0,
+      "numerical_converged": true,
+      "phase_density_distance": 0.45085331186719185,
+      "physical_accepted": true,
+      "pressure_stationarity_max_relative": 9.04619013820276e-13,
+      "solver_constraint_violation": 0.0,
+      "solver_converged": true,
+      "solver_lower_bounds": [
+        1e-10,
+        1e-10,
+        -18.420680743952367,
+        1e-10,
+        1e-10,
+        -18.420680743952367
+      ],
+      "solver_status": "solve_succeeded",
+      "solver_upper_bounds": [
+        0.6476500000000001,
+        0.35234999999999994,
+        -2.3025850929940455,
+        0.6476500000000001,
+        0.35234999999999994,
+        -2.3025850929940455
+      ],
+      "upper_bound_multipliers": [
+        2.8698314893017583e-11,
+        7.593975104744555e-11,
+        1.180483164873682e-12,
+        2.7475357625249663e-11,
+        3.907750958862913e-11,
+        1.2356758934974446e-12
+      ]
+    },
+    "may2015-ch4-c2h6-014": {
+      "attempt_log": [
+        {
+          "callback_error": "",
+          "constraint_violation": 0.0,
+          "initial_guess": [
+            0.209855,
+            0.290145,
+            -10.596634733096073,
+            0.389945,
+            0.11005500000000001,
+            -8.611450994196481
+          ],
+          "iterations": 9,
+          "role": "search",
+          "solver_converged": true,
+          "solver_status": "solve_succeeded"
+        },
+        {
+          "callback_error": "",
+          "constraint_violation": 1.1102230246251565e-16,
+          "initial_guess": [
+            0.2509850267252839,
+            0.2730964731001965,
+            -10.188586532310456,
+            0.34881497327471606,
+            0.12710352689980345,
+            -9.219293201590892
+          ],
+          "iterations": 7,
+          "role": "confirmation",
+          "solver_converged": true,
+          "solver_status": "solve_succeeded"
+        }
+      ],
+      "attempts": 2,
+      "chemical_potential_max_abs": 6.59898802268799e-11,
+      "confirmation_max_difference": 2.14917189672306e-14,
+      "confirmation_solves": 1,
+      "equality_multipliers": [
+        -7.430490152893376,
+        -5.7520557774727505
+      ],
+      "exact_derivatives": true,
+      "failure_reason": "",
+      "globality_certificate": false,
+      "iterations": 9,
+      "kkt_stationarity_max_abs": 2.6645352591003757e-15,
+      "lower_bound_multipliers": [
+        3.803868144724959e-11,
+        3.429305967135812e-11,
+        1.1110724172251527e-12,
+        2.5195919887582327e-11,
+        6.728764223815709e-11,
+        9.826540367537284e-13
+      ],
+      "material_balance_max_abs": 0.0,
+      "numerical_converged": true,
+      "phase_density_distance": 0.6623075444952818,
+      "physical_accepted": true,
+      "pressure_stationarity_max_relative": 1.1921062861990363e-12,
+      "solver_constraint_violation": 0.0,
+      "solver_converged": true,
+      "solver_lower_bounds": [
+        1e-10,
+        1e-10,
+        -18.420680743952367,
+        1e-10,
+        1e-10,
+        -18.420680743952367
+      ],
+      "solver_status": "solve_succeeded",
+      "solver_upper_bounds": [
+        0.5998,
+        0.4002,
+        -2.3025850929940455,
+        0.5998,
+        0.4002,
+        -2.3025850929940455
+      ],
+      "upper_bound_multipliers": [
+        2.5195919880599268e-11,
+        6.72876421883542e-11,
+        1.1455289416109633e-12,
+        3.803868143133298e-11,
+        3.429305965842267e-11,
+        1.3239099821052885e-12
+      ]
+    },
+    "may2015-ch4-c2h6-015": {
+      "attempt_log": [
+        {
+          "callback_error": "",
+          "constraint_violation": 0.0,
+          "initial_guess": [
+            0.18821374999999996,
+            0.31178625000000004,
+            -10.596634733096073,
+            0.38173625,
+            0.11826375,
+            -8.523197096692549
+          ],
+          "iterations": 8,
+          "role": "search",
+          "solver_converged": true,
+          "solver_status": "solve_succeeded"
+        },
+        {
+          "callback_error": "",
+          "constraint_violation": 0.0,
+          "initial_guess": [
+            0.22346505262100066,
+            0.2979248347224077,
+            -10.223771410295544,
+            0.34648494737899926,
+            0.13212516527759235,
+            -9.057806772500854
+          ],
+          "iterations": 7,
+          "role": "confirmation",
+          "solver_converged": true,
+          "solver_status": "solve_succeeded"
+        }
+      ],
+      "attempts": 2,
+      "chemical_potential_max_abs": 6.636025062789486e-11,
+      "confirmation_max_difference": 3.5523119532920516e-14,
+      "confirmation_solves": 1,
+      "equality_multipliers": [
+        -7.340854278887243,
+        -5.795448512721265
+      ],
+      "exact_derivatives": true,
+      "failure_reason": "",
+      "globality_certificate": false,
+      "iterations": 8,
+      "kkt_stationarity_max_abs": 8.881784197001252e-15,
+      "lower_bound_multipliers": [
+        4.2867501614658114e-11,
+        3.1420853313710084e-11,
+        1.1158700643321616e-12,
+        2.5402151531614444e-11,
+        6.460199939227018e-11,
+        9.657964951809986e-13
+      ],
+      "material_balance_max_abs": 0.0,
+      "numerical_converged": true,
+      "phase_density_distance": 0.7195960961505139,
+      "physical_accepted": true,
+      "pressure_stationarity_max_relative": 1.2660794717731035e-12,
+      "solver_constraint_violation": 0.0,
+      "solver_converged": true,
+      "solver_lower_bounds": [
+        1e-10,
+        1e-10,
+        -18.420680743952367,
+        1e-10,
+        1e-10,
+        -18.420680743952367
+      ],
+      "solver_status": "solve_succeeded",
+      "solver_upper_bounds": [
+        0.56995,
+        0.43005000000000004,
+        -2.3025850929940455,
+        0.56995,
+        0.43005000000000004,
+        -2.3025850929940455
+      ],
+      "upper_bound_multipliers": [
+        2.5402151524513926e-11,
+        6.460199934636827e-11,
+        1.1404734857531976e-12,
+        4.286750159443851e-11,
+        3.142085330285251e-11,
+        1.3557930654462493e-12
+      ]
+    },
+    "may2015-ch4-c2h6-016": {
+      "attempt_log": [
+        {
+          "callback_error": "",
+          "constraint_violation": 5.551115123125783e-17,
+          "initial_guess": [
+            0.1361,
+            0.3639,
+            -10.596634733096073,
+            0.3361,
+            0.1639,
+            -8.208278559373982
+          ],
+          "iterations": 9,
+          "role": "search",
+          "solver_converged": true,
+          "solver_status": "solve_succeeded"
+        },
+        {
+          "callback_error": "",
+          "constraint_violation": 5.551115123125783e-17,
+          "initial_guess": [
+            0.14457713828137755,
+            0.3611394192721772,
+            -10.300301390945359,
+            0.3276228617186224,
+            0.16666058072782286,
+            -8.568575438514413
+          ],
+          "iterations": 7,
+          "role": "confirmation",
+          "solver_converged": true,
+          "solver_status": "solve_succeeded"
+        }
+      ],
+      "attempts": 2,
+      "chemical_potential_max_abs": 8.060663247988487e-11,
+      "confirmation_max_difference": 6.106226635438361e-16,
+      "confirmation_solves": 1,
+      "equality_multipliers": [
+        -6.980182465983424,
+        -5.9168251631158855
+      ],
+      "exact_derivatives": true,
+      "failure_reason": "",
+      "globality_certificate": false,
+      "iterations": 9,
+      "kkt_stationarity_max_abs": 8.881784197001252e-16,
+      "lower_bound_multipliers": [
+        6.727445937867851e-11,
+        2.593082275516374e-11,
+        1.1264543315692047e-12,
+        2.697052684525313e-11,
+        5.129821704649739e-11,
+        9.180780416862037e-13
+      ],
+      "material_balance_max_abs": 5.551115123125783e-17,
+      "numerical_converged": true,
+      "phase_density_distance": 0.8304447816726873,
+      "physical_accepted": true,
+      "pressure_stationarity_max_relative": 1.4845301878586965e-12,
+      "solver_constraint_violation": 5.551115123125783e-17,
+      "solver_converged": true,
+      "solver_lower_bounds": [
+        1e-10,
+        1e-10,
+        -18.420680743952367,
+        1e-10,
+        1e-10,
+        -18.420680743952367
+      ],
+      "solver_status": "solve_succeeded",
+      "solver_upper_bounds": [
+        0.4722,
+        0.5278,
+        -2.3025850929940455,
+        0.4722,
+        0.5278,
+        -2.3025850929940455
+      ],
+      "upper_bound_multipliers": [
+        2.6970526837251813e-11,
+        5.129821701755103e-11,
+        1.1296253579713122e-12,
+        6.727445932889548e-11,
+        2.593082274776709e-11,
+        1.4625046705272468e-12
+      ]
+    },
+    "may2015-ch4-c2h6-017": {
+      "attempt_log": [
+        {
+          "callback_error": "",
+          "constraint_violation": 5.551115123125783e-17,
+          "initial_guess": [
+            0.13305,
+            0.36695,
+            -10.596634733096073,
+            0.33305,
+            0.16695,
+            -8.196686852800084
+          ],
+          "iterations": 9,
+          "role": "search",
+          "solver_converged": true,
+          "solver_status": "solve_succeeded"
+        },
+        {
+          "callback_error": "",
+          "constraint_violation": 5.551115123125783e-17,
+          "initial_guess": [
+            0.14409331064632938,
+            0.36815309247337924,
+            -10.287780272443369,
+            0.3220066893536706,
+            0.16574690752662083,
+            -8.566118943530615
+          ],
+          "iterations": 7,
+          "role": "confirmation",
+          "solver_converged": true,
+          "solver_status": "solve_succeeded"
+        }
+      ],
+      "attempts": 2,
+      "chemical_potential_max_abs": 8.003020468549948e-11,
+      "confirmation_max_difference": 1.8831014917255227e-15,
+      "confirmation_solves": 1,
+      "equality_multipliers": [
+        -6.965710783637909,
+        -5.920182662588336
+      ],
+      "exact_derivatives": true,
+      "failure_reason": "",
+      "globality_certificate": false,
+      "iterations": 9,
+      "kkt_stationarity_max_abs": 4.440892098500626e-15,
+      "lower_bound_multipliers": [
+        6.745501243717931e-11,
+        2.5430898850612957e-11,
+        1.1247092678561164e-12,
+        2.7437628223187144e-11,
+        5.152844655942046e-11,
+        9.178503777679265e-13
+      ],
+      "material_balance_max_abs": 5.551115123125783e-17,
+      "numerical_converged": true,
+      "phase_density_distance": 0.8331473939839596,
+      "physical_accepted": true,
+      "pressure_stationarity_max_relative": 1.4998728320712134e-12,
+      "solver_constraint_violation": 5.551115123125783e-17,
+      "solver_converged": true,
+      "solver_lower_bounds": [
+        1e-10,
+        1e-10,
+        -18.420680743952367,
+        1e-10,
+        1e-10,
+        -18.420680743952367
+      ],
+      "solver_status": "solve_succeeded",
+      "solver_upper_bounds": [
+        0.4661,
+        0.5339,
+        -2.3025850929940455,
+        0.4661,
+        0.5339,
+        -2.3025850929940455
+      ],
+      "upper_bound_multipliers": [
+        2.7437628214907066e-11,
+        5.1528446530212714e-11,
+        1.1313857217481636e-12,
+        6.745501238712496e-11,
+        2.5430898843499204e-11,
+        1.4630827778722432e-12
+      ]
+    }
+  },
+  "environment": {
+    "contract_sha256": "9d7c5a4c474cab3413ba0f60a2de1952f0532dc62b343fa352d41fcbb2dd6ba5",
+    "implementation": "CPython",
+    "imports": {
+      "epcsaft": "/tmp/epcsaft-validation-slice2-eq-019f71fa/lib/python3.13/site-packages/epcsaft/__init__.py",
+      "epcsaft_equilibrium": "/tmp/epcsaft-validation-slice2-eq-019f71fa/lib/python3.13/site-packages/epcsaft_equilibrium/__init__.py"
+    },
+    "installed_distributions": [
+      {
+        "name": "Pint",
+        "version": "0.25.3"
+      },
+      {
+        "name": "epcsaft",
+        "version": "0.1.0.dev0"
+      },
+      {
+        "name": "epcsaft-equilibrium",
+        "version": "0.1.0.dev0"
+      },
+      {
+        "name": "flexcache",
+        "version": "0.3"
+      },
+      {
+        "name": "flexparser",
+        "version": "0.4"
+      },
+      {
+        "name": "platformdirs",
+        "version": "4.10.0"
+      },
+      {
+        "name": "typing_extensions",
+        "version": "4.16.0"
+      }
+    ],
+    "machine": "x86_64",
+    "platform": "Linux-6.17.0-40-generic-x86_64-with-glibc2.39",
+    "python": "3.13.14 (main, Jun 23 2026, 15:18:27) [Clang 22.1.3 ]",
+    "python_executable": "/tmp/epcsaft-validation-slice2-eq-019f71fa/bin/python",
+    "python_executable_sha256": "b200d6c7ae464af64f81808ba246a856b1a1cdf3b2ae7088d37d87d31aebe9ff",
+    "python_isolated": true
+  },
+  "executed_at_utc": "2026-07-17T23:19:38.569333+00:00",
+  "globality_certificate": false,
+  "limitations": [
+    "The calculation fixes two phases and provides no phase-discovery, TPD, continuation, or global-stability certificate.",
+    "Rows with local solver acceptance but composition disagreement are model/data misses under the frozen 3*u_c contract, not solver defects.",
+    "A package local-physical rejection is retained as such and receives no composition comparison.",
+    "This validation transfers no runtime, release, publication, or promotion authority."
+  ],
+  "outputs": {
+    "csv": {
+      "path": "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT-project/ePC-SAFT-validation/results/may-2015-methane-ethane-flash.csv",
+      "rows": 17,
+      "sha256": "f5f09e796d9bcad74b860eca5d0ca2627d362679f129230afc7c553b7fc23089"
+    }
+  },
+  "row_outcomes": [
+    {
+      "composition_agreement_status": "PASS",
+      "failure_reason": "",
+      "local_physical_status": "PASS",
+      "numerical_status": "PASS",
+      "row_admission": "PASS",
+      "row_id": "may2015-ch4-c2h6-001",
+      "solver_status": "PASS",
+      "x_normalized_error": -0.6646553190113228,
+      "y_normalized_error": 0.34704695719683054
+    },
+    {
+      "composition_agreement_status": "FAIL",
+      "failure_reason": "",
+      "local_physical_status": "PASS",
+      "numerical_status": "PASS",
+      "row_admission": "FAIL",
+      "row_id": "may2015-ch4-c2h6-002",
+      "solver_status": "PASS",
+      "x_normalized_error": -0.41509515137688635,
+      "y_normalized_error": 1.3070769651514713
+    },
+    {
+      "composition_agreement_status": "PASS",
+      "failure_reason": "",
+      "local_physical_status": "PASS",
+      "numerical_status": "PASS",
+      "row_admission": "PASS",
+      "row_id": "may2015-ch4-c2h6-003",
+      "solver_status": "PASS",
+      "x_normalized_error": -0.4907522189057777,
+      "y_normalized_error": 0.5683929713247604
+    },
+    {
+      "composition_agreement_status": "PASS",
+      "failure_reason": "",
+      "local_physical_status": "PASS",
+      "numerical_status": "PASS",
+      "row_admission": "PASS",
+      "row_id": "may2015-ch4-c2h6-004",
+      "solver_status": "PASS",
+      "x_normalized_error": -0.6163968380633518,
+      "y_normalized_error": 0.4305313591225953
+    },
+    {
+      "composition_agreement_status": "PASS",
+      "failure_reason": "",
+      "local_physical_status": "PASS",
+      "numerical_status": "PASS",
+      "row_admission": "PASS",
+      "row_id": "may2015-ch4-c2h6-005",
+      "solver_status": "PASS",
+      "x_normalized_error": -0.6829102796854724,
+      "y_normalized_error": 0.6586749449242942
+    },
+    {
+      "composition_agreement_status": "PASS",
+      "failure_reason": "",
+      "local_physical_status": "PASS",
+      "numerical_status": "PASS",
+      "row_admission": "PASS",
+      "row_id": "may2015-ch4-c2h6-006",
+      "solver_status": "PASS",
+      "x_normalized_error": -0.5890969135431502,
+      "y_normalized_error": 0.4036252659760591
+    },
+    {
+      "composition_agreement_status": "PASS",
+      "failure_reason": "",
+      "local_physical_status": "PASS",
+      "numerical_status": "PASS",
+      "row_admission": "PASS",
+      "row_id": "may2015-ch4-c2h6-007",
+      "solver_status": "PASS",
+      "x_normalized_error": -0.20065545201818424,
+      "y_normalized_error": 0.5565632953138828
+    },
+    {
+      "composition_agreement_status": "PASS",
+      "failure_reason": "",
+      "local_physical_status": "PASS",
+      "numerical_status": "PASS",
+      "row_admission": "PASS",
+      "row_id": "may2015-ch4-c2h6-008",
+      "solver_status": "PASS",
+      "x_normalized_error": 0.01643300570313792,
+      "y_normalized_error": 0.3040361748896882
+    },
+    {
+      "composition_agreement_status": "FAIL",
+      "failure_reason": "",
+      "local_physical_status": "PASS",
+      "numerical_status": "PASS",
+      "row_admission": "FAIL",
+      "row_id": "may2015-ch4-c2h6-009",
+      "solver_status": "PASS",
+      "x_normalized_error": 0.49865983632549216,
+      "y_normalized_error": 1.2508590743566066
+    },
+    {
+      "composition_agreement_status": "FAIL",
+      "failure_reason": "",
+      "local_physical_status": "PASS",
+      "numerical_status": "PASS",
+      "row_admission": "FAIL",
+      "row_id": "may2015-ch4-c2h6-010",
+      "solver_status": "PASS",
+      "x_normalized_error": 1.1665838800291515,
+      "y_normalized_error": -0.07751792519940641
+    },
+    {
+      "composition_agreement_status": "FAIL",
+      "failure_reason": "",
+      "local_physical_status": "PASS",
+      "numerical_status": "PASS",
+      "row_admission": "FAIL",
+      "row_id": "may2015-ch4-c2h6-011",
+      "solver_status": "PASS",
+      "x_normalized_error": 1.4824052303178772,
+      "y_normalized_error": -0.30188305564063794
+    },
+    {
+      "composition_agreement_status": "NOT_EVALUATED_NO_ACCEPTED_PHASE_STATE",
+      "failure_reason": "Ipopt solution failed local physical acceptance",
+      "local_physical_status": "FAIL",
+      "numerical_status": "FAIL",
+      "row_admission": "NON_ADMISSION",
+      "row_id": "may2015-ch4-c2h6-012",
+      "solver_status": "PASS",
+      "x_normalized_error": "",
+      "y_normalized_error": ""
+    },
+    {
+      "composition_agreement_status": "PASS",
+      "failure_reason": "",
+      "local_physical_status": "PASS",
+      "numerical_status": "PASS",
+      "row_admission": "PASS",
+      "row_id": "may2015-ch4-c2h6-013",
+      "solver_status": "PASS",
+      "x_normalized_error": 0.7995262821430023,
+      "y_normalized_error": 0.7769012461244618
+    },
+    {
+      "composition_agreement_status": "PASS",
+      "failure_reason": "",
+      "local_physical_status": "PASS",
+      "numerical_status": "PASS",
+      "row_admission": "PASS",
+      "row_id": "may2015-ch4-c2h6-014",
+      "solver_status": "PASS",
+      "x_normalized_error": 0.0006278365614170987,
+      "y_normalized_error": 0.381671658990275
+    },
+    {
+      "composition_agreement_status": "PASS",
+      "failure_reason": "",
+      "local_physical_status": "PASS",
+      "numerical_status": "PASS",
+      "row_admission": "PASS",
+      "row_id": "may2015-ch4-c2h6-015",
+      "solver_status": "PASS",
+      "x_normalized_error": -0.21196818347908597,
+      "y_normalized_error": 0.4003707731906984
+    },
+    {
+      "composition_agreement_status": "PASS",
+      "failure_reason": "",
+      "local_physical_status": "PASS",
+      "numerical_status": "PASS",
+      "row_admission": "PASS",
+      "row_id": "may2015-ch4-c2h6-016",
+      "solver_status": "PASS",
+      "x_normalized_error": -0.8123545684119318,
+      "y_normalized_error": -0.2963473894038171
+    },
+    {
+      "composition_agreement_status": "PASS",
+      "failure_reason": "",
+      "local_physical_status": "PASS",
+      "numerical_status": "PASS",
+      "row_admission": "PASS",
+      "row_id": "may2015-ch4-c2h6-017",
+      "solver_status": "PASS",
+      "x_normalized_error": -0.617640861671843,
+      "y_normalized_error": 0.11395112808872995
+    }
+  ],
+  "row_summary": {
+    "admitted_rows": 12,
+    "composition_agreement_fail": 4,
+    "composition_agreement_pass": 12,
+    "composition_not_evaluated": 1,
+    "package_local_accepted": 16,
+    "package_local_rejected": 1,
+    "total": 17
+  },
+  "schema_version": 1,
+  "source": {
+    "citation": {
+      "authors": [
+        "Eric F. May",
+        "Jerry Y. Guo",
+        "Jordan H. Oakley",
+        "Thomas J. Hughes",
+        "Brendan F. Graham",
+        "Kenneth N. Marsh",
+        "Stanley H. Huang"
+      ],
+      "doi": "10.1021/acs.jced.5b00610",
+      "issue": 12,
+      "journal": "Journal of Chemical & Engineering Data",
+      "pages": "3606-3620",
+      "table_locator": "Table 5, page 3612 (PDF page 7)",
+      "title": "Reference Quality Vapor-Liquid Equilibrium Data for the Binary Systems Methane + Ethane, + Propane, + Butane, and + 2-Methylpropane, at Temperatures from (203 to 273) K and Pressures to 9 MPa",
+      "volume": 60,
+      "year": 2015
+    },
+    "csv": {
+      "path": "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT-project/ePC-SAFT-validation/data/may-2015-methane-ethane-vle.csv",
+      "sha256": "5cd1e74925a3c6504f5106dcf911f2cae2d6e99a5133fccc20454d8991bdbc7f"
+    },
+    "metadata": {
+      "path": "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT-project/ePC-SAFT-validation/data/may-2015-methane-ethane-vle.yaml",
+      "sha256": "d43433e93b354e01f96d330c760818a24b775026461ce795e45774cfb11ac94e"
+    },
+    "official_download_sha256": {
+      "nist_thermoml_json": "77630e90db70bb6aabfdfa520f61f14cee5076ece0265754140a25f771659662",
+      "nist_thermoml_xml": "311e35b53e27bc050e17c4146a466e087c24c7a15624c29ababc4b7897d7871a",
+      "publisher_article_pdf": "53fd1bdd55dc6807ec76cf88626438d8dfceb3ec09149d4405ea36cfbe6b842a"
+    },
+    "source_contract_commit": "73a37f5935e919a34d1e4fa3af285951d6fac8e7",
+    "tolerance_basis": {
+      "combined_standard_uncertainty_multiplier": 3.0,
+      "contract_version": 1,
+      "interpretation": "A conservative engineering comparison allowance of three combined standard uncertainties; not a claimed confidence interval because the source does not report a distribution or effective degrees of freedom for uc.",
+      "model_accuracy_floor": null,
+      "temperature_pressure_treatment": "Temperature and pressure are fixed campaign inputs. Their standard uncertainties are retained but are not added again because uc(x1) and uc(y2) already include their propagated contributions in quadrature.",
+      "x_methane_rule": "abs(model_x_methane - source_x_methane) <= x_comparison_allowance",
+      "y_methane_rule": "abs(model_y_methane - source_y_methane) <= y_comparison_allowance"
+    },
+    "tolerance_sha256": "ad744526678355be6ca47cf27ab9ff7ae66b7661c27e36ffe259c5b6295f1016"
+  }
+}

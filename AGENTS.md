@@ -2,9 +2,10 @@
 
 Repository Profile: scientific-computing
 
-Active scope: provider Slice 1 installed-artifact acceptance and bounded
-real-data provider campaigns for neutral-associating, aqueous, and mixed-
-solvent electrolyte properties.
+Active scope: provider Slice 1 installed-artifact acceptance; bounded real-data
+provider campaigns for neutral-associating, aqueous, and mixed-solvent
+electrolyte properties; and Consumer Slice 2 installed-artifact evidence for
+pure-saturation regression and local methane/ethane two-phase flash.
 
 Before work, read doctrine revision 2 at
 `../ePC-SAFT-organization/GOVERNANCE.md`. Its future published home is
@@ -19,3 +20,8 @@ Keep every campaign black-box and public-API-only. Do not add production
 source, copied kernels, sibling-source dependencies, package-private imports,
 workflows, broad datasets, or claims beyond the exact installed artifact and
 retained literature domain under test.
+
+Consumer Slice 2 regression accuracy remains descriptive unless an approved
+cutoff exists. Its 100 K ethane stress failure is excluded, not accepted. The
+two-phase flash campaign carries no phase-discovery or globality certificate;
+record every frozen-tolerance miss or local-state rejection as non-admission.

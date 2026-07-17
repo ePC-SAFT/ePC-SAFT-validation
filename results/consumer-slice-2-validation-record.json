@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "record_id": "consumer-slice-2-installed-artifact-admissions-2026-07-17",
+  "status": "DONE_WITH_CONCERNS",
+  "authority": "validation evidence only; no runtime, release, publication, promotion, remote, or ownership mutation",
+  "validation_repository_commits": {
+    "source_contract": "73a37f5935e919a34d1e4fa3af285951d6fac8e7",
+    "regression_campaign": "621c26fe96cffc761d54435d592bb44a8b72dfee",
+    "flash_campaign": "bf6aa8e89e8bc29ac06183d699028b889ff8549e"
+  },
+  "regression": {
+    "artifact_admission": "PASS",
+    "predictive_status": "NOT_ADJUDICATED_NO_APPROVED_HELD_OUT_CUTOFF",
+    "stress_status": "ETHANE_100_K_EXCLUDED_FAILURE",
+    "candidate": {
+      "implementation_commit": "50a488b91686388432fd50a0d6bfc5b15825e4f1",
+      "evidence_commit": "1c0c8bdbabbed20795cb2d093a7d15ee03accedb",
+      "regression_wheel_sha256": "e4bf7ec673a9e6f5b70ce1ef39d9f28a73c709cf38974019c09790cc4f9bfa49",
+      "provider_wheel_sha256": "f92f79c8d6f614660e5c201b7061c9b02b5cd1a25a4ed8c8fee0b59adaabf2bf",
+      "ethane_receipt_sha256": "e4729aa0d089973c1041e68b8b0abd028a440a04a0b4a47da2b7ccdbcb6cf529",
+      "ethane_receipt_subject_sha256": "a324cc2ba665b06c84660e6d815c7d39d1f898640a3b3fcc5833c10dc84b1f4f"
+    },
+    "environment_contract_sha256": "d789f1bf917b2ed04c3b7f0b76c5a237ca0eb11fa42121cf8232382299e1a0ec",
+    "python_executable_sha256": "b200d6c7ae464af64f81808ba246a856b1a1cdf3b2ae7088d37d87d31aebe9ff",
+    "row_summary": {
+      "methane": 9,
+      "ethane": 10,
+      "solver_numerical_local_physical_admission": "PASS for both component workflows",
+      "methane_accepted_result_parity": "PASS"
+    },
+    "outputs": {
+      "prediction_csv_sha256": "50978cdae569c60018db3c9ef5306f6cabe5ca32badc216482e8026468c4019b",
+      "parameter_csv_sha256": "082b72cb0ae926dbc0619ce941870fd0148c1ecb7ba9a4aa62f7f437f6742893",
+      "receipt_json_sha256": "73a241c8197b9f7903b08158f13fca41d4d3c9e333d1372a747102930c1282d4",
+      "png_sha256": "d79c534347393b6a6416bb2416967ea4a597044046614cbd9e5867ca14e0aac4",
+      "svg_sha256": "4666929bd08302bc00244beddb929dde34afec94e18f816844f3f00e4677eddf",
+      "pdf_sha256": "67bb14901529417533162c82c7328eb8a9872e3c2512427b682bed50d7e3dd21"
+    },
+    "concern": "The public regression result exposes start/fitted parameters and initial/final objective values but not start-model reporting predictions. Validation left those CSV fields empty instead of owning a saturation solve."
+  },
+  "equilibrium": {
+    "manager_reported_package_approval": "FINAL_PERMANENT_LAB_APPROVAL",
+    "validation_package_local_campaign_status": "NON_ADMISSION",
+    "predictive_agreement_status": "NON_ADMISSION",
+    "overall_validation_status": "NON_ADMISSION",
+    "candidate": {
+      "commit": "e16f1e0fff62892615ef11e4012cd1e63a329e39",
+      "tree": "6fc131c03e392acd5ab6678ff6e17e59a4afce02",
+      "equilibrium_wheel_sha256": "9f3adbc6f5539ae14cbff15b14a9eccf289ce238b316f78a81a25c1b91b3cc49",
+      "provider_wheel_sha256": "17c6735ee117469b13b76b6a669d0b4430071c8eaebdf1e405baefc9adcb838b"
+    },
+    "source": {
+      "doi": "10.1021/acs.jced.5b00610",
+      "locator": "May et al. (2015), Table 5, page 3612 (PDF page 7)",
+      "source_contract_commit": "73a37f5935e919a34d1e4fa3af285951d6fac8e7",
+      "csv_sha256": "5cd1e74925a3c6504f5106dcf911f2cae2d6e99a5133fccc20454d8991bdbc7f",
+      "metadata_sha256": "d43433e93b354e01f96d330c760818a24b775026461ce795e45774cfb11ac94e",
+      "tolerance_sha256": "ad744526678355be6ca47cf27ab9ff7ae66b7661c27e36ffe259c5b6295f1016",
+      "tolerance_basis": "abs(model-source) <= 3 times the row combined standard composition uncertainty; no model-accuracy floor"
+    },
+    "environment_contract_sha256": "9d7c5a4c474cab3413ba0f60a2de1952f0532dc62b343fa352d41fcbb2dd6ba5",
+    "python_executable_sha256": "b200d6c7ae464af64f81808ba246a856b1a1cdf3b2ae7088d37d87d31aebe9ff",
+    "row_summary": {
+      "total": 17,
+      "admitted": 12,
+      "package_local_accepted": 16,
+      "package_local_rejected": 1,
+      "solved_composition_misses": 4,
+      "solved_miss_row_ids": [
+        "may2015-ch4-c2h6-002",
+        "may2015-ch4-c2h6-009",
+        "may2015-ch4-c2h6-010",
+        "may2015-ch4-c2h6-011"
+      ],
+      "local_rejection_row_id": "may2015-ch4-c2h6-012",
+      "maximum_recomputed_material_balance_abs": 1.1102230246251565e-16,
+      "globality_certificate": false
+    },
+    "outputs": {
+      "csv_sha256": "f5f09e796d9bcad74b860eca5d0ca2627d362679f129230afc7c553b7fc23089",
+      "receipt_json_sha256": "5e2c3f7f566dec5c77ce9060bbb830c47747b684b938554fd7b6d7a6d9bc9013",
+      "png_sha256": "5093fdba2b30d06686f907ead6e6fe01014715e5d258a85ab3449f852d63f97d",
+      "svg_sha256": "011eebd0c6a1b4db1a12d875d3daddd53752f1d983b5137d26e1a300688e469f",
+      "pdf_sha256": "029bf16e5a7bac7700dd2a04e2e8ecec5a78d49e499a494cac655b2ab89bda82"
+    },
+    "concern": "Four locally accepted package states miss the frozen composition contract and one row has no accepted local state. These are retained separately as model/data misses and a package local-physical rejection."
+  },
+  "verification": {
+    "default_suite": "7 passed in 0.06 s",
+    "source_contract": "PASS",
+    "result_bundle_schema_and_magic": "PASS",
+    "plot_visual_review": "PASS",
+    "campaign_execution": "exact wheel pairs in separate CPython 3.13.14 isolated environments; exact commands are retained in each detailed receipt"
+  }
+}
