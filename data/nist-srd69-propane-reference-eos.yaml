@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "dataset_id": "nist-webbook-propane-saturation-100-360-k-v1",
-  "source_id": "nist-webbook-srd69-propane-saturation",
+  "dataset_id": "nist-webbook-propane-reference-eos-100-360-k-auxiliary-v1",
+  "source_id": "nist-webbook-srd69-propane-reference-eos-auxiliary",
   "format_note": "This file uses the JSON-compatible subset of YAML 1.2 for stdlib-only validation.",
   "citation": {
     "authors": [
@@ -52,7 +52,7 @@
     }
   },
   "source_audit": {
-    "source_kind": "Authoritative NIST reference-equation output; the retained rows are calculated reference values, not direct experimental measurements.",
+    "source_kind": "Auxiliary NIST reference-equation output; the retained rows are calculated reference values, not direct experimental measurements and not a regression target.",
     "query_domain": {
       "minimum_temperature_k": 100.0,
       "maximum_temperature_k": 360.0,
@@ -74,7 +74,7 @@
   "fields": {
     "row_id": "Repository-assigned stable identifier from the source temperature.",
     "component_id": "Exact component identifier propane.",
-    "role": "Frozen pre-model row role: training, held_out, or stress.",
+    "role": "Always reference_only; these rows cannot enter the experimental regression target or its partitions.",
     "T_K": "NIST download Temperature (K), exact decimal string.",
     "p_sat_Pa": "NIST wide download Pressure (Pa), exact decimal string.",
     "rho_sat_liq_kg_m3": "NIST wide download Density (l, kg/m3), exact decimal string.",
@@ -84,48 +84,10 @@
   "transformations": [
     "Retain rows from the exact 100 K through 360 K, 20 K increment query in source order.",
     "Copy Temperature (K), Pressure (Pa), and Density (l, kg/m3) decimal strings without numerical conversion or rounding.",
-    "Add stable row_id, component_id, and pre-model role fields.",
+    "Add stable row_id, component_id, and the auxiliary reference_only role.",
     "Convert the official uncertainty percentages to dimensionless relative values: 0.02% to 0.0002, 0.1% to 0.001, and 0.01% to 0.0001.",
     "Leave uncertainty blank when the official source does not quantify an unambiguous value for the retained state."
   ],
-  "fit_target_contract": {
-    "payload": {
-      "contract_version": 1,
-      "checkpoint_id": "neutral-hydrocarbon-regression-maturity-v1/checkpoint-a",
-      "specification_id": "pure-propane-saturation-lifted-volumes-v1",
-      "workflow": "fit_pure_saturation",
-      "component_id": "propane",
-      "dataset_id": "nist-webbook-propane-saturation-100-360-k-v1",
-      "source_id": "nist-webbook-srd69-propane-saturation",
-      "fit_parameter_names": [
-        "segment_count",
-        "segment_diameter_angstrom",
-        "dispersion_energy_over_k_kelvin"
-      ],
-      "fit_parameter_units": ["1", "angstrom", "K"],
-      "target_observables": ["saturation_pressure_pa", "saturated_liquid_mass_density_kg_m3"],
-      "training_row_ids": [
-        "nist-propane-sat-160-k",
-        "nist-propane-sat-220-k",
-        "nist-propane-sat-280-k",
-        "nist-propane-sat-340-k"
-      ],
-      "held_out_row_ids": [
-        "nist-propane-sat-120-k",
-        "nist-propane-sat-140-k",
-        "nist-propane-sat-180-k",
-        "nist-propane-sat-200-k",
-        "nist-propane-sat-240-k",
-        "nist-propane-sat-260-k",
-        "nist-propane-sat-300-k",
-        "nist-propane-sat-320-k"
-      ],
-      "stress_row_ids": ["nist-propane-sat-100-k", "nist-propane-sat-360-k"],
-      "partition_basis": "Four training temperatures are uniformly spaced by 60 K across the non-stress interior. Remaining interior rows are held out. The 100 K row is stress evidence because its pressure is below 1 Pa and its exact pressure uncertainty is not quantified; 360 K is stress evidence because it lies 9.89 K below the NIST critical temperature and its pointwise liquid-density uncertainty is not quantified.",
-      "implementation_boundary": "This source packet freezes source identity, observables, and row roles only. The regression owner must separately approve starts, bounds, scales, solver controls, and its production implementation."
-    },
-    "sha256": "99c64b012732dd28e593b578091f84bda919e12de8eadcb2888692cf3c2173b4"
-  },
   "comparison_contract": {
     "payload": {
       "contract_version": 1,
@@ -138,9 +100,9 @@
   },
   "retained_files": {
     "csv": {
-      "path": "data/nist-srd69-propane-saturation.csv",
-      "sha256": "a70ba0e6e1401b8b72bffb7958b0038f18fc44b560c847dcd2323cea740e5138"
+      "path": "data/nist-srd69-propane-reference-eos.csv",
+      "sha256": "4a05958854ed5fed28ce4f2b3dc1e98d2d5f833c3eb2f1290ce6428492f0051c"
     }
   },
-  "claim_boundary": "The packet establishes a hash-bound, pre-model propane saturation target and frozen row partition against the NIST reference equation. It does not validate ePC-SAFT, establish experimental prediction, approve a model-accuracy cutoff, or transfer runtime or scientific authority."
+  "claim_boundary": "This auxiliary packet can cross-check scale and reference-EOS context only. It is not direct experimental evidence, is not a Checkpoint A target, has no training or held-out rows, and cannot validate ePC-SAFT or support model agreement, prediction, promotion, or authority."
 }
