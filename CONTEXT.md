@@ -69,3 +69,13 @@ continuation, TPD, or global stability.
 `runtime_source_of_truth: false`
 
 `validation_source_of_truth: provider-slice-1, figiel-2025-miac, esteso-1989-water-ethanol-nacl, held-2012-ethanol-salt-density, held-2012-pure-ethanol-density, pure-saturation-regression, may-2015-methane-ethane-flash`
+
+The prepared next plan is
+`docs/plans/2026-07-17-neutral-held-v1-validation-plan.md`. It freezes a
+public-wheel-only sampled Gibbs-surface audit, the unchanged May campaign, and
+one source-derived liquid-side case inside the existing feed domain. Its
+status is `not_started` and its authority effect is none.
+
+`next_validation_plan: neutral-held-v1`
+
+`next_validation_plan_status: not_started`
