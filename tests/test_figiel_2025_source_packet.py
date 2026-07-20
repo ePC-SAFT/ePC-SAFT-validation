@@ -17,9 +17,9 @@ PARAMETER_PATH = ROOT / "data" / "figiel-2025-parameter-provenance.csv"
 METADATA_PATH = ROOT / "data" / "figiel-2025-regression-target-ledger.yaml"
 CHECKER_PATH = ROOT / "campaigns" / "check_figiel_2025_source_packet.py"
 
-EXPECTED_LEDGER_SHA256 = "8586daf635d268649b6b0bf52fedde96cb7ab78529cf072207977a2d7e428dbc"
-EXPECTED_PARAMETER_SHA256 = "71de73d001463676a74975d4e85c0ae0121a3f14ac3c2cf22f4247d59f7dab80"
-EXPECTED_METADATA_SHA256 = "c80f3f105e8b59ead9f140c743e88db8ad677a1ad541dc90f744fadb7be93b5f"
+EXPECTED_LEDGER_SHA256 = "f405a3e48d21cd979a8dd480d5f8cb3be40754f5d6babf368b505b5f305607f0"
+EXPECTED_PARAMETER_SHA256 = "932e8baa90fcefbaa8c3a8730cdeadd83a4c01f0a3b109f4e4cd0319aee9312b"
+EXPECTED_METADATA_SHA256 = "8ea06c6ca5452d01448a03f9a76cf7d0c35bb99c9abe23ccb1729d56c71d468f"
 EXPECTED_SI_SHA256 = "005b38ed566ec3c09b87e1ca3a9dd6eeafc9ba75e1a30b9322291d770bb93895"
 MAIN_MARKDOWN_SHA256 = "ce80533925a91bc59d8d0d8056113c40611ca26c2edf04aced76986d50bd4bae"
 
@@ -65,24 +65,43 @@ def test_source_identity_ledger_and_classifications_are_hash_bound() -> None:
 
 def test_si_tables_and_equation_19_construction_remain_source_faithful() -> None:
     rows = read_csv(LEDGER_PATH)
-    averages = {
+    residual_averages = {
         row["species"]: Decimal(row["value"])
         for row in rows
         if row["role"] == "reported_average_target"
     }
-    assert averages == {
-        "H+": Decimal("-1094.5"),
+    assert residual_averages == {
         "Li+": Decimal("-486.2"),
         "Na+": Decimal("-381.1"),
         "K+": Decimal("-309.1"),
         "Cl-": Decimal("-314.9"),
         "Br-": Decimal("-290.9"),
+    }
+    later_averages = {
+        row["species"]: Decimal(row["value"])
+        for row in rows
+        if row["role"] == "reported_average_later_gate"
+    }
+    assert later_averages == {
+        "H+": Decimal("-1094.5"),
         "I-": Decimal("-252.6"),
         "SO4^2-": Decimal("-1062.1"),
         "VO^2+": Decimal("-1895.0"),
         "V^3+": Decimal("-4202.1"),
     }
+    averages = residual_averages | later_averages
     assert sum(row["role"] == "underlying_literature_value" for row in rows) == 37
+    first_support = [row for row in rows if row["tracer_status"] == "first_tracer_support"]
+    assert len(first_support) == 32
+    assert {row["source_id"] for row in first_support} == {"figiel-2025-official-si"}
+    assert {
+        row["species"] for row in first_support
+    } == {"Li+", "Na+", "K+", "Cl-", "Br-"}
+    hamer = [
+        row for row in rows if row["source_id"] == "hamer-wu-1972-aqueous-alkali-halides"
+    ]
+    assert len(hamer) == 164
+    assert all(row["tracer_status"] == "later_capability_gate" for row in hamer)
     assert sum(row["quantity"] == "solution_mass_density" for row in rows) == 22
     assert sum(row["quantity"] == "osmotic_coefficient" for row in rows) == 5
 
@@ -98,19 +117,19 @@ def test_si_tables_and_equation_19_construction_remain_source_faithful() -> None
         assert Decimal(row["value"]) == averages[row["species"]] + transfers[key]
 
 
-def test_parameter_provenance_covers_tables_without_promoting_blanks_or_zeros() -> None:
+def test_parameter_provenance_covers_tables_without_promoting_blanks() -> None:
     rows = read_csv(PARAMETER_PATH)
     metadata = json.loads(METADATA_PATH.read_text(encoding="utf-8"))
 
     assert sha256(PARAMETER_PATH) == EXPECTED_PARAMETER_SHA256
     assert len(rows) == 122
     assert Counter(row["provenance_classification"] for row in rows) == {
-        "fitted-in-Figiel-2025": 52,
+        "fitted-in-Figiel-2025": 57,
         "inherited-from-cited-source": 33,
-        "fixed-or-assumed": 18,
+        "fixed-or-assumed": 13,
         "blank-or-unpublished": 19,
     }
-    assert Counter(row["recovery_target"] for row in rows) == {"true": 85, "false": 37}
+    assert Counter(row["recovery_target"] for row in rows) == {"true": 90, "false": 32}
     assert all(row["source_artifact_sha256"] == MAIN_MARKDOWN_SHA256 for row in rows)
     assert all(
         row["provenance_classification"] == "blank-or-unpublished"
@@ -119,11 +138,18 @@ def test_parameter_provenance_covers_tables_without_promoting_blanks_or_zeros() 
         if not row["reported_value"]
     )
     assert all(
-        row["provenance_classification"] == "fixed-or-assumed"
-        and row["recovery_target"] == "false"
+        row["provenance_classification"] == "fitted-in-Figiel-2025"
+        and row["recovery_target"] == "true"
         for row in rows
         if row["reported_value"] == "0"
     )
+    assert {row["cell_id"] for row in rows if row["reported_value"] == "0"} == {
+        "t4-K+-Cl-",
+        "t4-K+-I-",
+        "t4-VO^2+-SO4^2-",
+        "t5-Br--ethanol",
+        "t5-H+-water",
+    }
 
     stage_a = [row for row in rows if row["staged_order"] == "A"]
     assert {(row["component_i"], row["parameter"]) for row in stage_a} == {
@@ -183,7 +209,7 @@ def test_checker_is_stdlib_only_and_does_not_depend_on_local_source_paths() -> N
     assert report["ledger_rows"] == 407
     assert report["parameter_provenance"] == {
         "rows": 122,
-        "recovery_targets": 85,
-        "non_targets": 37,
+        "recovery_targets": 90,
+        "non_targets": 32,
     }
     assert report["comparison_threshold"] is None

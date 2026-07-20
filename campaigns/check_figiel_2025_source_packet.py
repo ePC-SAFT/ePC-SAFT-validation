@@ -17,10 +17,10 @@ DEFAULT_METADATA = ROOT / "data" / "figiel-2025-regression-target-ledger.yaml"
 DEFAULT_HAMER = ROOT / "data" / "hamer-wu-1972-aqueous-alkali-halides.csv"
 DEFAULT_PARAMETERS = ROOT / "data" / "figiel-2025-parameter-provenance.csv"
 
-EXPECTED_LEDGER_SHA256 = "8586daf635d268649b6b0bf52fedde96cb7ab78529cf072207977a2d7e428dbc"
+EXPECTED_LEDGER_SHA256 = "f405a3e48d21cd979a8dd480d5f8cb3be40754f5d6babf368b505b5f305607f0"
 EXPECTED_HAMER_SHA256 = "2f63e13f06a5b0f4e8bca2980b6a8d9d7fb0f839153c43e3a71952daf9796595"
 EXPECTED_SI_SHA256 = "005b38ed566ec3c09b87e1ca3a9dd6eeafc9ba75e1a30b9322291d770bb93895"
-EXPECTED_PARAMETER_SHA256 = "71de73d001463676a74975d4e85c0ae0121a3f14ac3c2cf22f4247d59f7dab80"
+EXPECTED_PARAMETER_SHA256 = "932e8baa90fcefbaa8c3a8730cdeadd83a4c01f0a3b109f4e4cd0319aee9312b"
 EXPECTED_COLUMNS = [
     "target_id",
     "regression_order",
@@ -106,9 +106,9 @@ PARAMETER_COLUMNS = [
     "source_artifact_sha256",
 ]
 EXPECTED_PARAMETER_PROVENANCE = {
-    "fitted-in-Figiel-2025": 52,
+    "fitted-in-Figiel-2025": 57,
     "inherited-from-cited-source": 33,
-    "fixed-or-assumed": 18,
+    "fixed-or-assumed": 13,
     "blank-or-unpublished": 19,
 }
 EXPECTED_PARAMETER_STAGES = {
@@ -122,6 +122,13 @@ EXPECTED_PARAMETER_STAGES = {
     "H": 17,
 }
 MAIN_MARKDOWN_SHA256 = "ce80533925a91bc59d8d0d8056113c40611ca26c2edf04aced76986d50bd4bae"
+EXPECTED_FITTED_ZERO_CELLS = {
+    "t4-K+-Cl-",
+    "t4-K+-I-",
+    "t4-VO^2+-SO4^2-",
+    "t5-Br--ethanol",
+    "t5-H+-water",
+}
 
 
 def sha256(path: Path) -> str:
@@ -159,12 +166,16 @@ def check_hamer_rows(rows: list[dict[str, str]], hamer_path: Path) -> None:
     ]
     if observed != expected:
         raise ValueError("Figiel ledger does not reproduce the retained Hamer-Wu packet")
+    if any(row["tracer_status"] != "later_capability_gate" for row in ledger):
+        raise ValueError("Hamer-Wu MIAC rows must remain outside the first Born tracer")
 
 
 def check_s5(rows: list[dict[str, str]]) -> None:
-    reported = [row for row in rows if row["role"] == "reported_average_target"]
+    reported_targets = [row for row in rows if row["role"] == "reported_average_target"]
+    reported_later = [row for row in rows if row["role"] == "reported_average_later_gate"]
+    reported = reported_targets + reported_later
     underlying = [row for row in rows if row["role"] == "underlying_literature_value"]
-    if len(reported) != 10 or len(underlying) != 37:
+    if len(reported_targets) != 5 or len(reported_later) != 5 or len(underlying) != 37:
         raise ValueError("unexpected SI Table S5 row count")
     observed_averages = {row["species"]: Decimal(row["value"]) for row in reported}
     if observed_averages != EXPECTED_S5_AVERAGES:
@@ -175,6 +186,20 @@ def check_s5(rows: list[dict[str, str]]) -> None:
         raise ValueError("SI Table S5 rows are not bound to the official SI")
     if any(row["source_classification"] != "table-derived" for row in reported + underlying):
         raise ValueError("SI Table S5 classifications changed")
+    first_ions = {"Li+", "Na+", "K+", "Cl-", "Br-"}
+    if {row["species"] for row in reported_targets} != first_ions:
+        raise ValueError("only current-catalog SI averages may be Regression residual targets")
+    first_support = [row for row in reported + underlying if row["species"] in first_ions]
+    if len(first_support) != 32 or any(
+        row["tracer_status"] != "first_tracer_support" for row in first_support
+    ):
+        raise ValueError("first tracer must retain exactly 32 current-ion SI S5 rows")
+    if any(
+        row["tracer_status"] != "later_capability_gate"
+        for row in reported + underlying
+        if row["species"] not in first_ions
+    ):
+        raise ValueError("expanded-ion SI S5 rows must remain later capability gates")
 
 
 def check_constructed_rows(rows: list[dict[str, str]]) -> None:
@@ -225,7 +250,7 @@ def check_parameter_provenance(parameter_path: Path, metadata: dict[str, object]
         raise ValueError(f"parameter provenance changed: {provenance}")
     if stages != EXPECTED_PARAMETER_STAGES:
         raise ValueError(f"parameter staging changed: {stages}")
-    if targets != {"true": 85, "false": 37}:
+    if targets != {"true": 90, "false": 32}:
         raise ValueError(f"parameter recovery-target partition changed: {targets}")
     if any(row["source_artifact_sha256"] != MAIN_MARKDOWN_SHA256 for row in rows):
         raise ValueError("parameter cell is not bound to the supplied main-paper artifact")
@@ -236,13 +261,19 @@ def check_parameter_provenance(parameter_path: Path, metadata: dict[str, object]
         target = row["recovery_target"]
         if not value and (provenance_value != "blank-or-unpublished" or target != "false"):
             raise ValueError("blank parameter cell was inferred or promoted")
-        if value == "0" and (provenance_value != "fixed-or-assumed" or target != "false"):
-            raise ValueError("explicit zero parameter cell was promoted")
+        if value == "0" and (
+            provenance_value != "fitted-in-Figiel-2025" or target != "true"
+        ):
+            raise ValueError("explicit published fitted zero lost its recovery-target identity")
         if provenance_value in {"fitted-in-Figiel-2025", "inherited-from-cited-source"}:
             if target != "true" or not value:
                 raise ValueError("source-backed recovery parameter lost its target identity")
         if provenance_value in {"fixed-or-assumed", "blank-or-unpublished"} and target != "false":
             raise ValueError("fixed or unpublished parameter became a recovery target")
+    if {row["cell_id"] for row in rows if row["reported_value"] == "0"} != (
+        EXPECTED_FITTED_ZERO_CELLS
+    ):
+        raise ValueError("explicit published fitted-zero cell set changed")
 
     stage_a = [row for row in rows if row["staged_order"] == "A"]
     if {
@@ -323,7 +354,7 @@ def check(
         raise ValueError(f"source classifications changed: {classifications}")
     if quantities != EXPECTED_QUANTITIES:
         raise ValueError(f"quantity counts changed: {quantities}")
-    if tracers != {"first_tracer_support": 196, "later_capability_gate": 211}:
+    if tracers != {"first_tracer_support": 32, "later_capability_gate": 375}:
         raise ValueError(f"tracer partition changed: {tracers}")
 
     for row in rows:

@@ -75,7 +75,7 @@
   },
   "extraction_record": {
     "official_si": "Downloaded the official SI PDF from ACS Figshare file 54030209, verified the API-supplied MD5 and byte count, extracted layout text with Poppler pdftotext 24.02.0, and visually audited rendered PDF pages 8 and 9 against the retained transcription.",
-    "table_s5": "Transcribe only the 37 literature values and 10 reported averages from SI Table S5. Preserve every sign and the x-treatment at 298.15 K and 1 bar. Exclude the modeled column. Do not replace a reported average with a locally recomputed value.",
+    "table_s5": "Transcribe only the 37 literature values and 10 reported averages from SI Table S5. Preserve every sign and the x-treatment at 298.15 K and 1 bar. Exclude the modeled column. Do not replace a reported average with a locally recomputed value. For the active tracer, only the Li+, Na+, K+, Cl-, and Br- reported averages are Regression residual targets; their 27 underlying SI values are provenance/support, and the remaining five averages are later-gate provenance.",
     "table_s4": "Transcribe the 22 rho_exp values and the five reported phi_exp values from SI Table S4. Exclude all ePC-SAFT and ARD columns. The 1 bar condition is stated in SI Figures S7-S8. No pointwise or method uncertainty is reported.",
     "aqueous_miac": "Reuse the existing hash-bound Hamer-Wu Validation packet without copying or changing its 164 rows. NaBr rows carry both the solvent-factor and aqueous-interaction roles; the other five salts carry the aqueous-interaction role.",
     "organic_miac": "Copy the exact 18 methanol-NaBr and 18 ethanol-NaBr retained lab values and bind their source files. Because those CSVs contain no primary-paper extraction receipt, classify all 36 rows as missing-primary-source.",
@@ -110,29 +110,32 @@
       "osmotic_coefficient": 5
     },
     "tracer_counts": {
-      "first_tracer_support": 196,
-      "later_capability_gate": 211
+      "first_tracer_support": 32,
+      "later_capability_gate": 375
     },
     "first_tracer_contract": {
       "ions": ["Li+", "Na+", "K+", "Cl-", "Br-"],
       "solvent": "water",
-      "support": "Five official-SI reported average solvation targets, their separately retained underlying SI values, and the 164 existing Hamer-Wu aqueous MIAC rows for LiCl, LiBr, NaCl, NaBr, KCl, and KBr.",
+      "support": "Exactly 32 official-SI Table S5 rows: five reported averages used as Regression residual targets and their 27 separately retained underlying literature values used only as provenance/support.",
+      "residual_target_role": "reported_average_target",
+      "residual_target_species": ["Li+", "Na+", "K+", "Cl-", "Br-"],
+      "later_family_rows": "All 164 Hamer-Wu aqueous MIAC rows belong to later f_k/k_ij recovery families and are labeled later_capability_gate.",
       "exclusions": ["H+", "I-", "SO4^2-", "VO^2+", "V^3+", "methanol", "ethanol"]
     }
   },
   "parameter_provenance_audit": {
     "retained_file": "data/figiel-2025-parameter-provenance.csv",
-    "sha256": "71de73d001463676a74975d4e85c0ae0121a3f14ac3c2cf22f4247d59f7dab80",
+    "sha256": "932e8baa90fcefbaa8c3a8730cdeadd83a4c01f0a3b109f4e4cd0319aee9312b",
     "rows": 122,
     "scope": "All Table 2 cells plus association-scheme footnotes; all Table 3 cells plus fixed segment-count footnotes; every Table 4 matrix cell; every Table 5 matrix cell; and the stage-B equation-11 coefficient.",
     "provenance_counts": {
-      "fitted-in-Figiel-2025": 52,
+      "fitted-in-Figiel-2025": 57,
       "inherited-from-cited-source": 33,
-      "fixed-or-assumed": 18,
+      "fixed-or-assumed": 13,
       "blank-or-unpublished": 19
     },
-    "recovery_target_counts": {"true": 85, "false": 37},
-    "zero_and_blank_rule": "Every blank cell and every explicit published zero has recovery_target=false. Blanks remain blank-or-unpublished; explicit zeros remain fixed-or-assumed. Neither is inferred, mirrored, or converted into a regression target.",
+    "recovery_target_counts": {"true": 90, "false": 32},
+    "zero_and_blank_rule": "The five explicit published zero cells K+-Cl-, K+-I-, VO2+-SO4^2-, Br--ethanol, and H+-water are fitted-in-Figiel-2025 recovery targets because the Table 4 caption and Table 5 footnote classify their reported ion interactions as fitted. Blank cells remain blank-or-unpublished with recovery_target=false; no zero is inferred, mirrored, or created from a blank/default absence.",
     "first_tracer_rule": "Only the five stage-A current-catalog Born diameters Li+, Na+, K+, Cl-, and Br- are active. Parameter provenance does not authorize recovery of any other family."
   },
   "staged_parameter_recovery": {
@@ -151,7 +154,7 @@
     },
     "D": {
       "family": "aqueous ion-water and cation-anion k_ij",
-      "required_source_packet": "The primary-verified aqueous MIAC matrix at 298.15 K and 1 bar for each published nonzero Table 4 pair and each published nonzero Table 5 ion-water cell; row-to-parameter sensitivity/rank plan required before fitting."
+      "required_source_packet": "The primary-verified aqueous MIAC matrix at 298.15 K and 1 bar for each published Table 4 pair and Table 5 ion-water cell classified as fitted, including explicit published zeros; row-to-parameter sensitivity/rank plan required before fitting. Blank cells are excluded."
     },
     "E": {
       "family": "organic-solvent ion k_ij",
@@ -169,7 +172,7 @@
     },
     "G": {
       "family": "expanded H+/I-/SO4^2-/V3+/VO2+ scope",
-      "required_source_packet": "Primary-verified S5 literature chains for expanded-ion solvation, SI Table S4 direct VCl3/VOSO4 density and osmotic data, primary MIAC/transfer sources for every nonzero published interaction, and a separately approved Provider species/catalog seam."
+      "required_source_packet": "Primary-verified S5 literature chains for expanded-ion solvation, SI Table S4 direct VCl3/VOSO4 density and osmotic data, primary MIAC/transfer sources for every published interaction classified as fitted including explicit zeros, and a separately approved Provider species/catalog seam. Blank cells are excluded."
     },
     "H": {
       "family": "joint published Tables 2-5 tuple replay and confirmation",
@@ -231,7 +234,7 @@
   ],
   "source_readiness": {
     "status": "ready_for_provider_regression_design",
-    "basis": "The first tracer support subset is exact and source-bound through the official Figiel SI and the existing Hamer-Wu packet. Every later-stage value presently available from the main paper, SI, or retained lab is captured with its true classification and locator. Missing primary chains are enumerated and cannot silently become direct evidence.",
+    "basis": "The first tracer support subset is exactly the 32 applicable official Figiel SI Table S5 rows. The five current-catalog reported averages are the only active Regression residual targets; their 27 underlying values are provenance/support. Hamer-Wu belongs only to later f_k/k_ij families. Every later-stage value presently available from the main paper, SI, or retained lab is captured with its true classification and locator. Missing primary chains are enumerated and cannot silently become direct evidence.",
     "later_stage_gate": "Organic MIAC, transfer, dielectric, and underlying SI Table S5 literature values require the listed papers before they can be promoted from missing/digitized/table-derived evidence to primary-verified targets."
   },
   "comparison_contract": {
@@ -244,12 +247,12 @@
     "target_ledger": {
       "path": "data/figiel-2025-regression-target-ledger.csv",
       "rows": 407,
-      "sha256": "8586daf635d268649b6b0bf52fedde96cb7ab78529cf072207977a2d7e428dbc"
+      "sha256": "f405a3e48d21cd979a8dd480d5f8cb3be40754f5d6babf368b505b5f305607f0"
     },
     "parameter_provenance": {
       "path": "data/figiel-2025-parameter-provenance.csv",
       "rows": 122,
-      "sha256": "71de73d001463676a74975d4e85c0ae0121a3f14ac3c2cf22f4247d59f7dab80"
+      "sha256": "932e8baa90fcefbaa8c3a8730cdeadd83a4c01f0a3b109f4e4cd0319aee9312b"
     }
   },
   "claim_boundary": "This packet supports source-faithful Provider/Regression design for the frozen first water-ion tracer and preserves later Figiel targets with explicit provenance limits. It does not validate an EOS, fit a parameter, approve model agreement, establish predictive validity, create a tolerance, admit a catalog species, publish evidence, or transfer authority."
