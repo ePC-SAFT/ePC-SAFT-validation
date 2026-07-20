@@ -1,0 +1,711 @@
+{
+  "artifacts": {
+    "candidate_receipt": {
+      "path": "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT-project/ePC-SAFT-equilibrium/receipts/promotion/promotion-0002-neutral-held-v1-candidate.yaml",
+      "sha256": "a8a1fe6f0836cef3afd9edfe390fb2d131b1a7a441e160f4cd7176524038dc30"
+    },
+    "equilibrium": {
+      "distribution": "epcsaft-equilibrium",
+      "evidence_commit": "db6cef273496b840a5b31426aa017b830bc7b94d",
+      "installed_root": "/tmp/epcsaft-validation-neutral-held-v1.JzV9Dd/venv/lib/python3.13/site-packages",
+      "path": "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT-project/artifacts/equilibrium-neutral-held-v1/8318e75/epcsaft_equilibrium-0.1.0.dev0-cp313-cp313-linux_x86_64.whl",
+      "record_members_verified": 8,
+      "runtime_commit": "8318e755d4a8e490822fdf7bb2685d8c5af6436c",
+      "sha256": "8ecd70e0192b76b3a107629201c3e8bf34f2d945ca7c8192f824a0df7c9dde12",
+      "version": "0.1.0.dev0"
+    },
+    "provider": {
+      "candidate_record_commit": "25e597289b044ff3e5af70b3572279293555b9f9",
+      "distribution": "epcsaft",
+      "implementation_commit": "0cd75b96f1dddba024c324df500493bd1564bf5c",
+      "installed_root": "/tmp/epcsaft-validation-neutral-held-v1.JzV9Dd/venv/lib/python3.13/site-packages",
+      "path": "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT-project/artifacts/provider-neutral-mixture-sdk-v1/25e5972/epcsaft-0.1.0.dev0-cp313-cp313-linux_x86_64.whl",
+      "record_members_verified": 29,
+      "sha256": "17c6735ee117469b13b76b6a669d0b4430071c8eaebdf1e405baefc9adcb838b",
+      "version": "0.1.0.dev0"
+    }
+  },
+  "audit_summaries": {
+    "may2015-row-011-liquid-side": {
+      "accepted_points": 1001,
+      "intercept": 5.68167199320996,
+      "localization": {
+        "status": "PASS",
+        "target_errors": [
+          0.00029999874000008475
+        ]
+      },
+      "minimum_gap": 7.20016464228479e-08,
+      "public_phase_states": [
+        {
+          "branch": "single",
+          "failure_reason": "",
+          "g_bar": 6.7469610171547325,
+          "molar_density_mol_m3": 13227.09196458638,
+          "relative_density_difference": 4.844003725259742e-12,
+          "residual_helmholtz": -1.3075428672429195,
+          "status": "accepted"
+        }
+      ],
+      "slope": 1.8931740251373244,
+      "status": "PASS",
+      "support_at_feed": 6.7469610171547325,
+      "total_free_energy_error": 8.881784197001252e-16,
+      "violating_points": 0
+    },
+    "may2015-row-012-midpoint": {
+      "accepted_points": 1001,
+      "intercept": 5.624391072374433,
+      "localization": {
+        "status": "PASS",
+        "target_errors": [
+          5.000333999993778e-05
+        ]
+      },
+      "minimum_gap": 1.963851303798947e-11,
+      "public_phase_states": [
+        {
+          "branch": "single",
+          "failure_reason": "",
+          "g_bar": 6.959396653801356,
+          "molar_density_mol_m3": 10233.780238871223,
+          "relative_density_difference": 1.159066310179858e-11,
+          "residual_helmholtz": -0.9699714576840905,
+          "status": "accepted"
+        }
+      ],
+      "slope": 2.001357591525258,
+      "status": "PASS",
+      "support_at_feed": 6.959396653801356,
+      "total_free_energy_error": 0.0,
+      "violating_points": 0
+    }
+  },
+  "campaign_id": "neutral-held-v1-installed-artifact-validation",
+  "command": [
+    "/tmp/epcsaft-validation-neutral-held-v1.JzV9Dd/venv/bin/python",
+    "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT-project/ePC-SAFT-validation/campaigns/neutral_held_v1.py",
+    "--provider-wheel",
+    "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT-project/artifacts/provider-neutral-mixture-sdk-v1/25e5972/epcsaft-0.1.0.dev0-cp313-cp313-linux_x86_64.whl",
+    "--equilibrium-wheel",
+    "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT-project/artifacts/equilibrium-neutral-held-v1/8318e75/epcsaft_equilibrium-0.1.0.dev0-cp313-cp313-linux_x86_64.whl",
+    "--candidate-receipt",
+    "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT-project/ePC-SAFT-equilibrium/receipts/promotion/promotion-0002-neutral-held-v1-candidate.yaml",
+    "--cases",
+    "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT-project/ePC-SAFT-validation/data/may-2015-neutral-held-cases.yaml",
+    "--source",
+    "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT-project/ePC-SAFT-validation/data/may-2015-methane-ethane-vle.csv",
+    "--output-dir",
+    "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT-project/ePC-SAFT-validation/results"
+  ],
+  "counts": {
+    "cases": 18,
+    "derived_one_phase_cases": 1,
+    "may_coexistence_cases": 17,
+    "package_accepted_cases": 2,
+    "predictive_fail_rows": 0,
+    "predictive_not_evaluated_rows": 17,
+    "predictive_pass_rows": 0,
+    "sampled_audit_cases": 3,
+    "sampled_rows": 9009
+  },
+  "decisions": {
+    "artifact_integrity": "PASS",
+    "declared_search_completion": "NON_ADMISSION",
+    "installed_artifact_campaign": "NON_ADMISSION",
+    "numerical": "NON_ADMISSION",
+    "one_phase_behavior": "PASS",
+    "physical": "NON_ADMISSION",
+    "predictive_agreement": "NON_ADMISSION",
+    "sampled_phase_set": "NON_ADMISSION",
+    "solver": "NON_ADMISSION",
+    "two_phase_behavior": "NON_ADMISSION"
+  },
+  "diagnostics_by_case": {
+    "may2015-row-001-midpoint": {
+      "attempts": 15,
+      "best_tpd": -0.1549640762627424,
+      "chemical_potential_max_relative": 0.05065053051278392,
+      "confirmation_max_difference": null,
+      "confirmation_succeeded": false,
+      "failure_reason": "Stage II found more than two distinct candidates",
+      "globality_certificate": "not_guaranteed",
+      "held_gap": 0.0005119888109881288,
+      "kkt_stationarity_max_abs": 1.5987211554602254e-14,
+      "lower_bound": 6.47076258511698,
+      "major_iterations": 4,
+      "material_balance_max_abs": 1.1102230246251565e-16,
+      "numerical_status": "not_adjudicated",
+      "outcome": "scope_exceeded",
+      "physical_status": "not_adjudicated",
+      "pressure_stationarity_max_relative": 1.6688515197992264e-10,
+      "search_profiles": [
+        "held-stage-i-binary-v1",
+        "held-stage-ii-binary-v1",
+        "held-stage-iii-binary-v1"
+      ],
+      "search_status": "third_candidate",
+      "solver_status": "not_adjudicated",
+      "upper_bound": 6.4712745739279685
+    },
+    "may2015-row-002-midpoint": {
+      "attempts": 17,
+      "best_tpd": -0.33508711043275685,
+      "chemical_potential_max_relative": 0.04198417834938329,
+      "confirmation_max_difference": null,
+      "confirmation_succeeded": false,
+      "failure_reason": "Stage II found more than two distinct candidates",
+      "globality_certificate": "not_guaranteed",
+      "held_gap": 0.0003772071922218956,
+      "kkt_stationarity_max_abs": 1.7141843500212417e-13,
+      "lower_bound": 6.0140440765973375,
+      "major_iterations": 4,
+      "material_balance_max_abs": 1.1102230246251565e-16,
+      "numerical_status": "not_adjudicated",
+      "outcome": "scope_exceeded",
+      "physical_status": "not_adjudicated",
+      "pressure_stationarity_max_relative": 4.202231375426896e-10,
+      "search_profiles": [
+        "held-stage-i-binary-v1",
+        "held-stage-ii-binary-v1",
+        "held-stage-iii-binary-v1"
+      ],
+      "search_status": "third_candidate",
+      "solver_status": "not_adjudicated",
+      "upper_bound": 6.014421283789559
+    },
+    "may2015-row-003-midpoint": {
+      "attempts": 114,
+      "best_tpd": -0.3103691439284857,
+      "chemical_potential_max_relative": null,
+      "confirmation_max_difference": null,
+      "confirmation_succeeded": false,
+      "failure_reason": "Stage II major-iteration budget exhausted",
+      "globality_certificate": "not_guaranteed",
+      "held_gap": null,
+      "kkt_stationarity_max_abs": null,
+      "lower_bound": null,
+      "major_iterations": 100,
+      "material_balance_max_abs": null,
+      "numerical_status": "not_adjudicated",
+      "outcome": "search_exhausted",
+      "physical_status": "not_adjudicated",
+      "pressure_stationarity_max_relative": null,
+      "search_profiles": [
+        "held-stage-i-binary-v1",
+        "held-stage-ii-binary-v1",
+        "held-stage-iii-binary-v1"
+      ],
+      "search_status": "search_exhausted",
+      "solver_status": "not_adjudicated",
+      "upper_bound": 6.235156478260666
+    },
+    "may2015-row-004-midpoint": {
+      "attempts": 18,
+      "best_tpd": -0.2708186765328592,
+      "chemical_potential_max_relative": 0.04489186226588962,
+      "confirmation_max_difference": null,
+      "confirmation_succeeded": false,
+      "failure_reason": "Stage II found more than two distinct candidates",
+      "globality_certificate": "not_guaranteed",
+      "held_gap": 0.0003501216216337255,
+      "kkt_stationarity_max_abs": 1.5711876244495215e-12,
+      "lower_bound": 6.2652764009709,
+      "major_iterations": 5,
+      "material_balance_max_abs": 0.0,
+      "numerical_status": "not_adjudicated",
+      "outcome": "scope_exceeded",
+      "physical_status": "not_adjudicated",
+      "pressure_stationarity_max_relative": 3.027394477195772e-10,
+      "search_profiles": [
+        "held-stage-i-binary-v1",
+        "held-stage-ii-binary-v1",
+        "held-stage-iii-binary-v1"
+      ],
+      "search_status": "third_candidate",
+      "solver_status": "not_adjudicated",
+      "upper_bound": 6.265626522592534
+    },
+    "may2015-row-005-midpoint": {
+      "attempts": 21,
+      "best_tpd": -0.21809729392970734,
+      "chemical_potential_max_relative": 0.04604772944179979,
+      "confirmation_max_difference": null,
+      "confirmation_succeeded": false,
+      "failure_reason": "Stage II found more than two distinct candidates",
+      "globality_certificate": "not_guaranteed",
+      "held_gap": 0.00041849219948719707,
+      "kkt_stationarity_max_abs": 5.773159728050814e-14,
+      "lower_bound": 6.369113928081365,
+      "major_iterations": 4,
+      "material_balance_max_abs": 0.0,
+      "numerical_status": "not_adjudicated",
+      "outcome": "scope_exceeded",
+      "physical_status": "not_adjudicated",
+      "pressure_stationarity_max_relative": 2.2005132800973855e-10,
+      "search_profiles": [
+        "held-stage-i-binary-v1",
+        "held-stage-ii-binary-v1",
+        "held-stage-iii-binary-v1"
+      ],
+      "search_status": "third_candidate",
+      "solver_status": "not_adjudicated",
+      "upper_bound": 6.369532420280852
+    },
+    "may2015-row-006-midpoint": {
+      "attempts": 15,
+      "best_tpd": -0.15575649372811395,
+      "chemical_potential_max_relative": 0.050645438291927636,
+      "confirmation_max_difference": null,
+      "confirmation_succeeded": false,
+      "failure_reason": "Stage II found more than two distinct candidates",
+      "globality_certificate": "not_guaranteed",
+      "held_gap": 0.0005124931295759083,
+      "kkt_stationarity_max_abs": 1.865174681370263e-14,
+      "lower_bound": 6.468947366102325,
+      "major_iterations": 4,
+      "material_balance_max_abs": 1.1102230246251565e-16,
+      "numerical_status": "not_adjudicated",
+      "outcome": "scope_exceeded",
+      "physical_status": "not_adjudicated",
+      "pressure_stationarity_max_relative": 1.6557235593937303e-10,
+      "search_profiles": [
+        "held-stage-i-binary-v1",
+        "held-stage-ii-binary-v1",
+        "held-stage-iii-binary-v1"
+      ],
+      "search_status": "third_candidate",
+      "solver_status": "not_adjudicated",
+      "upper_bound": 6.469459859231901
+    },
+    "may2015-row-007-midpoint": {
+      "attempts": 14,
+      "best_tpd": -0.0006644742134050974,
+      "chemical_potential_max_relative": 0.05342655707038568,
+      "confirmation_max_difference": null,
+      "confirmation_succeeded": false,
+      "failure_reason": "Stage II found more than two distinct candidates",
+      "globality_certificate": "not_guaranteed",
+      "held_gap": 0.0005007419565785654,
+      "kkt_stationarity_max_abs": 4.3520742565306136e-14,
+      "lower_bound": 6.641011483385948,
+      "major_iterations": 4,
+      "material_balance_max_abs": 0.0,
+      "numerical_status": "not_adjudicated",
+      "outcome": "scope_exceeded",
+      "physical_status": "not_adjudicated",
+      "pressure_stationarity_max_relative": 3.332978134149351e-10,
+      "search_profiles": [
+        "held-stage-i-binary-v1",
+        "held-stage-ii-binary-v1",
+        "held-stage-iii-binary-v1"
+      ],
+      "search_status": "third_candidate",
+      "solver_status": "not_adjudicated",
+      "upper_bound": 6.6415122253425265
+    },
+    "may2015-row-008-midpoint": {
+      "attempts": 15,
+      "best_tpd": -0.00202293337497797,
+      "chemical_potential_max_relative": 0.07183581144679882,
+      "confirmation_max_difference": null,
+      "confirmation_succeeded": false,
+      "failure_reason": "Stage II found more than two distinct candidates",
+      "globality_certificate": "not_guaranteed",
+      "held_gap": 0.0006463880949549861,
+      "kkt_stationarity_max_abs": 9.769962616701378e-15,
+      "lower_bound": 6.740607638646041,
+      "major_iterations": 4,
+      "material_balance_max_abs": 0.0,
+      "numerical_status": "not_adjudicated",
+      "outcome": "scope_exceeded",
+      "physical_status": "not_adjudicated",
+      "pressure_stationarity_max_relative": 6.603914294892488e-11,
+      "search_profiles": [
+        "held-stage-i-binary-v1",
+        "held-stage-ii-binary-v1",
+        "held-stage-iii-binary-v1"
+      ],
+      "search_status": "third_candidate",
+      "solver_status": "not_adjudicated",
+      "upper_bound": 6.741254026740996
+    },
+    "may2015-row-009-midpoint": {
+      "attempts": 16,
+      "best_tpd": -0.0008691248929224155,
+      "chemical_potential_max_relative": null,
+      "confirmation_max_difference": null,
+      "confirmation_succeeded": false,
+      "failure_reason": "Stage II found more than two distinct candidates",
+      "globality_certificate": "not_guaranteed",
+      "held_gap": null,
+      "kkt_stationarity_max_abs": null,
+      "lower_bound": 6.835981995972008,
+      "major_iterations": 5,
+      "material_balance_max_abs": null,
+      "numerical_status": "not_adjudicated",
+      "outcome": "scope_exceeded",
+      "physical_status": "not_adjudicated",
+      "pressure_stationarity_max_relative": null,
+      "search_profiles": [
+        "held-stage-i-binary-v1",
+        "held-stage-ii-binary-v1"
+      ],
+      "search_status": "third_candidate",
+      "solver_status": "not_adjudicated",
+      "upper_bound": 6.835981995972008
+    },
+    "may2015-row-010-midpoint": {
+      "attempts": 14,
+      "best_tpd": -0.00028281512228002514,
+      "chemical_potential_max_relative": null,
+      "confirmation_max_difference": null,
+      "confirmation_succeeded": false,
+      "failure_reason": "Stage II found more than two distinct candidates",
+      "globality_certificate": "not_guaranteed",
+      "held_gap": null,
+      "kkt_stationarity_max_abs": null,
+      "lower_bound": 6.89973503552931,
+      "major_iterations": 5,
+      "material_balance_max_abs": null,
+      "numerical_status": "not_adjudicated",
+      "outcome": "scope_exceeded",
+      "physical_status": "not_adjudicated",
+      "pressure_stationarity_max_relative": null,
+      "search_profiles": [
+        "held-stage-i-binary-v1",
+        "held-stage-ii-binary-v1"
+      ],
+      "search_status": "third_candidate",
+      "solver_status": "not_adjudicated",
+      "upper_bound": 6.89973503552931
+    },
+    "may2015-row-011-liquid-side": {
+      "attempts": 42,
+      "best_tpd": -2.9899255183455087e-15,
+      "chemical_potential_max_relative": null,
+      "confirmation_max_difference": null,
+      "confirmation_succeeded": false,
+      "failure_reason": "",
+      "globality_certificate": "not_guaranteed",
+      "held_gap": null,
+      "kkt_stationarity_max_abs": null,
+      "lower_bound": null,
+      "major_iterations": 0,
+      "material_balance_max_abs": null,
+      "numerical_status": "passed",
+      "outcome": "one_phase",
+      "physical_status": "passed",
+      "pressure_stationarity_max_relative": 1.2921735348143468e-11,
+      "search_profiles": [
+        "held-stage-i-binary-v1"
+      ],
+      "search_status": "stage_i_no_negative",
+      "solver_status": "passed",
+      "upper_bound": null
+    },
+    "may2015-row-011-midpoint": {
+      "attempts": 20,
+      "best_tpd": -3.1370299076412256e-05,
+      "chemical_potential_max_relative": null,
+      "confirmation_max_difference": null,
+      "confirmation_succeeded": false,
+      "failure_reason": "Stage II found more than two distinct candidates",
+      "globality_certificate": "not_guaranteed",
+      "held_gap": null,
+      "kkt_stationarity_max_abs": null,
+      "lower_bound": 6.930503017331489,
+      "major_iterations": 7,
+      "material_balance_max_abs": null,
+      "numerical_status": "not_adjudicated",
+      "outcome": "scope_exceeded",
+      "physical_status": "not_adjudicated",
+      "pressure_stationarity_max_relative": null,
+      "search_profiles": [
+        "held-stage-i-binary-v1",
+        "held-stage-ii-binary-v1"
+      ],
+      "search_status": "third_candidate",
+      "solver_status": "not_adjudicated",
+      "upper_bound": 6.930503017331489
+    },
+    "may2015-row-012-midpoint": {
+      "attempts": 42,
+      "best_tpd": 0.0,
+      "chemical_potential_max_relative": null,
+      "confirmation_max_difference": null,
+      "confirmation_succeeded": false,
+      "failure_reason": "",
+      "globality_certificate": "not_guaranteed",
+      "held_gap": null,
+      "kkt_stationarity_max_abs": null,
+      "lower_bound": null,
+      "major_iterations": 0,
+      "material_balance_max_abs": null,
+      "numerical_status": "passed",
+      "outcome": "one_phase",
+      "physical_status": "passed",
+      "pressure_stationarity_max_relative": 8.060370308814399e-12,
+      "search_profiles": [
+        "held-stage-i-binary-v1"
+      ],
+      "search_status": "stage_i_no_negative",
+      "solver_status": "passed",
+      "upper_bound": null
+    },
+    "may2015-row-013-midpoint": {
+      "attempts": 15,
+      "best_tpd": -0.0002406610166350437,
+      "chemical_potential_max_relative": null,
+      "confirmation_max_difference": null,
+      "confirmation_succeeded": false,
+      "failure_reason": "Stage II found more than two distinct candidates",
+      "globality_certificate": "not_guaranteed",
+      "held_gap": null,
+      "kkt_stationarity_max_abs": null,
+      "lower_bound": 6.901711614931798,
+      "major_iterations": 5,
+      "material_balance_max_abs": null,
+      "numerical_status": "not_adjudicated",
+      "outcome": "scope_exceeded",
+      "physical_status": "not_adjudicated",
+      "pressure_stationarity_max_relative": null,
+      "search_profiles": [
+        "held-stage-i-binary-v1",
+        "held-stage-ii-binary-v1"
+      ],
+      "search_status": "third_candidate",
+      "solver_status": "not_adjudicated",
+      "upper_bound": 6.901711614931798
+    },
+    "may2015-row-014-midpoint": {
+      "attempts": 13,
+      "best_tpd": -0.0024177058330297208,
+      "chemical_potential_max_relative": null,
+      "confirmation_max_difference": null,
+      "confirmation_succeeded": false,
+      "failure_reason": "Stage II found more than two distinct candidates",
+      "globality_certificate": "not_guaranteed",
+      "held_gap": null,
+      "kkt_stationarity_max_abs": null,
+      "lower_bound": 6.762747642828366,
+      "major_iterations": 4,
+      "material_balance_max_abs": null,
+      "numerical_status": "not_adjudicated",
+      "outcome": "scope_exceeded",
+      "physical_status": "not_adjudicated",
+      "pressure_stationarity_max_relative": null,
+      "search_profiles": [
+        "held-stage-i-binary-v1",
+        "held-stage-ii-binary-v1"
+      ],
+      "search_status": "third_candidate",
+      "solver_status": "not_adjudicated",
+      "upper_bound": 6.762747642828366
+    },
+    "may2015-row-015-midpoint": {
+      "attempts": 14,
+      "best_tpd": -0.0016135858930004937,
+      "chemical_potential_max_relative": null,
+      "confirmation_max_difference": null,
+      "confirmation_succeeded": false,
+      "failure_reason": "Stage II found more than two distinct candidates",
+      "globality_certificate": "not_guaranteed",
+      "held_gap": null,
+      "kkt_stationarity_max_abs": null,
+      "lower_bound": 6.680467756009875,
+      "major_iterations": 2,
+      "material_balance_max_abs": null,
+      "numerical_status": "not_adjudicated",
+      "outcome": "scope_exceeded",
+      "physical_status": "not_adjudicated",
+      "pressure_stationarity_max_relative": null,
+      "search_profiles": [
+        "held-stage-i-binary-v1",
+        "held-stage-ii-binary-v1"
+      ],
+      "search_status": "third_candidate",
+      "solver_status": "not_adjudicated",
+      "upper_bound": 6.680467756009875
+    },
+    "may2015-row-016-midpoint": {
+      "attempts": 109,
+      "best_tpd": -0.21304610704438517,
+      "chemical_potential_max_relative": null,
+      "confirmation_max_difference": null,
+      "confirmation_succeeded": false,
+      "failure_reason": "Stage II major-iteration budget exhausted",
+      "globality_certificate": "not_guaranteed",
+      "held_gap": null,
+      "kkt_stationarity_max_abs": null,
+      "lower_bound": null,
+      "major_iterations": 100,
+      "material_balance_max_abs": null,
+      "numerical_status": "not_adjudicated",
+      "outcome": "search_exhausted",
+      "physical_status": "not_adjudicated",
+      "pressure_stationarity_max_relative": null,
+      "search_profiles": [
+        "held-stage-i-binary-v1",
+        "held-stage-ii-binary-v1",
+        "held-stage-iii-binary-v1"
+      ],
+      "search_status": "search_exhausted",
+      "solver_status": "not_adjudicated",
+      "upper_bound": 6.476338842749083
+    },
+    "may2015-row-017-midpoint": {
+      "attempts": 111,
+      "best_tpd": -0.18848245496198612,
+      "chemical_potential_max_relative": null,
+      "confirmation_max_difference": null,
+      "confirmation_succeeded": false,
+      "failure_reason": "Stage II major-iteration budget exhausted",
+      "globality_certificate": "not_guaranteed",
+      "held_gap": null,
+      "kkt_stationarity_max_abs": null,
+      "lower_bound": 6.465540267543518,
+      "major_iterations": 100,
+      "material_balance_max_abs": null,
+      "numerical_status": "not_adjudicated",
+      "outcome": "search_exhausted",
+      "physical_status": "not_adjudicated",
+      "pressure_stationarity_max_relative": null,
+      "search_profiles": [
+        "held-stage-i-binary-v1",
+        "held-stage-ii-binary-v1"
+      ],
+      "search_status": "search_exhausted",
+      "solver_status": "not_adjudicated",
+      "upper_bound": 6.465540267543518
+    }
+  },
+  "environment": {
+    "contract_sha256": "bdff6a06b5419b98520fd774c05194b4be369402cb8978ade64b549762d1893a",
+    "imports": {
+      "epcsaft": "/tmp/epcsaft-validation-neutral-held-v1.JzV9Dd/venv/lib/python3.13/site-packages/epcsaft/__init__.py",
+      "epcsaft_equilibrium": "/tmp/epcsaft-validation-neutral-held-v1.JzV9Dd/venv/lib/python3.13/site-packages/epcsaft_equilibrium/__init__.py"
+    },
+    "installed_distributions": [
+      {
+        "name": "Pint",
+        "version": "0.25.3"
+      },
+      {
+        "name": "epcsaft",
+        "version": "0.1.0.dev0"
+      },
+      {
+        "name": "epcsaft-equilibrium",
+        "version": "0.1.0.dev0"
+      },
+      {
+        "name": "flexcache",
+        "version": "0.3"
+      },
+      {
+        "name": "flexparser",
+        "version": "0.4"
+      },
+      {
+        "name": "platformdirs",
+        "version": "4.10.1"
+      },
+      {
+        "name": "typing_extensions",
+        "version": "4.16.0"
+      }
+    ],
+    "machine": "x86_64",
+    "platform": "Linux-7.0.0-28-generic-x86_64-with-glibc2.39",
+    "python": "3.13.14 (main, Jun 23 2026, 15:18:27) [Clang 22.1.3 ]",
+    "python_executable": "/tmp/epcsaft-validation-neutral-held-v1.JzV9Dd/venv/bin/python",
+    "python_executable_sha256": "b200d6c7ae464af64f81808ba246a856b1a1cdf3b2ae7088d37d87d31aebe9ff",
+    "python_isolated": true
+  },
+  "executed_at_utc": "2026-07-20T20:49:04.455591+00:00",
+  "globality_certificate": "not_guaranteed",
+  "limitations": [
+    "The public pressure-state scan is finite sampled evidence and is not a continuous globality proof.",
+    "globality_certificate remains not_guaranteed for every case and decision layer.",
+    "Experimental composition disagreement is an EOS/data outcome, not a solver defect.",
+    "This record transfers no runtime, promotion, publication, release, or authority."
+  ],
+  "migration_gate": {
+    "commit": "2ab33646c9ef6069670fc37279dc19e0e7bc69ea",
+    "tree": "dcb96f150e59c32e7453fa5eadf2b6102f39e715"
+  },
+  "outputs": {
+    "cases_csv": {
+      "path": "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT-project/ePC-SAFT-validation/results/neutral-held-v1-cases.csv",
+      "rows": 18,
+      "sha256": "7e9c009e1d8e0029b24629a033094e141f6a329e9201967971b2c91e6aba6994"
+    },
+    "plots": {
+      "coexistence": {
+        "pdf": {
+          "path": "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT-project/ePC-SAFT-validation/results/neutral-held-v1-coexistence.pdf",
+          "sha256": "e3957bc62154eb4fbf0d188af908464f8811cf46445752a14be812edb419fb07"
+        },
+        "png": {
+          "path": "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT-project/ePC-SAFT-validation/results/neutral-held-v1-coexistence.png",
+          "sha256": "97cd8e119dcb8d5296f28e2a8696c5595319fd48a8a4b92037fbf64dd9946be7"
+        },
+        "svg": {
+          "path": "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT-project/ePC-SAFT-validation/results/neutral-held-v1-coexistence.svg",
+          "sha256": "c558cb843d3062e69fa8f01ad675da43a128e6b242787a61fd141867ef5b7fbe"
+        }
+      },
+      "sampled_gibbs": {
+        "pdf": {
+          "path": "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT-project/ePC-SAFT-validation/results/neutral-held-v1-sampled-gibbs.pdf",
+          "sha256": "d2f39dab9f479bb009e20226c75b92d0c4ae2fc02b862372921399afc4142249"
+        },
+        "png": {
+          "path": "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT-project/ePC-SAFT-validation/results/neutral-held-v1-sampled-gibbs.png",
+          "sha256": "1d9db8628884ac8f2eb203f7fbac3a3e8625d8434475a25879b195398e5d0097"
+        },
+        "svg": {
+          "path": "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT-project/ePC-SAFT-validation/results/neutral-held-v1-sampled-gibbs.svg",
+          "sha256": "68342a5f2a07ae635e7259a943d0247732cb3e86d36336c964ab9b00f9fed74a"
+        }
+      }
+    },
+    "sampled_gibbs_csv": {
+      "path": "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT-project/ePC-SAFT-validation/results/neutral-held-v1-sampled-gibbs.csv",
+      "rows": 9009,
+      "sha256": "f73bf7627894fc98f13bedac6be34cb90b96e8f09cce2f19f12f4220b321bf3b"
+    }
+  },
+  "plot_command": [
+    "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT-project/ePC-SAFT-validation/campaigns/plot_neutral_held_v1.py",
+    "--cases-csv",
+    "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT-project/ePC-SAFT-validation/results/neutral-held-v1-cases.csv",
+    "--surface-csv",
+    "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT-project/ePC-SAFT-validation/results/neutral-held-v1-sampled-gibbs.csv",
+    "--record",
+    "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT-project/ePC-SAFT-validation/results/neutral-held-v1-validation.json",
+    "--output-dir",
+    "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT-project/ePC-SAFT-validation/results"
+  ],
+  "plot_environment": {
+    "matplotlib": "3.11.1",
+    "platform": "Linux-7.0.0-28-generic-x86_64-with-glibc2.39",
+    "python": "3.13.14 (main, Jun 23 2026, 15:18:27) [Clang 22.1.3 ]",
+    "python_executable": "/home/tnnrpolley21/.cache/uv/builds-v0/.tmp0ur9td/bin/python"
+  },
+  "schema_version": 1,
+  "source": {
+    "cases": {
+      "path": "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT-project/ePC-SAFT-validation/data/may-2015-neutral-held-cases.yaml",
+      "sha256": "5aceaada58e3010d4232b8f3cf0f0447e2c174a33bbc54c9be7b8675464aa771"
+    },
+    "csv": {
+      "path": "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT-project/ePC-SAFT-validation/data/may-2015-methane-ethane-vle.csv",
+      "sha256": "5cd1e74925a3c6504f5106dcf911f2cae2d6e99a5133fccc20454d8991bdbc7f"
+    },
+    "metadata_sha256": "d43433e93b354e01f96d330c760818a24b775026461ce795e45774cfb11ac94e",
+    "source_contract_commit": "73a37f5935e919a34d1e4fa3af285951d6fac8e7",
+    "tolerance_sha256": "ad744526678355be6ca47cf27ab9ff7ae66b7661c27e36ffe259c5b6295f1016"
+  }
+}

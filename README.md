@@ -7,7 +7,8 @@ Intended GitHub home: `ePC-SAFT/ePC-SAFT-validation`
 Active campaigns: provider Slice 1 explicit-density neutral EOS, Figiel 2025
 aqueous alkali-halide MIAC reproduction, Esteso 1989 mixed-solvent NaCl MIAC,
 Held 2012 ethanol-salt density, the Held 2012 directly measured pure-ethanol
-density, pure-saturation regression, and May 2015 methane/ethane local flash.
+density, pure-saturation regression, May 2015 methane/ethane local flash, and
+the bounded neutral HELD v1 installed-artifact campaign.
 
 This repository will own black-box installed-artifact, cross-package, and
 literature acceptance evidence. It will not own production algorithms, private
@@ -60,6 +61,17 @@ row is locally rejected, so the physical campaign decision is
 global-stability judgment. Render the retained CSV with
 `campaigns/plot_may_2015_methane_ethane_flash.py`; the renderer imports no
 production package.
+
+`campaigns/neutral_held_v1.py` validates the exact installed provider and
+equilibrium candidate wheels over all 17 May midpoint feeds plus the frozen
+row-011 liquid-side case. It independently samples three binary Gibbs surfaces
+through only the provider's public pressure-state API; the finite scan is not
+a continuous globality proof. Artifact integrity and the derived one-phase
+case pass, but 13 May cases fail closed on a third candidate, three exhaust
+the declared search budget, and row 012 returns one phase. The installed-
+artifact and predictive decisions are `NON_ADMISSION`, with every result
+retaining `globality_certificate=not_guaranteed`. Render the retained CSVs
+with `campaigns/plot_neutral_held_v1.py`; the renderer imports neither package.
 
 The compact machine-readable roll-up is
 `results/consumer-slice-2-validation-record.json`. Detailed receipts preserve

@@ -1,6 +1,6 @@
 # Validation Repository Context
 
-This repository owns seven black-box installed-artifact campaigns:
+This repository owns eight black-box installed-artifact campaigns:
 
 - provider Slice 1 neutral, nonassociating PC-SAFT at explicit molar density;
 - Figiel 2025 aqueous LiCl, NaCl, KCl, LiBr, NaBr, and KBr mean ionic
@@ -14,7 +14,10 @@ This repository owns seven black-box installed-artifact campaigns:
 - pure-methane parity and pure-ethane saturation regression over retained NIST
   SRD 69 observations; and
 - May et al. 2015 Table 5 methane/ethane local two-phase flash over all 17
-  retained coexistence rows.
+  retained coexistence rows; and
+- neutral HELD v1 over the same 17 midpoint feeds, one source-derived
+  liquid-side case, and three frozen public pressure-state sampled Gibbs
+  audits.
 
 `governance_doctrine_revision: 2`
 
@@ -66,16 +69,35 @@ solver correctness, predictive agreement, and migration authority remain
 separate claims. The route fixes two phases and claims no phase discovery,
 continuation, TPD, or global stability.
 
+The neutral HELD v1 record binds provider wheel SHA-256
+`17c6735ee117469b13b76b6a669d0b4430071c8eaebdf1e405baefc9adcb838b`,
+equilibrium wheel SHA-256
+`8ecd70e0192b76b3a107629201c3e8bf34f2d945ca7c8192f824a0df7c9dde12`,
+candidate receipt SHA-256
+`a8a1fe6f0836cef3afd9edfe390fb2d131b1a7a441e160f4cd7176524038dc30`,
+and case-contract SHA-256
+`5aceaada58e3010d4232b8f3cf0f0447e2c174a33bbc54c9be7b8675464aa771`.
+Artifact integrity passes. The derived row-011 liquid case and the row-012
+one-phase result pass their finite sampled tangent audits, but only 2 of 18
+cases return accepted HELD states. Thirteen May cases fail closed on a third
+Stage-II candidate, three exhaust the declared Stage-II budget, and row 012
+returns one phase rather than the observed two-phase topology. The installed-
+artifact, declared-search, two-phase, sampled-phase-set, and predictive
+decisions are therefore `NON_ADMISSION`. Solver, numerical, and physical
+statuses are passed for the two returned states and not adjudicated for the
+sixteen fail-closed cases; no failure is relabeled as predictive disagreement.
+Every result retains `globality_certificate=not_guaranteed`.
+
 `runtime_source_of_truth: false`
 
-`validation_source_of_truth: provider-slice-1, figiel-2025-miac, esteso-1989-water-ethanol-nacl, held-2012-ethanol-salt-density, held-2012-pure-ethanol-density, pure-saturation-regression, may-2015-methane-ethane-flash`
+`validation_source_of_truth: provider-slice-1, figiel-2025-miac, esteso-1989-water-ethanol-nacl, held-2012-ethanol-salt-density, held-2012-pure-ethanol-density, pure-saturation-regression, may-2015-methane-ethane-flash, neutral-held-v1`
 
-The prepared next plan is
+The executed plan is
 `docs/plans/2026-07-17-neutral-held-v1-validation-plan.md`. It freezes a
 public-wheel-only sampled Gibbs-surface audit, the unchanged May campaign, and
 one source-derived liquid-side case inside the existing feed domain. Its
-status is `not_started` and its authority effect is none.
+decision is `NON_ADMISSION` and its authority effect is none.
 
 `next_validation_plan: neutral-held-v1`
 
-`next_validation_plan_status: not_started`
+`next_validation_plan_status: completed_non_admission`

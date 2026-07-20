@@ -5,7 +5,8 @@ Repository Profile: scientific-computing
 Active scope: provider Slice 1 installed-artifact acceptance; bounded real-data
 provider campaigns for neutral-associating, aqueous, and mixed-solvent
 electrolyte properties; and Consumer Slice 2 installed-artifact evidence for
-pure-saturation regression and local methane/ethane two-phase flash.
+pure-saturation regression and local methane/ethane two-phase flash; and the
+bounded Consumer Slice 3 neutral HELD installed-artifact campaign.
 
 Before work, read doctrine revision 2 at
 `../ePC-SAFT-organization/GOVERNANCE.md`. Its future published home is
@@ -25,3 +26,6 @@ Consumer Slice 2 regression accuracy remains descriptive unless an approved
 cutoff exists. Its 100 K ethane stress failure is excluded, not accepted. The
 two-phase flash campaign carries no phase-discovery or globality certificate;
 record every frozen-tolerance miss or local-state rejection as non-admission.
+The neutral HELD campaign retains separate artifact, solver, numerical,
+physical, sampled-phase-set, and predictive decisions. Its finite public
+pressure-state Gibbs scan is not a continuous globality proof.
