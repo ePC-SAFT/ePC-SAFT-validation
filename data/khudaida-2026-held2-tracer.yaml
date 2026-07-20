@@ -1,0 +1,188 @@
+{
+  "schema_version": 1,
+  "dataset_id": "khudaida-2026-held2-figure2-table3-tie-line-4-v1",
+  "format_note": "This file uses the JSON-compatible subset of YAML 1.2 for standard-library validation.",
+  "migration_binding": {
+    "decision": "D-024",
+    "gate_commit": "97c3467232c5fbab1ce67ebd2353801ae13d17e0",
+    "gate_tree": "17b72e724a2a70e4f7c5d9b8aa4d8558ef2992df"
+  },
+  "citation": {
+    "authors": [
+      "Salal Hasan Khudaida",
+      "Serli Dwi Rahayu",
+      "Paul Figiel",
+      "Christoph Held",
+      "Ardila Hayu Tiwikrama"
+    ],
+    "title": "Upgrading the Extraction of Ethanol and Isobutanol from an Aqueous Solution in the Presence of Sodium Chloride with Molecular Interaction Studies",
+    "journal": "Journal of Chemical & Engineering Data",
+    "year": 2026,
+    "volume": 71,
+    "pages": "708-717",
+    "doi": "10.1021/acs.jced.5c00780",
+    "main_locators": [
+      "Table 3, 293.15 K block, fourth tie line: direct formula-mole phase compositions",
+      "Table 3 footnote: standard uncertainties for temperature, pressure, and four formula-mole fractions",
+      "Figure 2: salt-free ternary projection of the 293.15 K, 5 wt% NaCl tie lines",
+      "Tables 5-7: pure-component, dielectric, and binary-interaction model inputs",
+      "Table 9, 293.15 K ePC-SAFT rows: aggregate phase/component AAD context"
+    ],
+    "supporting_information_locator": "Associated Content for DOI 10.1021/acs.jced.5c00780; Tables S1-S4 and Figures S1-S3",
+    "peer_reviewed_status": "peer-reviewed journal article"
+  },
+  "primary_sources": {
+    "main_markdown": {
+      "sha256": "fc8feed1b91c17b0e03610dab2c86d989dccce342a72bf5f38285c3a4466954e",
+      "size_bytes": 52546,
+      "role": "User-supplied primary-paper extraction controlling the tracer values, reported uncertainties, model-input tables, and Table 9 context.",
+      "execution_locator": "/home/tnnrpolley21/Zotero/storage/QS3ZS3AD/Khudaida et al. - 2026 - Upgrading the Extraction of Ethanol and Isobutanol from an Aqueous Solution in the Presence of Sodiu.md"
+    },
+    "supporting_information_markdown": {
+      "sha256": "71a6aec2ba260196b0e15a2c09e8f69b7e44dc0c131def96eecfc10fdeb337be",
+      "size_bytes": 8214,
+      "role": "User-supplied official supporting-information extraction; bound for source identity but not used to replace the direct Table 3 tracer.",
+      "execution_locator": "/home/tnnrpolley21/Zotero/storage/ATSDC4CB/Khudaida et al. - 2026 - Supporting Information - Upgrading the Extraction of Ethanol and Isobutanol from an Aqueous Solution in the Presence of Sodiu.md"
+    }
+  },
+  "use_basis": "Retain compact numerical facts, source identities, and transformations for scientific validation; do not redistribute the paper or supporting information.",
+  "lab_distillation": {
+    "lab_commit": "13ce345b6dcc41d399bb2a4c7b9bedb18f74b45b",
+    "authority": "non-authoritative extraction cross-check only; Validation has no lab runtime dependency",
+    "retained_table_hashes": {
+      "tables_3_4_experimental_tielines_csv": "8eb728633eed0a9ab6afb477e834e801c68ff86eb4c656cc46a8eb09c7166a1c",
+      "table_5_pure_component_parameters_csv": "2a1dea257bc42bb11934a49e88ef8359b8472996fd926611eb2c0d2fe78cfda1",
+      "table_6_relative_dielectric_constants_csv": "708573ca37adef83cd9d3be3b286eaacf05243dde286b3308abeb05d9afeb4b0",
+      "table_7_epcsaft_kij_csv": "4dda028bac9903c4722a628127be9470e644ccb52b7b7c9ae37386b61e51fb1b"
+    }
+  },
+  "retained_files": {
+    "tracer_csv": {
+      "path": "data/khudaida-2026-held2-tracer.csv",
+      "sha256": "cf048a88f19592b600d6a228ee46cdffc7fb64965108318796cd3d1b28553c24",
+      "rows": 1
+    }
+  },
+  "tracer_contract": {
+    "case_id": "khudaida2026-figure2-table3-tl4",
+    "role": "first installed real HELD2 electrolyte-LLE challenge",
+    "temperature_K": "293.15",
+    "pressure_Pa": "100000",
+    "pressure_transformation": "Table 3 pressure 0.1 MPa multiplied by exactly 1000000 Pa/MPa",
+    "salt_feed_mass_fraction": "0.05",
+    "formula_component_order": ["water", "ethanol", "isobutanol", "NaCl"],
+    "organic_formula_composition": ["0.3695", "0.0927", "0.5366", "0.0012"],
+    "aqueous_formula_composition": ["0.9486", "0.0092", "0.0037", "0.0385"],
+    "equal_formula_mole_midpoint": ["0.65905", "0.05095", "0.27015", "0.01985"],
+    "explicit_species_order": ["water", "ethanol", "isobutanol", "Na+", "Cl-"],
+    "explicit_species_amounts": ["0.65905", "0.05095", "0.27015", "0.01985", "0.01985"],
+    "amount_basis_note": "The four formula amounts sum to one. Dissociating one NaCl formula amount creates equal Na+ and Cl- amounts, so the five explicit amounts sum to 1.01985 before any public Provider normalization.",
+    "feed_source_classification": "table-derived from the direct Table 3 endpoints",
+    "excluded_feed": "The lower-provenance green feed point digitized from Figure 2 is not an input to the first tracer.",
+    "expansion_gate": "The remaining seven Figure 2 tie lines stay out of scope until this exact tracer executes against Migration-bound installed wheels."
+  },
+  "source_transformations": {
+    "midpoint": "componentwise arithmetic mean of the Table 3 organic and aqueous formula-mole compositions",
+    "dissociation": "replace the midpoint NaCl formula amount by equal Na+ and Cl- explicit amounts without renormalizing the retained input vector",
+    "figure_2_projection": "for each phase and each neutral component i, x_i_salt_free = x_i_formula / (1 - x_NaCl_formula)",
+    "classification": {
+      "table_3_endpoints": "direct",
+      "reported_standard_uncertainties": "direct",
+      "midpoint_and_dissociated_vector": "table-derived",
+      "figure_2_salt_free_coordinates": "table-derived",
+      "table_9_aad": "table-derived aggregate context"
+    }
+  },
+  "reported_uncertainty": {
+    "meaning": "Table 3 standard uncertainties; no coverage factor is reported in the table footnote.",
+    "temperature_K": "0.02",
+    "pressure_Pa": "1000",
+    "formula_mole_fraction": {
+      "water": "0.0016",
+      "ethanol": "0.0007",
+      "isobutanol": "0.0015",
+      "NaCl": "0.0002"
+    },
+    "midpoint_uncertainty": null,
+    "model_comparison_allowance": null,
+    "policy": "Do not convert a reported standard uncertainty into a model acceptance cutoff or add a model-accuracy floor without a separately approved contract."
+  },
+  "published_model_bundle": {
+    "bundle_identity": "A distinct Khudaida model bundle and fingerprint; the Figiel bundle is not a substitute.",
+    "table_5_printed_values": {
+      "water": {"m": "1.2047", "sigma_A": "2.7927 + 10.11 exp(-0.01775 T/K) - 1.417 exp(-0.01146 T/K)", "epsilon_over_k_K": "353.95", "association_energy_over_k_K": "2425.7", "association_volume": "0.04509", "solvent_solvation_factor": "1.5"},
+      "ethanol": {"m": "2.3827", "sigma_A": "3.1771", "epsilon_over_k_K": "198.24", "association_energy_over_k_K": "2653.4", "association_volume": "0.03238", "solvent_solvation_factor": "1.6"},
+      "isobutanol": {"m": "2.8440", "sigma_A": "3.5561", "epsilon_over_k_K": "257.13", "association_energy_over_k_K": "2514.3", "association_volume": "0.00391", "solvent_solvation_factor": "1.5"},
+      "Na+": {"sigma_A": "2.8232", "epsilon_over_k_K": "230.00", "born_diameter_A": "3.445"},
+      "Cl-": {"sigma_A": "2.7560", "epsilon_over_k_K": "170.00", "born_diameter_A": "4.100"}
+    },
+    "table_6_relative_dielectric_constants": {
+      "water": "78.09",
+      "ethanol": "24.88",
+      "isobutanol": "17.20",
+      "NaCl_ions": "8"
+    },
+    "table_7_kij": [
+      {"pair": ["ethanol", "water"], "value": "-0.06167", "reference": "39", "provenance": "inherited-from-cited-source"},
+      {"pair": ["ethanol", "isobutanol"], "value": "0.00154", "reference": "19", "provenance": "inherited-from-cited-source"},
+      {"pair": ["ethanol", "Na+"], "value": "0.05", "reference": "31", "provenance": "inherited-from-cited-source"},
+      {"pair": ["ethanol", "Cl-"], "value": "0.8", "reference": "31", "provenance": "inherited-from-cited-source"},
+      {"pair": ["water", "isobutanol"], "value": "-0.0071", "reference": "34", "provenance": "inherited-from-cited-source"},
+      {"pair": ["water", "Na+"], "value": "-0.3", "reference": "31", "provenance": "inherited-from-cited-source"},
+      {"pair": ["water", "Cl-"], "value": "-0.3", "reference": "31", "provenance": "inherited-from-cited-source"},
+      {"pair": ["isobutanol", "Na+"], "value": "0", "reference": null, "provenance": "explicit-published-zero-missing-upstream-reference"},
+      {"pair": ["isobutanol", "Cl-"], "value": "0", "reference": null, "provenance": "explicit-published-zero-missing-upstream-reference"},
+      {"pair": ["Na+", "Cl-"], "value": "0.317", "reference": "30", "provenance": "inherited-from-cited-source"}
+    ],
+    "completeness_requirements": [
+      "Exact installed Provider and Equilibrium wheel hashes, wheel RECORD hashes, import origins, candidate commits, and public API identities are required before execution.",
+      "Provider must expose a distinct Khudaida bundle fingerprint with explicit species identity, charge, ordering, temperature contract, Table 5/6/7 values, and source provenance.",
+      "The two Table 7 isobutanol-ion zeros are executable reproduction inputs but retain the missing-upstream-reference limitation.",
+      "All required cross-association records must be explicit and source-traced in Provider; an implicit default or missing executable record is PARAMETER_CONTRACT_INCOMPLETE.",
+      "Runtime l_ij and k_hb_ij matrices are not inputs to the current clean Provider formulation; their absence is not a parameter-contract failure and they must not be added as fake defaults.",
+      "The Figiel bundle must not be mutated or silently reused for Khudaida.",
+      "No parameter tuning or HELD2 algorithm change may use the tracer outcome to force agreement."
+    ]
+  },
+  "published_comparison_context": {
+    "table_9_293_15_K_epcsaft": {
+      "organic_component_aad": {"water": "0.0287", "ethanol": "0.0031", "isobutanol": "0.0313", "NaCl": "0.0009"},
+      "aqueous_component_aad": {"water": "0.0482", "ethanol": "0.0064", "isobutanol": "0.0021", "NaCl": "0.0083"},
+      "grand_aad": "0.0161",
+      "role": "Published aggregate context over all eight 293.15 K tie lines, not a row-specific target or acceptance cutoff."
+    }
+  },
+  "future_installed_challenge": {
+    "status": "not_run_pending_migration_bound_provider_and_equilibrium_wheels",
+    "algorithm_source": "Perdomo HELD2",
+    "model_data_source": "Khudaida et al. 2026",
+    "public_installed_api_only": true,
+    "noncollapse_rule": "A valid two-phase result must contain two finite, positive-amount phases with distinct compositions. A single phase, duplicate-feed/duplicate-composition phases, or a trace phase rejected by the immutable candidate contract is not predictive evidence.",
+    "required_checks": [
+      "noncollapsed phase count and amounts",
+      "component material balance",
+      "electroneutrality in every electrolyte phase",
+      "specified-pressure closure",
+      "independent modified-potential equality or the formulation-equivalent complementarity residual",
+      "comparison to the direct Table 3 endpoints and their Figure 2 salt-free projection",
+      "descriptive comparison with the published Table 9 aggregate context"
+    ],
+    "five_decision_layers": {
+      "artifact_input": "not_run",
+      "solver": "not_run",
+      "numerical": "not_run",
+      "physical": "not_run",
+      "predictive": "not_run"
+    },
+    "globality_certificate": "not_guaranteed",
+    "terminal_classifications": {
+      "PARAMETER_CONTRACT_INCOMPLETE": "required installed artifact or source-traced executable model input is absent or mismatched",
+      "SOLVER_LIMIT": "the declared HELD2 search does not return a numerically accepted state; this does not by itself prove an algorithm defect",
+      "MODEL_TOPOLOGY_MISS": "a numerically and physically accepted model result lacks the experimental two-phase topology",
+      "PREDICTIVE_MISS": "a numerically and physically accepted two-phase result misses a separately frozen predictive comparison contract",
+      "PREDICTIVE_PASS": "a numerically and physically accepted two-phase result satisfies a separately frozen predictive comparison contract",
+      "NOT_EVALUATED": "a later decision cannot be adjudicated because an earlier layer failed or no quantitative predictive cutoff has been approved"
+    }
+  },
+  "claim_boundary": "This packet establishes source identity, tracer inputs, model-bundle requirements, and future decision semantics only. It contains no installed model output, parameter fit, predictive result, campaign admission, release, or authority transfer."
+}
