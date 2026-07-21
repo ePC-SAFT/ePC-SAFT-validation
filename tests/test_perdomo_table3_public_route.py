@@ -16,7 +16,7 @@ CASES = ROOT / "data" / "perdomo-2025-held2-case-ledger.csv"
 SAMPLES = ROOT / "data" / "perdomo-2025-held2-published-samples.csv"
 RECORD = ROOT / "results" / "perdomo-table3-public-route-validation.json"
 EXPECTED_RECORD_SHA256 = (
-    "2a712e44f3e0b7d29c3ac8513be7391209d0a946860284c6840f4cb97c7609a9"
+    "83fecb9975d992c313f7177e036af7f04c0321c330d97c5395705984208b3d42"
 )
 
 
@@ -39,43 +39,51 @@ def test_existing_perdomo_input_column_derives_frozen_public_feed() -> None:
     assert source["reported_phase_count"] == 2
 
 
-def test_public_route_absence_stops_all_scientific_decision_layers() -> None:
+def test_public_route_result_keeps_package_and_source_decisions_separate() -> None:
     campaign = load_campaign()
     record = json.loads(RECORD.read_text(encoding="utf-8"))
 
     assert hashlib.sha256(RECORD.read_bytes()).hexdigest() == EXPECTED_RECORD_SHA256
     assert campaign.check_record(record)["status"] == (
-        "NOT_EVALUATED_PUBLIC_ROUTE_ABSENT"
+        "PUBLIC_ROUTE_PASS_SOURCE_TOPOLOGY_DISAGREEMENT"
     )
     assert record["public_route_audit"]["symbol"] == ("epcsaft_equilibrium.tp_flash")
-    diagnostics = record["public_route_audit"]["exception_diagnostics"]
-    assert diagnostics["outcome"] == "invalid_input"
-    assert diagnostics["attempts"] == 0
-    assert diagnostics["failure_reason"] == "tp_flash requires exactly two components"
+    diagnostics = record["public_route_audit"]["result"]["diagnostics"]
+    assert diagnostics["outcome"] == "one_phase"
+    assert diagnostics["attempts"] == 30
+    assert diagnostics["search_status"] == "complete_no_negative_found"
+    assert diagnostics["best_tpd"] == -1.6139519381498581e-12
+    assert diagnostics["solver_status"] == "passed"
+    assert diagnostics["numerical_status"] == "passed"
+    assert diagnostics["physical_status"] == "passed"
     assert record["frozen_search_contract"] == {
         "declared_starts": 30,
+        "observed_attempts": 30,
         "private_adapter_called": False,
+        "search_profile": "perdomo-held2-stage-i-installed-v1",
+        "search_status": "complete_no_negative_found",
         "seed": 2025,
-        "status": "not_started_public_route_absent",
     }
-    assert record["source_comparison"] == {
-        "endpoint_status": "not_evaluated_no_public_result",
-        "published_phase_count": 2,
-        "returned_phase_count": None,
-        "topology_disagreement": None,
-        "topology_status": "not_evaluated_public_route_absent",
+    comparison = record["source_comparison"]
+    assert comparison["published_phase_count"] == 2
+    assert comparison["returned_phase_count"] == 1
+    assert comparison["topology_status"] == "disagreement_cross_eos"
+    assert comparison["topology_disagreement"] is True
+    assert comparison["endpoint_status"] == ("not_evaluated_phase_count_disagreement")
+    assert record["decisions"] == {
+        "artifact_input": "PASS",
+        "globality": "NOT_GUARANTEED",
+        "numerical": "PASS",
+        "physical": "PASS",
+        "predictive_endpoint_comparison": "NOT_EVALUATED",
+        "public_route": "PASS",
+        "search_completeness": "PASS_DECLARED_30_OF_30",
+        "solver": "PASS",
+        "source_topology_comparison": "DISAGREEMENT_CROSS_EOS",
     }
-    assert all(
-        record["decisions"][axis] == "NOT_EVALUATED"
-        for axis in (
-            "solver",
-            "numerical",
-            "physical",
-            "source_topology_comparison",
-            "predictive_endpoint_comparison",
-            "search_completeness",
-        )
-    )
+    assert record["execution_accounting"]["public_solver_executions"] == 3
+    assert record["execution_accounting"]["evidence_assembly_solver_execution"] is False
+    assert record["execution_accounting"]["identity_continuity_claimed"] is False
     assert record["globality_certificate"] == "not_guaranteed"
 
 
@@ -86,11 +94,7 @@ def test_artifact_source_and_public_only_negative_space_are_hash_bound() -> None
         "9e4da0d7ba7896bcd2ec096400553d935e0516c61f1bd9f41f2370ab68ab36ea"
     )
     assert record["artifacts"]["equilibrium"]["sha256"] == (
-        "ff34db9643b79dad9df0095c190d55f98e02f4fc268e073ec83594669b277831"
-    )
-    assert (
-        record["artifacts"]["retained_package_trace_context_only"]["sha256"]
-        == "0ff032a747992a6add25dc6228da0628fcf901dc176f7f408a61c7a9c82903df"
+        "da37682dc06d278cc0c7e9333d61604c81209727cc99b1b91c9682d2aa82e5c7"
     )
     assert record["source"]["authority_commit"] == (
         "5620f030b1e4bf12cde2f97d739cb931653eb960"
@@ -133,5 +137,5 @@ def test_artifact_source_and_public_only_negative_space_are_hash_bound() -> None
     )
     assert completed.returncode == 0, completed.stderr
     assert json.loads(completed.stdout)["status"] == (
-        "NOT_EVALUATED_PUBLIC_ROUTE_ABSENT"
+        "PUBLIC_ROUTE_PASS_SOURCE_TOPOLOGY_DISAGREEMENT"
     )

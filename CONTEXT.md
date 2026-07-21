@@ -93,14 +93,17 @@ Every result retains `globality_certificate=not_guaranteed`.
 The D-025 Perdomo Table-3 record binds Provider wheel SHA-256
 `9e4da0d7ba7896bcd2ec096400553d935e0516c61f1bd9f41f2370ab68ab36ea`
 and Equilibrium wheel SHA-256
-`ff34db9643b79dad9df0095c190d55f98e02f4fc268e073ec83594669b277831`.
-Artifact and input integrity pass, but the installed public generic `tp_flash`
-route rejects the three-component water/Na+/Cl- model because it requires
-exactly two components. The terminal status is
-`NOT_EVALUATED_PUBLIC_ROUTE_ABSENT`: no HELD search ran, and solver, numerical,
-physical, source-topology, predictive-endpoint, and search-completeness axes
-remain not evaluated. The retained package trace is hash-bound context only;
-Validation imported no private adapter and retains
+`da37682dc06d278cc0c7e9333d61604c81209727cc99b1b91c9682d2aa82e5c7`.
+The installed public generic `tp_flash` route accepts the frozen
+water/Na+/Cl- input and returns one phase after all 30 declared starts, with
+`complete_no_negative_found`, minimum TPD
+`-1.6139519381498581e-12`, and passed solver, numerical, and physical package
+statuses. Artifact, input, public-route, and declared-search decisions pass.
+Perdomo Table 3 reports two phases under SAFT-gamma-Mie, so Validation records
+the ePC-SAFT result separately as a cross-EOS source-topology disagreement;
+endpoint-composition comparison remains `NOT_EVALUATED`. The terminal status
+is `PUBLIC_ROUTE_PASS_SOURCE_TOPOLOGY_DISAGREEMENT`. Validation imported no
+private adapter, makes no same-EOS reproduction claim, and retains
 `globality_certificate=not_guaranteed`.
 
 `runtime_source_of_truth: false`

@@ -2,60 +2,56 @@
   "artifacts": {
     "equilibrium": {
       "distribution": "epcsaft-equilibrium",
-      "installed_root": "/tmp/epcsaft-validation-d025-run.gSaaAY/lib/python3.13/site-packages",
+      "installed_root": "/home/tnnrpolley21/.cache/uv/archive-v0/_XdpATJPYr9_E3V1/lib/python3.13/site-packages",
       "native_members": [
         {
-          "path": "/tmp/epcsaft-validation-d025-run.gSaaAY/lib/python3.13/site-packages/epcsaft_equilibrium/_equilibrium.cpython-313-x86_64-linux-gnu.so",
-          "sha256": "89e5613664f472bcc8891159c2e134c4ea326358cf12b78d744dd62683fc3fc6"
+          "path": "/home/tnnrpolley21/.cache/uv/archive-v0/_XdpATJPYr9_E3V1/lib/python3.13/site-packages/epcsaft_equilibrium/_equilibrium.cpython-313-x86_64-linux-gnu.so",
+          "sha256": "bc4a825a57fca47725274104da0a160d1a48f8404e61ad1687dcfdd917361a9e"
         }
       ],
-      "path": "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT-project/artifacts/equilibrium-held2-perdomo-table3-v1/2d4cfcb/epcsaft_equilibrium-0.1.0.dev0-cp313-cp313-linux_x86_64.whl",
+      "path": "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT-project/artifacts/equilibrium-held2-public-dispatch-v1/ef6fe36/epcsaft_equilibrium-0.1.0.dev0-cp313-cp313-linux_x86_64.whl",
       "record_members_verified": 8,
-      "record_path": "/tmp/epcsaft-validation-d025-run.gSaaAY/lib/python3.13/site-packages/epcsaft_equilibrium-0.1.0.dev0.dist-info/RECORD",
-      "record_sha256": "7c80327b9ffa274256cb583f193c9e9b5511a043110c190c78ef2897fc94710e",
-      "sha256": "ff34db9643b79dad9df0095c190d55f98e02f4fc268e073ec83594669b277831",
+      "record_path": "/home/tnnrpolley21/.cache/uv/archive-v0/_XdpATJPYr9_E3V1/lib/python3.13/site-packages/epcsaft_equilibrium-0.1.0.dev0.dist-info/RECORD",
+      "record_sha256": "ccc7ba006433781ede3bf4928eb7fd3f5e70b5d891ec3843c953642b9cddb8df",
+      "sha256": "da37682dc06d278cc0c7e9333d61604c81209727cc99b1b91c9682d2aa82e5c7",
       "version": "0.1.0.dev0"
     },
     "provider": {
       "distribution": "epcsaft",
-      "installed_root": "/tmp/epcsaft-validation-d025-run.gSaaAY/lib/python3.13/site-packages",
+      "installed_root": "/home/tnnrpolley21/.cache/uv/archive-v0/_XdpATJPYr9_E3V1/lib/python3.13/site-packages",
       "native_members": [
         {
-          "path": "/tmp/epcsaft-validation-d025-run.gSaaAY/lib/python3.13/site-packages/epcsaft/_core.cpython-313-x86_64-linux-gnu.so",
+          "path": "/home/tnnrpolley21/.cache/uv/archive-v0/_XdpATJPYr9_E3V1/lib/python3.13/site-packages/epcsaft/_core.cpython-313-x86_64-linux-gnu.so",
           "sha256": "99b1d30e8f98dbd26b710f06af5e995707c4ad067b77846ae45c202b3e90bc13"
         }
       ],
       "path": "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT-project/artifacts/equilibrium-held2-perdomo-table3-v1/2d4cfcb/epcsaft-0.1.0.dev0-cp313-cp313-linux_x86_64.whl",
       "record_members_verified": 37,
-      "record_path": "/tmp/epcsaft-validation-d025-run.gSaaAY/lib/python3.13/site-packages/epcsaft-0.1.0.dev0.dist-info/RECORD",
+      "record_path": "/home/tnnrpolley21/.cache/uv/archive-v0/_XdpATJPYr9_E3V1/lib/python3.13/site-packages/epcsaft-0.1.0.dev0.dist-info/RECORD",
       "record_sha256": "7502cd3adcd3a751db16d3060e17f5d5361728e21f6afa4c1b15482de3754073",
       "sha256": "9e4da0d7ba7896bcd2ec096400553d935e0516c61f1bd9f41f2370ab68ab36ea",
       "version": "0.1.0.dev0"
-    },
-    "retained_package_trace_context_only": {
-      "path": "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT-project/artifacts/equilibrium-held2-perdomo-table3-v1/2d4cfcb/perdomo-table3-installed-trace.json",
-      "role": "hash-bound package context only; no result or private runner was consumed",
-      "sha256": "0ff032a747992a6add25dc6228da0628fcf901dc176f7f408a61c7a9c82903df"
     }
   },
   "authority_effect": "none",
   "campaign_id": "perdomo-2025-table3-public-route-installed-v1",
   "commands": {
-    "environment": "uv venv $D025_ENV --python 3.13",
-    "install": "uv pip install --python $D025_ENV/bin/python --offline $PROVIDER_WHEEL $EQUILIBRIUM_WHEEL",
-    "run": "cd $D025_ENV && env -u PYTHONPATH $D025_ENV/bin/python -I $VALIDATION_ROOT/campaigns/perdomo_table3_public_route.py run --provider-wheel $PROVIDER_WHEEL --equilibrium-wheel $EQUILIBRIUM_WHEEL --retained-trace $RETAINED_TRACE --source-metadata $VALIDATION_ROOT/data/perdomo-2025-held2-source-ledger.yaml --source-cases $VALIDATION_ROOT/data/perdomo-2025-held2-case-ledger.csv --source-samples $VALIDATION_ROOT/data/perdomo-2025-held2-published-samples.csv --output $VALIDATION_ROOT/results/perdomo-table3-public-route-validation.json"
+    "environment": "env -u PYTHONPATH uv run --isolated --no-project --offline --python 3.13",
+    "evidence_assembly": "the same command with --captured-result $CAPTURED_RESULT; this serializes the retained raw payload without executing tp_flash",
+    "install": "--with $PROVIDER_WHEEL --with $EQUILIBRIUM_WHEEL; uv creates an isolated site-packages environment from the exact wheels",
+    "run": "env -u PYTHONPATH uv run --isolated --no-project --offline --python 3.13 --with $PROVIDER_WHEEL --with $EQUILIBRIUM_WHEEL python -I $VALIDATION_ROOT/campaigns/perdomo_table3_public_route.py run --provider-wheel $PROVIDER_WHEEL --equilibrium-wheel $EQUILIBRIUM_WHEEL --source-metadata $VALIDATION_ROOT/data/perdomo-2025-held2-source-ledger.yaml --source-cases $VALIDATION_ROOT/data/perdomo-2025-held2-case-ledger.csv --source-samples $VALIDATION_ROOT/data/perdomo-2025-held2-published-samples.csv --output $VALIDATION_ROOT/results/perdomo-table3-public-route-validation.json"
   },
-  "created_utc": "2026-07-21T19:00:14.130056+00:00",
+  "created_utc": "2026-07-21T20:00:10.823571+00:00",
   "decisions": {
     "artifact_input": "PASS",
     "globality": "NOT_GUARANTEED",
-    "numerical": "NOT_EVALUATED",
-    "physical": "NOT_EVALUATED",
+    "numerical": "PASS",
+    "physical": "PASS",
     "predictive_endpoint_comparison": "NOT_EVALUATED",
-    "public_route": "ABSENT_FOR_ELECTROLYTE_INPUT",
-    "search_completeness": "NOT_EVALUATED",
-    "solver": "NOT_EVALUATED",
-    "source_topology_comparison": "NOT_EVALUATED"
+    "public_route": "PASS",
+    "search_completeness": "PASS_DECLARED_30_OF_30",
+    "solver": "PASS",
+    "source_topology_comparison": "DISAGREEMENT_CROSS_EOS"
   },
   "environment": {
     "dependency_versions": {
@@ -64,30 +60,65 @@
       "pint": "0.25.3",
       "platformdirs": "4.11.0"
     },
-    "equilibrium_import_origin": "/tmp/epcsaft-validation-d025-run.gSaaAY/lib/python3.13/site-packages/epcsaft_equilibrium/__init__.py",
+    "equilibrium_import_origin": "/home/tnnrpolley21/.cache/uv/archive-v0/_XdpATJPYr9_E3V1/lib/python3.13/site-packages/epcsaft_equilibrium/__init__.py",
     "imports_from_isolated_site_packages": true,
     "platform": "Linux-7.0.0-28-generic-x86_64-with-glibc2.39",
-    "provider_import_origin": "/tmp/epcsaft-validation-d025-run.gSaaAY/lib/python3.13/site-packages/epcsaft/__init__.py",
-    "python_executable": "/tmp/epcsaft-validation-d025-run.gSaaAY/bin/python",
+    "provider_import_origin": "/home/tnnrpolley21/.cache/uv/archive-v0/_XdpATJPYr9_E3V1/lib/python3.13/site-packages/epcsaft/__init__.py",
+    "python_executable": "/home/tnnrpolley21/.cache/uv/builds-v0/.tmp1qck1v/bin/python",
     "python_version": "3.13.14",
     "sys_path": [
       "/home/tnnrpolley21/.local/share/uv/python/cpython-3.13.14-linux-x86_64-gnu/lib/python313.zip",
       "/home/tnnrpolley21/.local/share/uv/python/cpython-3.13.14-linux-x86_64-gnu/lib/python3.13",
       "/home/tnnrpolley21/.local/share/uv/python/cpython-3.13-linux-x86_64-gnu/lib/python3.13/lib-dynload",
-      "/tmp/epcsaft-validation-d025-run.gSaaAY/lib/python3.13/site-packages"
+      "/home/tnnrpolley21/.cache/uv/builds-v0/.tmp1qck1v/lib/python3.13/site-packages",
+      "/home/tnnrpolley21/.cache/uv/archive-v0/_XdpATJPYr9_E3V1/lib/python3.13/site-packages",
+      "/home/tnnrpolley21/.cache/uv/builds-v0/.tmp56k5li/lib/python3.13/site-packages"
     ]
   },
   "equilibrium_subject": {
-    "commit": "2d4cfcbec537e3ff3d2272a5a6ad10959a00a09e",
-    "tree": "3acbae48db7dfe5ad1b9857c6907ba1384e7c91a"
+    "commit": "ef6fe362dc0bd84521e7499728ed977ce62c17f1",
+    "tree": "f196c86cf5eacbaadbc62f8d900fd02bd99413b3"
+  },
+  "execution_accounting": {
+    "attempts": [
+      {
+        "evidence_status": "raw_payload_retained_in_active_session",
+        "id": "exploratory_public_audit",
+        "scientific_status": "completed"
+      },
+      {
+        "evidence_status": "not_retained_search_profiles_tuple_list_postcondition_failure",
+        "id": "campaign_capture_1",
+        "scientific_status": "completed_expected_diagnostics_before_postcondition_failure"
+      },
+      {
+        "evidence_status": "not_retained_phase_fractions_tuple_list_postcondition_failure",
+        "id": "campaign_corrective_capture_2",
+        "scientific_status": "completed_expected_diagnostics_before_postcondition_failure"
+      }
+    ],
+    "canonical_payload_execution": "exploratory_public_audit",
+    "evidence_assembly_solver_execution": false,
+    "identity_continuity_claimed": false,
+    "public_solver_executions": 3
   },
   "frozen_search_contract": {
     "declared_starts": 30,
+    "observed_attempts": 30,
     "private_adapter_called": false,
-    "seed": 2025,
-    "status": "not_started_public_route_absent"
+    "search_profile": "perdomo-held2-stage-i-installed-v1",
+    "search_status": "complete_no_negative_found",
+    "seed": 2025
   },
   "globality_certificate": "not_guaranteed",
+  "independent_checks": {
+    "all_retained_physical_values_finite": true,
+    "phase_charge_residual": 0.0,
+    "phase_fraction_sum_residual": 0.0,
+    "phase_mole_fraction_sum_residual": 0.0,
+    "phase_pressure_residual_Pa": 4.859139153268188e-07,
+    "returned_phase_count": 1
+  },
   "input": {
     "charges": [
       0,
@@ -116,37 +147,74 @@
   "negative_space": [
     "No private _held2 adapter or native private symbol was imported or called.",
     "No package-retained runner, result payload, or expected numerical output was copied.",
-    "No solver search, forced phase split, endpoint comparison, tolerance change, package edit, receipt, promotion, or authority action occurred."
+    "No phase was forced and no endpoint comparison was evaluated after the phase-count disagreement.",
+    "No tolerance change, package edit, receipt, promotion, same-EOS reproduction claim, or authority action occurred."
   ],
   "production_status": "non-production-validation-evidence",
   "public_route_audit": {
     "call_attempted": true,
-    "exception_diagnostics": {
-      "attempts": 0,
-      "best_tpd": 0.0,
-      "chemical_potential_max_relative": null,
-      "confirmation_max_difference": null,
-      "confirmation_succeeded": false,
-      "failure_reason": "tp_flash requires exactly two components",
-      "globality_certificate": "not_guaranteed",
-      "held_gap": null,
-      "kkt_stationarity_max_abs": null,
-      "lower_bound": null,
-      "major_iterations": 0,
-      "material_balance_max_abs": null,
-      "numerical_status": "not_adjudicated",
-      "outcome": "invalid_input",
-      "physical_status": "not_adjudicated",
-      "pressure_stationarity_max_relative": null,
-      "search_profiles": [],
-      "search_status": "input_rejected",
-      "solver_status": "not_adjudicated",
-      "upper_bound": null
-    },
-    "exception_type": "FlashError",
+    "call_completed": true,
+    "payload_source": "retained_active_session_public_call",
     "publicly_exported": true,
+    "result": {
+      "diagnostics": {
+        "attempts": 30,
+        "best_tpd": -1.6139519381498581e-12,
+        "chemical_potential_max_relative": null,
+        "confirmation_max_difference": null,
+        "confirmation_succeeded": false,
+        "failure_reason": "",
+        "globality_certificate": "not_guaranteed",
+        "held_gap": null,
+        "kkt_stationarity_max_abs": null,
+        "lower_bound": null,
+        "major_iterations": 0,
+        "material_balance_max_abs": null,
+        "numerical_status": "passed",
+        "outcome": "one_phase",
+        "physical_status": "passed",
+        "pressure_stationarity_max_relative": 1.937455802738512e-10,
+        "search_profiles": [
+          "perdomo-held2-stage-i-installed-v1"
+        ],
+        "search_status": "complete_no_negative_found",
+        "solver_status": "passed",
+        "upper_bound": null
+      },
+      "overall_mole_fractions": [
+        0.8321050353538131,
+        0.08394748232309347,
+        0.08394748232309347
+      ],
+      "parameter_fingerprint": "sha256:7c637771bc9f717b8f47b44bb2a61044c3fe83084dca7c3c16102fba0989912d",
+      "phase_fractions": [
+        1.0
+      ],
+      "phases": [
+        {
+          "amount_mol": 1.0,
+          "chemical_potential_over_rt": [
+            -0.33452464592071784,
+            -155.20369999654878,
+            -130.67948254761905
+          ],
+          "molar_density_mol_m3": 1.0152625228028762,
+          "mole_fractions": [
+            0.8321050353538131,
+            0.08394748232309347,
+            0.08394748232309347
+          ],
+          "pressure_pa": 2507.999999514086,
+          "volume_m3": 0.9849669199245724
+        }
+      ],
+      "pressure_pa": 2508.0,
+      "temperature_k": 298.15,
+      "total_free_energy_over_rt": -24.277533055223746
+    },
+    "result_payload_sha256": "45380b1d572b1f13b884041cb813ae3290f02647de55ba4f629da1b20de9d924",
+    "result_type": "epcsaft_equilibrium._api.TpFlashResult",
     "signature": "(model: 'epcsaft.EPCSAFT', temperature: 'Quantity[Any]', pressure: 'Quantity[Any]', overall_mole_fractions: 'Sequence[float]') -> 'TpFlashResult'",
-    "surface_gap": "The installed public generic tp_flash route admits exactly two components and has no public dispatch for the three-component water/Na+/Cl- electrolyte model.",
     "symbol": "epcsaft_equilibrium.tp_flash"
   },
   "schema": "perdomo-table3-public-route-validation-v1",
@@ -198,11 +266,12 @@
     }
   },
   "source_comparison": {
-    "endpoint_status": "not_evaluated_no_public_result",
+    "endpoint_status": "not_evaluated_phase_count_disagreement",
+    "interpretation": "The installed ePC-SAFT public result is one phase while the SAFT-gamma-Mie source reports two; this is a cross-EOS source topology disagreement, not a same-EOS reproduction test.",
     "published_phase_count": 2,
-    "returned_phase_count": null,
-    "topology_disagreement": null,
-    "topology_status": "not_evaluated_public_route_absent"
+    "returned_phase_count": 1,
+    "topology_disagreement": true,
+    "topology_status": "disagreement_cross_eos"
   },
-  "status": "NOT_EVALUATED_PUBLIC_ROUTE_ABSENT"
+  "status": "PUBLIC_ROUTE_PASS_SOURCE_TOPOLOGY_DISAGREEMENT"
 }
