@@ -1,6 +1,6 @@
 # Validation Repository Context
 
-This repository owns eight black-box installed-artifact campaigns:
+This repository owns nine black-box installed-artifact campaigns:
 
 - provider Slice 1 neutral, nonassociating PC-SAFT at explicit molar density;
 - Figiel 2025 aqueous LiCl, NaCl, KCl, LiBr, NaBr, and KBr mean ionic
@@ -17,7 +17,9 @@ This repository owns eight black-box installed-artifact campaigns:
   retained coexistence rows; and
 - neutral HELD v1 over the same 17 midpoint feeds, one source-derived
   liquid-side case, and three frozen public pressure-state sampled Gibbs
-  audits.
+  audits; and
+- the D-025 Perdomo 2025 Table-3 public-route gate for the exact installed
+  Provider and Equilibrium HELD2 candidate.
 
 `governance_doctrine_revision: 2`
 
@@ -88,9 +90,22 @@ statuses are passed for the two returned states and not adjudicated for the
 sixteen fail-closed cases; no failure is relabeled as predictive disagreement.
 Every result retains `globality_certificate=not_guaranteed`.
 
+The D-025 Perdomo Table-3 record binds Provider wheel SHA-256
+`9e4da0d7ba7896bcd2ec096400553d935e0516c61f1bd9f41f2370ab68ab36ea`
+and Equilibrium wheel SHA-256
+`ff34db9643b79dad9df0095c190d55f98e02f4fc268e073ec83594669b277831`.
+Artifact and input integrity pass, but the installed public generic `tp_flash`
+route rejects the three-component water/Na+/Cl- model because it requires
+exactly two components. The terminal status is
+`NOT_EVALUATED_PUBLIC_ROUTE_ABSENT`: no HELD search ran, and solver, numerical,
+physical, source-topology, predictive-endpoint, and search-completeness axes
+remain not evaluated. The retained package trace is hash-bound context only;
+Validation imported no private adapter and retains
+`globality_certificate=not_guaranteed`.
+
 `runtime_source_of_truth: false`
 
-`validation_source_of_truth: provider-slice-1, figiel-2025-miac, esteso-1989-water-ethanol-nacl, held-2012-ethanol-salt-density, held-2012-pure-ethanol-density, pure-saturation-regression, may-2015-methane-ethane-flash, neutral-held-v1`
+`validation_source_of_truth: provider-slice-1, figiel-2025-miac, esteso-1989-water-ethanol-nacl, held-2012-ethanol-salt-density, held-2012-pure-ethanol-density, pure-saturation-regression, may-2015-methane-ethane-flash, neutral-held-v1, perdomo-table3-public-route`
 
 The executed plan is
 `docs/plans/2026-07-17-neutral-held-v1-validation-plan.md`. It freezes a

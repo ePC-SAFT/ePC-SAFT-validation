@@ -1,0 +1,208 @@
+{
+  "artifacts": {
+    "equilibrium": {
+      "distribution": "epcsaft-equilibrium",
+      "installed_root": "/tmp/epcsaft-validation-d025-run.gSaaAY/lib/python3.13/site-packages",
+      "native_members": [
+        {
+          "path": "/tmp/epcsaft-validation-d025-run.gSaaAY/lib/python3.13/site-packages/epcsaft_equilibrium/_equilibrium.cpython-313-x86_64-linux-gnu.so",
+          "sha256": "89e5613664f472bcc8891159c2e134c4ea326358cf12b78d744dd62683fc3fc6"
+        }
+      ],
+      "path": "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT-project/artifacts/equilibrium-held2-perdomo-table3-v1/2d4cfcb/epcsaft_equilibrium-0.1.0.dev0-cp313-cp313-linux_x86_64.whl",
+      "record_members_verified": 8,
+      "record_path": "/tmp/epcsaft-validation-d025-run.gSaaAY/lib/python3.13/site-packages/epcsaft_equilibrium-0.1.0.dev0.dist-info/RECORD",
+      "record_sha256": "7c80327b9ffa274256cb583f193c9e9b5511a043110c190c78ef2897fc94710e",
+      "sha256": "ff34db9643b79dad9df0095c190d55f98e02f4fc268e073ec83594669b277831",
+      "version": "0.1.0.dev0"
+    },
+    "provider": {
+      "distribution": "epcsaft",
+      "installed_root": "/tmp/epcsaft-validation-d025-run.gSaaAY/lib/python3.13/site-packages",
+      "native_members": [
+        {
+          "path": "/tmp/epcsaft-validation-d025-run.gSaaAY/lib/python3.13/site-packages/epcsaft/_core.cpython-313-x86_64-linux-gnu.so",
+          "sha256": "99b1d30e8f98dbd26b710f06af5e995707c4ad067b77846ae45c202b3e90bc13"
+        }
+      ],
+      "path": "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT-project/artifacts/equilibrium-held2-perdomo-table3-v1/2d4cfcb/epcsaft-0.1.0.dev0-cp313-cp313-linux_x86_64.whl",
+      "record_members_verified": 37,
+      "record_path": "/tmp/epcsaft-validation-d025-run.gSaaAY/lib/python3.13/site-packages/epcsaft-0.1.0.dev0.dist-info/RECORD",
+      "record_sha256": "7502cd3adcd3a751db16d3060e17f5d5361728e21f6afa4c1b15482de3754073",
+      "sha256": "9e4da0d7ba7896bcd2ec096400553d935e0516c61f1bd9f41f2370ab68ab36ea",
+      "version": "0.1.0.dev0"
+    },
+    "retained_package_trace_context_only": {
+      "path": "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT-project/artifacts/equilibrium-held2-perdomo-table3-v1/2d4cfcb/perdomo-table3-installed-trace.json",
+      "role": "hash-bound package context only; no result or private runner was consumed",
+      "sha256": "0ff032a747992a6add25dc6228da0628fcf901dc176f7f408a61c7a9c82903df"
+    }
+  },
+  "authority_effect": "none",
+  "campaign_id": "perdomo-2025-table3-public-route-installed-v1",
+  "commands": {
+    "environment": "uv venv $D025_ENV --python 3.13",
+    "install": "uv pip install --python $D025_ENV/bin/python --offline $PROVIDER_WHEEL $EQUILIBRIUM_WHEEL",
+    "run": "cd $D025_ENV && env -u PYTHONPATH $D025_ENV/bin/python -I $VALIDATION_ROOT/campaigns/perdomo_table3_public_route.py run --provider-wheel $PROVIDER_WHEEL --equilibrium-wheel $EQUILIBRIUM_WHEEL --retained-trace $RETAINED_TRACE --source-metadata $VALIDATION_ROOT/data/perdomo-2025-held2-source-ledger.yaml --source-cases $VALIDATION_ROOT/data/perdomo-2025-held2-case-ledger.csv --source-samples $VALIDATION_ROOT/data/perdomo-2025-held2-published-samples.csv --output $VALIDATION_ROOT/results/perdomo-table3-public-route-validation.json"
+  },
+  "created_utc": "2026-07-21T19:00:14.130056+00:00",
+  "decisions": {
+    "artifact_input": "PASS",
+    "globality": "NOT_GUARANTEED",
+    "numerical": "NOT_EVALUATED",
+    "physical": "NOT_EVALUATED",
+    "predictive_endpoint_comparison": "NOT_EVALUATED",
+    "public_route": "ABSENT_FOR_ELECTROLYTE_INPUT",
+    "search_completeness": "NOT_EVALUATED",
+    "solver": "NOT_EVALUATED",
+    "source_topology_comparison": "NOT_EVALUATED"
+  },
+  "environment": {
+    "dependency_versions": {
+      "flexcache": "0.3",
+      "flexparser": "0.4",
+      "pint": "0.25.3",
+      "platformdirs": "4.11.0"
+    },
+    "equilibrium_import_origin": "/tmp/epcsaft-validation-d025-run.gSaaAY/lib/python3.13/site-packages/epcsaft_equilibrium/__init__.py",
+    "imports_from_isolated_site_packages": true,
+    "platform": "Linux-7.0.0-28-generic-x86_64-with-glibc2.39",
+    "provider_import_origin": "/tmp/epcsaft-validation-d025-run.gSaaAY/lib/python3.13/site-packages/epcsaft/__init__.py",
+    "python_executable": "/tmp/epcsaft-validation-d025-run.gSaaAY/bin/python",
+    "python_version": "3.13.14",
+    "sys_path": [
+      "/home/tnnrpolley21/.local/share/uv/python/cpython-3.13.14-linux-x86_64-gnu/lib/python313.zip",
+      "/home/tnnrpolley21/.local/share/uv/python/cpython-3.13.14-linux-x86_64-gnu/lib/python3.13",
+      "/home/tnnrpolley21/.local/share/uv/python/cpython-3.13-linux-x86_64-gnu/lib/python3.13/lib-dynload",
+      "/tmp/epcsaft-validation-d025-run.gSaaAY/lib/python3.13/site-packages"
+    ]
+  },
+  "equilibrium_subject": {
+    "commit": "2d4cfcbec537e3ff3d2272a5a6ad10959a00a09e",
+    "tree": "3acbae48db7dfe5ad1b9857c6907ba1384e7c91a"
+  },
+  "frozen_search_contract": {
+    "declared_starts": 30,
+    "private_adapter_called": false,
+    "seed": 2025,
+    "status": "not_started_public_route_absent"
+  },
+  "globality_certificate": "not_guaranteed",
+  "input": {
+    "charges": [
+      0,
+      1,
+      -1
+    ],
+    "component_ids": [
+      "water",
+      "sodium-cation",
+      "chloride-anion"
+    ],
+    "feed_explicit_species_mole_fractions": [
+      0.8321050353538131,
+      0.08394748232309347,
+      0.08394748232309347
+    ],
+    "parameter_bundle": "figiel-2025-reference-electrolytes@1",
+    "parameter_fingerprint": "sha256:7c637771bc9f717b8f47b44bb2a61044c3fe83084dca7c3c16102fba0989912d",
+    "pressure_Pa": 2508.0,
+    "temperature_K": 298.15
+  },
+  "migration_binding": {
+    "commit": "8d916b9b7d76c3adc3ffce17c35b9a27224e4763",
+    "tree": "a9c198f9a8e4019280faa3b96d9d559e7924e0a9"
+  },
+  "negative_space": [
+    "No private _held2 adapter or native private symbol was imported or called.",
+    "No package-retained runner, result payload, or expected numerical output was copied.",
+    "No solver search, forced phase split, endpoint comparison, tolerance change, package edit, receipt, promotion, or authority action occurred."
+  ],
+  "production_status": "non-production-validation-evidence",
+  "public_route_audit": {
+    "call_attempted": true,
+    "exception_diagnostics": {
+      "attempts": 0,
+      "best_tpd": 0.0,
+      "chemical_potential_max_relative": null,
+      "confirmation_max_difference": null,
+      "confirmation_succeeded": false,
+      "failure_reason": "tp_flash requires exactly two components",
+      "globality_certificate": "not_guaranteed",
+      "held_gap": null,
+      "kkt_stationarity_max_abs": null,
+      "lower_bound": null,
+      "major_iterations": 0,
+      "material_balance_max_abs": null,
+      "numerical_status": "not_adjudicated",
+      "outcome": "invalid_input",
+      "physical_status": "not_adjudicated",
+      "pressure_stationarity_max_relative": null,
+      "search_profiles": [],
+      "search_status": "input_rejected",
+      "solver_status": "not_adjudicated",
+      "upper_bound": null
+    },
+    "exception_type": "FlashError",
+    "publicly_exported": true,
+    "signature": "(model: 'epcsaft.EPCSAFT', temperature: 'Quantity[Any]', pressure: 'Quantity[Any]', overall_mole_fractions: 'Sequence[float]') -> 'TpFlashResult'",
+    "surface_gap": "The installed public generic tp_flash route admits exactly two components and has no public dispatch for the three-component water/Na+/Cl- electrolyte model.",
+    "symbol": "epcsaft_equilibrium.tp_flash"
+  },
+  "schema": "perdomo-table3-public-route-validation-v1",
+  "source": {
+    "authority_commit": "5620f030b1e4bf12cde2f97d739cb931653eb960",
+    "authority_tree": "6d40521d15b823ab4243dd772e3069d82bd342ba",
+    "cases": {
+      "path": "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT-project/ePC-SAFT-validation/data/perdomo-2025-held2-case-ledger.csv",
+      "sha256": "654e4098f53abfa75bf8d4b5b8093fd56b89d352164be2a18c7804cc5a3a1282"
+    },
+    "doi": "10.1016/j.compchemeng.2024.108977",
+    "feed_derivation": {
+      "explicit_amounts_mol": [
+        55.50837343813314,
+        5.6,
+        5.6
+      ],
+      "normalized_feed": [
+        0.8321050353538131,
+        0.08394748232309347,
+        0.08394748232309347
+      ],
+      "salt_formula_unit_molality_mol_per_kg": 5.6,
+      "salt_free_water_basis_kg": 1.0,
+      "water_molar_mass_kg_per_mol": 0.0180153
+    },
+    "locator": "Perdomo et al. 2025 Table 3, retained Markdown lines 849-860",
+    "metadata": {
+      "path": "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT-project/ePC-SAFT-validation/data/perdomo-2025-held2-source-ledger.yaml",
+      "sha256": "2cce8ab35505b67622c4096604d4051122516b374bd36aea0ea12848eab8b436"
+    },
+    "reported_endpoints_in_public_order": {
+      "liquid": [
+        0.826112,
+        0.086944,
+        0.086944
+      ],
+      "vapor": [
+        1.0,
+        1.41063e-116,
+        1.41063e-116
+      ]
+    },
+    "reported_phase_count": 2,
+    "sample_id": "table3-nacl-5.6molal",
+    "samples": {
+      "path": "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT-project/ePC-SAFT-validation/data/perdomo-2025-held2-published-samples.csv",
+      "sha256": "92338efdb800f8a4546a0ed9bbd0944021586735c181963057c86e3e9b4f7c1f"
+    }
+  },
+  "source_comparison": {
+    "endpoint_status": "not_evaluated_no_public_result",
+    "published_phase_count": 2,
+    "returned_phase_count": null,
+    "topology_disagreement": null,
+    "topology_status": "not_evaluated_public_route_absent"
+  },
+  "status": "NOT_EVALUATED_PUBLIC_ROUTE_ABSENT"
+}
