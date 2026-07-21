@@ -112,9 +112,24 @@ is `PUBLIC_ROUTE_PASS_SOURCE_TOPOLOGY_DISAGREEMENT`. Validation imported no
 private adapter, makes no same-EOS reproduction claim, and retains
 `globality_certificate=not_guaranteed`.
 
+D-026 selects clean ePC-SAFT as the sole future HELD2 EOS but does not admit
+electrolyte LLE or assert equivalence to Perdomo's SAFT-gamma-Mie results. The
+nine-case source screen finds five cases ineligible because they are VLE or
+neutral and four two-liquid cases blocked by missing source records. The
+closest Perdomo Table-5 LiCl/water/1-butanol case lacks an explicit
+Li+-1-butanol pair contract and a fully bound 1-butanol dielectric/solvation
+contract. Ascani 2022 Case Study 2 is the prepared fallback source checker,
+but it still needs an explicit Na+-K+ `k_ij` semantic, a source-bound
+1-butanol association-site scheme, and the cited dielectric/solvation contract
+before Provider may build a source-complete bundle. Its SI
+Eq. S7/Table S3 water/1-butanol `k_ij(T)` is authoritative; the differing
+archived checker expression remains forbidden implementation input. No model
+was run, and Equilibrium remains `READY_WAITING_PROVIDER_CASE` without a
+speculative package change.
+
 `runtime_source_of_truth: false`
 
-`validation_source_of_truth: provider-slice-1, figiel-2025-miac, esteso-1989-water-ethanol-nacl, held-2012-ethanol-salt-density, held-2012-pure-ethanol-density, pure-saturation-regression, may-2015-methane-ethane-flash, neutral-held-v1, perdomo-table3-public-route`
+`validation_source_of_truth: provider-slice-1, figiel-2025-miac, esteso-1989-water-ethanol-nacl, held-2012-ethanol-salt-density, held-2012-pure-ethanol-density, pure-saturation-regression, may-2015-methane-ethane-flash, neutral-held-v1, perdomo-table3-public-route, perdomo-d026-source-selection`
 
 The executed plan is
 `docs/plans/2026-07-17-neutral-held-v1-validation-plan.md`. It freezes a
@@ -122,6 +137,6 @@ public-wheel-only sampled Gibbs-surface audit, the unchanged May campaign, and
 one source-derived liquid-side case inside the existing feed domain. Its
 decision is `NON_ADMISSION` and its authority effect is none.
 
-`next_validation_plan: neutral-held-v1`
+`next_validation_plan: d026-source-complete-two-liquid-case`
 
-`next_validation_plan_status: completed_non_admission`
+`next_validation_plan_status: blocked_pending_source_records_and_provider_bundle`

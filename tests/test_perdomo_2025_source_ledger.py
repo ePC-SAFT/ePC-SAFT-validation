@@ -18,13 +18,13 @@ METADATA_PATH = ROOT / "data" / "perdomo-2025-held2-source-ledger.yaml"
 CHECKER_PATH = ROOT / "campaigns" / "check_perdomo_2025_source_ledger.py"
 
 EXPECTED_CASES_SHA256 = (
-    "654e4098f53abfa75bf8d4b5b8093fd56b89d352164be2a18c7804cc5a3a1282"
+    "279a1ff76efdca4a27032fea841bdb1e6127ada334b14871e46b13683cb1bcf8"
 )
 EXPECTED_SAMPLES_SHA256 = (
     "92338efdb800f8a4546a0ed9bbd0944021586735c181963057c86e3e9b4f7c1f"
 )
 EXPECTED_METADATA_SHA256 = (
-    "2cce8ab35505b67622c4096604d4051122516b374bd36aea0ea12848eab8b436"
+    "18961d7a0966b3b5e78c7adf0b556485be8ab50183980696903d023660f1554b"
 )
 
 
@@ -74,7 +74,7 @@ def test_source_identities_counts_and_case_classes_are_frozen() -> None:
     assert metadata["citation"]["supporting_data_doi"] == "10.5281/zenodo.13646853"
 
 
-def test_recommended_tracer_arithmetic_and_source_anomaly_are_explicit() -> None:
+def test_closest_tracer_arithmetic_and_source_anomaly_are_explicit() -> None:
     cases, samples, metadata = load()
 
     selected = next(
@@ -103,7 +103,8 @@ def test_recommended_tracer_arithmetic_and_source_anomaly_are_explicit() -> None
     )
     assert selected_case["species_order"] == "Li+|Cl-|water|1-butanol"
     assert selected_case["charges"] == "+1|-1|0|0"
-    assert recommendation["status"] == "source_only_not_run"
+    assert recommendation["status"] == "not_selected_source_incomplete"
+    assert recommendation["source_completeness"] == "blocked_missing_epcsaft_records"
     assert set(recommendation["future_decisions"].values()) == {"not_run"}
 
     anomalies = [row for row in samples if row["source_anomaly"]]
@@ -124,6 +125,51 @@ def test_recommended_tracer_arithmetic_and_source_anomaly_are_explicit() -> None
         "table8-wap0.0460",
     ]
     assert all("never silently correct" in item["policy"] for item in anomaly_contracts)
+
+
+def test_d026_screen_has_no_source_complete_perdomo_lle_and_freezes_fallback() -> None:
+    cases, _, metadata = load()
+    screen = metadata["d026_epcsaft_two_liquid_screen"]
+
+    assert screen["migration_binding"] == {
+        "decision": "D-026",
+        "gate_commit": "3a4ef0a0c6b98c43405d3cafc1ac4f5f87afa68d",
+        "gate_tree": "9307c3f79581b6e0479d4ac2468932b2a68e5f5b",
+    }
+    assert screen["decision"] == "NO_SOURCE_COMPLETE_PERDOMO_TWO_LIQUID_CASE"
+    assert screen["screen_counts"] == {
+        "cases_screened": 9,
+        "ineligible_not_two_liquid": 5,
+        "two_liquid_blocked_source_records": 4,
+        "source_complete_two_liquid": 0,
+    }
+    closest = next(
+        row for row in cases if row["case_id"] == "perdomo2025-licl-water-butanol-lle"
+    )
+    assert (
+        closest["recommendation_role"]
+        == "closest-perdomo-candidate-blocked-source-records"
+    )
+    blocked = [
+        row
+        for row in screen["case_screen"]
+        if row["outcome"] == "blocked_source_records"
+    ]
+    assert len(blocked) == 4
+    closest_screen = next(
+        row for row in blocked if row["case_id"] == closest["case_id"]
+    )
+    missing = " ".join(closest_screen["missing_records_or_sources"])
+    assert "Li+-1-butanol k_ij" in missing
+    assert "Li+-1-butanol" in missing and "l_ij semantics" in missing
+    assert "isobutanol" in " ".join(closest_screen["non_substitutions"])
+    fallback = screen["fallback"]
+    assert fallback["case_id"] == "ascani2022-case-study-2"
+    assert len(fallback["remaining_source_gaps"]) == 3
+    assert "Na+-K+" in fallback["remaining_source_gaps"][0]
+    assert (
+        screen["equilibrium_status"]["classification"] == "READY_WAITING_PROVIDER_CASE"
+    )
 
 
 def test_checker_is_stdlib_only_and_source_packet_remains_model_free() -> None:
@@ -171,10 +217,12 @@ def test_checker_is_stdlib_only_and_source_packet_remains_model_free() -> None:
     )
     assert completed.returncode == 0, completed.stderr
     report = json.loads(completed.stdout)
-    assert report["status"] == "source_ledger_ready"
+    assert report["status"] == "no_source_complete_perdomo_two_liquid_case"
     assert report["cases"] == 9
     assert report["published_samples"] == 26
     assert report["model_output"] == "not_run"
+    assert report["selected_case"] is None
+    assert report["fallback_case"] == "ascani2022-case-study-2"
     assert report["case_ledger_sha256"] == EXPECTED_CASES_SHA256
     assert report["published_samples_sha256"] == EXPECTED_SAMPLES_SHA256
     assert report["metadata_sha256"] == EXPECTED_METADATA_SHA256

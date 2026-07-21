@@ -60,6 +60,12 @@ EXPECTED_MIGRATION_BINDING = {
     "gate_commit": "4527864ffcd37f5e9a524500dfd99d5a34c85672",
     "gate_tree": "6a4f9711787c333c146566be8947df2c60f1fc68",
 }
+EXPECTED_D026_BINDING = {
+    "decision": "D-026",
+    "gate_commit": "3a4ef0a0c6b98c43405d3cafc1ac4f5f87afa68d",
+    "gate_tree": "9307c3f79581b6e0479d4ac2468932b2a68e5f5b",
+    "selection": "fallback_source_checker_pending_source_complete_provider_bundle",
+}
 DERIVATION_ABS = Decimal("1e-27")
 
 
@@ -91,6 +97,8 @@ def check(csv_path: Path, metadata_path: Path) -> dict[str, object]:
     row = rows[0]
     if metadata["migration_binding"] != EXPECTED_MIGRATION_BINDING:
         raise ValueError("unexpected D-024 Migration binding")
+    if metadata["d026_selection_binding"] != EXPECTED_D026_BINDING:
+        raise ValueError("unexpected D-026 Migration binding")
     if metadata["citation"]["doi"] != "10.1021/acs.jced.1c00866":
         raise ValueError("unexpected Ascani DOI")
     source_hashes = {
@@ -220,6 +228,23 @@ def check(csv_path: Path, metadata_path: Path) -> dict[str, object]:
     ):
         raise ValueError("historical negative witness changed")
 
+    source_screen = metadata["d026_source_completeness_screen"]
+    if (
+        source_screen["case_source_status"]
+        != "fallback_checker_ready_provider_bundle_source_incomplete"
+        or len(source_screen["unresolved_records"]) != 3
+    ):
+        raise ValueError("D-026 Ascani source screen changed")
+    if source_screen["archive_source_mismatch"] != {
+        "source_authority": "Official SI Eq. S7 and Table S3",
+        "source_expression": "k_water,1-butanol(T) = -0.102 + 2.94e-4*(T/K - 298.15)",
+        "archive_expression": "2.94e-4*T - 0.102",
+        "effect": "The archive expression is not source-faithful and is forbidden as Provider or algorithm authority; at 298.15 K the source value is -0.102.",
+    }:
+        raise ValueError("water/1-butanol k_ij source precedence changed")
+    if source_screen["model_output"] != "not_run":
+        raise ValueError("D-026 source screen must remain model-free")
+
     support = metadata["supporting_numerical_literature"]
     if (
         support["sha256"]
@@ -253,13 +278,14 @@ def check(csv_path: Path, metadata_path: Path) -> dict[str, object]:
         raise ValueError("globality classification changed")
 
     return {
-        "status": "source_contract_ready",
+        "status": "fallback_source_checker_ready_provider_bundle_source_incomplete",
         "case_id": row["case_id"],
         "rows": len(rows),
         "csv_sha256": csv_hash,
         "metadata_sha256": sha256(metadata_path),
         "primary_source_sha256": source_hashes,
         "missing_upstream_sources": len(metadata["missing_upstream_provenance"]),
+        "d026_unresolved_records": len(source_screen["unresolved_records"]),
         "model_output": "not_run",
         "globality_certificate": challenge["globality_certificate"],
     }

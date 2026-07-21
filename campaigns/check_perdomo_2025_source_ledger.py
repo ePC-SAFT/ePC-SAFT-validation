@@ -76,8 +76,8 @@ EXPECTED_CASE_CLASSES = Counter(
 EXPECTED_TABLE_COUNTS = Counter(
     {"Table 3": 3, "Table 4": 3, "Table 5": 3, "Table 6": 6, "Table 7": 4, "Table 8": 7}
 )
-RECOMMENDED_CASE = "perdomo2025-licl-water-butanol-lle"
-RECOMMENDED_SAMPLE = "table5-licl-4.58molal"
+CLOSEST_CASE = "perdomo2025-licl-water-butanol-lle"
+CLOSEST_SAMPLE = "table5-licl-4.58molal"
 
 
 def sha256(path: Path) -> str:
@@ -167,15 +167,13 @@ def check(
     if sorted(set(anomaly_ids)) != ["table3-kcl-0.8molal", "table8-wap0.0460"]:
         raise ValueError(f"unexpected source anomaly set: {sorted(set(anomaly_ids))}")
 
-    selected_case = case_by_id[RECOMMENDED_CASE]
+    selected_case = case_by_id[CLOSEST_CASE]
     if (
         selected_case["recommendation_role"]
-        != "selected-smallest-source-complete-stage-i-ii-iii-lle-tracer"
+        != "closest-perdomo-candidate-blocked-source-records"
     ):
-        raise ValueError("recommended case role changed")
-    selected_sample = next(
-        row for row in samples if row["sample_id"] == RECOMMENDED_SAMPLE
-    )
+        raise ValueError("closest-case role changed")
+    selected_sample = next(row for row in samples if row["sample_id"] == CLOSEST_SAMPLE)
     organic = decimals(selected_sample["phase_1_x"])
     aqueous = decimals(selected_sample["phase_2_x"])
     midpoint = [
@@ -221,12 +219,41 @@ def check(
         "cross-eos-epcsaft-challenge-only": 8,
     }:
         raise ValueError("metadata classification counts changed")
-    if recommendation["status"] != "source_only_not_run":
-        raise ValueError("source-only recommendation was marked as executed")
+    if recommendation["status"] != "not_selected_source_incomplete":
+        raise ValueError("source-incomplete candidate status changed")
+    if recommendation["source_completeness"] != "blocked_missing_epcsaft_records":
+        raise ValueError("closest candidate source-completeness status changed")
     if set(recommendation["future_decisions"].values()) != {"not_run"}:
         raise ValueError("future model decisions were populated")
     if recommendation["globality_certificate"] != "not_guaranteed":
         raise ValueError("globality boundary changed")
+
+    screen = metadata["d026_epcsaft_two_liquid_screen"]
+    if screen["migration_binding"] != {
+        "decision": "D-026",
+        "gate_commit": "3a4ef0a0c6b98c43405d3cafc1ac4f5f87afa68d",
+        "gate_tree": "9307c3f79581b6e0479d4ac2468932b2a68e5f5b",
+    }:
+        raise ValueError("unexpected D-026 Migration binding")
+    if screen["decision"] != "NO_SOURCE_COMPLETE_PERDOMO_TWO_LIQUID_CASE":
+        raise ValueError("D-026 source-screen decision changed")
+    if screen["screen_counts"] != {
+        "cases_screened": 9,
+        "ineligible_not_two_liquid": 5,
+        "two_liquid_blocked_source_records": 4,
+        "source_complete_two_liquid": 0,
+    }:
+        raise ValueError("D-026 source-screen counts changed")
+    case_screen = screen["case_screen"]
+    blocked = [row for row in case_screen if row["outcome"] == "blocked_source_records"]
+    if len(blocked) != 4:
+        raise ValueError("D-026 blocked LLE case count changed")
+    fallback = screen["fallback"]
+    if (
+        fallback["case_id"] != "ascani2022-case-study-2"
+        or len(fallback["remaining_source_gaps"]) != 3
+    ):
+        raise ValueError("D-026 Ascani fallback contract changed")
 
     verified_sources: list[str] = []
     if verify_local_sources:
@@ -238,15 +265,17 @@ def check(
             verified_sources.append(name)
 
     return {
-        "status": "source_ledger_ready",
+        "status": "no_source_complete_perdomo_two_liquid_case",
         "cases": len(cases),
         "published_samples": len(samples),
         "published_flash_total": 122917,
         "classification_counts": dict(sorted(case_classes.items())),
         "table_counts": dict(sorted(EXPECTED_TABLE_COUNTS.items())),
         "source_anomalies": ["table3-kcl-0.8molal", "table8-wap0.0460"],
-        "recommended_case": RECOMMENDED_CASE,
-        "recommended_sample": RECOMMENDED_SAMPLE,
+        "closest_case": CLOSEST_CASE,
+        "closest_sample": CLOSEST_SAMPLE,
+        "selected_case": None,
+        "fallback_case": "ascani2022-case-study-2",
         "case_ledger_sha256": observed_hashes["case_ledger_csv"],
         "published_samples_sha256": observed_hashes["published_samples_csv"],
         "metadata_sha256": sha256(metadata_path),

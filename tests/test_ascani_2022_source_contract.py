@@ -17,7 +17,7 @@ CHECKER_PATH = ROOT / "campaigns" / "check_ascani_2022_source_contract.py"
 
 EXPECTED_CSV_SHA256 = "388f62d02f995fc89fb099bb625a907713eebe70f19ea631688cc8e4169acecd"
 EXPECTED_METADATA_SHA256 = (
-    "31594c059908677dcf1776bf4738c40cfe06bbb8ba8190f5e0c1d55ca31aee1d"
+    "8161265b5bf1c7cd61167334cf97cd74082cb39867487e83619730813faaf552"
 )
 EXPECTED_SOURCE_HASHES = {
     "main_markdown": "c0b73c10aa1ce9830e29f34aa3c1d1af4b889971959c3245a2deb7efdd979cd6",
@@ -44,6 +44,12 @@ def test_source_identity_archive_hashes_and_migration_binding_are_frozen() -> No
         "decision": "D-024",
         "gate_commit": "4527864ffcd37f5e9a524500dfd99d5a34c85672",
         "gate_tree": "6a4f9711787c333c146566be8947df2c60f1fc68",
+    }
+    assert metadata["d026_selection_binding"] == {
+        "decision": "D-026",
+        "gate_commit": "3a4ef0a0c6b98c43405d3cafc1ac4f5f87afa68d",
+        "gate_tree": "9307c3f79581b6e0479d4ac2468932b2a68e5f5b",
+        "selection": "fallback_source_checker_pending_source_complete_provider_bundle",
     }
     assert {
         name: source["sha256"] for name, source in metadata["primary_sources"].items()
@@ -121,6 +127,24 @@ def test_tracer_preserves_formula_values_and_explicit_species_derivations() -> N
         == "direct paper-reported ePC-SAFT advanced calculation output, not direct experimental data"
     )
     assert len(metadata["missing_upstream_provenance"]) == 3
+
+    screen = metadata["d026_source_completeness_screen"]
+    assert (
+        screen["case_source_status"]
+        == "fallback_checker_ready_provider_bundle_source_incomplete"
+    )
+    assert [record["record"] for record in screen["unresolved_records"]] == [
+        "Na+-K+ k_ij",
+        "1-butanol association-site scheme and multiplicity",
+        "concentration-dependent dielectric mixing contract and exact 1-butanol dielectric/solvation records",
+    ]
+    assert screen["archive_source_mismatch"]["source_expression"] == (
+        "k_water,1-butanol(T) = -0.102 + 2.94e-4*(T/K - 298.15)"
+    )
+    assert screen["archive_source_mismatch"]["archive_expression"] == (
+        "2.94e-4*T - 0.102"
+    )
+    assert screen["model_output"] == "not_run"
 
 
 def test_checker_is_stdlib_only_and_negative_space_stays_explicit() -> None:
@@ -201,8 +225,12 @@ def test_checker_is_stdlib_only_and_negative_space_stays_explicit() -> None:
     )
     assert completed.returncode == 0, completed.stderr
     report = json.loads(completed.stdout)
-    assert report["status"] == "source_contract_ready"
+    assert (
+        report["status"]
+        == "fallback_source_checker_ready_provider_bundle_source_incomplete"
+    )
     assert report["rows"] == 1
     assert report["model_output"] == "not_run"
+    assert report["d026_unresolved_records"] == 3
     assert report["csv_sha256"] == EXPECTED_CSV_SHA256
     assert report["metadata_sha256"] == EXPECTED_METADATA_SHA256

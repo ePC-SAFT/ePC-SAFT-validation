@@ -7,6 +7,12 @@
     "gate_commit": "4527864ffcd37f5e9a524500dfd99d5a34c85672",
     "gate_tree": "6a4f9711787c333c146566be8947df2c60f1fc68"
   },
+  "d026_selection_binding": {
+    "decision": "D-026",
+    "gate_commit": "3a4ef0a0c6b98c43405d3cafc1ac4f5f87afa68d",
+    "gate_tree": "9307c3f79581b6e0479d4ac2468932b2a68e5f5b",
+    "selection": "fallback_source_checker_pending_source_complete_provider_bundle"
+  },
   "citation": {
     "authors": ["Moreno Ascani", "Gabriele Sadowski", "Christoph Held"],
     "title": "Calculation of Multiphase Equilibria Containing Mixed Solvents and Mixed Electrolytes: General Formulation and Case Studies",
@@ -117,6 +123,56 @@
     "ownership": "Provider owns the executable bundle, source binding, component order, charges, interaction records, and fingerprint. Validation and Equilibrium must not copy these constants into runtime code.",
     "future_execution_path": "The clean source-bound Provider artifact plus the current general multiphase Perdomo HELD2 Equilibrium path; no Ascani compatibility route.",
     "no_tuning": "No model input or HELD2 behavior may be tuned to force agreement with this tracer."
+  },
+  "d026_source_completeness_screen": {
+    "case_source_status": "fallback_checker_ready_provider_bundle_source_incomplete",
+    "source_backed_records": {
+      "pure_and_association": [
+        "SI Table S1 lines 59-69: water and 1-butanol m, sigma(T), dispersion energy, association energy, and association volume; the table does not print the association-site scheme",
+        "SI Table S2 lines 72-85: Na+, K+, and Cl- m, sigma, and dispersion energy",
+        "main paper line 378: fully dissociated salts, ion relative permittivity 8, and the cited concentration-dependent dielectric treatment"
+      ],
+      "k_ij": [
+        "SI Eq. S7 lines 47-52 and Table S3 lines 87-96: water/1-butanol k_ij(T) = -0.102 + 2.94e-4*(T/K - 298.15), hence -0.102 exactly at 298.15 K",
+        "main paper line 378: all ion-neutral k_ij values used in Case Study 2 are explicitly zero",
+        "SI Table S4 lines 99-104: Na+/Cl- k_ij=0.317 and K+/Cl- k_ij=0.064 at 298.15 K"
+      ],
+      "l_ij_and_k_ij_hb": [
+        "SI lines 42-55 and Table S3: water/1-butanol l_ij=-0.0044 and k_ij_hb=0.026",
+        "SI line 55: l_ij and k_ij_hb were used only between water and 1-butanol in this work, providing explicit zero semantics for the other Case Study 2 pairs"
+      ]
+    },
+    "unresolved_records": [
+      {
+        "record": "Na+-K+ k_ij",
+        "reason": "SI Table S4 publishes only cation/chloride pairs. The main paper explicitly fixes ion-neutral pairs to zero but does not explicitly publish the same-sign cation pair. The retained archive source manifest classifies unlisted k_ij values as unresolved_default_zero, so zero cannot be inferred."
+      },
+      {
+        "record": "1-butanol association-site scheme and multiplicity",
+        "reason": "SI Table S1 prints association energy and volume but no site scheme. The retained archive labels 1-butanol as 2B, but that archive is checker provenance and cannot supply a Provider source record."
+      },
+      {
+        "record": "concentration-dependent dielectric mixing contract and exact 1-butanol dielectric/solvation records",
+        "reason": "The main paper line 378 cites Ascani ref. 72 and refs. 85-87 but does not print the complete mixing expression. The archive pure-component CSV values 17.51 and f_solv=1 are retained checker provenance, not bound primary parameter records."
+      }
+    ],
+    "missing_citations_or_source_records": [
+      "No Ascani citation is attached to an explicit Na+-K+ k_ij value or fixed zero.",
+      "Ascani, M.; Held, C. Prediction of salting-out in liquid-liquid two-phase systems with ePC-SAFT: Effect of the Born term and of a concentration-dependent dielectric constant. Z. Anorg. Allg. Chem. 647 (2021) 1305 (Ascani ref. 72).",
+      "Heyding, R. D.; Winkler, C. A. Solvent Effect on Iodide Exchange. Can. J. Chem. 29 (1951) 790-803 (Ascani ref. 85).",
+      "Dannhauser, W.; Cole, R. H. Dielectric Properties of Liquid Butyl Alcohols. J. Chem. Phys. 23 (1955) 1762-1766 (Ascani ref. 86).",
+      "Chu, D.-Y.; Zhang, Q.; Liu, R.-L. Standard Gibbs free energies of transfer of NaCl and KCl from water to mixtures of the four isomers of butyl alcohol with water. J. Chem. Soc., Faraday Trans. 1 83 (1987) 635 (Ascani ref. 87).",
+      "No bound Ascani article/SI locator prints the 1-butanol association-site scheme; a direct source record is required."
+    ],
+    "archive_source_mismatch": {
+      "source_authority": "Official SI Eq. S7 and Table S3",
+      "source_expression": "k_water,1-butanol(T) = -0.102 + 2.94e-4*(T/K - 298.15)",
+      "archive_expression": "2.94e-4*T - 0.102",
+      "effect": "The archive expression is not source-faithful and is forbidden as Provider or algorithm authority; at 298.15 K the source value is -0.102."
+    },
+    "provider_status": "No distinct source-bound Ascani bundle/fingerprint exists. Provider must resolve the two source gaps and encode every required pair-family semantic explicitly before an artifact can be requested.",
+    "equilibrium_status": "READY_WAITING_PROVIDER_CASE at 8a7164869975c03291fcf3296b1228b4b4a0f5b4; no speculative Equilibrium change is requested.",
+    "model_output": "not_run"
   },
   "lab_archive_provenance": {
     "archive_root": "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT/analyses/paper_validation/2022_ascani",

@@ -72,7 +72,7 @@
   "retained_files": {
     "case_ledger_csv": {
       "path": "data/perdomo-2025-held2-case-ledger.csv",
-      "sha256": "654e4098f53abfa75bf8d4b5b8093fd56b89d352164be2a18c7804cc5a3a1282",
+      "sha256": "279a1ff76efdca4a27032fea841bdb1e6127ada334b14871e46b13683cb1bcf8",
       "rows": 9
     },
     "published_samples_csv": {
@@ -124,6 +124,136 @@
     ],
     "validation_ecosystem_limit": "Current Provider/Equilibrium artifacts are ePC-SAFT, not SAFT-gamma-Mie. No parameter mapping or EOS substitution is authorized by this packet."
   },
+  "d026_epcsaft_two_liquid_screen": {
+    "migration_binding": {
+      "decision": "D-026",
+      "gate_commit": "3a4ef0a0c6b98c43405d3cafc1ac4f5f87afa68d",
+      "gate_tree": "9307c3f79581b6e0479d4ac2468932b2a68e5f5b"
+    },
+    "provider_source_snapshot": {
+      "commit": "53b0b74bf5de86d459c49eb2cc7e75b7cfd4ce3e",
+      "tree": "1750d04a84f3733e62eb32fb859d323243dddce9",
+      "role": "read-only catalog coverage screen; not an installed-artifact admission or runtime dependency",
+      "bound_validation_packets": {
+        "figiel_parameter_provenance_csv": {
+          "path": "data/figiel-2025-parameter-provenance.csv",
+          "sha256": "932e8baa90fcefbaa8c3a8730cdeadd83a4c01f0a3b109f4e4cd0319aee9312b"
+        },
+        "ascani_case_study_2_tracer_csv": {
+          "path": "data/ascani-2022-case-study-2-tracer.csv",
+          "sha256": "388f62d02f995fc89fb099bb625a907713eebe70f19ea631688cc8e4169acecd"
+        }
+      }
+    },
+    "decision": "NO_SOURCE_COMPLETE_PERDOMO_TWO_LIQUID_CASE",
+    "screen_counts": {
+      "cases_screened": 9,
+      "ineligible_not_two_liquid": 5,
+      "two_liquid_blocked_source_records": 4,
+      "source_complete_two_liquid": 0
+    },
+    "case_screen": [
+      {
+        "case_ids": ["perdomo2025-nacl-water-vle", "perdomo2025-kcl-water-vle", "perdomo2025-licl-water-vle"],
+        "outcome": "ineligible_not_two_liquid",
+        "reason": "Single-salt water VLE exercises vapour-liquid behavior rather than the required two-liquid Stage I-to-II-to-III path."
+      },
+      {
+        "case_id": "perdomo2025-water-methanol-vle",
+        "outcome": "ineligible_not_two_liquid",
+        "reason": "Neutral VLE contains no strong electrolyte and does not exercise a two-liquid HELD2 path."
+      },
+      {
+        "case_id": "perdomo2025-licl-water-methanol-vle",
+        "outcome": "ineligible_not_two_liquid",
+        "reason": "The bound Figiel packet covers Li+, Cl-, water, methanol, and their published k_ij values, but the source case remains vapour-liquid rather than two-liquid."
+      },
+      {
+        "case_id": "perdomo2025-licl-water-butanol-lle",
+        "outcome": "blocked_source_records",
+        "reason": "Closest and smallest Perdomo LLE candidate. The bound Figiel and Ascani packets cover most exact values, but no bound source completes every clean-ePC-SAFT record. Ascani's ion-neutral zero statement cannot be extended to Li+, which was not in that study.",
+        "available_source_records": [
+          "Figiel 2025 Tables 2-3: water, Li+, and Cl- pure/electrolyte records, water association values/sites, ionic-region permittivity, and solvation-factor/Born records",
+          "Figiel 2025 Table 4: Li+-Cl- k_ij=0.8 at 298.15 K",
+          "Figiel 2025 Table 5: water-Li+ k_ij=-0.4 and water-Cl- k_ij=-0.3 at 298.15 K",
+          "Ascani 2022 SI Table S1: 1-butanol m=2.7510, sigma=3.6139 angstrom, u/k=259.59 K, association energy/k=2544.56 K, and association volume=0.00669",
+          "Ascani 2022 SI Eq. S7/Table S3: water-1-butanol k_ij=-0.102, l_ij=-0.0044, and k_ij_hb=0.026 at 298.15 K",
+          "Ascani 2022 main paper line 378: the Cl--1-butanol k_ij used in that study is explicitly zero; SI line 55 supplies zero l_ij and k_ij_hb semantics outside water/1-butanol for the species used there",
+          "Li+ and Cl- have no association sites in the bound Figiel model, so ion-containing k_ij_hb records are not applicable rather than inferred zero values"
+        ],
+        "missing_records_or_sources": [
+          "Li+-1-butanol k_ij with an exact value or explicit source-backed zero",
+          "Li+-water, Li+-Cl-, and Li+-1-butanol l_ij semantics with exact values, explicit source-backed zeros, or source-backed nonapplicability",
+          "the 1-butanol association-site scheme and multiplicity; the retained archive says 2B but the bound Ascani article/SI does not print that scheme",
+          "the exact 1-butanol dielectric/solvation formulation required by the clean Provider; Ascani points to ref. 72 and refs. 85-87, while the retained archive's 17.51 and f_solv=1 values are checker provenance rather than bound primary parameter records"
+        ],
+        "non_substitutions": [
+          "Perdomo Appendix D SAFT-gamma-Mie records cannot be mapped to ePC-SAFT.",
+          "Khudaida isobutanol is a distinct constitutional isomer and cannot substitute for 1-butanol.",
+          "An absent pair record or runtime default cannot be promoted to a source value."
+        ]
+      },
+      {
+        "case_id": "perdomo2025-nacl-water-acetic-butanol-lle",
+        "outcome": "blocked_source_records",
+        "missing_records_or_sources": [
+          "source-bound acetic-acid pure, association, dielectric, and solvation records",
+          "all required acetic-acid/water, acetic-acid/1-butanol, acetic-acid/Na+, and acetic-acid/Cl- k_ij and l_ij records",
+          "all required acetic-acid cross-association k_ij_hb records or explicit source-backed nonassociation semantics"
+        ],
+        "citation_status": "Neither the Perdomo packet nor another bound local ePC-SAFT packet supplies these records; Perdomo Appendix D is SAFT-gamma-Mie only."
+      },
+      {
+        "case_id": "perdomo2025-cacl2-water-acetone-lle",
+        "outcome": "blocked_source_records",
+        "missing_records_or_sources": [
+          "source-bound Ca2+ pure/electrolyte/Born records",
+          "source-bound acetone pure, association-or-nonassociation, dielectric, and solvation records",
+          "Ca2+-Cl-, water-acetone, Ca2+-water, Ca2+-acetone, and Cl--acetone k_ij and l_ij records",
+          "every applicable water-acetone k_ij_hb record or explicit source-backed nonassociation semantics"
+        ],
+        "citation_status": "No bound local ePC-SAFT packet supplies Ca2+ or the complete acetone interaction contract; Perdomo Appendix D is SAFT-gamma-Mie only."
+      },
+      {
+        "case_id": "perdomo2025-cacl2-water-propanoic-butanol-lle",
+        "outcome": "blocked_source_records",
+        "missing_records_or_sources": [
+          "source-bound Ca2+ pure/electrolyte/Born records",
+          "source-bound propanoic-acid pure, association, dielectric, and solvation records",
+          "all required Ca2+/Cl-/water/propanoic-acid/1-butanol k_ij and l_ij records not already covered by the Ascani water/1-butanol packet",
+          "all applicable propanoic-acid and 1-butanol cross-association k_ij_hb records or explicit source-backed nonassociation semantics"
+        ],
+        "citation_status": "No bound local ePC-SAFT packet supplies Ca2+, propanoic acid, or their complete interactions; the printed Table 8 charge anomaly also remains excluded from a charge-balanced endpoint oracle."
+      }
+    ],
+    "fallback": {
+      "case_id": "ascani2022-case-study-2",
+      "role": "source checker prepared under the existing Ascani owner; not yet a source-complete executable Provider bundle",
+      "state": {"temperature_K": "298.15", "pressure_Pa": "100000"},
+      "species_order": ["H2O", "1-butanol", "Na+", "K+", "Cl-"],
+      "charges": [0, 0, 1, 1, -1],
+      "remaining_source_gaps": [
+        "an explicit Na+-K+ k_ij value or source-backed zero; SI Table S4 publishes only Na+/Cl- and K+/Cl- and the retained archive labels unlisted zeros unresolved",
+        "the 1-butanol association-site scheme and multiplicity; the retained archive says 2B but the bound article/SI prints only the association energy and volume",
+        "the exact concentration-dependent dielectric mixing contract and 1-butanol dielectric/solvation records from Ascani ref. 72 and refs. 85-87; the local archive values are comparison provenance only"
+      ],
+      "missing_citations_or_source_records": [
+        "No Ascani citation is attached to an explicit Na+-K+ k_ij value or fixed zero.",
+        "Ascani, M.; Held, C. Prediction of salting-out in liquid-liquid two-phase systems with ePC-SAFT: Effect of the Born term and of a concentration-dependent dielectric constant. Z. Anorg. Allg. Chem. 647 (2021) 1305 (Ascani ref. 72).",
+        "Heyding, R. D.; Winkler, C. A. Solvent Effect on Iodide Exchange. Can. J. Chem. 29 (1951) 790-803 (Ascani ref. 85).",
+        "Dannhauser, W.; Cole, R. H. Dielectric Properties of Liquid Butyl Alcohols. J. Chem. Phys. 23 (1955) 1762-1766 (Ascani ref. 86).",
+        "Chu, D.-Y.; Zhang, Q.; Liu, R.-L. Standard Gibbs free energies of transfer of NaCl and KCl from water to mixtures of the four isomers of butyl alcohol with water. J. Chem. Soc., Faraday Trans. 1 83 (1987) 635 (Ascani ref. 87).",
+        "No bound Ascani article/SI locator prints the 1-butanol association-site scheme; a direct source record is required."
+      ],
+      "provider_gap": "A distinct source-bound Ascani bundle and fingerprint does not exist. Provider must resolve the listed source records and explicit k_ij/l_ij/k_ij_hb semantics before artifact construction."
+    },
+    "equilibrium_status": {
+      "commit": "8a7164869975c03291fcf3296b1228b4b4a0f5b4",
+      "tree": "744132063d8b26ae3ef7ba7eb3094226aec31fd6",
+      "classification": "READY_WAITING_PROVIDER_CASE",
+      "boundary": "No speculative Equilibrium dispatch, API, or data-shape change is requested by this source screen."
+    }
+  },
   "published_sample_contract": {
     "rows": 26,
     "table_counts": {"Table 3": 3, "Table 4": 3, "Table 5": 3, "Table 6": 6, "Table 7": 4, "Table 8": 7},
@@ -148,7 +278,7 @@
   "recommended_first_tracer": {
     "case_id": "perdomo2025-licl-water-butanol-lle",
     "sample_id": "table5-licl-4.58molal",
-    "reason": "Smallest published strong-electrolyte LLE example with four explicit species, balanced 1:1 ions, two noncollapsed liquid phases, compact printed endpoints, and a source-derived feed suitable for exercising Stages I, II, and III.",
+    "reason": "Closest and smallest published strong-electrolyte LLE candidate, but not selected under D-026 because the bound ePC-SAFT packets do not publish the Li+-1-butanol pair contract or a complete 1-butanol dielectric/solvation contract.",
     "state": {"temperature_K": "298.15", "pressure_kPa": "101.3", "LiCl_molality_mol_per_kg": "4.58"},
     "species_order": ["Li+", "Cl-", "water", "1-butanol"],
     "charges": [1, -1, 0, 0],
@@ -163,12 +293,13 @@
     "classification": "cross-eos-epcsaft-challenge-only",
     "future_decisions": {"artifact_input": "not_run", "solver": "not_run", "numerical": "not_run", "physical": "not_run", "predictive": "not_run"},
     "globality_certificate": "not_guaranteed",
-    "status": "source_only_not_run"
+    "source_completeness": "blocked_missing_epcsaft_records",
+    "status": "not_selected_source_incomplete"
   },
   "ordering": {
-    "primary": "Perdomo Table 5 LiCl/water/1-butanol first row as the smallest Stage I-II-III algorithm-source tracer",
-    "secondary": "Khudaida 2026 tie-line 4 remains a later direct experimental ePC-SAFT challenge",
-    "later_checker": "Ascani 2022 Case Study 2 remains a non-blocking external checker"
+    "primary": "No Perdomo two-liquid case is source-complete for clean ePC-SAFT under D-026.",
+    "fallback": "Ascani 2022 Case Study 2 is the prepared source checker, pending the explicit source records listed in the D-026 screen and a distinct Provider bundle.",
+    "secondary": "Khudaida 2026 tie-line 4 remains closed non-production evidence and is not substituted into this selection."
   },
   "claim_boundary": [
     "No Provider or Equilibrium runtime was imported or executed.",
