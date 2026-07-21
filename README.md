@@ -11,10 +11,17 @@ density, pure-saturation regression, May 2015 methane/ethane local flash, and
 the bounded neutral HELD v1 installed-artifact campaign, plus the Haslam 2020
 Table-8 partial-source cross-EOS campaign.
 
-This repository will own black-box installed-artifact, cross-package, and
+This repository owns black-box installed-artifact, cross-package, and
 literature acceptance evidence. It will not own production algorithms, private
 package imports, or the broad paper archive retained by
 `tannerpolley/ePC-SAFT-lab`.
+
+It has no permanent Validation worker. The Provider, Equilibrium, or Regression
+task accountable for a capability remains based in its package repository and
+writes its assigned black-box campaign here against immutable installed public
+artifacts. Migration schedules one writer per exact subject and requests a
+separate bounded review only when required. Task identity is not scientific
+independence, and package-authored evidence cannot self-accept promotion.
 
 The Slice 1 campaign is `campaigns/provider_slice_1.py`. Run it in an isolated environment with the
 exact provider wheel supplied through `uv --with`; pass the same wheel to

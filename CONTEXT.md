@@ -23,7 +23,7 @@ This repository owns ten black-box installed-artifact campaigns:
 - Haslam 2020 Table 8 aqueous alkali-halide source evidence and a bounded
   cross-EOS campaign at 298.15 K and 0.101 MPa.
 
-`governance_doctrine_revision: 2`
+`governance_doctrine_revision: 3`
 
 Canonical local doctrine: `../ePC-SAFT-organization/GOVERNANCE.md`.
 
@@ -158,3 +158,13 @@ decision is `NON_ADMISSION` and its authority effect is none.
 `next_validation_plan: d026-source-complete-two-liquid-case`
 
 `next_validation_plan_status: blocked_pending_source_faithful_provider_implementation`
+
+`execution_owner_model: package-rooted-no-resident-validation-task`
+
+Future Provider, Equilibrium, and Regression campaigns are authored here by the
+accountable package task while that task remains based in its package
+repository. Validation remains the evidence owner, not a second implementation
+owner. Migration serializes writers and requests bounded review only after an
+exact stable subject exists. This workflow change does not alter any retained
+campaign decision, artifact identity, scientific limitation, promotion, or
+runtime authority.
