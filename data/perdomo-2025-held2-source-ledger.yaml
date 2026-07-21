@@ -1,0 +1,180 @@
+{
+  "schema_version": 1,
+  "dataset_id": "perdomo-2025-held2-case-study-ledger-v1",
+  "format_note": "This file uses the JSON-compatible subset of YAML 1.2 for standard-library validation.",
+  "citation": {
+    "authors": ["Felipe A. Perdomo", "George Jackson", "Alexander Mitsos", "Amparo Galindo", "Claire S. Adjiman"],
+    "title": "Phase stability criteria and fluid-phase equilibria in strong-electrolyte systems",
+    "journal": "Computers & Chemical Engineering",
+    "year": 2025,
+    "volume": 194,
+    "article_number": "108977",
+    "doi": "10.1016/j.compchemeng.2024.108977",
+    "supporting_data_doi": "10.5281/zenodo.13646853",
+    "zotero_parent_item": "YZZ95ZCU",
+    "zotero_markdown_item": "9IXYY46Q",
+    "peer_reviewed_status": "peer-reviewed journal article"
+  },
+  "bound_sources": {
+    "zotero_markdown": {
+      "sha256": "a55846342ac6a73379b2267c24d6e9bf792637aea1d66bd26b50e0230429b727",
+      "size_bytes": 161813,
+      "line_count": 1391,
+      "execution_locator": "/home/tnnrpolley21/Zotero/storage/9IXYY46Q/Perdomo et al. - 2025 - Phase stability criteria and fluid-phase equilibria in strong-electrolyte systems.md",
+      "role": "line-addressable primary article extraction used for every durable article locator in this packet"
+    },
+    "permanent_lab_markdown": {
+      "sha256": "522cba2efb44c6404b3b8b75eefb90c50a84cc4110333f30aa1f0eb1a21380d5",
+      "size_bytes": 163204,
+      "execution_locator": "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT/docs/papers/md/Equilibrium/Perdomo et al. - 2025 - Phase stability criteria and fluid-phase equilibria in strong-electrolyte systems.md",
+      "lab_commit": "13ce345b6dcc41d399bb2a4c7b9bedb18f74b45b",
+      "lab_tree": "c821e06e169ff3c3218cb5dbcf52309e46cb9199",
+      "normalization_note": "The byte-preserved working-tree file has different line endings from the Zotero extraction. Git text normalization at the bound lab commit produces blob bytes with SHA-256 a55846342ac6a73379b2267c24d6e9bf792637aea1d66bd26b50e0230429b727.",
+      "role": "independently bound permanent-lab article extraction"
+    },
+    "article_pdf_visual_audit": {
+      "sha256": "8be02605fc0e839c368362a80837ae2d4f029f97ba7ba6dc60b486548a790111",
+      "size_bytes": 2300582,
+      "zotero_item": "GVEMXCZD",
+      "role": "visual verification of the source-printed Table 8 charge anomaly; the PDF is not redistributed"
+    },
+    "official_supporting_workbook": {
+      "zenodo_record": 13646853,
+      "article_doi": "10.5281/zenodo.13646853",
+      "file_name": "Zenodo_file_reviewed_NoExp (1).xlsx",
+      "file_url": "https://zenodo.org/api/records/13646853/files/Zenodo_file_reviewed_NoExp%20(1).xlsx/content",
+      "sha256": "c659847256044fb783c3fe090454103e109cd13cb5696bb715910428f9935834",
+      "zenodo_md5": "33e91ae54e63a63fa55baebe15db9719",
+      "size_bytes": 104638,
+      "license": "CC BY 4.0",
+      "sheets": ["FIGURE 1A", "1B", "1C", "2", "3 & 4", "5", "6", "7A", "7B"],
+      "extraction_method": "Downloaded from the official Zenodo record and inspected read-only with the bundled spreadsheet artifact API; exact workbook bytes are bound but not retained in this repository.",
+      "role": "official supporting numerical arrays for the published figures; article Tables 3-8 remain the source of the 26 compact retained sample rows"
+    }
+  },
+  "durable_article_locators": {
+    "three_stage_algorithm": "lines 541-750: Stage I stochastic tunneling stability search, Stage II fixed-seed multistart phase allocation, and Stage III Gibbs-energy minimization/refinement",
+    "stage_i_sampling": "lines 553-590 and 649-658: Algorithm 1; fixed seed; N_S=10C; packing-fraction range 1e-6 to 0.74",
+    "stage_ii": "lines 660-700, including fixed-seed multistart at line 685",
+    "stage_iii": "lines 702-750, including default eps_g=eps_mu=1e-6 at lines 733-735",
+    "implementation_resources": "lines 752-756: Fortran 90, in-house tunneling, proprietary HELD2 code on request, NAG E04UCA/E04MFA, and 64-bit 3.40 GHz/8 GB/Windows 10 machine",
+    "case_inventory": "Table 1 lines 769-790",
+    "dielectric_parameters": "Table 2 lines 794-803",
+    "single_salt_vle": "Section 5.1 lines 809-825 and Table 3 lines 849-862",
+    "licl_water_methanol_vle": "Sections 5.2.1-5.2.2 lines 828-905 and Table 4 lines 864-878",
+    "licl_water_butanol_lle": "Section 5.2.2 lines 837-905 and Table 5 lines 884-898",
+    "nacl_water_acetic_butanol_lle": "Section 5.2.3 lines 909-921 and Table 6 lines 940-960",
+    "cacl2_water_acetone_lle": "Section 5.3.1 lines 927-934 and Table 7 lines 962-984",
+    "cacl2_water_propanoic_butanol_lle": "Section 5.3.2 lines 936-938 and Table 8 lines 989-1025",
+    "model_parameters": "Appendix D Tables D.9-D.10 lines 1227-1288",
+    "data_availability": "lines 1290-1292"
+  },
+  "retained_files": {
+    "case_ledger_csv": {
+      "path": "data/perdomo-2025-held2-case-ledger.csv",
+      "sha256": "654e4098f53abfa75bf8d4b5b8093fd56b89d352164be2a18c7804cc5a3a1282",
+      "rows": 9
+    },
+    "published_samples_csv": {
+      "path": "data/perdomo-2025-held2-published-samples.csv",
+      "sha256": "92338efdb800f8a4546a0ed9bbd0944021586735c181963057c86e3e9b4f7c1f",
+      "rows": 26
+    }
+  },
+  "classification_contract": {
+    "allowed": {
+      "fully-reproducible": "All numerical model inputs and an executable source-faithful model route are publicly bound; none of the paper cases meet this standard in the current Validation ecosystem.",
+      "blocked-missing-saft-gamma-mie-parameters-or-proprietary-inputs": "A same-EOS reproduction cannot be executed because cited base/group inputs, proprietary HELD2 implementation details, or both are not immutably retained.",
+      "algorithmic-manufactured-only": "Useful only as a neutral or manufactured algorithm baseline, not a strong-electrolyte physical reproduction target.",
+      "cross-eos-epcsaft-challenge-only": "The article reports SAFT-gamma-Mie calculations, whereas the future installed challenge uses ePC-SAFT; comparison can test topology/behavior but cannot claim same-model reproduction."
+    },
+    "ledger_counts": {
+      "fully-reproducible": 0,
+      "blocked-missing-saft-gamma-mie-parameters-or-proprietary-inputs": 0,
+      "algorithmic-manufactured-only": 1,
+      "cross-eos-epcsaft-challenge-only": 8
+    },
+    "classification_note": "The eight electrolyte cases also have same-EOS reproduction gaps. Their ledger class is the more directly actionable Validation role: cross-EOS ePC-SAFT challenge only. The parameter and proprietary-code gaps remain explicit below."
+  },
+  "paper_algorithm_and_resource_contract": {
+    "eos_model": "SAFT-gamma-Mie group-contribution electrolyte equation of state only",
+    "stages": {
+      "I": "stochastic tunneling phase-stability search",
+      "II": "fixed-seed multistart phase allocation",
+      "III": "Gibbs-energy minimization and trace-species refinement"
+    },
+    "sampling": {"seed_policy": "fixed seed reported, numerical seed value not published", "sample_count": "N_S=10C", "packing_fraction_interval": ["1e-6", "0.74"]},
+    "reported_default_convergence": {"epsilon_g": "1e-6", "epsilon_mu": "1e-6"},
+    "software": ["Fortran 90", "in-house tunneling implementation", "proprietary HELD2 code available only on request", "NAG E04UCA", "NAG E04MFA"],
+    "hardware": "64-bit 3.40 GHz processor, 8 GB RAM, Windows 10",
+    "published_flash_total": 122917,
+    "claim_boundary": "These are source facts, not an authorization to copy the implementation, inherit paper tolerances, or treat finite stochastic searches as global proof."
+  },
+  "parameter_source_availability": {
+    "available_in_article": [
+      "Table 2 dielectric-correlation parameters",
+      "Appendix D Table D.9 unlike-group dispersion interactions",
+      "Appendix D Table D.10 ion-solvent and ion-ion interaction parameters"
+    ],
+    "still_required_for_same_eos_reproduction": [
+      "the cited SAFT-gamma-Mie base and functional-group definitions and their complete parameter records",
+      "the exact proprietary HELD2 implementation or a separately reviewed independent same-EOS implementation",
+      "the unpublished fixed random-seed value and any unstated numerical settings needed for exact stochastic replay",
+      "licensed NAG routine behavior if bitwise or route-identical replay is claimed"
+    ],
+    "validation_ecosystem_limit": "Current Provider/Equilibrium artifacts are ePC-SAFT, not SAFT-gamma-Mie. No parameter mapping or EOS substitution is authorized by this packet."
+  },
+  "published_sample_contract": {
+    "rows": 26,
+    "table_counts": {"Table 3": 3, "Table 4": 3, "Table 5": 3, "Table 6": 6, "Table 7": 4, "Table 8": 7},
+    "content": "Each row retains state/feed descriptors, explicit species order and charges through its case link, two published phase compositions, phase types/count, packing fractions, molar volumes, and iterations/CPU where printed.",
+    "basis": "Published phase mole fractions in the explicit ionic species order printed by each table; pressure is retained in kPa and temperature in K.",
+    "uncertainty": "The rows are model-calculation outputs, not direct experimental measurements; no pointwise experimental uncertainty or model-comparison allowance is reported or created.",
+    "source_anomalies": [
+      {
+        "sample_id": "table3-kcl-0.8molal",
+        "detail": "The printed KCl liquid molar volume 9.168e-5 m3/mol repeats the vapour packing-fraction value and is physically suspicious.",
+        "verification": "Article PDF text confirms the same value, so this is not Markdown OCR drift.",
+        "policy": "Retain verbatim, never silently correct, and exclude this value from any liquid-volume oracle."
+      },
+      {
+        "sample_id": "table8-wap0.0460",
+        "detail": "The printed aqueous phase [Ca2+, Cl-, water, propanoic acid, 1-butanol] begins [0.0013733, 0.027466, ...], violating the required 1:2 Ca2+/Cl- electroneutrality by a decimal factor.",
+        "verification": "Article PDF page 17 visually confirms the same values, so this is not Markdown OCR drift.",
+        "policy": "Retain verbatim, never silently correct, and exclude this phase composition from any charge-balanced oracle."
+      }
+    ]
+  },
+  "recommended_first_tracer": {
+    "case_id": "perdomo2025-licl-water-butanol-lle",
+    "sample_id": "table5-licl-4.58molal",
+    "reason": "Smallest published strong-electrolyte LLE example with four explicit species, balanced 1:1 ions, two noncollapsed liquid phases, compact printed endpoints, and a source-derived feed suitable for exercising Stages I, II, and III.",
+    "state": {"temperature_K": "298.15", "pressure_kPa": "101.3", "LiCl_molality_mol_per_kg": "4.58"},
+    "species_order": ["Li+", "Cl-", "water", "1-butanol"],
+    "charges": [1, -1, 0, 0],
+    "paper_phase_endpoints": {
+      "organic": ["0.028517", "0.028517", "0.30442", "0.63855"],
+      "aqueous": ["0.13329", "0.13329", "0.68072", "0.052686"]
+    },
+    "raw_equal_phase_midpoint": ["0.0809035", "0.0809035", "0.49257", "0.345618"],
+    "raw_midpoint_sum": "0.9999950",
+    "normalized_equal_phase_feed": ["0.08090390451952259761298806494", "0.08090390451952259761298806494", "0.4925724628623143115715578578", "0.3456197280986404932024660123"],
+    "derivation": "Componentwise arithmetic mean of the two printed phase mole-fraction vectors followed by normalization only to remove their printed-rounding sum defect.",
+    "classification": "cross-eos-epcsaft-challenge-only",
+    "future_decisions": {"artifact_input": "not_run", "solver": "not_run", "numerical": "not_run", "physical": "not_run", "predictive": "not_run"},
+    "globality_certificate": "not_guaranteed",
+    "status": "source_only_not_run"
+  },
+  "ordering": {
+    "primary": "Perdomo Table 5 LiCl/water/1-butanol first row as the smallest Stage I-II-III algorithm-source tracer",
+    "secondary": "Khudaida 2026 tie-line 4 remains a later direct experimental ePC-SAFT challenge",
+    "later_checker": "Ascani 2022 Case Study 2 remains a non-blocking external checker"
+  },
+  "claim_boundary": [
+    "No Provider or Equilibrium runtime was imported or executed.",
+    "No SAFT-gamma-Mie parameter was invented, inferred from a plot, or mapped to ePC-SAFT.",
+    "No EOS substitution, phase-equilibrium reproduction, predictive agreement, model admission, tolerance, receipt, promotion, release, or authority change is claimed.",
+    "The paper phase compositions are calculated source outputs, not direct experimental observations.",
+    "A future one-phase ePC-SAFT result would be a model-topology outcome and not automatically an algorithm defect."
+  ]
+}
