@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "packet_id": "haslam-2020-osmotic-provider-partial-source-coverage-v1",
+  "decision": "PARTIAL_SOURCE_COVERAGE",
+  "format_note": "This file uses the JSON-compatible subset of YAML 1.2 for standard-library validation.",
+  "migration_binding": {
+    "commit": "bcf93699f75278920d094f5dfb4ee0da3b6d83e8",
+    "tree": "de17bddbabf2f321696b329cbee961b721a79bdb"
+  },
+  "sources": {
+    "haslam_2020": {
+      "citation": "A. J. Haslam et al., Expanding the Applications of the SAFT-gamma Mie Group-Contribution Equation of State: Prediction of Thermodynamic Properties and Phase Behavior of Mixtures, Journal of Chemical & Engineering Data 65 (2020) 5862-5890.",
+      "doi": "10.1021/acs.jced.0c00746",
+      "zotero_parent_item": "7JTIJER8",
+      "zotero_pdf_item": "JGRVI5AH",
+      "pdf_execution_locator": "/home/tnnrpolley21/Zotero/storage/JGRVI5AH/Haslam et al. - 2020 - Expanding the Applications of the SAFT-γ Mie Group-Contribution Equation of State Prediction of The.pdf",
+      "pdf_sha256": "ef1d694c61caa1cc9665a9569223d2a7acf3c9b834feea1de9afd9c08e433044",
+      "pdf_size_bytes": 3336112,
+      "table_8_locator": "PDF page 19, printed page 5880, Table 8: saltwise Phi and gamma_pm counts, percent AADs, and reference identifiers at 298.15 K over 0.001-3.0 mol/kg",
+      "condition_locator": "PDF page 21, printed page 5882, text introducing Figure 7: sodium-halide Phi and gamma_pm at T=298.15 K and P=0.101 MPa",
+      "figure_7_locator": "PDF page 22, printed page 5883, Figure 7 and caption",
+      "authority": "authoritative article artifact for the Haslam condition, Table 8 count/reference cells, and Figure 7 identities; it does not disclose the exact selected row keys"
+    },
+    "hamer_wu_1972": {
+      "citation": "W. J. Hamer and Y.-C. Wu, Osmotic Coefficients and Mean Activity Coefficients of Uni-univalent Electrolytes in Water at 25 C, Journal of Physical and Chemical Reference Data 1 (1972) 1047-1100.",
+      "doi": "10.1063/1.3253108",
+      "official_pdf_url": "https://srd.nist.gov/jpcrdreprint/1.3253108.pdf",
+      "official_pdf_sha256": "8399084b29b4db4ce35ab47ed679446dbedb9bf1686f99f43fce7b2073ee4beb",
+      "official_pdf_size_bytes": 4357237,
+      "zotero_parent_item": "28NPJ5H6",
+      "zotero_pdf_item": "5RS9QAMK",
+      "zotero_pdf_execution_locator": "/home/tnnrpolley21/Zotero/storage/5RS9QAMK/Hamer and Yung chi - 1972 - Osmotic Coefficients and Mean Activity Coefficients of Uni univalent Electrolytes in Water at 25°C.pdf",
+      "zotero_pdf_sha256": "a20e0029c929b4e1df2cc8cd7aba10ecbbada3dd0f35689a102d16d18fc34ca6",
+      "zotero_pdf_size_bytes": 4357404,
+      "byte_stream_note": "The Zotero attachment and official NIST download are distinct byte streams of the same article. The official NIST artifact is authoritative for the retained row.",
+      "definition_locator": "PDF page 6, printed page 1051, equations 3.4 prime and 3.5; practical molal osmotic coefficient from solvent activity",
+      "activity_locator": "PDF pages 5-6, printed pages 1050-1051, equations 3.1-3.5; solution/pure-solvent fugacity ratio and pure-solvent activity reference",
+      "molality_and_nu_locator": "PDF page 4, printed page 1049, text following equations 1.11-1.15; molality is moles of solute per 1000 g solvent and nu is the number of ions per solute formula unit",
+      "oracle_locator": "PDF page 22, printed page 1067, Table 16, middle triplet, sixth data row: NaCl m=1.000 mol/kg, Phi=0.936, gamma_pm=0.657",
+      "table_character": "critically evaluated internally consistent composite values; not raw single-experiment observations"
+    },
+    "hamer_wu_mathpix_markdown": {
+      "execution_locator": "/home/tnnrpolley21/Zotero/storage/5RS9QAMK/Hamer and Yung chi - 1972 - Osmotic Coefficients and Mean Activity Coefficients of Uni univalent Electrolytes in Water at 25°C.md",
+      "sha256": "289c44242c919bc5902dc0eff395c20d29a7285e20c9c8e3432cad48461e2d33",
+      "size_bytes": 224654,
+      "definition_lines": "193-205",
+      "table_16_lines": "1140-1157",
+      "authority": "extraction-only locator and transcription aid; never source authority"
+    }
+  },
+  "thermodynamic_contract": {
+    "quantity": "dimensionless practical molal osmotic coefficient",
+    "symbol": "Phi",
+    "source_equation_g_per_mol": "Phi = -1000 * ln(a_solv) / (nu * m * M_solv), with M_solv in g/mol",
+    "si_equivalent": "Phi = -ln(a_solv) / (nu * m * M_solv), with M_solv in kg/mol",
+    "molality": "formula-unit molality m in moles of salt formula units per kilogram of salt-free solvent",
+    "molality_unit": "mol/kg",
+    "nu": "sum of ionic stoichiometric coefficients in one salt formula unit; nu=2 for each 1:1 salt in this packet",
+    "solvent_molar_mass": "the resolved solvent molar mass M_solv; use kg/mol with the SI-equivalent equation and g/mol only with Hamer-Wu's explicit factor 1000",
+    "solvent_activity": "a_solv is the solvent activity relative to pure solvent at the same temperature and pressure, so the pure-solvent reference has activity one",
+    "temperature_K": "298.15",
+    "haslam_pressure_MPa": "0.101",
+    "pressure_note": "Haslam fixes the comparison pressure. Hamer-Wu Table 16 does not report a separate pressure for its critically evaluated 25 C row.",
+    "provider_input_route": "EPCSAFT.reference_state(...).at_molality(...) with a source-resolved solvent and salt formula-unit molality",
+    "implementation_boundary": "Provider owns the public calculation and resolved solvent molar mass. It must remain data-agnostic: no Validation runtime dependency and no copied source-row constant."
+  },
+  "retained_files": {
+    "source_row_csv": {
+      "path": "data/haslam-2020-osmotic-provider-source-row.csv",
+      "sha256": "fa2e68e8bc1224f2c6d5b80ad79e6643a08b5944276274067084c40aee2b4f45",
+      "rows": 1
+    }
+  },
+  "exact_oracle": {
+    "salt": "NaCl",
+    "species": ["Na+", "Cl-"],
+    "molality_mol_kg": "1.000",
+    "nu": 2,
+    "phi": "0.936",
+    "source": "Hamer-Wu Table 16, PDF page 22, printed page 1067, middle triplet, sixth data row",
+    "visual_verification": "Verified directly against the rendered official NIST PDF page; the Mathpix Markdown agrees but is extraction-only.",
+    "haslam_exact_selected_subset": false,
+    "haslam_subset_reason": "Haslam Table 8 cites references 181-186 for its 40 NaCl Phi points. Hamer-Wu is Haslam reference 179, so this row cannot be labeled a member of Haslam's exact selected NaCl Phi subset.",
+    "uncertainty": "Hamer-Wu reports table-level sigma(Phi)=6.40e-4 and sigma*(Phi)=6.60e-4. These are fit statistics, not a pointwise uncertainty and not an acceptance tolerance.",
+    "claim": "Exact property-definition and one-row supported-salt numerical oracle only; not Haslam Table 8 reproduction, count parity, predictive validation, or campaign acceptance."
+  },
+  "provider_six_salt_coverage": [
+    {"salt": "LiCl", "ions": ["Li+", "Cl-"], "provider_catalog": "supported", "haslam_table_8_phi_n": 23, "haslam_table_8_phi_refs": "180", "exact_haslam_rows_in_packet": 0, "selection_status": "unknown-missing-row-selection-manifest"},
+    {"salt": "LiBr", "ions": ["Li+", "Br-"], "provider_catalog": "supported", "haslam_table_8_phi_n": 23, "haslam_table_8_phi_refs": "179", "exact_haslam_rows_in_packet": 0, "selection_status": "unknown-missing-row-selection-manifest"},
+    {"salt": "NaCl", "ions": ["Na+", "Cl-"], "provider_catalog": "supported", "haslam_table_8_phi_n": 40, "haslam_table_8_phi_refs": "181-186", "exact_haslam_rows_in_packet": 0, "selection_status": "unknown-missing-row-selection-manifest"},
+    {"salt": "NaBr", "ions": ["Na+", "Br-"], "provider_catalog": "supported", "haslam_table_8_phi_n": 23, "haslam_table_8_phi_refs": "182,187", "exact_haslam_rows_in_packet": 0, "selection_status": "unknown-missing-row-selection-manifest"},
+    {"salt": "KCl", "ions": ["K+", "Cl-"], "provider_catalog": "supported", "haslam_table_8_phi_n": 37, "haslam_table_8_phi_refs": "181,188,189", "exact_haslam_rows_in_packet": 0, "selection_status": "unknown-missing-row-selection-manifest"},
+    {"salt": "KBr", "ions": ["K+", "Br-"], "provider_catalog": "supported", "haslam_table_8_phi_n": 24, "haslam_table_8_phi_refs": "179", "exact_haslam_rows_in_packet": 0, "selection_status": "unknown-missing-row-selection-manifest"}
+  ],
+  "unsupported_haslam_scope": {
+    "iodides": [
+      {"salt": "LiI", "haslam_table_8_phi_n": 23, "haslam_table_8_phi_refs": "179", "status": "unsupported-I-minus-absent-from-current-provider-catalog"},
+      {"salt": "NaI", "haslam_table_8_phi_n": 23, "haslam_table_8_phi_refs": "179", "status": "unsupported-I-minus-absent-from-current-provider-catalog"},
+      {"salt": "KI", "haslam_table_8_phi_n": 23, "haslam_table_8_phi_refs": "179", "status": "unsupported-I-minus-absent-from-current-provider-catalog"}
+    ],
+    "figure_7_fluoride": {"salt": "NaF", "status": "unsupported-F-minus-absent-from-current-provider-catalog"},
+    "policy": "No unsupported salt or absent ion is inferred, added to Provider scope, or treated as executable evidence."
+  },
+  "haslam_selection_provenance": {
+    "classification": "unknown-missing-row-selection-manifest",
+    "known": "Haslam Table 8 provides saltwise nPhi counts and reference identifiers over 0.001-3.0 mol/kg at 298.15 K; Figure 7 provides plotted sodium-halide identities and the 0.101 MPa condition.",
+    "missing": "No exact row-selection manifest, supporting workbook, or source-row key list was located that maps the Table 8 Phi counts to individual literature rows.",
+    "effect": "This packet cannot establish full Haslam Table 8 reproduction, count parity, AAD recomputation, or exact membership of the retained Hamer-Wu NaCl row.",
+    "no_inference": "No digitized lab CSV, plotted point, count-matching truncation, interpolation, or broad-campaign output is promoted into this canonical source binding."
+  },
+  "related_evidence_only": {
+    "broad_campaign_commit": "25f3c5071b2c9c9a97df4c21c5c6daffec8b4b3e",
+    "broad_campaign_tree": "48149abc697600392f8cecc2d9bf2ede12edeaab",
+    "role": "independent campaign evidence only; not the canonical Provider source binding and not copied into this packet"
+  },
+  "claim_boundary": [
+    "This packet authorizes only the public osmotic-coefficient property definition and one exact supported-salt oracle.",
+    "It does not authorize full Haslam table reproduction, Table 8 count parity, unsupported salts or species, MIAC predictive claims, campaign acceptance, model thresholds, or promotion.",
+    "It contains no Provider runtime, source-row constants for production, calculated model output, AAD, plot, campaign result, or authority transfer."
+  ]
+}
