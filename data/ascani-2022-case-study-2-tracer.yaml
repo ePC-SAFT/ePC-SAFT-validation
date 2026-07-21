@@ -1,0 +1,210 @@
+{
+  "schema_version": 1,
+  "dataset_id": "ascani-2022-case-study-2-held2-tracer-v1",
+  "format_note": "This file uses the JSON-compatible subset of YAML 1.2 for standard-library validation.",
+  "migration_binding": {
+    "decision": "D-024",
+    "gate_commit": "4527864ffcd37f5e9a524500dfd99d5a34c85672",
+    "gate_tree": "6a4f9711787c333c146566be8947df2c60f1fc68"
+  },
+  "citation": {
+    "authors": ["Moreno Ascani", "Gabriele Sadowski", "Christoph Held"],
+    "title": "Calculation of Multiphase Equilibria Containing Mixed Solvents and Mixed Electrolytes: General Formulation and Case Studies",
+    "journal": "Journal of Chemical & Engineering Data",
+    "year": 2022,
+    "volume": 67,
+    "pages": "1972-1984",
+    "doi": "10.1021/acs.jced.1c00866",
+    "zotero_parent_item": "48XP953U",
+    "main_markdown_item": "4NSAXCX8",
+    "supporting_information_markdown_item": "QK83PCBV",
+    "peer_reviewed_status": "peer-reviewed journal article"
+  },
+  "primary_sources": {
+    "main_markdown": {
+      "sha256": "c0b73c10aa1ce9830e29f34aa3c1d1af4b889971959c3245a2deb7efdd979cd6",
+      "size_bytes": 81732,
+      "execution_locator": "/home/tnnrpolley21/Zotero/storage/4NSAXCX8/Ascani, Sadowski, Held - 2022 - Calculation of Multiphase Equilibria Containing Mixed Solvents and M.md",
+      "durable_locators": [
+        "lines 374-378: Case Study 2 scope, inherited model inputs, feed, and fully dissociated salt basis",
+        "lines 386-392: Table 4 system, 298.15 K, 1.00 bar, and experimental reference 83",
+        "line 395: paper-calculated phase compositions, two-phase result, and Gibbs values",
+        "lines 401-407: Table 5 logarithmic neutral and mean-ionic fugacity equalities on a bar basis",
+        "line 417: Figure 4 distinguishes experimental tie-lines from ePC-SAFT advanced predictions",
+        "lines 423-427: official SI locator for DOI 10.1021/acs.jced.1c00866",
+        "line 537: reference 83, Pedraza et al. 2004"
+      ]
+    },
+    "supporting_information_markdown": {
+      "sha256": "a6a61508cbaae805f2e360686785318953747a66c27d9102936e77be7f472c03",
+      "size_bytes": 9007,
+      "execution_locator": "/home/tnnrpolley21/Zotero/storage/QK83PCBV/Ascani, Sadowski, Held - 2022 - Supporting Information for Calculation of multiphase equilibria containing mixed solvents and mixed..md",
+      "durable_locators": [
+        "lines 42-55: combining rules, temperature-dependent k_ij, and water/1-butanol l_ij and k_hb_ij use",
+        "lines 59-69: Table S1 neutral-component parameters",
+        "lines 72-85: Table S2 ion parameters",
+        "lines 87-96: Table S3 water/organic interaction parameters",
+        "lines 99-104: Table S4 cation/chloride k_ij values",
+        "lines 107-119: SI parameter-source references S1-S11"
+      ]
+    }
+  },
+  "use_basis": "Retain compact numerical facts, source identities, and transformations for installed-artifact scientific validation; do not redistribute the paper or supporting information.",
+  "retained_files": {
+    "tracer_csv": {
+      "path": "data/ascani-2022-case-study-2-tracer.csv",
+      "sha256": "388f62d02f995fc89fb099bb625a907713eebe70f19ea631688cc8e4169acecd",
+      "rows": 1
+    }
+  },
+  "tracer_contract": {
+    "case_id": "ascani2022-case-study-2",
+    "role": "non-blocking secondary external HELD2 tracer; Khudaida 2026 tie-line 4 remains the primary hard challenge",
+    "temperature_K": "298.15",
+    "pressure_Pa": "100000",
+    "pressure_transformation": "Table 4 pressure 1.00 bar multiplied by exactly 100000 Pa/bar",
+    "formula_feed_mass_fraction_order": ["water", "1-butanol", "NaCl", "KCl"],
+    "formula_feed_mass_fractions": ["0.8094", "0.1728", "0.0054", "0.0124"],
+    "explicit_species_order": ["H2O", "1-butanol", "Na+", "K+", "Cl-"],
+    "explicit_feed_mole_fractions": ["0.9403742328474496", "0.04879524350242891", "0.0019339333595015447", "0.0034813284655591703", "0.005415261825060715"],
+    "formula_to_explicit_feed_transform": {
+      "basis": "one kilogram formula feed",
+      "molar_masses_kg_per_mol": {"water": "0.01801528", "1-butanol": "0.0741216", "NaCl": "0.05844277", "KCl": "0.0745513"},
+      "steps": "divide formula mass fractions by formula molar masses; replace each NaCl amount by one Na+ and one Cl- and each KCl amount by one K+ and one Cl-; normalize the five explicit amounts",
+      "classification": "table-derived from the direct paper feed and retained lab conversion arithmetic"
+    },
+    "paper_formula_phase_compositions": {
+      "component_order": ["H2O", "1-butanol", "NaCl", "KCl"],
+      "organic": ["0.4426", "0.5570", "0.0000415", "0.000420"],
+      "aqueous": ["0.9627", "0.0122", "0.0076", "0.0174"],
+      "classification": "direct paper-reported ePC-SAFT advanced calculation output, not direct experimental data",
+      "rounding_note": "The printed organic and aqueous formula values sum to 1.0000615 and 0.9999, respectively; retain them unchanged."
+    },
+    "formula_to_explicit_phase_transform": {
+      "steps": "replace each printed NaCl formula amount by equal Na+ and Cl- amounts and each KCl formula amount by equal K+ and Cl- amounts, then normalize the five explicit amounts",
+      "classification": "table-derived",
+      "organic": ["0.4423686412006520589731570389", "0.5567088412760126453864628799", "0.00004147830684551979314818350003", "0.0004197804548221280270418571087", "0.0004612587616676478201900406088"],
+      "aqueous": ["0.9393111523075421992389501415", "0.01190360035125378085666894331", "0.007415357595863011025465899112", "0.01697726607473899892672455849", "0.02439262367060200995219045761"]
+    },
+    "paper_table_5_log_fugacity": {
+      "basis": "natural logarithm of fugacity divided by 1 bar",
+      "values": {"water": "-3.521", "1-butanol": "-5.088", "KCl_mean_ionic_pair": "-206.733", "NaCl_mean_ionic_pair": "-224.891"},
+      "phase_equality": "Each printed value is identical in the organic and aqueous columns.",
+      "classification": "direct paper-reported ePC-SAFT advanced calculation output, not an independent experimental observable"
+    },
+    "reported_phase_count": 2
+  },
+  "source_classification": {
+    "feed_and_conditions": "direct",
+    "paper_formula_phase_compositions": "direct-paper-calculation-output",
+    "table_5_log_fugacity_equalities": "direct-paper-calculation-output",
+    "explicit_species_feed_and_phases": "table-derived",
+    "figure_4_experimental_tie_lines": "missing-primary-source-for-this-packet",
+    "uncertainty": "not reported for the paper-calculated Case Study 2 values",
+    "model_comparison_allowance": null,
+    "policy": "No numerical predictive acceptance threshold is created by this source-only packet."
+  },
+  "published_model_bundle_prerequisites": {
+    "status": "not_implemented_not_dispatched",
+    "bundle_identity": "A distinct future source-bound Ascani model bundle; the current Khudaida artifact is insufficient.",
+    "required_components": ["H2O", "1-butanol", "Na+", "K+", "Cl-"],
+    "required_source_inputs": [
+      "SI Table S1 H2O and 1-butanol neutral-component parameters",
+      "SI Table S2 Na+, K+, and Cl- ion parameters",
+      "SI Table S3 water/1-butanol k_ij(T), l_ij, and k_hb_ij",
+      "SI Table S4 Na+/Cl- and K+/Cl- k_ij"
+    ],
+    "ownership": "Provider owns the executable bundle, source binding, component order, charges, interaction records, and fingerprint. Validation and Equilibrium must not copy these constants into runtime code.",
+    "future_execution_path": "The clean source-bound Provider artifact plus the current general multiphase Perdomo HELD2 Equilibrium path; no Ascani compatibility route.",
+    "no_tuning": "No model input or HELD2 behavior may be tuned to force agreement with this tracer."
+  },
+  "lab_archive_provenance": {
+    "archive_root": "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT/analyses/paper_validation/2022_ascani",
+    "authority": "checker data only; no runtime, algorithm, numerical, solver, or acceptance authority",
+    "source_and_model_input_hashes": {
+      "case2_paper_phase_compositions_csv": "eb139d8cdc90f3e21a612dc4125e481c2bb200d1f922b1167279de0296143344",
+      "paper_table5_fugacity_csv": "591892ef0c01a13060a16edbce08466b65ba31d2be27174815e423cc19650d88",
+      "pure_component_parameters_csv": "13928e22d419413076ac21586c230416bab7945f6676bef53d516fc915a81146",
+      "binary_interaction_source_manifest_csv": "d55c1fa59c961d8727808491ad89915968e5949ae6401efe76bbd00142166dde",
+      "k_ij_csv": "4d3e587faa598acbf058b6162d86b7ec541b376c1dac84169b96f39e57c2e690",
+      "l_ij_csv": "97a69ff9c60c77329775ed4f760bb3f3ea015929510f86f434e397210f616920",
+      "k_hb_ij_csv": "6f956c05e6fee9ec151c7e097dd98557a3d1a6a31a8f8adb07a7b0d45f3d513c"
+    },
+    "permitted_historical_output_hashes": {
+      "summary_json": "d1178d8d02b3f8d6f83929d7ca3818e58b965c52430d0d93ab92e545632891a1",
+      "phase_split_csv": "a3ab6456bceca8fd8fda2343cbc9e8e4efae5d5533a6df67a24f9347d9aac10f",
+      "stability_summary_csv": "2275895adfb1a80b5cb3b5fd13171667d1ca4b1fa4d751fc5eebac3de977795b"
+    },
+    "historical_witnesses": {
+      "archive_reported_status": "accepted_public_native_ipopt",
+      "strong_negative_witness_min_tpd": "-0.09607343786579076",
+      "strong_negative_witness_locator": "shared/results/stability_summary/stability_summary.csv: parent_phase=feed, seed_name=returned_org_phase",
+      "role": "historical hypothesis and external comparison support only; neither value is HELD2 proof"
+    },
+    "negative_space": [
+      "Do not reuse, port, restore, call, imitate, or derive implementation behavior from the archived electrolyte_lle or native liquid-root route.",
+      "Do not use archived seeds, controller, API, solver behavior, tolerances, or acceptance logic as authority.",
+      "Permitted archive use is limited to paper source feed, conditions, model inputs, paper-reported phase compositions, fugacity equalities, phase count, and retained outputs as provenance/comparison data.",
+      "The archived accepted label and negative witness cannot validate or determine the new algorithm."
+    ]
+  },
+  "supporting_numerical_literature": {
+    "citation": "G. V. Belov and N. M. Aristova, Calculation of Complex Chemical Equilibrium Using Optimization Package Ipopt (2023)",
+    "zotero_parent_item": "5HRFS379",
+    "attachment_item": "X8VYH7WX",
+    "mathpix_locator": "/home/tnnrpolley21/Zotero/storage/X8VYH7WX/Belov and Aristova - 2023 - Calculation of Complex Chemical Equilibrium Using Optimization Package Ipopt.mmd",
+    "sha256": "501d9bdb5dfd89cf5584e050cfcd9cc6580fac5395f809cb91d16d81d1bd1f38",
+    "size_bytes": 37215,
+    "line_ranges": {
+      "broad_concentration_scales_conditioning": "23-27",
+      "exact_derivatives_and_automatic_differentiation": "121-132",
+      "dimensionless_objective": "134-138",
+      "nonnegative_variables_phase_sums_material_balances": "141-187",
+      "inventory_normalization_and_review_checks": "301-307"
+    },
+    "classification": "general numerical-conditioning support only; not electrolyte-LLE or HELD2 evidence",
+    "negative_space": "Supplies no authoritative scaling formula, Ipopt settings or tolerances, multiplier unscaling, start policy, scientific-gate relaxation, or validation oracle."
+  },
+  "missing_upstream_provenance": [
+    {
+      "citation": "Pedraza, Ruiz, Saquete, and Gomis, Fluid Phase Equilibria 216 (2004) 27-31, Ascani reference 83",
+      "need": "original experimental water/1-butanol/NaCl/KCl LLE values, units, uncertainty, and composition basis before any direct experimental predictive campaign",
+      "effect": "Figure 4 experimental tie-lines are not numerical targets in this packet"
+    },
+    {
+      "citation": "Nann, Held, and Sadowski, Ind. Eng. Chem. Res. 52 (2013) 18472-18481, SI reference S6",
+      "need": "original parameter-estimation data and objective if inherited 1-butanol or water/1-butanol parameters are later recovered rather than replayed",
+      "effect": "SI-printed values remain reproduction inputs, not independently recovered parameters"
+    },
+    {
+      "citation": "Held et al., Chem. Eng. Res. Des. 92 (2014) 2884-2897, SI reference S10/S3",
+      "need": "original ion-parameter and cation/chloride interaction datasets and objectives if inherited parameters are later recovered rather than replayed",
+      "effect": "SI-printed values remain reproduction inputs, not independently recovered parameters"
+    }
+  ],
+  "future_installed_challenge": {
+    "status": "not_run_pending_new_migration_bound_provider_and_equilibrium_wheels",
+    "public_installed_api_only": true,
+    "algorithm_source": "current Perdomo HELD2",
+    "required_checks": [
+      "noncollapsed phase count and positive phase amounts",
+      "component material balance",
+      "electroneutrality in every electrolyte phase",
+      "specified-pressure closure",
+      "independent modified-potential equality or formulation-equivalent complementarity residual",
+      "descriptive comparison to the paper formula-basis phase compositions",
+      "descriptive comparison to the paper Table 5 log-fugacity equalities"
+    ],
+    "five_decision_layers": {"artifact_input": "not_run", "solver": "not_run", "numerical": "not_run", "physical": "not_run", "predictive": "not_run"},
+    "globality_certificate": "not_guaranteed",
+    "terminal_classifications": {
+      "PARAMETER_CONTRACT_INCOMPLETE": "the new installed Provider bundle or a required source-traced executable input is absent or mismatched",
+      "SOLVER_LIMIT": "the declared HELD2 search does not return a numerically accepted state; this is not automatically an algorithm defect",
+      "MODEL_TOPOLOGY_MISS": "a numerically and physically accepted model result lacks the paper-reported two-phase topology",
+      "PREDICTIVE_MISS": "a numerically and physically accepted result misses a separately approved predictive contract",
+      "PREDICTIVE_PASS": "a numerically and physically accepted result satisfies a separately approved predictive contract",
+      "NOT_EVALUATED": "a later decision cannot be adjudicated because an earlier layer failed or no quantitative predictive cutoff exists"
+    }
+  },
+  "claim_boundary": "This compact packet establishes source identity, a secondary tracer, model-bundle prerequisites, archive negative space, and future decision semantics only. It contains no installed model output, model acceptance threshold, parameter fit, predictive claim, HELD2 proof, promotion, receipt, release, or authority transfer."
+}
