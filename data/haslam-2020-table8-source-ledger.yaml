@@ -1,0 +1,96 @@
+schema_version: 1
+campaign_id: haslam-2020-table8-cross-eos
+decision: HASLAM_TABLE8_PARTIAL_SOURCE_COVERAGE
+conditions:
+  temperature_K: 298.15
+  pressure_MPa: 0.101
+  pressure_locator: Haslam 2020, text introducing Figure 7, printed page 5882
+  molality_range_mol_kg: [0.001, 3.0]
+  molality_basis: formula-unit moles of salt per kilogram of water
+  gamma_basis: molality-scale stoichiometric mean ionic activity coefficient
+  osmotic_basis: dimensionless practical molal osmotic coefficient
+  osmotic_definition:
+    source: Hamer and Wu (1972), equation 3.5, PDF page 6, printed page 1051
+    contract: phi = -ln(a_water) / (nu * m * M_water)
+    nu: sum of ionic stoichiometric coefficients; nu=2 for every 1:1 salt in this campaign
+    molality: formula-unit moles of salt per kilogram of salt-free solvent
+    solvent_molar_mass_basis: M_water in kg/mol when m is mol/kg
+    solvent_activity_standard_state: pure water at campaign temperature and pressure
+sources:
+  haslam_2020:
+    doi: 10.1021/acs.jced.0c00746
+    locator: PDF page 19, printed page 5880, Table 8
+    sha256: ef1d694c61caa1cc9665a9569223d2a7acf3c9b834feea1de9afd9c08e433044
+  hamer_wu_1972_pdf:
+    doi: 10.1063/1.3253108
+    zotero_parent_item_key: 28NPJ5H6
+    zotero_attachment_key: 5RS9QAMK
+    sha256: a20e0029c929b4e1df2cc8cd7aba10ecbbada3dd0f35689a102d16d18fc34ca6
+    official_nist_pdf_sha256: 8399084b29b4db4ce35ab47ed679446dbedb9bf1686f99f43fce7b2073ee4beb
+    byte_stream_note: The Zotero attachment and official NIST download are distinct byte streams of the same article.
+    role: authoritative visual source for Tables 9-11, 16-18, and 28-30
+    definition_locator: equation 3.5, PDF page 6, printed page 1051
+  hamer_wu_1972_mathpix_markdown:
+    sha256: 289c44242c919bc5902dc0eff395c20d29a7285e20c9c8e3432cad48461e2d33
+    role: extraction evidence only; the PDF remains authoritative
+  existing_validation_hamer_wu_csv:
+    sha256: 2f63e13f06a5b0f4e8bca2980b6a8d9d7fb0f839153c43e3a71952daf9796595
+    limitation: gamma-only; omits iodides and eight NaBr rows in the Table-8 range
+repository_reconciliation:
+  miac:
+    KBr: {sha256: 540d6e1fe0270ca686defc12bbfc160f9d47be17d0810cbab7e3c677b653a565, rows_in_range: 23, verified_matches: 23}
+    KCl: {sha256: ffa05e58b0ea7ff941674d5dc353a07bf20722fc354fcac65c0f0585d5a97fd2, rows_in_range: 23, verified_matches: 23}
+    KI: {sha256: a18ffab1772c77b8aad338a5a5deb9cae51d8ba4bcc7ea33f3a0a8d8c5e3b0c5, rows_in_range: 23, verified_matches: 23}
+    LiBr: {sha256: 8daf2ca847a4b901e3f18965d7dfb6788bfb92897534f29b37f5018e9a211760, rows_in_range: 23, verified_matches: 23}
+    LiCl: {sha256: 11cff6dcdb6fe0e8efc19d182243f1cc2b94eafc966f3bcfdc8c05e97c06543e, rows_in_range: 23, verified_matches: 23}
+    LiI: {sha256: c3c65cb0a7d484313515c9bf0b4d709241f274748724f936a891c63ed283253f, rows_in_range: 23, verified_matches: 23}
+    NaBr: {sha256: 90182aed719106b6ca4d946aa451eedc998f2678a3aeaa4a07d4313b88aa084f, rows_in_range: 15, verified_matches: 15, missing_hamer_rows: 8}
+    NaCl: {sha256: 2c2f9d421e79f651694180cce9dcf8f387272a2141ed18e0fdbd2e8fa1ab80a8, rows_in_range: 23, verified_matches: 23}
+    NaI: {sha256: 65f07245438d6f50a61e72f9bbf4ac5d563942c162bad117811e31a2355c9bd4, rows_in_range: 23, verified_matches: 23}
+  osmotic:
+    KBr.csv: {sha256: e2f54b1e9df00307a0f0e061089984572921323e99fbcb536731ef51f7712d46, exact_hamer_rows: 0}
+    NaCl.csv: {sha256: 2ada1c2bd5f4646018eb372581c585ab3801ecf6db984575b5aaaad70383985c, exact_hamer_rows: 0}
+    nacl_kcl_osmotic_coefficients.csv: {sha256: c198c2ef5f92fb3ac2fe47172794d8b5a8874887f98cb3a701c3f0c1ba52f2c4, exact_hamer_rows: 0}
+    coverage_note: No local osmotic file supplies a verified Hamer-Wu row; six salts have no candidate file.
+exact_provider_phi_oracle:
+  salt: LiBr
+  molality_mol_kg: 0.001
+  phi: 0.989
+  locator: Hamer-Wu Table 10, PDF page 19, printed page 1064, first data row
+  haslam_binding: EXACT_HAMER_WU_SUBSET; Table 8 reports LiBr Phi n=23 from reference 179
+extraction:
+  retained_rows: 207
+  rows_per_salt: 23
+  visual_pages_checked: [18, 19, 22, 23, 28, 29]
+  reconciled_ambiguities:
+    - Mathpix prepends unrelated recommended-article metadata.
+    - Mathpix renders the continued NaBr molality headers as iii, III, and Cyrillic sh.
+    - Raw pdftotext reads KBr at 1.4 mol/kg as gamma=0.902; the PDF image and Mathpix table show gamma=0.602.
+  source_character: Hamer-Wu tables are critically evaluated composites; some entries are equation-derived rather than raw observations.
+haslam_average_audit:
+  gamma_reported_percent: 2.71
+  gamma_recomputed_rule: unweighted arithmetic mean of nine saltwise AAD values
+  phi_reported_percent: 0.73
+  phi_recomputed_rule: unweighted arithmetic mean of the six Na/K saltwise AAD values
+  caution: Haslam does not state the pointwise percent-AAD equation in the located paper text.
+missing_exact_selection_evidence:
+  - Haslam row-selection manifest, supporting workbook, or code defining the 12 NaCl gamma and 21 KBr gamma points.
+  - Exact 40-row NaCl Phi compilation from references 181-186.
+  - Exact 37-row KCl Phi compilation from references 181, 188, and 189.
+  - Exact 23-row LiCl Phi subset from reference 180.
+  - Exact 23-row NaBr Phi subset from references 182 and 187.
+  - Identity of the 24th KBr Phi point beyond Hamer-Wu's 23 points in range.
+local_source_availability:
+  available_papers: [179, 180, 181, 182, 183, 184, 186, 187, 188, 189]
+  unavailable_papers: [185]
+  unavailable_detail:
+    reference: 185
+    citation: Childs, C. W.; Platford, R. F. Excess free energies of mixing at temperatures below 25 degrees. Isopiestic measurements on H2O-NaCl-Na2SO4 and H2O-NaCl-MgSO4. Australian Journal of Chemistry 1971, 24, 2487-2491.
+    doi: not established from the local source packet
+    local_search_result: no PDF or extracted dataset located in Zotero or the repository
+    required_role: candidate rows in the 40-point NaCl Phi compilation cited to references 181-186
+  actionable_gap: Even where references 180-189 are locally available, Haslam's row-selection manifest/supporting workbook is absent; paper identity alone cannot reconstruct the exact multi-source Phi compilations or the 12/21-point gamma selections.
+limits:
+  - Matching a paper reference and row count is accepted only when the Hamer-Wu table has exactly the Table-8 count over the stated range.
+  - No row is truncated, duplicated, or interpolated to force a Table-8 count.
+  - The conventional relative percent-AAD formula is used for the cross-EOS comparison but is labeled method_assumption, not source-verified.

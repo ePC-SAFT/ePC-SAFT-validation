@@ -1,6 +1,6 @@
 # Validation Repository Context
 
-This repository owns eight black-box installed-artifact campaigns:
+This repository owns nine black-box installed-artifact campaigns:
 
 - provider Slice 1 neutral, nonassociating PC-SAFT at explicit molar density;
 - Figiel 2025 aqueous LiCl, NaCl, KCl, LiBr, NaBr, and KBr mean ionic
@@ -18,6 +18,8 @@ This repository owns eight black-box installed-artifact campaigns:
 - neutral HELD v1 over the same 17 midpoint feeds, one source-derived
   liquid-side case, and three frozen public pressure-state sampled Gibbs
   audits.
+- Haslam 2020 Table 8 aqueous alkali-halide source evidence and a bounded
+  cross-EOS campaign at 298.15 K and 0.101 MPa.
 
 `governance_doctrine_revision: 2`
 
@@ -88,9 +90,21 @@ statuses are passed for the two returned states and not adjudicated for the
 sixteen fail-closed cases; no failure is relabeled as predictive disagreement.
 Every result retains `globality_certificate=not_guaranteed`.
 
+The Haslam 2020 record binds the 207-row Hamer--Wu source grid and clean
+Provider wheel SHA-256
+`2cd055a159b1cb21c929a3c1b9a7bbb873d6240dea87a2e431a7c5a6c66522c1`.
+The Provider evaluates 138 gamma rows; 92 rows belong to four exact Table-8
+source subsets. All osmotic rows and all iodide gamma rows are
+`NOT_EVALUATED`. NaCl and KBr gamma results use the complete 23-row Hamer--Wu
+grid because Haslam's 12- and 21-row selections are unavailable. Haslam does
+not state the pointwise percent-AAD equation in the located paper text, so the
+cross-EOS comparison labels the conventional relative formula as a method
+assumption. The decision is `HASLAM_TABLE8_PARTIAL_SOURCE_COVERAGE` and has no
+authority effect.
+
 `runtime_source_of_truth: false`
 
-`validation_source_of_truth: provider-slice-1, figiel-2025-miac, esteso-1989-water-ethanol-nacl, held-2012-ethanol-salt-density, held-2012-pure-ethanol-density, pure-saturation-regression, may-2015-methane-ethane-flash, neutral-held-v1`
+`validation_source_of_truth: provider-slice-1, figiel-2025-miac, esteso-1989-water-ethanol-nacl, held-2012-ethanol-salt-density, held-2012-pure-ethanol-density, pure-saturation-regression, may-2015-methane-ethane-flash, neutral-held-v1, haslam-2020-table8-partial-source-coverage`
 
 The executed plan is
 `docs/plans/2026-07-17-neutral-held-v1-validation-plan.md`. It freezes a

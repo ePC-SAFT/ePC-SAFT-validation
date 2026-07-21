@@ -1,0 +1,334 @@
+{
+  "aad_method": {
+    "formula": "100/n * sum(abs((model-experiment)/experiment))",
+    "reason": "Haslam pointwise AAD equation was not located in the paper text or available source packet",
+    "status": "method_assumption"
+  },
+  "artifact": {
+    "direct_url": "file:///home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT-project/artifacts/provider-native-sdk-v1/1d9dd0e/epcsaft-0.1.0.dev0-cp313-cp313-linux_x86_64.whl",
+    "distribution": "epcsaft",
+    "filename": "epcsaft-0.1.0.dev0-cp313-cp313-linux_x86_64.whl",
+    "import_origin": "/tmp/haslam-audit.fGRwsV/venv/lib/python3.13/site-packages/epcsaft/__init__.py",
+    "provider_commit": "1d9dd0e3d944ddfdde68281b94afb9fa93258a60",
+    "provider_tree": "42c36626d5dc712b179870db6e9ef5431ca95a36",
+    "sha256": "2cd055a159b1cb21c929a3c1b9a7bbb873d6240dea87a2e431a7c5a6c66522c1",
+    "version": "0.1.0.dev0",
+    "wheel_record_verification": "PASS",
+    "wheel_record_verified_files": 37
+  },
+  "blockers": [
+    "public Provider osmotic-coefficient observable absent",
+    "iodide species and parameters absent",
+    "exact NaCl and KBr gamma row selections unavailable",
+    "five Phi source subsets unavailable"
+  ],
+  "bundle_fingerprint": "sha256:9f017007adbea2c943dc91c4a8df5271a5400392ae89796b74959aac913b920c",
+  "campaign_decisions": {
+    "EXACT_TABLE8_REPRODUCTION": {
+      "limitation": "not a same-model reproduction; current ePC-SAFT is compared cross-EOS with Haslam SAFT-gamma-Mie",
+      "phi": "NOT_EVALUATED_PUBLIC_OBSERVABLE_ABSENT",
+      "scope": "only observable-specific Hamer-Wu subsets whose 23-row selection exactly matches Haslam Table 8",
+      "status": "PARTIAL_92_SOURCE_ESTABLISHED_GAMMA_ROWS_EVALUATED"
+    },
+    "PARTIAL_HAMER_WU_CROSS_EOS": {
+      "iodides": "NOT_EVALUATED_INSTALLED_COMPONENT_AND_PARAMETERS_ABSENT",
+      "phi": "NOT_EVALUATED_PUBLIC_OBSERVABLE_ABSENT",
+      "scope": "all 23 Hamer-Wu rows for each of six installed Cl/Br salts, including nonexact NaCl and KBr Haslam selections",
+      "status": "COMPLETE_FOR_138_PROVIDER_SUPPORTED_GAMMA_ROWS"
+    }
+  },
+  "campaign_id": "haslam-2020-table8-cross-eos",
+  "conditions": {
+    "basis": "formula-unit molality in water",
+    "molality_range_mol_kg": [
+      0.001,
+      3.0
+    ],
+    "pressure_MPa": 0.101,
+    "temperature_K": 298.15
+  },
+  "coverage": {
+    "current_exact_source_subset_mean_aad_percent": 5.142711865487538,
+    "evaluated_rows": 138,
+    "exact_table8_gamma_rows_evaluated": 92,
+    "exact_table8_phi_rows_evaluated": 0,
+    "not_evaluated_rows": 276
+  },
+  "coverage_by_salt": {
+    "KBr": {
+      "gamma_pm_m": "EVALUATED",
+      "osmotic_coefficient": "NOT_EVALUATED_PUBLIC_OBSERVABLE_ABSENT"
+    },
+    "KCl": {
+      "gamma_pm_m": "EVALUATED",
+      "osmotic_coefficient": "NOT_EVALUATED_PUBLIC_OBSERVABLE_ABSENT"
+    },
+    "KI": {
+      "gamma_pm_m": "NOT_EVALUATED_IODIDE_ABSENT",
+      "osmotic_coefficient": "NOT_EVALUATED_PUBLIC_OBSERVABLE_ABSENT"
+    },
+    "LiBr": {
+      "gamma_pm_m": "EVALUATED",
+      "osmotic_coefficient": "NOT_EVALUATED_PUBLIC_OBSERVABLE_ABSENT"
+    },
+    "LiCl": {
+      "gamma_pm_m": "EVALUATED",
+      "osmotic_coefficient": "NOT_EVALUATED_PUBLIC_OBSERVABLE_ABSENT"
+    },
+    "LiI": {
+      "gamma_pm_m": "NOT_EVALUATED_IODIDE_ABSENT",
+      "osmotic_coefficient": "NOT_EVALUATED_PUBLIC_OBSERVABLE_ABSENT"
+    },
+    "NaBr": {
+      "gamma_pm_m": "EVALUATED",
+      "osmotic_coefficient": "NOT_EVALUATED_PUBLIC_OBSERVABLE_ABSENT"
+    },
+    "NaCl": {
+      "gamma_pm_m": "EVALUATED",
+      "osmotic_coefficient": "NOT_EVALUATED_PUBLIC_OBSERVABLE_ABSENT"
+    },
+    "NaI": {
+      "gamma_pm_m": "NOT_EVALUATED_IODIDE_ABSENT",
+      "osmotic_coefficient": "NOT_EVALUATED_PUBLIC_OBSERVABLE_ABSENT"
+    }
+  },
+  "decision": "HASLAM_TABLE8_PARTIAL_SOURCE_COVERAGE",
+  "decisions": {
+    "artifact": "PASS",
+    "exact_table8_reproduction": "NOT_EVALUATED_FULL_TABLE",
+    "numerical": "FINITE_OUTPUT_ONLY_NO_CONVERGENCE_CERTIFICATE",
+    "physical": "DESCRIPTIVE_PRESSURE_EXTRAPOLATION_1P01_BAR_VS_REPORTED_1_BAR_DOMAIN",
+    "predictive": "DESCRIPTIVE_CROSS_EOS_NO_ACCEPTANCE_CUTOFF",
+    "solver": "NOT_ADJUDICATED_PUBLIC_API_EXPOSES_NO_POINT_SOLVER_DIAGNOSTIC",
+    "source": "PARTIAL_SOURCE_COVERAGE"
+  },
+  "execution": {
+    "argv": [
+      "campaigns/haslam_2020_table8.py",
+      "--artifact",
+      "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT-project/artifacts/provider-native-sdk-v1/1d9dd0e/epcsaft-0.1.0.dev0-cp313-cp313-linux_x86_64.whl",
+      "--output",
+      "results/haslam-2020-table8.json",
+      "--rows",
+      "results/haslam-2020-table8.csv",
+      "--comparison",
+      "results/haslam-2020-table8-aad-comparison.csv"
+    ],
+    "cwd": "/home/tnnrpolley21/.codex/worktrees/ad2b/ePC-SAFT-validation",
+    "environment_recipe": "uv venv --python 3.13 <temp>/venv; uv pip install --python <temp>/venv/bin/python <exact-wheel>; <temp>/venv/bin/python -I campaigns/haslam_2020_table8.py ...",
+    "isolated_mode": true,
+    "python_executable": "/tmp/haslam-audit.fGRwsV/venv/bin/python",
+    "python_implementation": "CPython",
+    "python_version": "3.13.14"
+  },
+  "interaction_semantics": {
+    "k_ij": "retained from queried public PairParameterRecord objects, including explicit published zeros",
+    "k_ij_hb": "ABSENT_FROM_PUBLIC_BUNDLE_RECORDS_NO_DEFAULT_INFERRED",
+    "l_ij": "ABSENT_FROM_PUBLIC_BUNDLE_RECORDS_NO_DEFAULT_INFERRED"
+  },
+  "parameter_set_fingerprints": {
+    "KBr": "sha256:1d498278767a568e2120286f27f98a0b79268c92a68805d85ca30a21f14f3284",
+    "KCl": "sha256:d29cef0c0f63034436d547d0aafa57934effe06783c8dffd89c94fa85e6940f4",
+    "LiBr": "sha256:1258d8f76ddb4300d4983e70a2efa107b5cdc468748fe8760a04f82c4de38668",
+    "LiCl": "sha256:1bb528ebe8f5612757e148608fc55821f9fb03737dbcec6d0bc4fffd0f4cbc4c",
+    "NaBr": "sha256:b46a48ee5025e15a2d063b6f3ca4de54e29c33d429b94940913a9d225c78456b",
+    "NaCl": "sha256:7c637771bc9f717b8f47b44bb2a61044c3fe83084dca7c3c16102fba0989912d"
+  },
+  "public_capability_evidence": {
+    "component_ids": [
+      "bromide-anion",
+      "chloride-anion",
+      "ethanol",
+      "lithium-cation",
+      "methanol",
+      "potassium-cation",
+      "sodium-cation",
+      "water"
+    ],
+    "derived_supported_salts": [
+      "LiCl",
+      "LiBr",
+      "NaCl",
+      "NaBr",
+      "KCl",
+      "KBr"
+    ],
+    "iodide_component_present": false,
+    "queried_molality_state_attributes": {
+      "mean_ionic_activity_coefficient_molality": true,
+      "practical_osmotic_coefficient_molality": false
+    },
+    "record_families": [
+      "NO_FAMILY_ATTRIBUTE",
+      "association_energy_over_k",
+      "association_volume",
+      "born_diameter",
+      "charge_number",
+      "dielectric_ion_suppression_coefficient",
+      "dispersion_energy_over_k",
+      "ionic_region_relative_permittivity",
+      "k_ij",
+      "molar_mass",
+      "relative_permittivity",
+      "segment_count",
+      "segment_diameter",
+      "solvation_factor"
+    ],
+    "selected_k_ij_records": [
+      {
+        "component_id_a": "bromide-anion",
+        "component_id_b": "lithium-cation",
+        "domain_id": "figiel-298-k-1-bar",
+        "family": "k_ij",
+        "locator": "Table 4, Br- row, Li+ column",
+        "record_id": "lithium-bromide-kij",
+        "source_id": "figiel-yu-held-2025",
+        "value": "0.5"
+      },
+      {
+        "component_id_a": "chloride-anion",
+        "component_id_b": "lithium-cation",
+        "domain_id": "figiel-298-k-1-bar",
+        "family": "k_ij",
+        "locator": "Table 4, Cl- row, Li+ column",
+        "record_id": "lithium-chloride-kij",
+        "source_id": "figiel-yu-held-2025",
+        "value": "0.8"
+      },
+      {
+        "component_id_a": "bromide-anion",
+        "component_id_b": "potassium-cation",
+        "domain_id": "figiel-298-k-1-bar",
+        "family": "k_ij",
+        "locator": "Table 4, Br- row, K+ column",
+        "record_id": "potassium-bromide-kij",
+        "source_id": "figiel-yu-held-2025",
+        "value": "-0.35"
+      },
+      {
+        "component_id_a": "chloride-anion",
+        "component_id_b": "potassium-cation",
+        "domain_id": "figiel-298-k-1-bar",
+        "family": "k_ij",
+        "locator": "Table 4, Cl- row, K+ column",
+        "record_id": "potassium-chloride-kij",
+        "source_id": "figiel-yu-held-2025",
+        "value": "0"
+      },
+      {
+        "component_id_a": "bromide-anion",
+        "component_id_b": "sodium-cation",
+        "domain_id": "figiel-298-k-1-bar",
+        "family": "k_ij",
+        "locator": "Table 4, Br- row, Na+ column",
+        "record_id": "sodium-bromide-kij",
+        "source_id": "figiel-yu-held-2025",
+        "value": "0.65"
+      },
+      {
+        "component_id_a": "chloride-anion",
+        "component_id_b": "sodium-cation",
+        "domain_id": "figiel-298-k-1-bar",
+        "family": "k_ij",
+        "locator": "Table 4, Cl- row, Na+ column",
+        "record_id": "sodium-chloride-kij",
+        "source_id": "figiel-yu-held-2025",
+        "value": "0.8"
+      },
+      {
+        "component_id_a": "bromide-anion",
+        "component_id_b": "water",
+        "domain_id": "figiel-298-k-1-bar",
+        "family": "k_ij",
+        "locator": "Table 5, Br- row, water column",
+        "record_id": "water-bromide-kij",
+        "source_id": "figiel-yu-held-2025",
+        "value": "-0.3"
+      },
+      {
+        "component_id_a": "chloride-anion",
+        "component_id_b": "water",
+        "domain_id": "figiel-298-k-1-bar",
+        "family": "k_ij",
+        "locator": "Table 5, Cl- row, water column",
+        "record_id": "water-chloride-kij",
+        "source_id": "figiel-yu-held-2025",
+        "value": "-0.3"
+      },
+      {
+        "component_id_a": "lithium-cation",
+        "component_id_b": "water",
+        "domain_id": "figiel-298-k-1-bar",
+        "family": "k_ij",
+        "locator": "Table 5, Li+ row, water column",
+        "record_id": "water-lithium-kij",
+        "source_id": "figiel-yu-held-2025",
+        "value": "-0.4"
+      },
+      {
+        "component_id_a": "potassium-cation",
+        "component_id_b": "water",
+        "domain_id": "figiel-298-k-1-bar",
+        "family": "k_ij",
+        "locator": "Table 5, K+ row, water column",
+        "record_id": "water-potassium-kij",
+        "source_id": "figiel-yu-held-2025",
+        "value": "-0.1"
+      },
+      {
+        "component_id_a": "sodium-cation",
+        "component_id_b": "water",
+        "domain_id": "figiel-298-k-1-bar",
+        "family": "k_ij",
+        "locator": "Table 5, Na+ row, water column",
+        "record_id": "water-sodium-kij",
+        "source_id": "figiel-yu-held-2025",
+        "value": "-0.3"
+      }
+    ]
+  },
+  "reference_diagnostics": {
+    "KBr": {
+      "log_fugacity_convergence_error": 1.062838622090112e-05,
+      "reference_molality_mol_kg": 1e-12
+    },
+    "KCl": {
+      "log_fugacity_convergence_error": 1.062839899645951e-05,
+      "reference_molality_mol_kg": 1e-12
+    },
+    "LiBr": {
+      "log_fugacity_convergence_error": 1.062832087939114e-05,
+      "reference_molality_mol_kg": 1e-12
+    },
+    "LiCl": {
+      "log_fugacity_convergence_error": 1.062832714637807e-05,
+      "reference_molality_mol_kg": 1e-12
+    },
+    "NaBr": {
+      "log_fugacity_convergence_error": 1.0628335502360642e-05,
+      "reference_molality_mol_kg": 1e-12
+    },
+    "NaCl": {
+      "log_fugacity_convergence_error": 1.0628333455997563e-05,
+      "reference_molality_mol_kg": 1e-12
+    }
+  },
+  "retained_outputs": {
+    "comparison_csv": {
+      "path": "results/haslam-2020-table8-aad-comparison.csv",
+      "sha256": "593cc9720d4f7c8b5483e9d88723dfdab96dcc7a82bf42d361d5e6ba031339b6"
+    },
+    "rows_csv": {
+      "path": "results/haslam-2020-table8.csv",
+      "sha256": "4c30654f2948680cb88040fb661271955d2519d5eb83ba114d552f769b867fea"
+    }
+  },
+  "schema_version": 1,
+  "source_data": {
+    "filename": "hamer-wu-1972-haslam-table8.csv",
+    "rows": 207,
+    "sha256": "e2f4661b984fcca3b3fafa13a3f154d2e2baf8424b341d45fd2eaa8b8dcd38c3",
+    "source_ledger_sha256": "521cd1cc6105b6e0e8904fd8d8e2e699b4607b4552a852f7397911d5081c2387",
+    "target_ledger_sha256": "4a75a2826f5dfaa7ce49616c81b02002eb2a0a132031155249fecf3f042b1ca6"
+  }
+}
