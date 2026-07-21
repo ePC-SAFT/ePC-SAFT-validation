@@ -8,7 +8,8 @@ Active campaigns: provider Slice 1 explicit-density neutral EOS, Figiel 2025
 aqueous alkali-halide MIAC reproduction, Esteso 1989 mixed-solvent NaCl MIAC,
 Held 2012 ethanol-salt density, the Held 2012 directly measured pure-ethanol
 density, pure-saturation regression, May 2015 methane/ethane local flash, and
-the bounded neutral HELD v1 installed-artifact campaign.
+the bounded neutral HELD v1 installed-artifact campaign, plus the Haslam 2020
+Table-8 partial-source cross-EOS campaign.
 
 This repository will own black-box installed-artifact, cross-package, and
 literature acceptance evidence. It will not own production algorithms, private
@@ -28,6 +29,17 @@ retains predictions and a hash-bound JSON receipt. The source range stops at
 6 mol/kg, matching the model range in Figiel 2025 Figure 5; no figure points
 were digitized and no parameters are fitted here. Render the retained CSV with
 `campaigns/plot_figiel_2025_miac.py`; plotting never recomputes the EOS.
+
+`campaigns/haslam_2020_table8.py` evaluates the complete 23-point Hamer--Wu
+grid from 0.001 to 3.0 mol/kg against one installed clean Provider wheel at
+298.15 K and 0.101 MPa. The source ledger identifies exact Table-8 subsets
+without truncating rows to match Haslam's counts. The Provider evaluates both
+gamma and Phi for six chloride/bromide salts plus NaI and KI; LiI remains
+fail-closed because no source-backed Li+/I- interaction is published.
+`campaigns/plot_haslam_2020_table8.py` renders retained rows
+without importing the Provider; `results/haslam-2020-table8-manifest.json`
+hash-binds the result tables, receipt, and three plot formats. The decision is
+`HASLAM_TABLE8_PARTIAL_SOURCE_COVERAGE`.
 
 `campaigns/provider_real_data.py` adds three small predictive campaigns using
 only direct tabular experiments: 92 Esteso Table I NaCl activity-coefficient

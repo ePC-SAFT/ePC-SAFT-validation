@@ -1,0 +1,587 @@
+{
+  "aad_method": {
+    "formula": "100/n * sum(abs((model-experiment)/experiment))",
+    "reason": "Haslam pointwise AAD equation was not located in the paper text or available source packet",
+    "status": "method_assumption"
+  },
+  "artifact": {
+    "direct_url": "file:///home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT-project/artifacts/provider-native-sdk-v1/53b0b74/epcsaft-0.1.0.dev0-cp313-cp313-linux_x86_64.whl",
+    "distribution": "epcsaft",
+    "filename": "epcsaft-0.1.0.dev0-cp313-cp313-linux_x86_64.whl",
+    "import_origin": "/tmp/haslam-osmotic.O1Secw/venv/lib/python3.13/site-packages/epcsaft/__init__.py",
+    "provider_commit": "53b0b74bf5de86d459c49eb2cc7e75b7cfd4ce3e",
+    "provider_tree": "1750d04a84f3733e62eb32fb859d323243dddce9",
+    "sha256": "961156a641435e33746a65d07d97e07a40243e0cfdf870932bd79961783afa96",
+    "version": "0.1.0.dev0",
+    "wheel_record_verification": "PASS",
+    "wheel_record_verified_files": 45
+  },
+  "blockers": [
+    "LiI lacks a published Li+/I- interaction and remains not evaluated",
+    "exact NaCl and KBr gamma row selections unavailable",
+    "exact Haslam Phi row-selection manifest unavailable"
+  ],
+  "bundle_fingerprints": {
+    "figiel-2025-aqueous-iodides": "sha256:3833b38c72f3de554958cb424285da278fe6444e8d150521cd525bb47f9f0784",
+    "figiel-2025-reference-electrolytes": "sha256:9f017007adbea2c943dc91c4a8df5271a5400392ae89796b74959aac913b920c"
+  },
+  "campaign_decisions": {
+    "EXACT_TABLE8_REPRODUCTION": {
+      "limitation": "not a same-model reproduction; current ePC-SAFT is compared cross-EOS with Haslam SAFT-gamma-Mie",
+      "phi": "NO_EXACT_HASLAM_SELECTED_ROWS_SOURCE_ESTABLISHED",
+      "scope": "only observable-specific Hamer-Wu subsets whose 23-row selection exactly matches Haslam Table 8",
+      "status": "PARTIAL_138_SOURCE_ESTABLISHED_GAMMA_ROWS_EVALUATED"
+    },
+    "PARTIAL_HAMER_WU_CROSS_EOS": {
+      "iodides": "NAI_AND_KI_EVALUATED_LII_NOT_EVALUATED_MISSING_LI_I_INTERACTION",
+      "phi": "EVALUATED_184_PARTIAL_SOURCE_GRID_ROWS",
+      "scope": "Phi and gamma on all 23 Hamer-Wu rows for eight source-complete installed salts",
+      "status": "COMPLETE_FOR_368_PROVIDER_SUPPORTED_ROWS"
+    }
+  },
+  "campaign_id": "haslam-2020-table8-cross-eos",
+  "conditions": {
+    "basis": "formula-unit molality in water",
+    "molality_range_mol_kg": [
+      0.001,
+      3.0
+    ],
+    "pressure_MPa": 0.101,
+    "temperature_K": 298.15
+  },
+  "coverage": {
+    "current_exact_source_subset_mean_aad_percent": 4.511241431451315,
+    "evaluated_rows": 368,
+    "exact_table8_gamma_rows_evaluated": 138,
+    "exact_table8_phi_rows_evaluated": 0,
+    "not_evaluated_rows": 46
+  },
+  "coverage_by_salt": {
+    "KBr": {
+      "gamma_pm_m": "EVALUATED",
+      "osmotic_coefficient": "EVALUATED"
+    },
+    "KCl": {
+      "gamma_pm_m": "EVALUATED",
+      "osmotic_coefficient": "EVALUATED"
+    },
+    "KI": {
+      "gamma_pm_m": "EVALUATED",
+      "osmotic_coefficient": "EVALUATED"
+    },
+    "LiBr": {
+      "gamma_pm_m": "EVALUATED",
+      "osmotic_coefficient": "EVALUATED"
+    },
+    "LiCl": {
+      "gamma_pm_m": "EVALUATED",
+      "osmotic_coefficient": "EVALUATED"
+    },
+    "LiI": {
+      "gamma_pm_m": "NOT_EVALUATED_MISSING_LI_I_INTERACTION",
+      "osmotic_coefficient": "NOT_EVALUATED_MISSING_LI_I_INTERACTION"
+    },
+    "NaBr": {
+      "gamma_pm_m": "EVALUATED",
+      "osmotic_coefficient": "EVALUATED"
+    },
+    "NaCl": {
+      "gamma_pm_m": "EVALUATED",
+      "osmotic_coefficient": "EVALUATED"
+    },
+    "NaI": {
+      "gamma_pm_m": "EVALUATED",
+      "osmotic_coefficient": "EVALUATED"
+    }
+  },
+  "decision": "HASLAM_TABLE8_PARTIAL_SOURCE_COVERAGE",
+  "decisions": {
+    "artifact": "PASS",
+    "exact_table8_reproduction": "NOT_EVALUATED_FULL_TABLE",
+    "numerical": "FINITE_OUTPUT_ONLY_NO_CONVERGENCE_CERTIFICATE",
+    "physical": "DESCRIPTIVE_PRESSURE_EXTRAPOLATION_1P01_BAR_VS_REPORTED_1_BAR_DOMAIN",
+    "predictive": "DESCRIPTIVE_CROSS_EOS_NO_ACCEPTANCE_CUTOFF",
+    "solver": "NOT_ADJUDICATED_PUBLIC_API_EXPOSES_NO_POINT_SOLVER_DIAGNOSTIC",
+    "source": "PARTIAL_SOURCE_COVERAGE"
+  },
+  "execution": {
+    "argv": [
+      "campaigns/haslam_2020_table8.py",
+      "--artifact",
+      "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT-project/artifacts/provider-native-sdk-v1/53b0b74/epcsaft-0.1.0.dev0-cp313-cp313-linux_x86_64.whl",
+      "--output",
+      "results/haslam-2020-table8.json",
+      "--rows",
+      "results/haslam-2020-table8.csv",
+      "--comparison",
+      "results/haslam-2020-table8-aad-comparison.csv"
+    ],
+    "cwd": "/home/tnnrpolley21/.codex/worktrees/ad2b/ePC-SAFT-validation",
+    "environment_recipe": "uv venv --python 3.13 <temp>/venv; uv pip install --python <temp>/venv/bin/python <exact-wheel>; <temp>/venv/bin/python -I campaigns/haslam_2020_table8.py ...",
+    "isolated_mode": true,
+    "python_executable": "/tmp/haslam-osmotic.O1Secw/venv/bin/python",
+    "python_implementation": "CPython",
+    "python_version": "3.13.14"
+  },
+  "interaction_semantics": {
+    "k_ij": "retained from queried public PairParameterRecord objects, including explicit published zeros",
+    "k_ij_hb": "ABSENT_FROM_PUBLIC_BUNDLE_RECORDS_NO_DEFAULT_INFERRED",
+    "l_ij": "ABSENT_FROM_PUBLIC_BUNDLE_RECORDS_NO_DEFAULT_INFERRED"
+  },
+  "parameter_set_fingerprints": {
+    "KBr": "sha256:1d498278767a568e2120286f27f98a0b79268c92a68805d85ca30a21f14f3284",
+    "KCl": "sha256:d29cef0c0f63034436d547d0aafa57934effe06783c8dffd89c94fa85e6940f4",
+    "KI": "sha256:c1032fd48e76a942f1a1fd720f43b6a1e4e53f62a095d79db9643597cb8353eb",
+    "LiBr": "sha256:1258d8f76ddb4300d4983e70a2efa107b5cdc468748fe8760a04f82c4de38668",
+    "LiCl": "sha256:1bb528ebe8f5612757e148608fc55821f9fb03737dbcec6d0bc4fffd0f4cbc4c",
+    "NaBr": "sha256:b46a48ee5025e15a2d063b6f3ca4de54e29c33d429b94940913a9d225c78456b",
+    "NaCl": "sha256:7c637771bc9f717b8f47b44bb2a61044c3fe83084dca7c3c16102fba0989912d",
+    "NaI": "sha256:afdf4e6178125e94395895c57ca6833b7a6679aa7b42bdf7d969d78c90a305ce"
+  },
+  "public_capability_evidence": {
+    "component_ids": {
+      "figiel-2025-aqueous-iodides": [
+        "iodide-anion",
+        "potassium-cation",
+        "sodium-cation",
+        "water"
+      ],
+      "figiel-2025-reference-electrolytes": [
+        "bromide-anion",
+        "chloride-anion",
+        "ethanol",
+        "lithium-cation",
+        "methanol",
+        "potassium-cation",
+        "sodium-cation",
+        "water"
+      ]
+    },
+    "derived_supported_salts": [
+      "LiCl",
+      "LiBr",
+      "NaCl",
+      "NaBr",
+      "KCl",
+      "KBr",
+      "NaI",
+      "KI"
+    ],
+    "iodide_component_present": true,
+    "queried_molality_state_attributes": {
+      "figiel-2025-aqueous-iodides": {
+        "mean_ionic_activity_coefficient_molality": true,
+        "practical_osmotic_coefficient_molality": true
+      },
+      "figiel-2025-reference-electrolytes": {
+        "mean_ionic_activity_coefficient_molality": true,
+        "practical_osmotic_coefficient_molality": true
+      }
+    },
+    "record_families": {
+      "figiel-2025-aqueous-iodides": [
+        "NO_FAMILY_ATTRIBUTE",
+        "association_energy_over_k",
+        "association_volume",
+        "born_diameter",
+        "charge_number",
+        "dielectric_ion_suppression_coefficient",
+        "dispersion_energy_over_k",
+        "ionic_region_relative_permittivity",
+        "k_ij",
+        "molar_mass",
+        "relative_permittivity",
+        "segment_count",
+        "segment_diameter",
+        "solvation_factor"
+      ],
+      "figiel-2025-reference-electrolytes": [
+        "NO_FAMILY_ATTRIBUTE",
+        "association_energy_over_k",
+        "association_volume",
+        "born_diameter",
+        "charge_number",
+        "dielectric_ion_suppression_coefficient",
+        "dispersion_energy_over_k",
+        "ionic_region_relative_permittivity",
+        "k_ij",
+        "molar_mass",
+        "relative_permittivity",
+        "segment_count",
+        "segment_diameter",
+        "solvation_factor"
+      ]
+    },
+    "selected_k_ij_records": [
+      {
+        "bundle": "figiel-2025-reference-electrolytes",
+        "component_id_a": "bromide-anion",
+        "component_id_b": "ethanol",
+        "domain_id": "figiel-298-k-1-bar",
+        "family": "k_ij",
+        "locator": "Table 5, Br- row, ethanol column",
+        "record_id": "ethanol-bromide-kij",
+        "source_id": "figiel-yu-held-2025",
+        "value": "0"
+      },
+      {
+        "bundle": "figiel-2025-reference-electrolytes",
+        "component_id_a": "chloride-anion",
+        "component_id_b": "ethanol",
+        "domain_id": "figiel-298-k-1-bar",
+        "family": "k_ij",
+        "locator": "Table 5, Cl- row, ethanol column",
+        "record_id": "ethanol-chloride-kij",
+        "source_id": "figiel-yu-held-2025",
+        "value": "0.8"
+      },
+      {
+        "bundle": "figiel-2025-reference-electrolytes",
+        "component_id_a": "ethanol",
+        "component_id_b": "lithium-cation",
+        "domain_id": "figiel-298-k-1-bar",
+        "family": "k_ij",
+        "locator": "Table 5, Li+ row, ethanol column",
+        "record_id": "ethanol-lithium-kij",
+        "source_id": "figiel-yu-held-2025",
+        "value": "-0.8"
+      },
+      {
+        "bundle": "figiel-2025-reference-electrolytes",
+        "component_id_a": "ethanol",
+        "component_id_b": "potassium-cation",
+        "domain_id": "figiel-298-k-1-bar",
+        "family": "k_ij",
+        "locator": "Table 5, K+ row, ethanol column",
+        "record_id": "ethanol-potassium-kij",
+        "source_id": "figiel-yu-held-2025",
+        "value": "0.53"
+      },
+      {
+        "bundle": "figiel-2025-reference-electrolytes",
+        "component_id_a": "ethanol",
+        "component_id_b": "sodium-cation",
+        "domain_id": "figiel-298-k-1-bar",
+        "family": "k_ij",
+        "locator": "Table 5, Na+ row, ethanol column",
+        "record_id": "ethanol-sodium-kij",
+        "source_id": "figiel-yu-held-2025",
+        "value": "0.05"
+      },
+      {
+        "bundle": "figiel-2025-reference-electrolytes",
+        "component_id_a": "bromide-anion",
+        "component_id_b": "lithium-cation",
+        "domain_id": "figiel-298-k-1-bar",
+        "family": "k_ij",
+        "locator": "Table 4, Br- row, Li+ column",
+        "record_id": "lithium-bromide-kij",
+        "source_id": "figiel-yu-held-2025",
+        "value": "0.5"
+      },
+      {
+        "bundle": "figiel-2025-reference-electrolytes",
+        "component_id_a": "chloride-anion",
+        "component_id_b": "lithium-cation",
+        "domain_id": "figiel-298-k-1-bar",
+        "family": "k_ij",
+        "locator": "Table 4, Cl- row, Li+ column",
+        "record_id": "lithium-chloride-kij",
+        "source_id": "figiel-yu-held-2025",
+        "value": "0.8"
+      },
+      {
+        "bundle": "figiel-2025-reference-electrolytes",
+        "component_id_a": "bromide-anion",
+        "component_id_b": "methanol",
+        "domain_id": "figiel-298-k-1-bar",
+        "family": "k_ij",
+        "locator": "Table 5, Br- row, methanol column",
+        "record_id": "methanol-bromide-kij",
+        "source_id": "figiel-yu-held-2025",
+        "value": "0.15"
+      },
+      {
+        "bundle": "figiel-2025-reference-electrolytes",
+        "component_id_a": "chloride-anion",
+        "component_id_b": "methanol",
+        "domain_id": "figiel-298-k-1-bar",
+        "family": "k_ij",
+        "locator": "Table 5, Cl- row, methanol column",
+        "record_id": "methanol-chloride-kij",
+        "source_id": "figiel-yu-held-2025",
+        "value": "0.5"
+      },
+      {
+        "bundle": "figiel-2025-reference-electrolytes",
+        "component_id_a": "lithium-cation",
+        "component_id_b": "methanol",
+        "domain_id": "figiel-298-k-1-bar",
+        "family": "k_ij",
+        "locator": "Table 5, Li+ row, methanol column",
+        "record_id": "methanol-lithium-kij",
+        "source_id": "figiel-yu-held-2025",
+        "value": "-0.9"
+      },
+      {
+        "bundle": "figiel-2025-reference-electrolytes",
+        "component_id_a": "methanol",
+        "component_id_b": "potassium-cation",
+        "domain_id": "figiel-298-k-1-bar",
+        "family": "k_ij",
+        "locator": "Table 5, K+ row, methanol column",
+        "record_id": "methanol-potassium-kij",
+        "source_id": "figiel-yu-held-2025",
+        "value": "0.32"
+      },
+      {
+        "bundle": "figiel-2025-reference-electrolytes",
+        "component_id_a": "methanol",
+        "component_id_b": "sodium-cation",
+        "domain_id": "figiel-298-k-1-bar",
+        "family": "k_ij",
+        "locator": "Table 5, Na+ row, methanol column",
+        "record_id": "methanol-sodium-kij",
+        "source_id": "figiel-yu-held-2025",
+        "value": "-0.25"
+      },
+      {
+        "bundle": "figiel-2025-reference-electrolytes",
+        "component_id_a": "bromide-anion",
+        "component_id_b": "potassium-cation",
+        "domain_id": "figiel-298-k-1-bar",
+        "family": "k_ij",
+        "locator": "Table 4, Br- row, K+ column",
+        "record_id": "potassium-bromide-kij",
+        "source_id": "figiel-yu-held-2025",
+        "value": "-0.35"
+      },
+      {
+        "bundle": "figiel-2025-reference-electrolytes",
+        "component_id_a": "chloride-anion",
+        "component_id_b": "potassium-cation",
+        "domain_id": "figiel-298-k-1-bar",
+        "family": "k_ij",
+        "locator": "Table 4, Cl- row, K+ column",
+        "record_id": "potassium-chloride-kij",
+        "source_id": "figiel-yu-held-2025",
+        "value": "0"
+      },
+      {
+        "bundle": "figiel-2025-reference-electrolytes",
+        "component_id_a": "bromide-anion",
+        "component_id_b": "sodium-cation",
+        "domain_id": "figiel-298-k-1-bar",
+        "family": "k_ij",
+        "locator": "Table 4, Br- row, Na+ column",
+        "record_id": "sodium-bromide-kij",
+        "source_id": "figiel-yu-held-2025",
+        "value": "0.65"
+      },
+      {
+        "bundle": "figiel-2025-reference-electrolytes",
+        "component_id_a": "chloride-anion",
+        "component_id_b": "sodium-cation",
+        "domain_id": "figiel-298-k-1-bar",
+        "family": "k_ij",
+        "locator": "Table 4, Cl- row, Na+ column",
+        "record_id": "sodium-chloride-kij",
+        "source_id": "figiel-yu-held-2025",
+        "value": "0.8"
+      },
+      {
+        "bundle": "figiel-2025-reference-electrolytes",
+        "component_id_a": "bromide-anion",
+        "component_id_b": "water",
+        "domain_id": "figiel-298-k-1-bar",
+        "family": "k_ij",
+        "locator": "Table 5, Br- row, water column",
+        "record_id": "water-bromide-kij",
+        "source_id": "figiel-yu-held-2025",
+        "value": "-0.3"
+      },
+      {
+        "bundle": "figiel-2025-reference-electrolytes",
+        "component_id_a": "chloride-anion",
+        "component_id_b": "water",
+        "domain_id": "figiel-298-k-1-bar",
+        "family": "k_ij",
+        "locator": "Table 5, Cl- row, water column",
+        "record_id": "water-chloride-kij",
+        "source_id": "figiel-yu-held-2025",
+        "value": "-0.3"
+      },
+      {
+        "bundle": "figiel-2025-reference-electrolytes",
+        "component_id_a": "ethanol",
+        "component_id_b": "water",
+        "domain_id": "figiel-298-k-1-bar",
+        "family": "k_ij",
+        "locator": "Table 5, ethanol row, water column",
+        "record_id": "water-ethanol-kij",
+        "source_id": "figiel-yu-held-2025",
+        "value": "-0.0617"
+      },
+      {
+        "bundle": "figiel-2025-reference-electrolytes",
+        "component_id_a": "lithium-cation",
+        "component_id_b": "water",
+        "domain_id": "figiel-298-k-1-bar",
+        "family": "k_ij",
+        "locator": "Table 5, Li+ row, water column",
+        "record_id": "water-lithium-kij",
+        "source_id": "figiel-yu-held-2025",
+        "value": "-0.4"
+      },
+      {
+        "bundle": "figiel-2025-reference-electrolytes",
+        "component_id_a": "methanol",
+        "component_id_b": "water",
+        "domain_id": "figiel-298-k-1-bar",
+        "family": "k_ij",
+        "locator": "Table 5, methanol row, water column",
+        "record_id": "water-methanol-kij",
+        "source_id": "figiel-yu-held-2025",
+        "value": "-0.0878"
+      },
+      {
+        "bundle": "figiel-2025-reference-electrolytes",
+        "component_id_a": "potassium-cation",
+        "component_id_b": "water",
+        "domain_id": "figiel-298-k-1-bar",
+        "family": "k_ij",
+        "locator": "Table 5, K+ row, water column",
+        "record_id": "water-potassium-kij",
+        "source_id": "figiel-yu-held-2025",
+        "value": "-0.1"
+      },
+      {
+        "bundle": "figiel-2025-reference-electrolytes",
+        "component_id_a": "sodium-cation",
+        "component_id_b": "water",
+        "domain_id": "figiel-298-k-1-bar",
+        "family": "k_ij",
+        "locator": "Table 5, Na+ row, water column",
+        "record_id": "water-sodium-kij",
+        "source_id": "figiel-yu-held-2025",
+        "value": "-0.3"
+      },
+      {
+        "bundle": "figiel-2025-aqueous-iodides",
+        "component_id_a": "iodide-anion",
+        "component_id_b": "potassium-cation",
+        "domain_id": "figiel-298-k-1-bar",
+        "family": "k_ij",
+        "locator": "Table 4, I- row, K+ column; explicit fitted zero",
+        "record_id": "potassium-iodide-kij",
+        "source_id": "figiel-yu-held-2025",
+        "value": "0"
+      },
+      {
+        "bundle": "figiel-2025-aqueous-iodides",
+        "component_id_a": "iodide-anion",
+        "component_id_b": "sodium-cation",
+        "domain_id": "figiel-298-k-1-bar",
+        "family": "k_ij",
+        "locator": "Table 4, I- row, Na+ column; fitted in this work",
+        "record_id": "sodium-iodide-kij",
+        "source_id": "figiel-yu-held-2025",
+        "value": "0.45"
+      },
+      {
+        "bundle": "figiel-2025-aqueous-iodides",
+        "component_id_a": "iodide-anion",
+        "component_id_b": "water",
+        "domain_id": "figiel-298-k-1-bar",
+        "family": "k_ij",
+        "locator": "Table 5, I- row, water column; fitted in this work",
+        "record_id": "water-iodide-kij",
+        "source_id": "figiel-yu-held-2025",
+        "value": "-0.05"
+      },
+      {
+        "bundle": "figiel-2025-aqueous-iodides",
+        "component_id_a": "potassium-cation",
+        "component_id_b": "water",
+        "domain_id": "figiel-298-k-1-bar",
+        "family": "k_ij",
+        "locator": "Table 5, K+ row, water column",
+        "record_id": "water-potassium-kij",
+        "source_id": "figiel-yu-held-2025",
+        "value": "-0.1"
+      },
+      {
+        "bundle": "figiel-2025-aqueous-iodides",
+        "component_id_a": "sodium-cation",
+        "component_id_b": "water",
+        "domain_id": "figiel-298-k-1-bar",
+        "family": "k_ij",
+        "locator": "Table 5, Na+ row, water column",
+        "record_id": "water-sodium-kij",
+        "source_id": "figiel-yu-held-2025",
+        "value": "-0.3"
+      }
+    ]
+  },
+  "reference_diagnostics": {
+    "KBr": {
+      "log_fugacity_convergence_error": 1.062838622090112e-05,
+      "reference_molality_mol_kg": 1e-12
+    },
+    "KCl": {
+      "log_fugacity_convergence_error": 1.062839899645951e-05,
+      "reference_molality_mol_kg": 1e-12
+    },
+    "KI": {
+      "log_fugacity_convergence_error": 1.06283373355609e-05,
+      "reference_molality_mol_kg": 1e-12
+    },
+    "LiBr": {
+      "log_fugacity_convergence_error": 1.062832087939114e-05,
+      "reference_molality_mol_kg": 1e-12
+    },
+    "LiCl": {
+      "log_fugacity_convergence_error": 1.062832714637807e-05,
+      "reference_molality_mol_kg": 1e-12
+    },
+    "NaBr": {
+      "log_fugacity_convergence_error": 1.0628335502360642e-05,
+      "reference_molality_mol_kg": 1e-12
+    },
+    "NaCl": {
+      "log_fugacity_convergence_error": 1.0628333455997563e-05,
+      "reference_molality_mol_kg": 1e-12
+    },
+    "NaI": {
+      "log_fugacity_convergence_error": 1.0628344739416207e-05,
+      "reference_molality_mol_kg": 1e-12
+    }
+  },
+  "retained_outputs": {
+    "comparison_csv": {
+      "path": "results/haslam-2020-table8-aad-comparison.csv",
+      "sha256": "3fc133cc6a575381facad151c2a6ff44199ad8ce40c6e6e57409dde35ba1f37e"
+    },
+    "rows_csv": {
+      "path": "results/haslam-2020-table8.csv",
+      "sha256": "381454f46e0f320e8d81c71cdf0481ddc66f7d9d1ed2525c0f86348406d1a885"
+    }
+  },
+  "schema_version": 1,
+  "source_data": {
+    "canonical_provider_source_binding": {
+      "ledger_path": "data/haslam-2020-osmotic-provider-source-ledger.yaml",
+      "ledger_sha256": "b12d592b7886e5b8701103c3a41f5b211b3b46b1f5b617f345bc5e3f793c3741",
+      "role": "referenced canonical property-definition packet; not copied into this campaign",
+      "source_row_path": "data/haslam-2020-osmotic-provider-source-row.csv",
+      "source_row_sha256": "fa2e68e8bc1224f2c6d5b80ad79e6643a08b5944276274067084c40aee2b4f45",
+      "validation_commit": "8d34f64f42201a564f2fa958f3d8552650abc4da",
+      "validation_tree": "bb4b2e60a966792a8d6bdf159055be625170cb98"
+    },
+    "filename": "hamer-wu-1972-haslam-table8.csv",
+    "rows": 207,
+    "sha256": "6c7e61986faf9f96e6446ed8efbb9dc3c60a5854c59e9706778efcc3468f46f8",
+    "source_ledger_sha256": "238a3abc8e53b59a750d1e40303722e2da2c6ba41ee1af4c6b390bdb7c8fd8e6",
+    "target_ledger_sha256": "b164a3bcec431885cae7169baf0b115cefea832edaa9c69f5654b0827a330605"
+  }
+}
