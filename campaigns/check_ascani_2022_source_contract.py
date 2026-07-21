@@ -55,6 +55,10 @@ EXPECTED_SOURCE_HASHES = {
     "main_markdown": "c0b73c10aa1ce9830e29f34aa3c1d1af4b889971959c3245a2deb7efdd979cd6",
     "supporting_information_markdown": "a6a61508cbaae805f2e360686785318953747a66c27d9102936e77be7f472c03",
 }
+EXPECTED_AUTHORITY_PDF_HASHES = {
+    "main_markdown": "3c446bfa5274f8c4f0963f23c76a5cf7a87496db94dc29896369f4946b53e6e6",
+    "supporting_information_markdown": "33f43e99557130757d0893d78772cbd59c05da69ff2e85377de242c04b8af4d0",
+}
 EXPECTED_MIGRATION_BINDING = {
     "decision": "D-024",
     "gate_commit": "4527864ffcd37f5e9a524500dfd99d5a34c85672",
@@ -64,7 +68,22 @@ EXPECTED_D026_BINDING = {
     "decision": "D-026",
     "gate_commit": "3a4ef0a0c6b98c43405d3cafc1ac4f5f87afa68d",
     "gate_tree": "9307c3f79581b6e0479d4ac2468932b2a68e5f5b",
-    "selection": "fallback_source_checker_pending_source_complete_provider_bundle",
+    "selection": "ascani_case_study_2_source_complete_pending_distinct_provider_bundle",
+}
+EXPECTED_PARAMETER_SOURCE_HASHES = {
+    "ascani_held_2021": {
+        "pdf_sha256": "9ab259a8dfb27a052fcf49782e6ab75132140d94c5f8f695215a2703f1d010ab",
+        "permanent_lab_pdf_sha256": "b26bb94b84e676c15a5ff40f878f0e0d1488c6994990c3c3e7d968630f2fa464",
+        "markdown_sha256": "948a50f7d447a5d3622b3bd401932d4dc84a3b715ae93dd0ffbb01fe64866c68",
+    },
+    "nann_held_sadowski_2013": {
+        "pdf_sha256": "aeb3562f76ac9b3a8ee11779696933aead55a5bd0e6e6bb67bd82f38bf691313",
+        "mathpix_sha256": "de0de1510c0520d4c900421ddab3edf84e613c798840617f5d07095e427d4426",
+    },
+    "held_et_al_2014": {
+        "pdf_sha256": "dea9aa05e2ee8eb1c675873fa9d8737943312484874d844f01b45613da261acf",
+        "markdown_sha256": "b8b1e46bf870224de5de68b5989f9cb377d17445d87109a5462a94f1efaafbda",
+    },
 }
 DERIVATION_ABS = Decimal("1e-27")
 
@@ -84,7 +103,9 @@ def explicit_phase(formula: list[Decimal]) -> list[Decimal]:
     return [amount / total for amount in amounts]
 
 
-def check(csv_path: Path, metadata_path: Path) -> dict[str, object]:
+def check(
+    csv_path: Path, metadata_path: Path, verify_local_sources: bool = False
+) -> dict[str, object]:
     with csv_path.open(newline="", encoding="utf-8") as stream:
         reader = csv.DictReader(stream)
         if reader.fieldnames != EXPECTED_COLUMNS:
@@ -106,6 +127,27 @@ def check(csv_path: Path, metadata_path: Path) -> dict[str, object]:
     }
     if source_hashes != EXPECTED_SOURCE_HASHES:
         raise ValueError("primary Markdown source hashes changed")
+    authority_pdf_hashes = {
+        name: source["authority_pdf_sha256"]
+        for name, source in metadata["primary_sources"].items()
+    }
+    if authority_pdf_hashes != EXPECTED_AUTHORITY_PDF_HASHES:
+        raise ValueError("primary PDF source hashes changed")
+    parameter_source_hashes = {
+        name: {
+            key: source[key]
+            for key in (
+                "pdf_sha256",
+                "permanent_lab_pdf_sha256",
+                "markdown_sha256",
+                "mathpix_sha256",
+            )
+            if key in source
+        }
+        for name, source in metadata["bound_parameter_sources"].items()
+    }
+    if parameter_source_hashes != EXPECTED_PARAMETER_SOURCE_HASHES:
+        raise ValueError("bound parameter source hashes changed")
     csv_hash = sha256(csv_path)
     if metadata["retained_files"]["tracer_csv"]["sha256"] != csv_hash:
         raise ValueError("retained tracer CSV hash does not match metadata")
@@ -231,17 +273,22 @@ def check(csv_path: Path, metadata_path: Path) -> dict[str, object]:
     source_screen = metadata["d026_source_completeness_screen"]
     if (
         source_screen["case_source_status"]
-        != "fallback_checker_ready_provider_bundle_source_incomplete"
-        or len(source_screen["unresolved_records"]) != 3
+        != "SOURCE_COMPLETE_FOR_BOUNDED_ASCANI_EPCSAFT_ADVANCED_MODEL"
+        or source_screen["unresolved_ascani_source_records"]
+        or source_screen["provider_status"] != "PROVIDER_NOT_YET_CAPABLE"
+        or source_screen["residual_source_need"]
+        != "NONE_FOR_BOUNDED_298_15_K_ASCANI_MODEL"
     ):
         raise ValueError("D-026 Ascani source screen changed")
-    if source_screen["archive_source_mismatch"] != {
-        "source_authority": "Official SI Eq. S7 and Table S3",
-        "source_expression": "k_water,1-butanol(T) = -0.102 + 2.94e-4*(T/K - 298.15)",
-        "archive_expression": "2.94e-4*T - 0.102",
-        "effect": "The archive expression is not source-faithful and is forbidden as Provider or algorithm authority; at 298.15 K the source value is -0.102.",
-    }:
-        raise ValueError("water/1-butanol k_ij source precedence changed")
+    if source_screen["hybrid_figiel_status"] != (
+        "NOT_SOURCE_COMPLETE_FOR_HYBRID_FIGIEL_SSM_DS_1_BUTANOL"
+    ):
+        raise ValueError("Figiel hybrid source boundary changed")
+    if (
+        "Ascani 2022 SI Eq. S4"
+        not in source_screen["water_butanol_l_ij_sign_convention"]["target_authority"]
+    ):
+        raise ValueError("water/1-butanol l_ij target convention changed")
     if source_screen["model_output"] != "not_run":
         raise ValueError("D-026 source screen must remain model-free")
 
@@ -277,15 +324,46 @@ def check(csv_path: Path, metadata_path: Path) -> dict[str, object]:
     if challenge["globality_certificate"] != "not_guaranteed":
         raise ValueError("globality classification changed")
 
+    verified_sources: list[str] = []
+    if verify_local_sources:
+        for name, source in metadata["primary_sources"].items():
+            for prefix, hash_key in (
+                ("", "sha256"),
+                ("authority_pdf_", "authority_pdf_sha256"),
+            ):
+                path = Path(source[f"{prefix}execution_locator"])
+                if not path.is_file() or sha256(path) != source[hash_key]:
+                    raise ValueError(
+                        f"local source verification failed: {name}:{prefix}"
+                    )
+                verified_sources.append(f"{name}:{prefix or 'markdown'}")
+        for name, source in metadata["bound_parameter_sources"].items():
+            for prefix in ("pdf_", "permanent_lab_pdf_", "markdown_", "mathpix_"):
+                hash_key = f"{prefix}sha256"
+                if hash_key not in source:
+                    continue
+                path = Path(source[f"{prefix}execution_locator"])
+                if not path.is_file() or sha256(path) != source[hash_key]:
+                    raise ValueError(
+                        f"local source verification failed: {name}:{prefix}"
+                    )
+                verified_sources.append(f"{name}:{prefix}")
+
     return {
-        "status": "fallback_source_checker_ready_provider_bundle_source_incomplete",
+        "status": "source_complete_for_bounded_ascani_epcsaft_advanced_model",
         "case_id": row["case_id"],
         "rows": len(rows),
         "csv_sha256": csv_hash,
         "metadata_sha256": sha256(metadata_path),
         "primary_source_sha256": source_hashes,
+        "primary_authority_pdf_sha256": authority_pdf_hashes,
+        "parameter_source_sha256": parameter_source_hashes,
         "missing_upstream_sources": len(metadata["missing_upstream_provenance"]),
-        "d026_unresolved_records": len(source_screen["unresolved_records"]),
+        "d026_unresolved_ascani_source_records": len(
+            source_screen["unresolved_ascani_source_records"]
+        ),
+        "provider_status": source_screen["provider_status"],
+        "local_sources_verified": verified_sources,
         "model_output": "not_run",
         "globality_certificate": challenge["globality_certificate"],
     }
@@ -297,8 +375,15 @@ def main() -> None:
     )
     parser.add_argument("--csv", type=Path, default=DEFAULT_CSV)
     parser.add_argument("--metadata", type=Path, default=DEFAULT_METADATA)
+    parser.add_argument("--verify-local-sources", action="store_true")
     args = parser.parse_args()
-    print(json.dumps(check(args.csv, args.metadata), indent=2, sort_keys=True))
+    print(
+        json.dumps(
+            check(args.csv, args.metadata, args.verify_local_sources),
+            indent=2,
+            sort_keys=True,
+        )
+    )
 
 
 if __name__ == "__main__":

@@ -17,11 +17,16 @@ CHECKER_PATH = ROOT / "campaigns" / "check_ascani_2022_source_contract.py"
 
 EXPECTED_CSV_SHA256 = "388f62d02f995fc89fb099bb625a907713eebe70f19ea631688cc8e4169acecd"
 EXPECTED_METADATA_SHA256 = (
-    "8161265b5bf1c7cd61167334cf97cd74082cb39867487e83619730813faaf552"
+    "9ac51dae619c4fd5ba4afbf01e4930083e4b3da39a13f332890da704fa18c4c6"
 )
 EXPECTED_SOURCE_HASHES = {
     "main_markdown": "c0b73c10aa1ce9830e29f34aa3c1d1af4b889971959c3245a2deb7efdd979cd6",
     "supporting_information_markdown": "a6a61508cbaae805f2e360686785318953747a66c27d9102936e77be7f472c03",
+}
+EXPECTED_PARAMETER_SOURCE_PDFS = {
+    "ascani_held_2021": "9ab259a8dfb27a052fcf49782e6ab75132140d94c5f8f695215a2703f1d010ab",
+    "nann_held_sadowski_2013": "aeb3562f76ac9b3a8ee11779696933aead55a5bd0e6e6bb67bd82f38bf691313",
+    "held_et_al_2014": "dea9aa05e2ee8eb1c675873fa9d8737943312484874d844f01b45613da261acf",
 }
 
 
@@ -49,11 +54,21 @@ def test_source_identity_archive_hashes_and_migration_binding_are_frozen() -> No
         "decision": "D-026",
         "gate_commit": "3a4ef0a0c6b98c43405d3cafc1ac4f5f87afa68d",
         "gate_tree": "9307c3f79581b6e0479d4ac2468932b2a68e5f5b",
-        "selection": "fallback_source_checker_pending_source_complete_provider_bundle",
+        "selection": "ascani_case_study_2_source_complete_pending_distinct_provider_bundle",
     }
     assert {
         name: source["sha256"] for name, source in metadata["primary_sources"].items()
     } == EXPECTED_SOURCE_HASHES
+    assert {
+        name: source["pdf_sha256"]
+        for name, source in metadata["bound_parameter_sources"].items()
+    } == EXPECTED_PARAMETER_SOURCE_PDFS
+    assert (
+        metadata["bound_parameter_sources"]["ascani_held_2021"][
+            "permanent_lab_pdf_sha256"
+        ]
+        == "b26bb94b84e676c15a5ff40f878f0e0d1488c6994990c3c3e7d968630f2fa464"
+    )
     archive = metadata["lab_archive_provenance"]
     assert archive["source_and_model_input_hashes"] == {
         "case2_paper_phase_compositions_csv": "eb139d8cdc90f3e21a612dc4125e481c2bb200d1f922b1167279de0296143344",
@@ -131,18 +146,19 @@ def test_tracer_preserves_formula_values_and_explicit_species_derivations() -> N
     screen = metadata["d026_source_completeness_screen"]
     assert (
         screen["case_source_status"]
-        == "fallback_checker_ready_provider_bundle_source_incomplete"
+        == "SOURCE_COMPLETE_FOR_BOUNDED_ASCANI_EPCSAFT_ADVANCED_MODEL"
     )
-    assert [record["record"] for record in screen["unresolved_records"]] == [
-        "Na+-K+ k_ij",
-        "1-butanol association-site scheme and multiplicity",
-        "concentration-dependent dielectric mixing contract and exact 1-butanol dielectric/solvation records",
-    ]
-    assert screen["archive_source_mismatch"]["source_expression"] == (
-        "k_water,1-butanol(T) = -0.102 + 2.94e-4*(T/K - 298.15)"
+    assert screen["unresolved_ascani_source_records"] == []
+    assert screen["provider_status"] == "PROVIDER_NOT_YET_CAPABLE"
+    assert screen["hybrid_figiel_status"] == (
+        "NOT_SOURCE_COMPLETE_FOR_HYBRID_FIGIEL_SSM_DS_1_BUTANOL"
     )
-    assert screen["archive_source_mismatch"]["archive_expression"] == (
-        "2.94e-4*T - 0.102"
+    assert "NOT_APPLICABLE" in " ".join(
+        screen["source_backed_records"]["pure_and_association"]
+    )
+    assert (
+        "Ascani 2022 SI Eq. S4"
+        in screen["water_butanol_l_ij_sign_convention"]["target_authority"]
     )
     assert screen["model_output"] == "not_run"
 
@@ -207,10 +223,11 @@ def test_checker_is_stdlib_only_and_negative_space_stays_explicit() -> None:
         assert excluded in support["negative_space"]
 
     prerequisite = metadata["published_model_bundle_prerequisites"]
-    assert prerequisite["status"] == "not_implemented_not_dispatched"
-    assert (
-        "current Khudaida artifact is insufficient" in prerequisite["bundle_identity"]
+    assert prerequisite["status"] == (
+        "source_complete_for_ascani_epcsaft_advanced_not_implemented_not_run"
     )
+    assert "current Khudaida" in prerequisite["bundle_identity"]
+    assert "insufficient" in prerequisite["bundle_identity"]
     challenge = metadata["future_installed_challenge"]
     assert challenge["algorithm_source"] == "current Perdomo HELD2"
     assert set(challenge["five_decision_layers"].values()) == {"not_run"}
@@ -226,11 +243,11 @@ def test_checker_is_stdlib_only_and_negative_space_stays_explicit() -> None:
     assert completed.returncode == 0, completed.stderr
     report = json.loads(completed.stdout)
     assert (
-        report["status"]
-        == "fallback_source_checker_ready_provider_bundle_source_incomplete"
+        report["status"] == "source_complete_for_bounded_ascani_epcsaft_advanced_model"
     )
     assert report["rows"] == 1
     assert report["model_output"] == "not_run"
-    assert report["d026_unresolved_records"] == 3
+    assert report["d026_unresolved_ascani_source_records"] == 0
+    assert report["provider_status"] == "PROVIDER_NOT_YET_CAPABLE"
     assert report["csv_sha256"] == EXPECTED_CSV_SHA256
     assert report["metadata_sha256"] == EXPECTED_METADATA_SHA256

@@ -142,6 +142,10 @@
         "ascani_case_study_2_tracer_csv": {
           "path": "data/ascani-2022-case-study-2-tracer.csv",
           "sha256": "388f62d02f995fc89fb099bb625a907713eebe70f19ea631688cc8e4169acecd"
+        },
+        "ascani_case_study_2_source_contract": {
+          "path": "data/ascani-2022-case-study-2-tracer.yaml",
+          "sha256": "9ac51dae619c4fd5ba4afbf01e4930083e4b3da39a13f332890da704fa18c4c6"
         }
       }
     },
@@ -184,8 +188,7 @@
         "missing_records_or_sources": [
           "Li+-1-butanol k_ij with an exact value or explicit source-backed zero",
           "Li+-water, Li+-Cl-, and Li+-1-butanol l_ij semantics with exact values, explicit source-backed zeros, or source-backed nonapplicability",
-          "the 1-butanol association-site scheme and multiplicity; the retained archive says 2B but the bound Ascani article/SI does not print that scheme",
-          "the exact 1-butanol dielectric/solvation formulation required by the clean Provider; Ascani points to ref. 72 and refs. 85-87, while the retained archive's 17.51 and f_solv=1 values are checker provenance rather than bound primary parameter records"
+          "a source-complete Figiel SSM+DS 1-butanol extension: f_1-butanol and Li+-1-butanol k_ij are absent; the now-bound Ascani model is a distinct altered-Born formulation"
         ],
         "non_substitutions": [
           "Perdomo Appendix D SAFT-gamma-Mie records cannot be mapped to ePC-SAFT.",
@@ -228,24 +231,21 @@
     ],
     "fallback": {
       "case_id": "ascani2022-case-study-2",
-      "role": "source checker prepared under the existing Ascani owner; not yet a source-complete executable Provider bundle",
+      "role": "selected smallest source-complete D-026 ePC-SAFT case for a distinct source-faithful Ascani ePC-SAFT-advanced Provider bundle; not an executable artifact or model result",
+      "selection_status": "SELECTED_D026_FALLBACK_PENDING_DISTINCT_PROVIDER_IMPLEMENTATION",
+      "source_status": "SOURCE_COMPLETE_FOR_BOUNDED_ASCANI_EPCSAFT_ADVANCED_MODEL",
+      "hybrid_figiel_status": "NOT_SOURCE_COMPLETE_FOR_HYBRID_FIGIEL_SSM_DS_1_BUTANOL",
       "state": {"temperature_K": "298.15", "pressure_Pa": "100000"},
       "species_order": ["H2O", "1-butanol", "Na+", "K+", "Cl-"],
       "charges": [0, 0, 1, 1, -1],
-      "remaining_source_gaps": [
-        "an explicit Na+-K+ k_ij value or source-backed zero; SI Table S4 publishes only Na+/Cl- and K+/Cl- and the retained archive labels unlisted zeros unresolved",
-        "the 1-butanol association-site scheme and multiplicity; the retained archive says 2B but the bound article/SI prints only the association energy and volume",
-        "the exact concentration-dependent dielectric mixing contract and 1-butanol dielectric/solvation records from Ascani ref. 72 and refs. 85-87; the local archive values are comparison provenance only"
+      "remaining_source_gaps": [],
+      "provider_construction_gaps": [
+        "original/Ascani Born option with ion diameter=sigma and SSM/DS disabled",
+        "Ascani Eq. 13 combined dielectric rule with exact derivatives and ion mixture permittivity 8",
+        "water/1-butanol l_ij support and source-receipted k_ij_hb or derived cross-association provenance",
+        "bounded 298.15 K k_ij domain or the published temperature law; explicit ion-neutral zeros; Na+-K+ NOT_APPLICABLE"
       ],
-      "missing_citations_or_source_records": [
-        "No Ascani citation is attached to an explicit Na+-K+ k_ij value or fixed zero.",
-        "Ascani, M.; Held, C. Prediction of salting-out in liquid-liquid two-phase systems with ePC-SAFT: Effect of the Born term and of a concentration-dependent dielectric constant. Z. Anorg. Allg. Chem. 647 (2021) 1305 (Ascani ref. 72).",
-        "Heyding, R. D.; Winkler, C. A. Solvent Effect on Iodide Exchange. Can. J. Chem. 29 (1951) 790-803 (Ascani ref. 85).",
-        "Dannhauser, W.; Cole, R. H. Dielectric Properties of Liquid Butyl Alcohols. J. Chem. Phys. 23 (1955) 1762-1766 (Ascani ref. 86).",
-        "Chu, D.-Y.; Zhang, Q.; Liu, R.-L. Standard Gibbs free energies of transfer of NaCl and KCl from water to mixtures of the four isomers of butyl alcohol with water. J. Chem. Soc., Faraday Trans. 1 83 (1987) 635 (Ascani ref. 87).",
-        "No bound Ascani article/SI locator prints the 1-butanol association-site scheme; a direct source record is required."
-      ],
-      "provider_gap": "A distinct source-bound Ascani bundle and fingerprint does not exist. Provider must resolve the listed source records and explicit k_ij/l_ij/k_ij_hb semantics before artifact construction."
+      "provider_gap": "PROVIDER_NOT_YET_CAPABLE: a distinct source-bound Ascani ePC-SAFT-advanced bundle and fingerprint does not exist; no residual paper/value request remains for the bounded case."
     },
     "equilibrium_status": {
       "commit": "8a7164869975c03291fcf3296b1228b4b4a0f5b4",
@@ -298,7 +298,7 @@
   },
   "ordering": {
     "primary": "No Perdomo two-liquid case is source-complete for clean ePC-SAFT under D-026.",
-    "fallback": "Ascani 2022 Case Study 2 is the prepared source checker, pending the explicit source records listed in the D-026 screen and a distinct Provider bundle.",
+    "fallback": "Ascani 2022 Case Study 2 is the selected source-complete D-026 ePC-SAFT fallback, pending a distinct source-faithful Ascani ePC-SAFT-advanced Provider implementation and immutable artifact.",
     "secondary": "Khudaida 2026 tie-line 4 remains closed non-production evidence and is not substituted into this selection."
   },
   "claim_boundary": [

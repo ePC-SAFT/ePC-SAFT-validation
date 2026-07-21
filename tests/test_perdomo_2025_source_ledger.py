@@ -24,7 +24,7 @@ EXPECTED_SAMPLES_SHA256 = (
     "92338efdb800f8a4546a0ed9bbd0944021586735c181963057c86e3e9b4f7c1f"
 )
 EXPECTED_METADATA_SHA256 = (
-    "18961d7a0966b3b5e78c7adf0b556485be8ab50183980696903d023660f1554b"
+    "28d008aa6e56d4f3faeae0ffeea4967cee931941530f27b48a4f31ea5b797d7f"
 )
 
 
@@ -165,8 +165,16 @@ def test_d026_screen_has_no_source_complete_perdomo_lle_and_freezes_fallback() -
     assert "isobutanol" in " ".join(closest_screen["non_substitutions"])
     fallback = screen["fallback"]
     assert fallback["case_id"] == "ascani2022-case-study-2"
-    assert len(fallback["remaining_source_gaps"]) == 3
-    assert "Na+-K+" in fallback["remaining_source_gaps"][0]
+    assert fallback["remaining_source_gaps"] == []
+    assert fallback["source_status"] == (
+        "SOURCE_COMPLETE_FOR_BOUNDED_ASCANI_EPCSAFT_ADVANCED_MODEL"
+    )
+    assert fallback["provider_gap"].startswith("PROVIDER_NOT_YET_CAPABLE")
+    assert "Na+-K+ NOT_APPLICABLE" in " ".join(fallback["provider_construction_gaps"])
+    ascani_binding = screen["provider_source_snapshot"]["bound_validation_packets"][
+        "ascani_case_study_2_source_contract"
+    ]
+    assert sha256(ROOT / ascani_binding["path"]) == ascani_binding["sha256"]
     assert (
         screen["equilibrium_status"]["classification"] == "READY_WAITING_PROVIDER_CASE"
     )

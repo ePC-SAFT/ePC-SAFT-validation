@@ -115,16 +115,20 @@ private adapter, makes no same-EOS reproduction claim, and retains
 D-026 selects clean ePC-SAFT as the sole future HELD2 EOS but does not admit
 electrolyte LLE or assert equivalence to Perdomo's SAFT-gamma-Mie results. The
 nine-case source screen finds five cases ineligible because they are VLE or
-neutral and four two-liquid cases blocked by missing source records. The
-closest Perdomo Table-5 LiCl/water/1-butanol case lacks an explicit
-Li+-1-butanol pair contract and a fully bound 1-butanol dielectric/solvation
-contract. Ascani 2022 Case Study 2 is the prepared fallback source checker,
-but it still needs an explicit Na+-K+ `k_ij` semantic, a source-bound
-1-butanol association-site scheme, and the cited dielectric/solvation contract
-before Provider may build a source-complete bundle. Its SI
-Eq. S7/Table S3 water/1-butanol `k_ij(T)` is authoritative; the differing
-archived checker expression remains forbidden implementation input. No model
-was run, and Equilibrium remains `READY_WAITING_PROVIDER_CASE` without a
+neutral and four Perdomo two-liquid cases blocked by missing source records.
+Ascani 2022 Case Study 2 is now the selected smallest source-complete ePC-SAFT
+fallback, but only for a distinct source-faithful Ascani ePC-SAFT-advanced
+Provider bundle. Bound Ascani 2021 records establish the 1-butanol 2B scheme,
+Eq. 13 combined dielectric rule, 1-butanol permittivity, sigma-based Born
+diameter, and cation-anion-only dispersion; therefore Na+-K+ `k_ij` is
+`NOT_APPLICABLE`, not a missing zero. The current Provider is
+`PROVIDER_NOT_YET_CAPABLE`: it lacks the original-Born/Ascani dielectric mode,
+`l_ij`, and source-receipted `k_ij_hb` or equivalent cross-association
+provenance. A hybrid Figiel SSM+DS/1-butanol bundle is separately not
+source-complete and is not substituted. Ascani SI Eq. S4 and Eq. S7/Table S3
+govern the target; the differing Nann sign and temperature expressions are
+retained as cross-paper discrepancies, not runtime alternatives. No model was
+run, and Equilibrium remains `READY_WAITING_PROVIDER_CASE` without a
 speculative package change.
 
 `runtime_source_of_truth: false`
@@ -139,4 +143,4 @@ decision is `NON_ADMISSION` and its authority effect is none.
 
 `next_validation_plan: d026-source-complete-two-liquid-case`
 
-`next_validation_plan_status: blocked_pending_source_records_and_provider_bundle`
+`next_validation_plan_status: blocked_pending_source_faithful_provider_implementation`

@@ -251,9 +251,17 @@ def check(
     fallback = screen["fallback"]
     if (
         fallback["case_id"] != "ascani2022-case-study-2"
-        or len(fallback["remaining_source_gaps"]) != 3
+        or fallback["remaining_source_gaps"]
+        or fallback["source_status"]
+        != "SOURCE_COMPLETE_FOR_BOUNDED_ASCANI_EPCSAFT_ADVANCED_MODEL"
+        or fallback["provider_gap"].split(":", 1)[0] != "PROVIDER_NOT_YET_CAPABLE"
     ):
         raise ValueError("D-026 Ascani fallback contract changed")
+    ascani_binding = screen["provider_source_snapshot"]["bound_validation_packets"][
+        "ascani_case_study_2_source_contract"
+    ]
+    if sha256(ROOT / ascani_binding["path"]) != ascani_binding["sha256"]:
+        raise ValueError("D-026 Ascani source-contract binding changed")
 
     verified_sources: list[str] = []
     if verify_local_sources:
@@ -273,6 +281,8 @@ def check(
         "table_counts": dict(sorted(EXPECTED_TABLE_COUNTS.items())),
         "source_anomalies": ["table3-kcl-0.8molal", "table8-wap0.0460"],
         "closest_case": CLOSEST_CASE,
+        "selected_fallback": fallback["case_id"],
+        "selected_fallback_source_status": fallback["source_status"],
         "closest_sample": CLOSEST_SAMPLE,
         "selected_case": None,
         "fallback_case": "ascani2022-case-study-2",

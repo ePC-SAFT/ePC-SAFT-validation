@@ -30,9 +30,27 @@ def load_campaign():
     return module
 
 
-def test_existing_perdomo_input_column_derives_frozen_public_feed() -> None:
+def test_existing_perdomo_input_column_derives_frozen_public_feed(
+    tmp_path: Path,
+) -> None:
     campaign = load_campaign()
-    source = campaign.load_source_contract(METADATA, CASES, SAMPLES)
+    # The accepted D-025 result is bound to SOURCE_COMMIT, not to the evolving
+    # canonical ledger used by later source-selection decisions.
+    snapshot_paths = []
+    for source_path in (METADATA, CASES, SAMPLES):
+        snapshot = tmp_path / source_path.name
+        snapshot.write_bytes(
+            subprocess.check_output(
+                [
+                    "git",
+                    "show",
+                    f"{campaign.SOURCE_COMMIT}:{source_path.relative_to(ROOT)}",
+                ],
+                cwd=ROOT,
+            )
+        )
+        snapshot_paths.append(snapshot)
+    source = campaign.load_source_contract(*snapshot_paths)
 
     assert source["sample_id"] == "table3-nacl-5.6molal"
     assert source["feed_derivation"]["normalized_feed"] == list(campaign.FEED_Z)
