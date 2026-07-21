@@ -13,15 +13,25 @@ Before work, read doctrine revision 3 at
 `https://github.com/ePC-SAFT/.github/blob/main/GOVERNANCE.md`. Local policy may
 narrow that doctrine but must not contradict it.
 
-This future home is limited to installed-artifact, cross-package, and
+This repository is limited to installed-artifact, cross-package, and
 literature acceptance evidence. It owns no production algorithm, private
 package import, broad paper archive, or package release.
 
-This repository has no resident owner task. The accountable Provider,
-Equilibrium, or Regression task stays rooted in its package repository and may
-perform an assigned bounded campaign here. Migration serializes exact subjects
-and writers. Do not create a Validation task merely to wait for package work or
-to make evidence appear independent.
+## Agent role and writer protocol
+
+- This repository has no resident agent, implementation owner, or waiting task.
+- The accountable Provider, Equilibrium, or Regression agent remains rooted in
+  its package repository and may use a clean Validation checkout or worktree for
+  its own Migration-assigned bounded campaign.
+- Migration serializes one writer per exact subject. A package agent must start
+  from the named Validation base, touch only its assigned campaign/evidence
+  paths, and preserve unrelated retained evidence.
+- The package agent authors, runs, verifies, and commits its campaign here, then
+  continues from its package home. Do not create a separate Validation task to
+  wait, relay package results, or manufacture independence.
+- A stable Validation commit is evidence, not self-acceptance. A distinct
+  reviewer is dispatched only when required by a receipt or scientific gate;
+  promotion and authority still require their separate approvals.
 
 Package-authored evidence must still use immutable installed public artifacts,
 remain source-traceable and hash-bound, and preserve all claim limitations. It
