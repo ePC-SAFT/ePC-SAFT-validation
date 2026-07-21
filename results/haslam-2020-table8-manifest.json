@@ -13,31 +13,31 @@
     "--manifest",
     "results/haslam-2020-table8-manifest.json"
   ],
-  "plot_input_rows_sha256": "b043f7e3e7b60ff619b2ad8c38ec4d91418aa078791ee18a200cf364c1b2bd0f",
+  "plot_input_rows_sha256": "381454f46e0f320e8d81c71cdf0481ddc66f7d9d1ed2525c0f86348406d1a885",
   "retained_files": {
     "comparison_csv": {
       "path": "results/haslam-2020-table8-aad-comparison.csv",
-      "sha256": "99548b37d849d9738e026de8bb5068ddef228cb84da207e4301dc5441532fa0f"
+      "sha256": "3fc133cc6a575381facad151c2a6ff44199ad8ce40c6e6e57409dde35ba1f37e"
     },
     "plot_pdf": {
       "path": "results/haslam-2020-table8.pdf",
-      "sha256": "901e267212cf3a5c0c19053ca95f5bcec87c3e93244ffbc51fccf8f15e77bdac"
+      "sha256": "9dd959ab2b3738bdd24e1f800f32e723a70810f9658c43e8d74adb96ecdada3d"
     },
     "plot_png": {
       "path": "results/haslam-2020-table8.png",
-      "sha256": "fe5fcedee96de01b24a1f117ecd022f492905d685b0a879959ba656b22732c69"
+      "sha256": "128fdfc6804712ecafef528d75ee900667667630c219416cb8bcf5a254491005"
     },
     "plot_svg": {
       "path": "results/haslam-2020-table8.svg",
-      "sha256": "4952dd20faf31f34f5738acedd5480b3bee4194e2edc3b152b6bfd57a4b07a69"
+      "sha256": "29f0113616d344ed440b02c56822b8fed67dc7eda679e5509cd0143ee2713aaf"
     },
     "receipt_json": {
       "path": "results/haslam-2020-table8.json",
-      "sha256": "49079944c45b5390e4e092b6b05fcaa9978e691657c0652d5b4fc920a4331a7c"
+      "sha256": "22adb980b93f81c072d50f6cd1ef458983a1d7e60f0badf363bdefdc5b86195f"
     },
     "rows_csv": {
       "path": "results/haslam-2020-table8.csv",
-      "sha256": "b043f7e3e7b60ff619b2ad8c38ec4d91418aa078791ee18a200cf364c1b2bd0f"
+      "sha256": "381454f46e0f320e8d81c71cdf0481ddc66f7d9d1ed2525c0f86348406d1a885"
     }
   },
   "schema_version": 1

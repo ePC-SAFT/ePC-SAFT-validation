@@ -92,11 +92,12 @@ Every result retains `globality_certificate=not_guaranteed`.
 
 The Haslam 2020 record binds the 207-row Hamer--Wu source grid and clean
 Provider wheel SHA-256
-`2cd055a159b1cb21c929a3c1b9a7bbb873d6240dea87a2e431a7c5a6c66522c1`.
-The Provider evaluates 138 gamma rows; 92 rows belong to four exact Table-8
-source subsets. All osmotic rows and all iodide gamma rows are
-`NOT_EVALUATED`. NaCl and KBr gamma results use the complete 23-row Hamer--Wu
-grid because Haslam's 12- and 21-row selections are unavailable. Haslam does
+`961156a641435e33746a65d07d97e07a40243e0cfdf870932bd79961783afa96`.
+The Provider evaluates Phi and gamma for 184 rows each across eight salts;
+LiI remains `NOT_EVALUATED` because the Li+/I- interaction is unpublished.
+No Phi row has source-established exact Haslam membership. NaCl and KBr gamma
+results use the complete 23-row Hamer--Wu grid because Haslam's 12- and
+21-row selections are unavailable. Haslam does
 not state the pointwise percent-AAD equation in the located paper text, so the
 cross-EOS comparison labels the conventional relative formula as a method
 assumption. The decision is `HASLAM_TABLE8_PARTIAL_SOURCE_COVERAGE` and has no

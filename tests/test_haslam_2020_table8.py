@@ -70,6 +70,20 @@ def test_retained_manifest_hashes_and_aads_recompute() -> None:
     ) as stream:
         comparison = list(csv.DictReader(stream))
     campaign = _load(CAMPAIGN)
+    receipt = json.loads(
+        (ROOT / "results/haslam-2020-table8.json").read_text(encoding="utf-8")
+    )
+    assert receipt["artifact"]["sha256"] == (
+        "961156a641435e33746a65d07d97e07a40243e0cfdf870932bd79961783afa96"
+    )
+    assert receipt["coverage"]["evaluated_rows"] == 368
+    assert receipt["coverage"]["not_evaluated_rows"] == 46
+    assert receipt["coverage"]["exact_table8_gamma_rows_evaluated"] == 138
+    assert {
+        (row["salt"], row["observable"])
+        for row in rows
+        if row["artifact_status"] == "NOT_EVALUATED"
+    } == {("LiI", "gamma_pm_m"), ("LiI", "osmotic_coefficient")}
     for summary in comparison:
         if not summary["current_epcsaft_aad_percent"]:
             continue

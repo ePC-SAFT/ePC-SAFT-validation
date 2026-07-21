@@ -33,9 +33,10 @@ were digitized and no parameters are fitted here. Render the retained CSV with
 `campaigns/haslam_2020_table8.py` evaluates the complete 23-point Hamer--Wu
 grid from 0.001 to 3.0 mol/kg against one installed clean Provider wheel at
 298.15 K and 0.101 MPa. The source ledger identifies exact Table-8 subsets
-without truncating rows to match Haslam's counts. The Provider evaluates gamma
-for six chloride/bromide salts, exposes no public Phi observable, and contains
-no iodide species. `campaigns/plot_haslam_2020_table8.py` renders retained rows
+without truncating rows to match Haslam's counts. The Provider evaluates both
+gamma and Phi for six chloride/bromide salts plus NaI and KI; LiI remains
+fail-closed because no source-backed Li+/I- interaction is published.
+`campaigns/plot_haslam_2020_table8.py` renders retained rows
 without importing the Provider; `results/haslam-2020-table8-manifest.json`
 hash-binds the result tables, receipt, and three plot formats. The decision is
 `HASLAM_TABLE8_PARTIAL_SOURCE_COVERAGE`.

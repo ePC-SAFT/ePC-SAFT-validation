@@ -77,23 +77,36 @@ def main() -> None:
                 linewidths=0.9,
                 zorder=4 if selected is gamma else 3,
             )
-        evaluated = [row for row in gamma if row["artifact_status"] == "EVALUATED"]
-        if evaluated:
+        evaluated_gamma = [
+            row for row in gamma if row["artifact_status"] == "EVALUATED"
+        ]
+        evaluated_phi = [row for row in phi if row["artifact_status"] == "EVALUATED"]
+        if evaluated_gamma:
             axis.plot(
-                [float(row["molality_mol_kg"]) for row in evaluated],
-                [float(row["model_value"]) for row in evaluated],
+                [float(row["molality_mol_kg"]) for row in evaluated_gamma],
+                [float(row["model_value"]) for row in evaluated_gamma],
                 color="#A13A2A",
                 linewidth=1.8,
                 marker="o",
                 markersize=2.2,
                 zorder=2,
             )
+        if evaluated_phi:
+            axis.plot(
+                [float(row["molality_mol_kg"]) for row in evaluated_phi],
+                [float(row["model_value"]) for row in evaluated_phi],
+                color="#246A8D",
+                linewidth=1.8,
+                marker="s",
+                markersize=2.2,
+                zorder=2,
+            )
         axis.set_xscale("log")
         axis.set_title(
             salt
-            if evaluated
-            else salt + r"  ($\gamma_{\pm}$ model NE; I$^{-}$ absent)",
-            fontsize=12 if evaluated else 9.5,
+            if evaluated_gamma
+            else salt + r"  (models NE; Li$^{+}$--I$^{-}$ missing)",
+            fontsize=12 if evaluated_gamma else 9.5,
         )
         axis.grid(True, which="major", color="#D9D9D9", linewidth=0.55)
         axis.tick_params(direction="out")
@@ -137,12 +150,21 @@ def main() -> None:
             markersize=3,
             label=r"clean ePC-SAFT $\gamma_{\pm}^{m}$",
         ),
+        Line2D(
+            [],
+            [],
+            color="#246A8D",
+            linewidth=1.8,
+            marker="s",
+            markersize=3,
+            label=r"clean ePC-SAFT $\Phi$",
+        ),
     ]
     figure.legend(
         handles=legend,
         loc="upper center",
         bbox_to_anchor=(0.5, 0.93),
-        ncols=4,
+        ncols=5,
         frameon=False,
     )
     figure.suptitle(
@@ -152,7 +174,7 @@ def main() -> None:
     figure.text(
         0.5,
         0.012,
-        "Cross-EOS comparison. Provider has no public Φ observable; iodides are absent.",
+        "Cross-EOS comparison. Φ source-grid membership is unresolved; LiI remains not evaluated.",
         ha="center",
         fontsize=9,
     )

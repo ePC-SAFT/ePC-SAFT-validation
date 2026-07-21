@@ -22,17 +22,19 @@ SOURCE = ROOT / "data" / "hamer-wu-1972-haslam-table8.csv"
 TARGETS = ROOT / "data" / "haslam-2020-table8-targets.csv"
 SOURCE_LEDGER = ROOT / "data" / "haslam-2020-table8-source-ledger.yaml"
 EXPECTED_ARTIFACT_SHA256 = (
-    "2cd055a159b1cb21c929a3c1b9a7bbb873d6240dea87a2e431a7c5a6c66522c1"
+    "961156a641435e33746a65d07d97e07a40243e0cfdf870932bd79961783afa96"
 )
 TEMPERATURE_K = 298.15
 PRESSURE_MPA = 0.101
 SUPPORTED = {
-    "LiCl": ("lithium-cation", "chloride-anion"),
-    "LiBr": ("lithium-cation", "bromide-anion"),
-    "NaCl": ("sodium-cation", "chloride-anion"),
-    "NaBr": ("sodium-cation", "bromide-anion"),
-    "KCl": ("potassium-cation", "chloride-anion"),
-    "KBr": ("potassium-cation", "bromide-anion"),
+    "LiCl": ("figiel-2025-reference-electrolytes", "lithium-cation", "chloride-anion"),
+    "LiBr": ("figiel-2025-reference-electrolytes", "lithium-cation", "bromide-anion"),
+    "NaCl": ("figiel-2025-reference-electrolytes", "sodium-cation", "chloride-anion"),
+    "NaBr": ("figiel-2025-reference-electrolytes", "sodium-cation", "bromide-anion"),
+    "KCl": ("figiel-2025-reference-electrolytes", "potassium-cation", "chloride-anion"),
+    "KBr": ("figiel-2025-reference-electrolytes", "potassium-cation", "bromide-anion"),
+    "NaI": ("figiel-2025-aqueous-iodides", "sodium-cation", "iodide-anion"),
+    "KI": ("figiel-2025-aqueous-iodides", "potassium-cation", "iodide-anion"),
 }
 SALTS = ("LiCl", "LiBr", "LiI", "NaCl", "NaBr", "NaI", "KCl", "KBr", "KI")
 
@@ -141,38 +143,36 @@ def run(
     source_rows = read_csv(SOURCE)
     targets = {(row["salt"], row["observable"]): row for row in read_csv(TARGETS)}
     units = epcsaft.unit_registry
-    bundle = epcsaft.ParameterBundle.from_catalog(
-        "figiel-2025-reference-electrolytes", version=1
-    )
-    component_ids = tuple(component.component_id for component in bundle.components)
+    bundles = {
+        name: epcsaft.ParameterBundle.from_catalog(name, version=1)
+        for name in {spec[0] for spec in SUPPORTED.values()}
+    }
+    component_ids = {
+        name: tuple(component.component_id for component in bundle.components)
+        for name, bundle in bundles.items()
+    }
     derived_supported = {
-        salt: pair
-        for salt, pair in SUPPORTED.items()
-        if "water" in component_ids
-        and all(component in component_ids for component in pair)
+        salt: spec
+        for salt, spec in SUPPORTED.items()
+        if "water" in component_ids[spec[0]]
+        and all(component in component_ids[spec[0]] for component in spec[1:])
     }
     if derived_supported != SUPPORTED:
-        raise AssertionError(
-            "public component catalog does not cover expected Cl/Br salts"
-        )
+        raise AssertionError("public component catalogs do not cover expected salts")
     public_pair_records = [
-        public_record(record)
+        {"bundle": name, **public_record(record)}
+        for name, bundle in bundles.items()
         for record in bundle.records
         if getattr(record, "family", None) == "k_ij"
-        and (
-            getattr(record, "component_id_a", None)
-            in {"water", *sum(SUPPORTED.values(), ())}
-            and getattr(record, "component_id_b", None)
-            in {"water", *sum(SUPPORTED.values(), ())}
-        )
     ]
     output_rows: list[dict[str, Any]] = []
     fingerprints: dict[str, str] = {}
     reference_diagnostics: dict[str, dict[str, float]] = {}
-    gamma_predictions: dict[tuple[str, float], float] = {}
-    molality_state_capabilities: dict[str, bool] | None = None
+    predictions: dict[tuple[str, float, str], float] = {}
+    molality_state_capabilities: dict[str, dict[str, bool]] = {}
 
-    for salt, (cation, anion) in SUPPORTED.items():
+    for salt, (bundle_name, cation, anion) in SUPPORTED.items():
+        bundle = bundles[bundle_name]
         parameters = bundle.select(("water", cation, anion))
         fingerprints[salt] = parameters.fingerprint
         reference = epcsaft.EPCSAFT(parameters).reference_state(
@@ -194,8 +194,8 @@ def run(
             molality_state = reference.at_molality(
                 molality * units.mole / units.kilogram
             )
-            if molality_state_capabilities is None:
-                molality_state_capabilities = {
+            if bundle_name not in molality_state_capabilities:
+                molality_state_capabilities[bundle_name] = {
                     "mean_ionic_activity_coefficient_molality": hasattr(
                         molality_state,
                         "mean_ionic_activity_coefficient_molality",
@@ -205,9 +205,15 @@ def run(
                         "practical_osmotic_coefficient_molality",
                     ),
                 }
-            gamma_predictions[(salt, molality)] = (
+            predictions[(salt, molality, "gamma_pm_m")] = (
                 molality_state.mean_ionic_activity_coefficient_molality
             )
+            phi = molality_state.practical_osmotic_coefficient_molality
+            if phi is None:
+                raise AssertionError(
+                    f"public osmotic coefficient unavailable for {salt}"
+                )
+            predictions[(salt, molality, "osmotic_coefficient")] = phi
 
     for row in source_rows:
         salt = row["salt"]
@@ -218,16 +224,12 @@ def run(
         ):
             target = targets[(salt, observable)]
             source_exact = target["subset_status"] == "EXACT_HAMER_WU_SUBSET"
-            if observable == "osmotic_coefficient":
+            if salt not in SUPPORTED:
                 prediction = None
                 artifact_status = "NOT_EVALUATED"
-                blocker = "installed Provider exposes no public osmotic-coefficient observable"
-            elif salt not in SUPPORTED:
-                prediction = None
-                artifact_status = "NOT_EVALUATED"
-                blocker = "installed Provider catalog lacks iodide component and required parameters"
+                blocker = "installed Provider has iodide species but no source-backed Li+/I- interaction"
             else:
-                prediction = gamma_predictions[(salt, molality)]
+                prediction = predictions[(salt, molality, observable)]
                 artifact_status = "EVALUATED"
                 blocker = ""
             observed = float(row[column])
@@ -320,23 +322,23 @@ def run(
         "decision": "HASLAM_TABLE8_PARTIAL_SOURCE_COVERAGE",
         "campaign_decisions": {
             "EXACT_TABLE8_REPRODUCTION": {
-                "status": "PARTIAL_92_SOURCE_ESTABLISHED_GAMMA_ROWS_EVALUATED",
+                "status": "PARTIAL_138_SOURCE_ESTABLISHED_GAMMA_ROWS_EVALUATED",
                 "scope": "only observable-specific Hamer-Wu subsets whose 23-row selection exactly matches Haslam Table 8",
-                "phi": "NOT_EVALUATED_PUBLIC_OBSERVABLE_ABSENT",
+                "phi": "NO_EXACT_HASLAM_SELECTED_ROWS_SOURCE_ESTABLISHED",
                 "limitation": "not a same-model reproduction; current ePC-SAFT is compared cross-EOS with Haslam SAFT-gamma-Mie",
             },
             "PARTIAL_HAMER_WU_CROSS_EOS": {
-                "status": "COMPLETE_FOR_138_PROVIDER_SUPPORTED_GAMMA_ROWS",
-                "scope": "all 23 Hamer-Wu rows for each of six installed Cl/Br salts, including nonexact NaCl and KBr Haslam selections",
-                "phi": "NOT_EVALUATED_PUBLIC_OBSERVABLE_ABSENT",
-                "iodides": "NOT_EVALUATED_INSTALLED_COMPONENT_AND_PARAMETERS_ABSENT",
+                "status": "COMPLETE_FOR_368_PROVIDER_SUPPORTED_ROWS",
+                "scope": "Phi and gamma on all 23 Hamer-Wu rows for eight source-complete installed salts",
+                "phi": "EVALUATED_184_PARTIAL_SOURCE_GRID_ROWS",
+                "iodides": "NAI_AND_KI_EVALUATED_LII_NOT_EVALUATED_MISSING_LI_I_INTERACTION",
             },
         },
         "artifact": {
             "filename": artifact.name,
             "sha256": artifact_hash,
-            "provider_commit": "1d9dd0e3d944ddfdde68281b94afb9fa93258a60",
-            "provider_tree": "42c36626d5dc712b179870db6e9ef5431ca95a36",
+            "provider_commit": "53b0b74bf5de86d459c49eb2cc7e75b7cfd4ce3e",
+            "provider_tree": "1750d04a84f3733e62eb32fb859d323243dddce9",
             "distribution": metadata.distribution("epcsaft").metadata["Name"],
             "version": metadata.version("epcsaft"),
             "import_origin": str(module_path),
@@ -364,19 +366,26 @@ def run(
             "molality_range_mol_kg": [0.001, 3.0],
             "basis": "formula-unit molality in water",
         },
-        "bundle_fingerprint": bundle.fingerprint,
+        "bundle_fingerprints": {
+            name: bundle.fingerprint for name, bundle in bundles.items()
+        },
         "public_capability_evidence": {
             "component_ids": component_ids,
-            "iodide_component_present": "iodide-anion" in component_ids,
+            "iodide_component_present": any(
+                "iodide-anion" in ids for ids in component_ids.values()
+            ),
             "derived_supported_salts": tuple(derived_supported),
             "queried_molality_state_attributes": molality_state_capabilities,
             "selected_k_ij_records": public_pair_records,
-            "record_families": sorted(
-                {
-                    str(getattr(record, "family", "NO_FAMILY_ATTRIBUTE"))
-                    for record in bundle.records
-                }
-            ),
+            "record_families": {
+                name: sorted(
+                    {
+                        str(getattr(record, "family", "NO_FAMILY_ATTRIBUTE"))
+                        for record in bundle.records
+                    }
+                )
+                for name, bundle in bundles.items()
+            },
         },
         "parameter_set_fingerprints": fingerprints,
         "reference_diagnostics": reference_diagnostics,
@@ -403,8 +412,10 @@ def run(
             salt: {
                 "gamma_pm_m": "EVALUATED"
                 if salt in SUPPORTED
-                else "NOT_EVALUATED_IODIDE_ABSENT",
-                "osmotic_coefficient": "NOT_EVALUATED_PUBLIC_OBSERVABLE_ABSENT",
+                else "NOT_EVALUATED_MISSING_LI_I_INTERACTION",
+                "osmotic_coefficient": "EVALUATED"
+                if salt in SUPPORTED
+                else "NOT_EVALUATED_MISSING_LI_I_INTERACTION",
             }
             for salt in SALTS
         },
@@ -439,10 +450,9 @@ def run(
             "environment_recipe": "uv venv --python 3.13 <temp>/venv; uv pip install --python <temp>/venv/bin/python <exact-wheel>; <temp>/venv/bin/python -I campaigns/haslam_2020_table8.py ...",
         },
         "blockers": [
-            "public Provider osmotic-coefficient observable absent",
-            "iodide species and parameters absent",
+            "LiI lacks a published Li+/I- interaction and remains not evaluated",
             "exact NaCl and KBr gamma row selections unavailable",
-            "five Phi source subsets unavailable",
+            "exact Haslam Phi row-selection manifest unavailable",
         ],
     }
     return receipt, output_rows, comparison
