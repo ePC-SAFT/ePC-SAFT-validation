@@ -348,6 +348,15 @@ def run(
             "rows": len(source_rows),
             "target_ledger_sha256": sha256(TARGETS),
             "source_ledger_sha256": sha256(SOURCE_LEDGER),
+            "canonical_provider_source_binding": {
+                "validation_commit": "8d34f64f42201a564f2fa958f3d8552650abc4da",
+                "validation_tree": "bb4b2e60a966792a8d6bdf159055be625170cb98",
+                "ledger_path": "data/haslam-2020-osmotic-provider-source-ledger.yaml",
+                "ledger_sha256": "b12d592b7886e5b8701103c3a41f5b211b3b46b1f5b617f345bc5e3f793c3741",
+                "source_row_path": "data/haslam-2020-osmotic-provider-source-row.csv",
+                "source_row_sha256": "fa2e68e8bc1224f2c6d5b80ad79e6643a08b5944276274067084c40aee2b4f45",
+                "role": "referenced canonical property-definition packet; not copied into this campaign",
+            },
         },
         "conditions": {
             "temperature_K": TEMPERATURE_K,

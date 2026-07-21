@@ -29,7 +29,7 @@ def test_source_packet_reproduces_only_identified_table8_subsets() -> None:
     result = _load(CHECKER).validate()
     assert result["status"] == "source_packet_ready_partial_coverage"
     assert result["rows"] == 207
-    assert result["exact_phi_rows"] == 92
+    assert result["exact_phi_rows"] == 0
     assert result["exact_gamma_rows"] == 161
 
 

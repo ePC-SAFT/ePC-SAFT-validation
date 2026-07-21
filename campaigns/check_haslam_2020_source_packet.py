@@ -95,7 +95,7 @@ def validate() -> dict[str, object]:
         if row["observable"] == "gamma_pm_m"
         and row["subset_status"] == "EXACT_HAMER_WU_SUBSET"
     }
-    if exact_phi != {"LiBr", "LiI", "NaI", "KI"}:
+    if exact_phi:
         raise ValueError("exact Phi subset classification changed")
     if exact_gamma != {"LiCl", "LiBr", "LiI", "NaBr", "NaI", "KCl", "KI"}:
         raise ValueError("exact gamma subset classification changed")
@@ -109,13 +109,6 @@ def validate() -> dict[str, object]:
         raise ValueError("nine-file MIAC reconciliation changed")
     if {row["salt"] for row in absent} != {"NaBr"}:
         raise ValueError("unexpected MIAC repository gaps")
-    oracle = next(row for row in rows if row["row_id"] == "HW1972-T10-LiBr-m0.001")
-    if (
-        oracle["source_pdf_page"] != "19"
-        or oracle["osmotic_coefficient"] != "0.989"
-        or oracle["phi_table8_binding"] != "DIRECT_HAMER_WU_EXACT_HASLAM_SUBSET"
-    ):
-        raise ValueError("exact LiBr Phi oracle changed")
     ledger = LEDGER.read_text(encoding="utf-8")
     for value in EXPECTED_SOURCE_HASHES.values():
         if value not in ledger:
@@ -127,6 +120,8 @@ def validate() -> dict[str, object]:
         "unavailable_papers",
         "equation 3.5",
         "reference: 185",
+        "8d34f64f42201a564f2fa958f3d8552650abc4da",
+        "b12d592b7886e5b8701103c3a41f5b211b3b46b1f5b617f345bc5e3f793c3741",
     ):
         if token not in ledger:
             raise ValueError(f"source-ledger contract missing: {token}")
@@ -137,7 +132,7 @@ def validate() -> dict[str, object]:
         "source_csv_sha256": sha256(SOURCE),
         "target_ledger_sha256": sha256(TARGETS),
         "ledger_sha256": sha256(LEDGER),
-        "exact_phi_rows": 4 * 23,
+        "exact_phi_rows": 0,
         "exact_gamma_rows": 7 * 23,
     }
 

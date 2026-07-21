@@ -1,6 +1,15 @@
 schema_version: 1
 campaign_id: haslam-2020-table8-cross-eos
 decision: HASLAM_TABLE8_PARTIAL_SOURCE_COVERAGE
+canonical_provider_source_binding:
+  role: canonical property definition and one-row Provider oracle; referenced, not copied into this broad campaign
+  validation_commit: 8d34f64f42201a564f2fa958f3d8552650abc4da
+  validation_tree: bb4b2e60a966792a8d6bdf159055be625170cb98
+  ledger_path: data/haslam-2020-osmotic-provider-source-ledger.yaml
+  ledger_sha256: b12d592b7886e5b8701103c3a41f5b211b3b46b1f5b617f345bc5e3f793c3741
+  source_row_path: data/haslam-2020-osmotic-provider-source-row.csv
+  source_row_sha256: fa2e68e8bc1224f2c6d5b80ad79e6643a08b5944276274067084c40aee2b4f45
+  decision: PARTIAL_SOURCE_COVERAGE
 conditions:
   temperature_K: 298.15
   pressure_MPa: 0.101
@@ -9,13 +18,6 @@ conditions:
   molality_basis: formula-unit moles of salt per kilogram of water
   gamma_basis: molality-scale stoichiometric mean ionic activity coefficient
   osmotic_basis: dimensionless practical molal osmotic coefficient
-  osmotic_definition:
-    source: Hamer and Wu (1972), equation 3.5, PDF page 6, printed page 1051
-    contract: phi = -ln(a_water) / (nu * m * M_water)
-    nu: sum of ionic stoichiometric coefficients; nu=2 for every 1:1 salt in this campaign
-    molality: formula-unit moles of salt per kilogram of salt-free solvent
-    solvent_molar_mass_basis: M_water in kg/mol when m is mol/kg
-    solvent_activity_standard_state: pure water at campaign temperature and pressure
 sources:
   haslam_2020:
     doi: 10.1021/acs.jced.0c00746
@@ -52,12 +54,6 @@ repository_reconciliation:
     NaCl.csv: {sha256: 2ada1c2bd5f4646018eb372581c585ab3801ecf6db984575b5aaaad70383985c, exact_hamer_rows: 0}
     nacl_kcl_osmotic_coefficients.csv: {sha256: c198c2ef5f92fb3ac2fe47172794d8b5a8874887f98cb3a701c3f0c1ba52f2c4, exact_hamer_rows: 0}
     coverage_note: No local osmotic file supplies a verified Hamer-Wu row; six salts have no candidate file.
-exact_provider_phi_oracle:
-  salt: LiBr
-  molality_mol_kg: 0.001
-  phi: 0.989
-  locator: Hamer-Wu Table 10, PDF page 19, printed page 1064, first data row
-  haslam_binding: EXACT_HAMER_WU_SUBSET; Table 8 reports LiBr Phi n=23 from reference 179
 extraction:
   retained_rows: 207
   rows_per_salt: 23
@@ -91,6 +87,6 @@ local_source_availability:
     required_role: candidate rows in the 40-point NaCl Phi compilation cited to references 181-186
   actionable_gap: Even where references 180-189 are locally available, Haslam's row-selection manifest/supporting workbook is absent; paper identity alone cannot reconstruct the exact multi-source Phi compilations or the 12/21-point gamma selections.
 limits:
-  - Matching a paper reference and row count is accepted only when the Hamer-Wu table has exactly the Table-8 count over the stated range.
+  - Matching a paper reference and row count does not establish exact Haslam Phi membership without the missing row-selection manifest; all Phi source grids remain partial campaign evidence.
   - No row is truncated, duplicated, or interpolated to force a Table-8 count.
   - The conventional relative percent-AAD formula is used for the cross-EOS comparison but is labeled method_assumption, not source-verified.

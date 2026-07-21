@@ -123,18 +123,10 @@ def main() -> None:
         Line2D(
             [],
             [],
-            marker="x",
-            linestyle="none",
-            color="#285F86",
-            label=r"exact Table-8 $\Phi$ source",
-        ),
-        Line2D(
-            [],
-            [],
             marker="+",
             linestyle="none",
             color="#9AAAB5",
-            label=r"partial Hamer-Wu $\Phi$ grid",
+            label=r"Hamer-Wu $\Phi$ grid (membership unknown)",
         ),
         Line2D(
             [],
@@ -150,7 +142,7 @@ def main() -> None:
         handles=legend,
         loc="upper center",
         bbox_to_anchor=(0.5, 0.93),
-        ncols=5,
+        ncols=4,
         frameon=False,
     )
     figure.suptitle(
