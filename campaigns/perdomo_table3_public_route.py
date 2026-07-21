@@ -26,12 +26,32 @@ CAMPAIGN_ID = "perdomo-2025-table3-public-route-installed-v1"
 STATUS = "PUBLIC_ROUTE_PASS_SOURCE_TOPOLOGY_DISAGREEMENT"
 MIGRATION_COMMIT = "8d916b9b7d76c3adc3ffce17c35b9a27224e4763"
 MIGRATION_TREE = "a9c198f9a8e4019280faa3b96d9d559e7924e0a9"
-EQUILIBRIUM_COMMIT = "ef6fe362dc0bd84521e7499728ed977ce62c17f1"
-EQUILIBRIUM_TREE = "f196c86cf5eacbaadbc62f8d900fd02bd99413b3"
+EQUILIBRIUM_COMMIT = "8a7164869975c03291fcf3296b1228b4b4a0f5b4"
+EQUILIBRIUM_TREE = "744132063d8b26ae3ef7ba7eb3094226aec31fd6"
 SOURCE_COMMIT = "5620f030b1e4bf12cde2f97d739cb931653eb960"
 SOURCE_TREE = "6d40521d15b823ab4243dd772e3069d82bd342ba"
 PROVIDER_SHA256 = "9e4da0d7ba7896bcd2ec096400553d935e0516c61f1bd9f41f2370ab68ab36ea"
-EQUILIBRIUM_SHA256 = "da37682dc06d278cc0c7e9333d61604c81209727cc99b1b91c9682d2aa82e5c7"
+EQUILIBRIUM_SHA256 = "41192aa4ab1821a0546ba100352dfd9254c67884d26511ea1504205647aa08d4"
+PROVIDER_RECORD_SHA256 = (
+    "f0e5f17472014a179aa6226095a0265f9de897be5a30135ffa3e99c777728791"
+)
+PROVIDER_HEADER_MEMBER = "epcsaft/include/epcsaft/native_sdk_v1.h"
+PROVIDER_HEADER_SHA256 = (
+    "51ac8d251ffbc53e019c8cf7828fd51d2a011ff2871b3e606eb08573a1c9183b"
+)
+PROVIDER_NATIVE_MEMBER = "epcsaft/_core.cpython-313-x86_64-linux-gnu.so"
+PROVIDER_NATIVE_SHA256 = (
+    "99b1d30e8f98dbd26b710f06af5e995707c4ad067b77846ae45c202b3e90bc13"
+)
+EQUILIBRIUM_RECORD_SHA256 = (
+    "dba4daeaa74bf98783debc42c5c6d5b8f007841b7bf4566c47793b7052eac974"
+)
+EQUILIBRIUM_NATIVE_MEMBER = (
+    "epcsaft_equilibrium/_equilibrium.cpython-313-x86_64-linux-gnu.so"
+)
+EQUILIBRIUM_NATIVE_SHA256 = (
+    "b486edcbc00d4fa0f52d712c4ac760edbda4e77dc633e4f613315f87fe91b919"
+)
 SOURCE_METADATA_SHA256 = (
     "2cce8ab35505b67622c4096604d4051122516b374bd36aea0ea12848eab8b436"
 )
@@ -53,8 +73,10 @@ EXPECTED_OUTCOME = "one_phase"
 EXPECTED_SEARCH_STATUS = "complete_no_negative_found"
 EXPECTED_BEST_TPD = -1.6139519381498581e-12
 EXPECTED_SEARCH_PROFILE = "perdomo-held2-stage-i-installed-v1"
+EXPECTED_ROOT_COMPLETENESS = "not_proven"
+EXPECTED_SELECTED_VOLUME_M3 = 0.9849669199245724
 EXPECTED_RESULT_PAYLOAD_SHA256 = (
-    "45380b1d572b1f13b884041cb813ae3290f02647de55ba4f629da1b20de9d924"
+    "cbffa8b6ea42573c78a009004bf8556e68f862259e7e55f4a35d2ebc64658782"
 )
 
 
@@ -87,28 +109,40 @@ def required_wheel(value: str | Path) -> Path:
     return path
 
 
-def _wheel_contract(wheel: Path) -> tuple[str, str, list[list[str]]]:
+def _wheel_contract(wheel: Path) -> tuple[str, str, str, list[list[str]]]:
     with zipfile.ZipFile(wheel) as archive:
         metadata_name = next(
             name for name in archive.namelist() if name.endswith(".dist-info/METADATA")
         )
         metadata = BytesParser().parsebytes(archive.read(metadata_name))
         record_name = metadata_name.removesuffix("METADATA") + "RECORD"
-        records = list(csv.reader(archive.read(record_name).decode().splitlines()))
-    return str(metadata["Name"]), str(metadata["Version"]), records
+        record_bytes = archive.read(record_name)
+        records = list(csv.reader(record_bytes.decode().splitlines()))
+    return (
+        str(metadata["Name"]),
+        str(metadata["Version"]),
+        hashlib.sha256(record_bytes).hexdigest(),
+        records,
+    )
 
 
 def verify_installed_wheel(
-    wheel: Path, distribution_name: str, expected_sha256: str
+    wheel: Path,
+    distribution_name: str,
+    expected_sha256: str,
+    expected_record_sha256: str,
+    expected_members: dict[str, str],
 ) -> dict[str, Any]:
     observed_sha256 = sha256_file(wheel)
     if observed_sha256 != expected_sha256:
         raise ValueError(f"{distribution_name} wheel SHA-256 mismatch")
-    wheel_name, wheel_version, record_rows = _wheel_contract(wheel)
+    wheel_name, wheel_version, wheel_record_sha256, record_rows = _wheel_contract(wheel)
     if wheel_name != distribution_name:
         raise ValueError(
             f"wheel distribution is {wheel_name!r}, not {distribution_name!r}"
         )
+    if wheel_record_sha256 != expected_record_sha256:
+        raise ValueError(f"{distribution_name} wheel RECORD SHA-256 mismatch")
     distribution = importlib.metadata.distribution(distribution_name)
     if distribution.version != wheel_version:
         raise ValueError(f"installed {distribution_name} version differs from wheel")
@@ -135,6 +169,19 @@ def verify_installed_wheel(
         verified_members += 1
     if not verified_members:
         raise ValueError(f"{distribution_name} RECORD has no hashed members")
+    required_members = []
+    for member, expected_member_sha256 in expected_members.items():
+        installed = Path(distribution.locate_file(member)).resolve()
+        observed_member_sha256 = sha256_file(installed)
+        if observed_member_sha256 != expected_member_sha256:
+            raise ValueError(f"{distribution_name} required member mismatch: {member}")
+        required_members.append(
+            {
+                "member": member,
+                "installed_path": str(installed),
+                "sha256": observed_member_sha256,
+            }
+        )
     record_path = Path(
         distribution.locate_file(
             f"{distribution_name.replace('-', '_')}-{wheel_version}.dist-info/RECORD"
@@ -147,10 +194,12 @@ def verify_installed_wheel(
         "sha256": observed_sha256,
         "distribution": wheel_name,
         "version": wheel_version,
+        "wheel_record_sha256": wheel_record_sha256,
         "installed_root": str(installed_root),
         "record_path": str(record_path),
         "record_sha256": sha256_file(record_path),
         "record_members_verified": verified_members,
+        "required_members": required_members,
         "native_members": [
             {"path": str(path), "sha256": sha256_file(path)} for path in native_members
         ],
@@ -244,6 +293,7 @@ def decisions() -> dict[str, str]:
         "source_topology_comparison": "DISAGREEMENT_CROSS_EOS",
         "predictive_endpoint_comparison": "NOT_EVALUATED",
         "search_completeness": "PASS_DECLARED_30_OF_30",
+        "root_completeness": "NOT_PROVEN",
         "globality": "NOT_GUARANTEED",
     }
 
@@ -251,9 +301,22 @@ def decisions() -> dict[str, str]:
 def run(args: argparse.Namespace) -> dict[str, Any]:
     provider_wheel = required_wheel(args.provider_wheel)
     equilibrium_wheel = required_wheel(args.equilibrium_wheel)
-    provider = verify_installed_wheel(provider_wheel, "epcsaft", PROVIDER_SHA256)
+    provider = verify_installed_wheel(
+        provider_wheel,
+        "epcsaft",
+        PROVIDER_SHA256,
+        PROVIDER_RECORD_SHA256,
+        {
+            PROVIDER_HEADER_MEMBER: PROVIDER_HEADER_SHA256,
+            PROVIDER_NATIVE_MEMBER: PROVIDER_NATIVE_SHA256,
+        },
+    )
     equilibrium = verify_installed_wheel(
-        equilibrium_wheel, "epcsaft-equilibrium", EQUILIBRIUM_SHA256
+        equilibrium_wheel,
+        "epcsaft-equilibrium",
+        EQUILIBRIUM_SHA256,
+        EQUILIBRIUM_RECORD_SHA256,
+        {EQUILIBRIUM_NATIVE_MEMBER: EQUILIBRIUM_NATIVE_SHA256},
     )
     validation_root = Path(__file__).resolve().parents[1]
     reject_sibling_source_paths(validation_root)
@@ -280,25 +343,17 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     if parameters.fingerprint != PARAMETER_FINGERPRINT:
         raise ValueError("public Provider parameter fingerprint changed")
     model = epcsaft.EPCSAFT(parameters)
-    if args.captured_result is None:
-        result = equilibrium_api.tp_flash(
-            model,
-            TEMPERATURE_K * epcsaft.unit_registry.kelvin,
-            PRESSURE_PA * epcsaft.unit_registry.pascal,
-            FEED_Z,
-        )
-        result_payload = asdict(result)
-        result_type = f"{type(result).__module__}.{type(result).__qualname__}"
-        payload_source = "live_public_call"
-    else:
-        captured = json.loads(required_file(args.captured_result).read_text())
-        if "public_route_audit" in captured:
-            captured = captured["public_route_audit"]
-        result_payload = captured["result"]
-        result_type = captured["result_type"]
-        payload_source = "retained_active_session_public_call"
+    result = equilibrium_api.tp_flash(
+        model,
+        TEMPERATURE_K * epcsaft.unit_registry.kelvin,
+        PRESSURE_PA * epcsaft.unit_registry.pascal,
+        FEED_Z,
+    )
+    result_payload = asdict(result)
+    result_type = f"{type(result).__module__}.{type(result).__qualname__}"
     diagnostics = result_payload["diagnostics"]
-    if sha256_json(result_payload) != EXPECTED_RESULT_PAYLOAD_SHA256:
+    result_payload_sha256 = sha256_json(result_payload)
+    if result_payload_sha256 != EXPECTED_RESULT_PAYLOAD_SHA256:
         raise RuntimeError("retained public result payload SHA-256 mismatch")
     if (
         diagnostics["outcome"] != EXPECTED_OUTCOME
@@ -306,6 +361,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         or diagnostics["attempts"] != DECLARED_STARTS
         or diagnostics["best_tpd"] != EXPECTED_BEST_TPD
         or tuple(diagnostics["search_profiles"]) != (EXPECTED_SEARCH_PROFILE,)
+        or diagnostics["root_completeness"] != EXPECTED_ROOT_COMPLETENESS
         or diagnostics["solver_status"] != "passed"
         or diagnostics["numerical_status"] != "passed"
         or diagnostics["physical_status"] != "passed"
@@ -321,6 +377,8 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         or tuple(result_payload["phase_fractions"]) != (1.0,)
         or len(phases) != 1
         or tuple(phases[0]["mole_fractions"]) != FEED_Z
+        or phases[0]["amount_mol"] != 1.0
+        or phases[0]["volume_m3"] != EXPECTED_SELECTED_VOLUME_M3
     ):
         raise RuntimeError("public result changed the frozen input or one-phase state")
     if not all(
@@ -386,40 +444,39 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             "call_attempted": True,
             "call_completed": True,
             "result_type": result_type,
-            "payload_source": payload_source,
-            "result_payload_sha256": sha256_json(result_payload),
+            "payload_source": "single_hardened_public_replay",
+            "result_payload_sha256": result_payload_sha256,
             "result": result_payload,
         },
         "execution_accounting": {
-            "public_solver_executions": 3,
-            "canonical_payload_execution": "exploratory_public_audit",
-            "evidence_assembly_solver_execution": False,
-            "attempts": [
-                {
-                    "id": "exploratory_public_audit",
-                    "scientific_status": "completed",
-                    "evidence_status": "raw_payload_retained_in_active_session",
-                },
-                {
-                    "id": "campaign_capture_1",
-                    "scientific_status": (
-                        "completed_expected_diagnostics_before_postcondition_failure"
-                    ),
-                    "evidence_status": (
-                        "not_retained_search_profiles_tuple_list_postcondition_failure"
-                    ),
-                },
-                {
-                    "id": "campaign_corrective_capture_2",
-                    "scientific_status": (
-                        "completed_expected_diagnostics_before_postcondition_failure"
-                    ),
-                    "evidence_status": (
-                        "not_retained_phase_fractions_tuple_list_postcondition_failure"
-                    ),
-                },
-            ],
-            "identity_continuity_claimed": False,
+            "hardened_public_solver_executions": 1,
+            "serialization_reruns": 0,
+            "canonical_execution": "hardened_public_replay_1",
+            "scientific_status": "completed_and_retained",
+        },
+        "root_evidence": {
+            "public_terminal_root_completeness": diagnostics["root_completeness"],
+            "selected_molar_volume_m3_per_mol": (
+                phases[0]["volume_m3"] / phases[0]["amount_mol"]
+            ),
+            "detected_roots": {
+                "value": 3,
+                "classification": "package_reported_context_not_publicly_exposed",
+            },
+            "mechanically_stable_roots": {
+                "value": 2,
+                "classification": "package_reported_context_not_publicly_exposed",
+            },
+            "package_context_source": {
+                "owner": "epcsaft-equilibrium",
+                "commit": EQUILIBRIUM_COMMIT,
+                "tree": EQUILIBRIUM_TREE,
+            },
+            "public_surface_boundary": (
+                "HeldDiagnostics exposes root_completeness but not detected-root "
+                "or mechanically-stable-root counts; Validation does not infer "
+                "those counts from the accepted phase."
+            ),
         },
         "independent_checks": {
             "returned_phase_count": len(phases),
@@ -459,18 +516,13 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             },
         },
         "commands": {
-            "environment": (
-                "env -u PYTHONPATH uv run --isolated --no-project --offline "
-                "--python 3.13"
-            ),
+            "environment": "uv venv $D025_ENV --python 3.13",
             "install": (
-                "--with $PROVIDER_WHEEL --with $EQUILIBRIUM_WHEEL; uv creates "
-                "an isolated site-packages environment from the exact wheels"
+                "uv pip install --python $D025_ENV/bin/python --offline "
+                "$PROVIDER_WHEEL $EQUILIBRIUM_WHEEL"
             ),
             "run": (
-                "env -u PYTHONPATH uv run --isolated --no-project --offline "
-                "--python 3.13 --with $PROVIDER_WHEEL --with $EQUILIBRIUM_WHEEL "
-                "python -I "
+                "cd $D025_ENV && env -u PYTHONPATH $D025_ENV/bin/python -I "
                 "$VALIDATION_ROOT/campaigns/perdomo_table3_public_route.py run "
                 "--provider-wheel $PROVIDER_WHEEL --equilibrium-wheel "
                 "$EQUILIBRIUM_WHEEL "
@@ -479,14 +531,11 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
                 "--source-samples $VALIDATION_ROOT/data/perdomo-2025-held2-published-samples.csv "
                 "--output $VALIDATION_ROOT/results/perdomo-table3-public-route-validation.json"
             ),
-            "evidence_assembly": (
-                "the same command with --captured-result $CAPTURED_RESULT; "
-                "this serializes the retained raw payload without executing tp_flash"
-            ),
         },
         "negative_space": [
             "No private _held2 adapter or native private symbol was imported or called.",
             "No package-retained runner, result payload, or expected numerical output was copied.",
+            "No private root count was read; the public terminal exposes only root_completeness.",
             "No phase was forced and no endpoint comparison was evaluated after the phase-count disagreement.",
             "No tolerance change, package edit, receipt, promotion, same-EOS reproduction claim, or authority action occurred.",
         ],
@@ -511,9 +560,30 @@ def check_record(record: dict[str, Any]) -> dict[str, Any]:
     }:
         raise ValueError("Migration binding changed")
     artifacts = record["artifacts"]
-    if artifacts["provider"]["sha256"] != PROVIDER_SHA256:
+    provider = artifacts["provider"]
+    equilibrium = artifacts["equilibrium"]
+    if (
+        provider["sha256"] != PROVIDER_SHA256
+        or provider["wheel_record_sha256"] != PROVIDER_RECORD_SHA256
+        or {
+            member["member"]: member["sha256"]
+            for member in provider["required_members"]
+        }
+        != {
+            PROVIDER_HEADER_MEMBER: PROVIDER_HEADER_SHA256,
+            PROVIDER_NATIVE_MEMBER: PROVIDER_NATIVE_SHA256,
+        }
+    ):
         raise ValueError("Provider artifact changed")
-    if artifacts["equilibrium"]["sha256"] != EQUILIBRIUM_SHA256:
+    if (
+        equilibrium["sha256"] != EQUILIBRIUM_SHA256
+        or equilibrium["wheel_record_sha256"] != EQUILIBRIUM_RECORD_SHA256
+        or {
+            member["member"]: member["sha256"]
+            for member in equilibrium["required_members"]
+        }
+        != {EQUILIBRIUM_NATIVE_MEMBER: EQUILIBRIUM_NATIVE_SHA256}
+    ):
         raise ValueError("Equilibrium artifact changed")
     source = record["source"]
     if (
@@ -538,11 +608,12 @@ def check_record(record: dict[str, Any]) -> dict[str, Any]:
         not audit["publicly_exported"]
         or not audit["call_completed"]
         or audit["result_payload_sha256"] != EXPECTED_RESULT_PAYLOAD_SHA256
-        or sha256_json(result) != EXPECTED_RESULT_PAYLOAD_SHA256
+        or audit["result_payload_sha256"] != sha256_json(result)
         or diagnostics["outcome"] != EXPECTED_OUTCOME
         or diagnostics["search_status"] != EXPECTED_SEARCH_STATUS
         or diagnostics["attempts"] != DECLARED_STARTS
         or diagnostics["best_tpd"] != EXPECTED_BEST_TPD
+        or diagnostics["root_completeness"] != EXPECTED_ROOT_COMPLETENESS
         or diagnostics["solver_status"] != "passed"
         or diagnostics["numerical_status"] != "passed"
         or diagnostics["physical_status"] != "passed"
@@ -550,22 +621,41 @@ def check_record(record: dict[str, Any]) -> dict[str, Any]:
         or tuple(result["overall_mole_fractions"]) != FEED_Z
         or tuple(result["phase_fractions"]) != (1.0,)
         or tuple(result["phases"][0]["mole_fractions"]) != FEED_Z
+        or result["phases"][0]["amount_mol"] != 1.0
+        or result["phases"][0]["volume_m3"] != EXPECTED_SELECTED_VOLUME_M3
     ):
         raise ValueError("public route result changed")
     accounting = record["execution_accounting"]
-    if (
-        accounting["public_solver_executions"] != 3
-        or accounting["canonical_payload_execution"] != "exploratory_public_audit"
-        or accounting["evidence_assembly_solver_execution"]
-        or accounting["identity_continuity_claimed"]
-        or [attempt["scientific_status"] for attempt in accounting["attempts"]]
-        != [
-            "completed",
-            "completed_expected_diagnostics_before_postcondition_failure",
-            "completed_expected_diagnostics_before_postcondition_failure",
-        ]
-    ):
+    if accounting != {
+        "hardened_public_solver_executions": 1,
+        "serialization_reruns": 0,
+        "canonical_execution": "hardened_public_replay_1",
+        "scientific_status": "completed_and_retained",
+    }:
         raise ValueError("public solver execution accounting changed")
+    if record["root_evidence"] != {
+        "public_terminal_root_completeness": EXPECTED_ROOT_COMPLETENESS,
+        "selected_molar_volume_m3_per_mol": EXPECTED_SELECTED_VOLUME_M3,
+        "detected_roots": {
+            "value": 3,
+            "classification": "package_reported_context_not_publicly_exposed",
+        },
+        "mechanically_stable_roots": {
+            "value": 2,
+            "classification": "package_reported_context_not_publicly_exposed",
+        },
+        "package_context_source": {
+            "owner": "epcsaft-equilibrium",
+            "commit": EQUILIBRIUM_COMMIT,
+            "tree": EQUILIBRIUM_TREE,
+        },
+        "public_surface_boundary": (
+            "HeldDiagnostics exposes root_completeness but not detected-root "
+            "or mechanically-stable-root counts; Validation does not infer "
+            "those counts from the accepted phase."
+        ),
+    }:
+        raise ValueError("root evidence classification changed")
     if record["decisions"] != decisions():
         raise ValueError("decision axes changed")
     if record["source_comparison"] != {
@@ -597,6 +687,7 @@ def check_record(record: dict[str, Any]) -> dict[str, Any]:
         "artifact_input": "PASS",
         "public_route": "PASS",
         "solver": "PASS",
+        "root_completeness": "not_proven",
         "source_topology_comparison": "DISAGREEMENT_CROSS_EOS",
         "predictive_endpoint_comparison": "NOT_EVALUATED",
         "globality_certificate": "not_guaranteed",
@@ -612,7 +703,6 @@ def build_parser() -> argparse.ArgumentParser:
     execute.add_argument("--source-metadata", required=True, type=required_file)
     execute.add_argument("--source-cases", required=True, type=required_file)
     execute.add_argument("--source-samples", required=True, type=required_file)
-    execute.add_argument("--captured-result", type=required_file)
     execute.add_argument("--output", required=True, type=Path)
     check = subparsers.add_parser("check")
     check.add_argument("record", type=required_file)

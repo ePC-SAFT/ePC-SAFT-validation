@@ -16,7 +16,7 @@ CASES = ROOT / "data" / "perdomo-2025-held2-case-ledger.csv"
 SAMPLES = ROOT / "data" / "perdomo-2025-held2-published-samples.csv"
 RECORD = ROOT / "results" / "perdomo-table3-public-route-validation.json"
 EXPECTED_RECORD_SHA256 = (
-    "83fecb9975d992c313f7177e036af7f04c0321c330d97c5395705984208b3d42"
+    "b2e17682992e94a1edcfa84df0fb497130cf9f158eda2ea502f865b3d7a52553"
 )
 
 
@@ -53,9 +53,12 @@ def test_public_route_result_keeps_package_and_source_decisions_separate() -> No
     assert diagnostics["attempts"] == 30
     assert diagnostics["search_status"] == "complete_no_negative_found"
     assert diagnostics["best_tpd"] == -1.6139519381498581e-12
+    assert diagnostics["root_completeness"] == "not_proven"
+    assert diagnostics["globality_certificate"] == "not_guaranteed"
     assert diagnostics["solver_status"] == "passed"
     assert diagnostics["numerical_status"] == "passed"
     assert diagnostics["physical_status"] == "passed"
+    assert diagnostics["failure_reason"] == ""
     assert record["frozen_search_contract"] == {
         "declared_starts": 30,
         "observed_attempts": 30,
@@ -77,13 +80,39 @@ def test_public_route_result_keeps_package_and_source_decisions_separate() -> No
         "physical": "PASS",
         "predictive_endpoint_comparison": "NOT_EVALUATED",
         "public_route": "PASS",
+        "root_completeness": "NOT_PROVEN",
         "search_completeness": "PASS_DECLARED_30_OF_30",
         "solver": "PASS",
         "source_topology_comparison": "DISAGREEMENT_CROSS_EOS",
     }
-    assert record["execution_accounting"]["public_solver_executions"] == 3
-    assert record["execution_accounting"]["evidence_assembly_solver_execution"] is False
-    assert record["execution_accounting"]["identity_continuity_claimed"] is False
+    assert record["execution_accounting"] == {
+        "canonical_execution": "hardened_public_replay_1",
+        "hardened_public_solver_executions": 1,
+        "scientific_status": "completed_and_retained",
+        "serialization_reruns": 0,
+    }
+    assert record["root_evidence"] == {
+        "detected_roots": {
+            "classification": "package_reported_context_not_publicly_exposed",
+            "value": 3,
+        },
+        "mechanically_stable_roots": {
+            "classification": "package_reported_context_not_publicly_exposed",
+            "value": 2,
+        },
+        "package_context_source": {
+            "commit": "8a7164869975c03291fcf3296b1228b4b4a0f5b4",
+            "owner": "epcsaft-equilibrium",
+            "tree": "744132063d8b26ae3ef7ba7eb3094226aec31fd6",
+        },
+        "public_surface_boundary": (
+            "HeldDiagnostics exposes root_completeness but not detected-root "
+            "or mechanically-stable-root counts; Validation does not infer "
+            "those counts from the accepted phase."
+        ),
+        "public_terminal_root_completeness": "not_proven",
+        "selected_molar_volume_m3_per_mol": 0.9849669199245724,
+    }
     assert record["globality_certificate"] == "not_guaranteed"
 
 
@@ -94,7 +123,17 @@ def test_artifact_source_and_public_only_negative_space_are_hash_bound() -> None
         "9e4da0d7ba7896bcd2ec096400553d935e0516c61f1bd9f41f2370ab68ab36ea"
     )
     assert record["artifacts"]["equilibrium"]["sha256"] == (
-        "da37682dc06d278cc0c7e9333d61604c81209727cc99b1b91c9682d2aa82e5c7"
+        "41192aa4ab1821a0546ba100352dfd9254c67884d26511ea1504205647aa08d4"
+    )
+    assert record["artifacts"]["equilibrium"]["wheel_record_sha256"] == (
+        "dba4daeaa74bf98783debc42c5c6d5b8f007841b7bf4566c47793b7052eac974"
+    )
+    provider_members = {
+        member["member"]: member["sha256"]
+        for member in record["artifacts"]["provider"]["required_members"]
+    }
+    assert provider_members["epcsaft/include/epcsaft/native_sdk_v1.h"] == (
+        "51ac8d251ffbc53e019c8cf7828fd51d2a011ff2871b3e606eb08573a1c9183b"
     )
     assert record["source"]["authority_commit"] == (
         "5620f030b1e4bf12cde2f97d739cb931653eb960"

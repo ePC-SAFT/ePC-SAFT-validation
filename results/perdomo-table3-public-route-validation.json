@@ -2,46 +2,66 @@
   "artifacts": {
     "equilibrium": {
       "distribution": "epcsaft-equilibrium",
-      "installed_root": "/home/tnnrpolley21/.cache/uv/archive-v0/_XdpATJPYr9_E3V1/lib/python3.13/site-packages",
+      "installed_root": "/tmp/epcsaft-validation-d025-hardened.uT7pDg/lib/python3.13/site-packages",
       "native_members": [
         {
-          "path": "/home/tnnrpolley21/.cache/uv/archive-v0/_XdpATJPYr9_E3V1/lib/python3.13/site-packages/epcsaft_equilibrium/_equilibrium.cpython-313-x86_64-linux-gnu.so",
-          "sha256": "bc4a825a57fca47725274104da0a160d1a48f8404e61ad1687dcfdd917361a9e"
+          "path": "/tmp/epcsaft-validation-d025-hardened.uT7pDg/lib/python3.13/site-packages/epcsaft_equilibrium/_equilibrium.cpython-313-x86_64-linux-gnu.so",
+          "sha256": "b486edcbc00d4fa0f52d712c4ac760edbda4e77dc633e4f613315f87fe91b919"
         }
       ],
-      "path": "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT-project/artifacts/equilibrium-held2-public-dispatch-v1/ef6fe36/epcsaft_equilibrium-0.1.0.dev0-cp313-cp313-linux_x86_64.whl",
+      "path": "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT-project/artifacts/equilibrium-held2-reference-root-hardening-v1/8a71648/epcsaft_equilibrium-0.1.0.dev0-cp313-cp313-linux_x86_64.whl",
       "record_members_verified": 8,
-      "record_path": "/home/tnnrpolley21/.cache/uv/archive-v0/_XdpATJPYr9_E3V1/lib/python3.13/site-packages/epcsaft_equilibrium-0.1.0.dev0.dist-info/RECORD",
-      "record_sha256": "ccc7ba006433781ede3bf4928eb7fd3f5e70b5d891ec3843c953642b9cddb8df",
-      "sha256": "da37682dc06d278cc0c7e9333d61604c81209727cc99b1b91c9682d2aa82e5c7",
-      "version": "0.1.0.dev0"
+      "record_path": "/tmp/epcsaft-validation-d025-hardened.uT7pDg/lib/python3.13/site-packages/epcsaft_equilibrium-0.1.0.dev0.dist-info/RECORD",
+      "record_sha256": "c6b99cefce1d04ffd4be9fa0a12ec31ddda33f6e808faae4880b700c47477187",
+      "required_members": [
+        {
+          "installed_path": "/tmp/epcsaft-validation-d025-hardened.uT7pDg/lib/python3.13/site-packages/epcsaft_equilibrium/_equilibrium.cpython-313-x86_64-linux-gnu.so",
+          "member": "epcsaft_equilibrium/_equilibrium.cpython-313-x86_64-linux-gnu.so",
+          "sha256": "b486edcbc00d4fa0f52d712c4ac760edbda4e77dc633e4f613315f87fe91b919"
+        }
+      ],
+      "sha256": "41192aa4ab1821a0546ba100352dfd9254c67884d26511ea1504205647aa08d4",
+      "version": "0.1.0.dev0",
+      "wheel_record_sha256": "dba4daeaa74bf98783debc42c5c6d5b8f007841b7bf4566c47793b7052eac974"
     },
     "provider": {
       "distribution": "epcsaft",
-      "installed_root": "/home/tnnrpolley21/.cache/uv/archive-v0/_XdpATJPYr9_E3V1/lib/python3.13/site-packages",
+      "installed_root": "/tmp/epcsaft-validation-d025-hardened.uT7pDg/lib/python3.13/site-packages",
       "native_members": [
         {
-          "path": "/home/tnnrpolley21/.cache/uv/archive-v0/_XdpATJPYr9_E3V1/lib/python3.13/site-packages/epcsaft/_core.cpython-313-x86_64-linux-gnu.so",
+          "path": "/tmp/epcsaft-validation-d025-hardened.uT7pDg/lib/python3.13/site-packages/epcsaft/_core.cpython-313-x86_64-linux-gnu.so",
           "sha256": "99b1d30e8f98dbd26b710f06af5e995707c4ad067b77846ae45c202b3e90bc13"
         }
       ],
       "path": "/home/tnnrpolley21/Workspaces/Engineering/ePC-SAFT-project/artifacts/equilibrium-held2-perdomo-table3-v1/2d4cfcb/epcsaft-0.1.0.dev0-cp313-cp313-linux_x86_64.whl",
       "record_members_verified": 37,
-      "record_path": "/home/tnnrpolley21/.cache/uv/archive-v0/_XdpATJPYr9_E3V1/lib/python3.13/site-packages/epcsaft-0.1.0.dev0.dist-info/RECORD",
+      "record_path": "/tmp/epcsaft-validation-d025-hardened.uT7pDg/lib/python3.13/site-packages/epcsaft-0.1.0.dev0.dist-info/RECORD",
       "record_sha256": "7502cd3adcd3a751db16d3060e17f5d5361728e21f6afa4c1b15482de3754073",
+      "required_members": [
+        {
+          "installed_path": "/tmp/epcsaft-validation-d025-hardened.uT7pDg/lib/python3.13/site-packages/epcsaft/include/epcsaft/native_sdk_v1.h",
+          "member": "epcsaft/include/epcsaft/native_sdk_v1.h",
+          "sha256": "51ac8d251ffbc53e019c8cf7828fd51d2a011ff2871b3e606eb08573a1c9183b"
+        },
+        {
+          "installed_path": "/tmp/epcsaft-validation-d025-hardened.uT7pDg/lib/python3.13/site-packages/epcsaft/_core.cpython-313-x86_64-linux-gnu.so",
+          "member": "epcsaft/_core.cpython-313-x86_64-linux-gnu.so",
+          "sha256": "99b1d30e8f98dbd26b710f06af5e995707c4ad067b77846ae45c202b3e90bc13"
+        }
+      ],
       "sha256": "9e4da0d7ba7896bcd2ec096400553d935e0516c61f1bd9f41f2370ab68ab36ea",
-      "version": "0.1.0.dev0"
+      "version": "0.1.0.dev0",
+      "wheel_record_sha256": "f0e5f17472014a179aa6226095a0265f9de897be5a30135ffa3e99c777728791"
     }
   },
   "authority_effect": "none",
   "campaign_id": "perdomo-2025-table3-public-route-installed-v1",
   "commands": {
-    "environment": "env -u PYTHONPATH uv run --isolated --no-project --offline --python 3.13",
-    "evidence_assembly": "the same command with --captured-result $CAPTURED_RESULT; this serializes the retained raw payload without executing tp_flash",
-    "install": "--with $PROVIDER_WHEEL --with $EQUILIBRIUM_WHEEL; uv creates an isolated site-packages environment from the exact wheels",
-    "run": "env -u PYTHONPATH uv run --isolated --no-project --offline --python 3.13 --with $PROVIDER_WHEEL --with $EQUILIBRIUM_WHEEL python -I $VALIDATION_ROOT/campaigns/perdomo_table3_public_route.py run --provider-wheel $PROVIDER_WHEEL --equilibrium-wheel $EQUILIBRIUM_WHEEL --source-metadata $VALIDATION_ROOT/data/perdomo-2025-held2-source-ledger.yaml --source-cases $VALIDATION_ROOT/data/perdomo-2025-held2-case-ledger.csv --source-samples $VALIDATION_ROOT/data/perdomo-2025-held2-published-samples.csv --output $VALIDATION_ROOT/results/perdomo-table3-public-route-validation.json"
+    "environment": "uv venv $D025_ENV --python 3.13",
+    "install": "uv pip install --python $D025_ENV/bin/python --offline $PROVIDER_WHEEL $EQUILIBRIUM_WHEEL",
+    "run": "cd $D025_ENV && env -u PYTHONPATH $D025_ENV/bin/python -I $VALIDATION_ROOT/campaigns/perdomo_table3_public_route.py run --provider-wheel $PROVIDER_WHEEL --equilibrium-wheel $EQUILIBRIUM_WHEEL --source-metadata $VALIDATION_ROOT/data/perdomo-2025-held2-source-ledger.yaml --source-cases $VALIDATION_ROOT/data/perdomo-2025-held2-case-ledger.csv --source-samples $VALIDATION_ROOT/data/perdomo-2025-held2-published-samples.csv --output $VALIDATION_ROOT/results/perdomo-table3-public-route-validation.json"
   },
-  "created_utc": "2026-07-21T20:00:10.823571+00:00",
+  "created_utc": "2026-07-21T20:49:24.969193+00:00",
   "decisions": {
     "artifact_input": "PASS",
     "globality": "NOT_GUARANTEED",
@@ -49,6 +69,7 @@
     "physical": "PASS",
     "predictive_endpoint_comparison": "NOT_EVALUATED",
     "public_route": "PASS",
+    "root_completeness": "NOT_PROVEN",
     "search_completeness": "PASS_DECLARED_30_OF_30",
     "solver": "PASS",
     "source_topology_comparison": "DISAGREEMENT_CROSS_EOS"
@@ -60,47 +81,28 @@
       "pint": "0.25.3",
       "platformdirs": "4.11.0"
     },
-    "equilibrium_import_origin": "/home/tnnrpolley21/.cache/uv/archive-v0/_XdpATJPYr9_E3V1/lib/python3.13/site-packages/epcsaft_equilibrium/__init__.py",
+    "equilibrium_import_origin": "/tmp/epcsaft-validation-d025-hardened.uT7pDg/lib/python3.13/site-packages/epcsaft_equilibrium/__init__.py",
     "imports_from_isolated_site_packages": true,
     "platform": "Linux-7.0.0-28-generic-x86_64-with-glibc2.39",
-    "provider_import_origin": "/home/tnnrpolley21/.cache/uv/archive-v0/_XdpATJPYr9_E3V1/lib/python3.13/site-packages/epcsaft/__init__.py",
-    "python_executable": "/home/tnnrpolley21/.cache/uv/builds-v0/.tmp1qck1v/bin/python",
+    "provider_import_origin": "/tmp/epcsaft-validation-d025-hardened.uT7pDg/lib/python3.13/site-packages/epcsaft/__init__.py",
+    "python_executable": "/tmp/epcsaft-validation-d025-hardened.uT7pDg/bin/python",
     "python_version": "3.13.14",
     "sys_path": [
       "/home/tnnrpolley21/.local/share/uv/python/cpython-3.13.14-linux-x86_64-gnu/lib/python313.zip",
       "/home/tnnrpolley21/.local/share/uv/python/cpython-3.13.14-linux-x86_64-gnu/lib/python3.13",
       "/home/tnnrpolley21/.local/share/uv/python/cpython-3.13-linux-x86_64-gnu/lib/python3.13/lib-dynload",
-      "/home/tnnrpolley21/.cache/uv/builds-v0/.tmp1qck1v/lib/python3.13/site-packages",
-      "/home/tnnrpolley21/.cache/uv/archive-v0/_XdpATJPYr9_E3V1/lib/python3.13/site-packages",
-      "/home/tnnrpolley21/.cache/uv/builds-v0/.tmp56k5li/lib/python3.13/site-packages"
+      "/tmp/epcsaft-validation-d025-hardened.uT7pDg/lib/python3.13/site-packages"
     ]
   },
   "equilibrium_subject": {
-    "commit": "ef6fe362dc0bd84521e7499728ed977ce62c17f1",
-    "tree": "f196c86cf5eacbaadbc62f8d900fd02bd99413b3"
+    "commit": "8a7164869975c03291fcf3296b1228b4b4a0f5b4",
+    "tree": "744132063d8b26ae3ef7ba7eb3094226aec31fd6"
   },
   "execution_accounting": {
-    "attempts": [
-      {
-        "evidence_status": "raw_payload_retained_in_active_session",
-        "id": "exploratory_public_audit",
-        "scientific_status": "completed"
-      },
-      {
-        "evidence_status": "not_retained_search_profiles_tuple_list_postcondition_failure",
-        "id": "campaign_capture_1",
-        "scientific_status": "completed_expected_diagnostics_before_postcondition_failure"
-      },
-      {
-        "evidence_status": "not_retained_phase_fractions_tuple_list_postcondition_failure",
-        "id": "campaign_corrective_capture_2",
-        "scientific_status": "completed_expected_diagnostics_before_postcondition_failure"
-      }
-    ],
-    "canonical_payload_execution": "exploratory_public_audit",
-    "evidence_assembly_solver_execution": false,
-    "identity_continuity_claimed": false,
-    "public_solver_executions": 3
+    "canonical_execution": "hardened_public_replay_1",
+    "hardened_public_solver_executions": 1,
+    "scientific_status": "completed_and_retained",
+    "serialization_reruns": 0
   },
   "frozen_search_contract": {
     "declared_starts": 30,
@@ -147,6 +149,7 @@
   "negative_space": [
     "No private _held2 adapter or native private symbol was imported or called.",
     "No package-retained runner, result payload, or expected numerical output was copied.",
+    "No private root count was read; the public terminal exposes only root_completeness.",
     "No phase was forced and no endpoint comparison was evaluated after the phase-count disagreement.",
     "No tolerance change, package edit, receipt, promotion, same-EOS reproduction claim, or authority action occurred."
   ],
@@ -154,7 +157,7 @@
   "public_route_audit": {
     "call_attempted": true,
     "call_completed": true,
-    "payload_source": "retained_active_session_public_call",
+    "payload_source": "single_hardened_public_replay",
     "publicly_exported": true,
     "result": {
       "diagnostics": {
@@ -174,6 +177,7 @@
         "outcome": "one_phase",
         "physical_status": "passed",
         "pressure_stationarity_max_relative": 1.937455802738512e-10,
+        "root_completeness": "not_proven",
         "search_profiles": [
           "perdomo-held2-stage-i-installed-v1"
         ],
@@ -212,10 +216,28 @@
       "temperature_k": 298.15,
       "total_free_energy_over_rt": -24.277533055223746
     },
-    "result_payload_sha256": "45380b1d572b1f13b884041cb813ae3290f02647de55ba4f629da1b20de9d924",
+    "result_payload_sha256": "cbffa8b6ea42573c78a009004bf8556e68f862259e7e55f4a35d2ebc64658782",
     "result_type": "epcsaft_equilibrium._api.TpFlashResult",
     "signature": "(model: 'epcsaft.EPCSAFT', temperature: 'Quantity[Any]', pressure: 'Quantity[Any]', overall_mole_fractions: 'Sequence[float]') -> 'TpFlashResult'",
     "symbol": "epcsaft_equilibrium.tp_flash"
+  },
+  "root_evidence": {
+    "detected_roots": {
+      "classification": "package_reported_context_not_publicly_exposed",
+      "value": 3
+    },
+    "mechanically_stable_roots": {
+      "classification": "package_reported_context_not_publicly_exposed",
+      "value": 2
+    },
+    "package_context_source": {
+      "commit": "8a7164869975c03291fcf3296b1228b4b4a0f5b4",
+      "owner": "epcsaft-equilibrium",
+      "tree": "744132063d8b26ae3ef7ba7eb3094226aec31fd6"
+    },
+    "public_surface_boundary": "HeldDiagnostics exposes root_completeness but not detected-root or mechanically-stable-root counts; Validation does not infer those counts from the accepted phase.",
+    "public_terminal_root_completeness": "not_proven",
+    "selected_molar_volume_m3_per_mol": 0.9849669199245724
   },
   "schema": "perdomo-table3-public-route-validation-v1",
   "source": {
