@@ -8,7 +8,7 @@ electrolyte properties; and Consumer Slice 2 installed-artifact evidence for
 pure-saturation regression and local methane/ethane two-phase flash; and the
 bounded Consumer Slice 3 neutral HELD installed-artifact campaign.
 
-Before work, read doctrine revision 3 at
+Before work, read doctrine revision 4 at
 `../ePC-SAFT-organization/GOVERNANCE.md`. Its future published home is
 `https://github.com/ePC-SAFT/.github/blob/main/GOVERNANCE.md`. Local policy may
 narrow that doctrine but must not contradict it.

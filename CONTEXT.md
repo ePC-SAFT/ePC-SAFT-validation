@@ -23,7 +23,7 @@ This repository owns ten black-box installed-artifact campaigns:
 - Haslam 2020 Table 8 aqueous alkali-halide source evidence and a bounded
   cross-EOS campaign at 298.15 K and 0.101 MPa.
 
-`governance_doctrine_revision: 3`
+`governance_doctrine_revision: 4`
 
 Canonical local doctrine: `../ePC-SAFT-organization/GOVERNANCE.md`.
 
